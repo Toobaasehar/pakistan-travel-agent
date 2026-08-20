@@ -1,0 +1,26 @@
+# Phase 1 dependencies — backend server only.
+# We will ADD to this file in later phases (database driver, Anthropic SDK, etc.)
+# rather than replacing it, so you can see the project grow.
+
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+
+# Phase 2 — database
+sqlalchemy==2.0.35
+
+# Phase 4 — AI agent
+anthropic==0.39.0
+groq>=0.9.0
+python-dotenv==1.0.1
+
+# Phase 7 — Authentication & Security
+pyjwt>=2.8.0
+bcrypt>=4.0.1
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.9
+email-validator>=2.0.0
+
+# Interactive dashboard
+streamlit>=1.35.0
+pandas>=2.0.0
+

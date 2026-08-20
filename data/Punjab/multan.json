@@ -1,0 +1,202 @@
+{
+  "city": "Multan",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "mux_att_01",
+      "name": "Shrine of Shah Rukn-e-Alam",
+      "category": "religious",
+      "description": "A 14th-century Sufi shrine and one of the most impressive examples of Multani tile-work architecture.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Multan Fort area",
+      "popularity": "high"
+    },
+    {
+      "id": "mux_att_02",
+      "name": "Multan Fort / Qasim Bagh",
+      "category": "historical",
+      "description": "The remains of an ancient fort and surrounding park, home to several historic shrines and the old citadel walls.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Multan",
+      "popularity": "high"
+    },
+    {
+      "id": "mux_att_03",
+      "name": "Shrine of Bahauddin Zakariya",
+      "category": "religious",
+      "description": "A revered Sufi shrine, one of the oldest and most significant in Multan, the 'City of Saints'.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Multan Fort",
+      "popularity": "high"
+    },
+    {
+      "id": "mux_att_04",
+      "name": "Ghanta Ghar (Clock Tower) & Hussain Agahi Bazaar",
+      "category": "shopping",
+      "description": "A colonial-era clock tower surrounded by one of Multan's busiest traditional markets.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Multan",
+      "popularity": "medium"
+    },
+    {
+      "id": "mux_att_05",
+      "name": "Multan Museum",
+      "category": "museum",
+      "description": "A museum showcasing artifacts from Multan's long history, including Indus Valley and Islamic-era items.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Multan",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "mux_food_01",
+      "name": "Multani Sohan Halwa shops",
+      "cuisine": "desserts",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Multan's famous sohan halwa, a popular sweet souvenir"
+    },
+    {
+      "id": "mux_food_02",
+      "name": "Haveli Food Street",
+      "cuisine": "Punjabi/traditional",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1000,
+      "family_friendly": true,
+      "specialty": "Traditional dining in a restored haveli setting"
+    },
+    {
+      "id": "mux_food_03",
+      "name": "Chaap and BBQ stalls near Hussain Agahi",
+      "cuisine": "BBQ/street food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Local-style chaap and grilled items"
+    },
+    {
+      "id": "mux_food_04",
+      "name": "Local lassi shops",
+      "cuisine": "beverages",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 150,
+      "family_friendly": true,
+      "specialty": "Thick, sweet traditional lassi, a Multan specialty"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "mux_trans_01",
+      "from_city": "Multan",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Daewoo Express (intercity coach)",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 300,
+      "notes": "AC coach service, multiple daily departures"
+    },
+    {
+      "id": "mux_trans_02",
+      "from_city": "Multan",
+      "to_city": "Bahawalpur",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 700,
+      "duration_min": 120,
+      "notes": "Short and frequent route"
+    },
+    {
+      "id": "mux_trans_03",
+      "from_city": "Multan",
+      "to_city": "Karachi",
+      "transport_type": "flight",
+      "route": "Domestic flight",
+      "estimated_cost_pkr": 13000,
+      "duration_min": 100,
+      "notes": "Fastest way to reach Karachi"
+    },
+    {
+      "id": "mux_trans_04",
+      "from_city": "Multan",
+      "to_city": "Multan",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 300,
+      "duration_min": 20,
+      "notes": "Convenient for reaching the fort and shrine area"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "mux_acc_01",
+      "name": "Budget guesthouse near Cantt area",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.4
+    },
+    {
+      "id": "mux_acc_02",
+      "name": "Mid-range hotel near Gulgasht Colony",
+      "price_range": "moderate",
+      "approx_price_pkr": 8500,
+      "family_friendly": true,
+      "rating": 4.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert/semi-arid climate, one of the hottest cities in Pakistan",
+    "best_time_to_visit": "November to February (mild and comfortable)",
+    "avoid_months": "May to July (extremely hot, frequently among the highest temperatures in the country, 45°C+)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 8-22°C, comfortable for sightseeing" },
+      { "season": "Summer (Apr-Jul)", "avg_condition": "Extremely hot and dry, often exceeding 45°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Light, irregular rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "mux_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Multan Ring Road / Bypass to avoid the congested inner city when traveling between the airport and Cantt areas."
+    },
+    {
+      "id": "mux_tip_02",
+      "category": "local_transport",
+      "tip": "Ride-hailing apps work well in Multan for reaching the fort, shrines, and food streets."
+    },
+    {
+      "id": "mux_tip_03",
+      "category": "safety",
+      "tip": "Stay well hydrated and avoid outdoor sightseeing during peak afternoon heat, especially between April and July."
+    },
+    {
+      "id": "mux_tip_04",
+      "category": "timing",
+      "tip": "Visit the shrines and Hussain Agahi Bazaar in the early evening, when the area is lively but temperatures have cooled."
+    }
+  ],
+  "history": {
+  "founded": "One of the oldest continuously inhabited cities in South Asia, dating back thousands of years",
+  "city_history": "Known as the 'City of Saints' for its many Sufi shrines, Multan has been ruled by the Persians, Greeks (visited by Alexander the Great), Arabs, Ghaznavids, Mughals, and Sikhs. It was historically a major trade hub connecting South Asia to Central Asia and the Middle East.",
+  "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+}
+}

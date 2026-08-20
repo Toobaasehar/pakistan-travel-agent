@@ -1,0 +1,171 @@
+{
+  "city": "Hyderabad",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "hyd_att_01",
+      "name": "Pacco Qillo (Hyderabad Fort)",
+      "category": "historical",
+      "description": "A historic fort built by the Talpur rulers, offering views over the old city and Indus River plains.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Hyderabad",
+      "popularity": "medium"
+    },
+    {
+      "id": "hyd_att_02",
+      "name": "Sindh Museum",
+      "category": "museum",
+      "description": "A museum showcasing Sindh's cultural and archaeological heritage, including Indus Valley artifacts.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Hyderabad city",
+      "popularity": "medium"
+    },
+    {
+      "id": "hyd_att_03",
+      "name": "Tombs of the Talpur Mirs",
+      "category": "historical",
+      "description": "Elaborately decorated royal tombs of the Talpur dynasty, showcasing intricate tile-work.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Hyderabad",
+      "popularity": "low"
+    },
+    {
+      "id": "hyd_att_04",
+      "name": "Resham Gali & Shahi Bazaar",
+      "category": "shopping",
+      "description": "Traditional markets famous for Sindhi textiles, bangles, and handicrafts.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Old city, Hyderabad",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "hyd_food_01",
+      "name": "Shahi Bazaar food stalls",
+      "cuisine": "Sindhi street food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi snacks and sweets"
+    },
+    {
+      "id": "hyd_food_02",
+      "name": "Sindhi Chai and biryani houses",
+      "cuisine": "Sindhi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Sindhi biryani and traditional tea"
+    },
+    {
+      "id": "hyd_food_03",
+      "name": "Auto Bhan Road restaurants",
+      "cuisine": "mixed",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Modern casual dining options"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "hyd_trans_01",
+      "from_city": "Hyderabad",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Motorway coach via M-9",
+      "estimated_cost_pkr": 700,
+      "duration_min": 120,
+      "notes": "Fast route via the M-9 Motorway"
+    },
+    {
+      "id": "hyd_trans_02",
+      "from_city": "Hyderabad",
+      "to_city": "Sukkur",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 1000,
+      "duration_min": 240,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "hyd_trans_03",
+      "from_city": "Hyderabad",
+      "to_city": "Hyderabad",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 300,
+      "duration_min": 20,
+      "notes": "Convenient for reaching the old city and fort areas"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "hyd_acc_01",
+      "name": "Budget guesthouse near Auto Bhan Road",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "hyd_acc_02",
+      "name": "Mid-range hotel near Latifabad",
+      "price_range": "moderate",
+      "approx_price_pkr": 7500,
+      "family_friendly": true,
+      "rating": 3.8
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert climate, very hot summers with mild winters",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "April to June (extremely hot, frequently 42°C+)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 12-25°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Extremely hot, often 40-45°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Humid with occasional rain" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "hyd_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Hyderabad Bypass to avoid the busy city center when passing through en route between Karachi and upper Sindh."
+    },
+    {
+      "id": "hyd_tip_02",
+      "category": "local_transport",
+      "tip": "Ride-hailing apps work well for reaching the fort and old city markets."
+    },
+    {
+      "id": "hyd_tip_03",
+      "category": "safety",
+      "tip": "Stay hydrated and avoid extended outdoor sightseeing during peak summer afternoon heat."
+    },
+    {
+      "id": "hyd_tip_04",
+      "category": "timing",
+      "tip": "Visit Shahi Bazaar and the old city in the morning or early evening to avoid the midday heat."
+    }
+  ],
+  "history": {
+    "founded": "Founded in 1768 by Mian Ghulam Shah Kalhoro",
+    "city_history": "Hyderabad served as the capital of Sindh under both the Kalhora and Talpur dynasties before British annexation in 1843, after which the capital shifted to Karachi. It remains one of Sindh's major cultural and educational centers, known for its historic forts, bazaars, and Talpur-era architecture.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

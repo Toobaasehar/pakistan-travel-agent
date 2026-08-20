@@ -1,0 +1,128 @@
+{
+  "city": "Vehari",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "vhr_att_01",
+      "name": "Vehari agricultural belt",
+      "category": "nature",
+      "description": "Vehari district is a major cotton and citrus growing region; countryside drives showcase Punjab's agricultural heartland.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Surrounding Vehari district",
+      "popularity": "low"
+    },
+    {
+      "id": "vhr_att_02",
+      "name": "Vehari local bazaars",
+      "category": "shopping",
+      "description": "Local markets serving the surrounding agricultural communities with everyday goods and produce.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Vehari",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "vhr_food_01",
+      "name": "Local Punjabi dhabas",
+      "cuisine": "Punjabi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional roadside-style Punjabi food"
+    },
+    {
+      "id": "vhr_food_02",
+      "name": "Local citrus/juice stalls",
+      "cuisine": "beverages",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 150,
+      "family_friendly": true,
+      "specialty": "Fresh citrus juice from the surrounding orchards"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "vhr_trans_01",
+      "from_city": "Vehari",
+      "to_city": "Multan",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "vhr_trans_02",
+      "from_city": "Vehari",
+      "to_city": "Vehari",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within town",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "vhr_acc_01",
+      "name": "Budget guesthouse in central Vehari",
+      "price_range": "budget",
+      "approx_price_pkr": 2400,
+      "family_friendly": true,
+      "rating": 3.1
+    },
+    {
+      "id": "vhr_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 5200,
+      "family_friendly": true,
+      "rating": 3.4
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "November to March",
+    "avoid_months": "May to July (hot and dry)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 8-22°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 32-42°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "vhr_tip_01",
+      "category": "shortcut_route",
+      "tip": "Vehari is well connected to Multan by a direct road, making it an easy stop for travelers exploring southern Punjab."
+    },
+    {
+      "id": "vhr_tip_02",
+      "category": "local_transport",
+      "tip": "Rickshaws and local taxis are the main way to get around this smaller town."
+    },
+    {
+      "id": "vhr_tip_03",
+      "category": "safety",
+      "tip": "Standard travel precautions apply; Vehari is a calm, agricultural town."
+    },
+    {
+      "id": "vhr_tip_04",
+      "category": "timing",
+      "tip": "Visit during citrus harvest season (winter months) to see the region's orchards at their most active."
+    }
+  ],
+  "history": {
+    "founded": "Developed as an agricultural market town in the canal-colony era of British Punjab",
+    "city_history": "Vehari grew as part of the extensive canal irrigation network built by the British in Punjab, transforming the area into productive farmland. It remains primarily known today as an agricultural center, particularly for cotton and citrus production.",
+    "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+  }
+}

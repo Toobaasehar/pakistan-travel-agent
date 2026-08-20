@@ -1,0 +1,140 @@
+{
+  "city": "Mirpurkhas",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "mpk_att_01",
+      "name": "Kot Diji Fort (day trip)",
+      "category": "historical",
+      "description": "A hilltop fort offering panoramic views, built in the early 19th century by the Talpur rulers, near the ancient Kot Diji archaeological site.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~70km from Mirpurkhas",
+      "popularity": "medium"
+    },
+    {
+      "id": "mpk_att_02",
+      "name": "Mirpurkhas mango orchards",
+      "category": "nature",
+      "description": "Mirpurkhas is famous for its mango orchards; seasonal orchard visits are popular during mango season.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Surrounding Mirpurkhas district",
+      "popularity": "medium"
+    },
+    {
+      "id": "mpk_att_03",
+      "name": "Mirpurkhas Buddhist Stupa",
+      "category": "historical",
+      "description": "An ancient Buddhist archaeological site reflecting the region's early religious history.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Mirpurkhas city",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "mpk_food_01",
+      "name": "Local mango stalls (in season)",
+      "cuisine": "fruit/snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Mirpurkhas is one of Sindh's top mango-producing regions"
+    },
+    {
+      "id": "mpk_food_02",
+      "name": "Local Sindhi karahi houses",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi-style karahi"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "mpk_trans_01",
+      "from_city": "Mirpurkhas",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "mpk_trans_02",
+      "from_city": "Mirpurkhas",
+      "to_city": "Mirpurkhas",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "mpk_acc_01",
+      "name": "Budget guesthouse in central Mirpurkhas",
+      "price_range": "budget",
+      "approx_price_pkr": 2700,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "mpk_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert climate, on the edge of the Thar Desert region",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "April to June (extremely hot)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 13-26°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Extremely hot, often 42-46°C" },
+      { "season": "Monsoon", "avg_condition": "Light, irregular rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "mpk_tip_01",
+      "category": "shortcut_route",
+      "tip": "Mirpurkhas serves as a good base for exploring the Tharparkar desert region further southeast."
+    },
+    {
+      "id": "mpk_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local car for day trips to Kot Diji Fort, since it's a fair distance and best combined with a full-day itinerary."
+    },
+    {
+      "id": "mpk_tip_03",
+      "category": "safety",
+      "tip": "Carry sufficient water and sun protection, especially outside the winter months given the desert-edge climate."
+    },
+    {
+      "id": "mpk_tip_04",
+      "category": "timing",
+      "tip": "Visit during mango season (roughly May-August) if interested in the region's famous orchards, despite the heat."
+    }
+  ],
+  "history": {
+    "founded": "Founded in 1806 by Mir Ali Murad Talpur",
+    "city_history": "Mirpurkhas was established by the Talpur rulers of Sindh and developed into an important agricultural trading center, particularly known today for its mango production. The region also has ancient roots, with nearby Buddhist archaeological remains pointing to a long history of settlement.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

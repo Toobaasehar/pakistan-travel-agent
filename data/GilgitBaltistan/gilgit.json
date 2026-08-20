@@ -1,0 +1,162 @@
+{
+  "city": "Gilgit",
+  "province": "Gilgit-Baltistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "glt_att_01",
+      "name": "Kargah Buddha",
+      "category": "historical",
+      "description": "A large Buddha figure carved into a rock face, dating back to the 7th century, reflecting the region's Buddhist past.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kargah Valley, near Gilgit",
+      "popularity": "medium"
+    },
+    {
+      "id": "glt_att_02",
+      "name": "Hunza Valley (day trip)",
+      "category": "nature",
+      "description": "One of Pakistan's most famous mountain valleys, with dramatic peaks, ancient forts, and terraced orchards, reachable from Gilgit.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 300,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~2-3 hours from Gilgit via the Karakoram Highway",
+      "popularity": "high"
+    },
+    {
+      "id": "glt_att_03",
+      "name": "Gilgit Bazaar",
+      "category": "shopping",
+      "description": "The main market area of Gilgit, known for dry fruits, local handicrafts, and gemstones.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Gilgit",
+      "popularity": "medium"
+    },
+    {
+      "id": "glt_att_04",
+      "name": "Naltar Valley",
+      "category": "nature",
+      "description": "A remote alpine valley near Gilgit known for colorful lakes, pine forests, and a small ski resort.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 240,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~2 hours from Gilgit",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "glt_food_01",
+      "name": "Local Gilgiti/Balti cuisine restaurants",
+      "cuisine": "Gilgiti/Balti",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Regional dishes like chapshoro (meat-filled bread) and apricot-based foods"
+    },
+    {
+      "id": "glt_food_02",
+      "name": "Dry fruit and apricot stalls",
+      "cuisine": "snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Gilgit-Baltistan is famous for dried apricots, walnuts, and mulberries"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "glt_trans_01",
+      "from_city": "Gilgit",
+      "to_city": "Islamabad",
+      "transport_type": "flight",
+      "route": "Domestic flight (weather permitting)",
+      "estimated_cost_pkr": 12000,
+      "duration_min": 60,
+      "notes": "Scenic flight past Nanga Parbat, but frequently subject to weather cancellations"
+    },
+    {
+      "id": "glt_trans_02",
+      "from_city": "Gilgit",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Karakoram Highway (KKH) coach",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 1200,
+      "notes": "Long but extremely scenic overland route along the Karakoram Highway"
+    },
+    {
+      "id": "glt_trans_03",
+      "from_city": "Gilgit",
+      "to_city": "Hunza",
+      "transport_type": "local_car",
+      "route": "Karakoram Highway",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 150,
+      "notes": "Scenic drive, hire a local car or shared van"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "glt_acc_01",
+      "name": "Budget guesthouse in central Gilgit",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.5
+    },
+    {
+      "id": "glt_acc_02",
+      "name": "Mid-range hotel with mountain views",
+      "price_range": "moderate",
+      "approx_price_pkr": 9000,
+      "family_friendly": true,
+      "rating": 4.1
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Cold semi-arid mountain climate, with large temperature swings between summer and winter",
+    "best_time_to_visit": "May to October (mountain roads most reliably open)",
+    "avoid_months": "December to February (very cold, roads can be affected by snow)",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cold, often below freezing, especially at night" },
+      { "season": "Summer (May-Aug)", "avg_condition": "Mild and pleasant, 20-30°C during the day, cool at night" },
+      { "season": "Spring/Autumn", "avg_condition": "Generally clear and scenic, good for photography" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "glt_tip_01",
+      "category": "shortcut_route",
+      "tip": "Flights from Islamabad to Gilgit are the fastest option but frequently get cancelled due to weather -- always have the Karakoram Highway route as a backup plan."
+    },
+    {
+      "id": "glt_tip_02",
+      "category": "local_transport",
+      "tip": "Shared vans (Coasters) and hired cars are the main way to reach Hunza and other nearby valleys from Gilgit."
+    },
+    {
+      "id": "glt_tip_03",
+      "category": "safety",
+      "tip": "Check road conditions along the Karakoram Highway before traveling, as landslides can occasionally cause temporary closures, especially after heavy rain."
+    },
+    {
+      "id": "glt_tip_04",
+      "category": "timing",
+      "tip": "Plan flexible travel dates in this region since weather can delay both flights and, occasionally, road travel."
+    }
+  ],
+  "history": {
+    "founded": "An ancient settlement along historic Silk Road trade routes, with a history spanning over a thousand years",
+    "city_history": "Gilgit was a key stop on trade routes connecting South Asia, Central Asia, and China, and was ruled by various local dynasties before coming under British political influence in the 19th century. It has served as the main administrative and gateway city for the Gilgit-Baltistan region since Pakistan's independence.",
+    "province_history": "Gilgit-Baltistan is a mountainous region in northern Pakistan, home to some of the world's highest peaks including K2. It has a distinct administrative status, having acceded to Pakistan in 1947 separately from the rest of the country, and was granted a measure of self-governance in 2009."
+  }
+}

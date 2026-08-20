@@ -1,0 +1,159 @@
+{
+  "city": "Sargodha",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "sgd_att_01",
+      "name": "Clock Tower Sargodha",
+      "category": "cultural",
+      "description": "A central landmark in Sargodha city, surrounded by markets and busy streets.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Sargodha",
+      "popularity": "medium"
+    },
+    {
+      "id": "sgd_att_02",
+      "name": "Kirana Hills",
+      "category": "nature",
+      "description": "A range of low rocky hills near Sargodha, popular for short hikes and views over the surrounding plains.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Sargodha city",
+      "popularity": "low"
+    },
+    {
+      "id": "sgd_att_03",
+      "name": "Sargodha Fruit Orchards (citrus belt)",
+      "category": "nature",
+      "description": "Sargodha is known as Pakistan's citrus capital; orchard visits during harvest season are popular with visitors.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Surrounding Sargodha district",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "sgd_food_01",
+      "name": "Sargodha citrus/juice stalls",
+      "cuisine": "beverages",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 150,
+      "family_friendly": true,
+      "specialty": "Fresh kinnow (citrus) juice, a local specialty given Sargodha's fruit industry"
+    },
+    {
+      "id": "sgd_food_02",
+      "name": "Local karahi and BBQ houses",
+      "cuisine": "Punjabi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Traditional Punjabi karahi"
+    },
+    {
+      "id": "sgd_food_03",
+      "name": "Satellite Town food street",
+      "cuisine": "mixed",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Casual dining popular with students and families"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "sgd_trans_01",
+      "from_city": "Sargodha",
+      "to_city": "Faisalabad",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Short regional route"
+    },
+    {
+      "id": "sgd_trans_02",
+      "from_city": "Sargodha",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "sgd_trans_03",
+      "from_city": "Sargodha",
+      "to_city": "Sargodha",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "sgd_acc_01",
+      "name": "Budget guesthouse near Club Road",
+      "price_range": "budget",
+      "approx_price_pkr": 2800,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "sgd_acc_02",
+      "name": "Mid-range hotel near Satellite Town",
+      "price_range": "moderate",
+      "approx_price_pkr": 6500,
+      "family_friendly": true,
+      "rating": 3.8
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "November to March (also ideal for citrus harvest season, December-February)",
+    "avoid_months": "May to July (hot and dry)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool, 6-20°C, peak citrus season" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-42°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "sgd_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Sargodha Bypass to avoid the busy clock tower area when passing through toward Faisalabad or Lahore."
+    },
+    {
+      "id": "sgd_tip_02",
+      "category": "local_transport",
+      "tip": "Rickshaws and local taxis are the most common way to get around; ride-hailing app coverage is more limited than in bigger cities."
+    },
+    {
+      "id": "sgd_tip_03",
+      "category": "safety",
+      "tip": "Standard city precautions apply; Sargodha is generally a calm, agricultural city."
+    },
+    {
+      "id": "sgd_tip_04",
+      "category": "timing",
+      "tip": "Visit during December-February if interested in the citrus orchards, which is peak harvest season for Sargodha's famous kinnow oranges."
+    }
+  ],
+  "history": {
+    "founded": "Developed significantly under British colonial canal-colony planning in the early 20th century",
+    "city_history": "Sargodha grew rapidly after the British developed extensive irrigation canal networks in the region, turning it into one of Punjab's most productive agricultural areas, especially known for citrus fruit. It also has a long association with the Pakistan Air Force, hosting a major air base.",
+    "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+  }
+}

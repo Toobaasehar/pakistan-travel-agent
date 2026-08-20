@@ -1,0 +1,193 @@
+{
+  "city": "Islamabad",
+  "province": "Islamabad Capital Territory",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "isb_att_01",
+      "name": "Faisal Mosque",
+      "category": "religious",
+      "description": "One of the largest mosques in the world, with a striking modern triangular design at the foot of the Margalla Hills.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Shah Faisal Avenue, Islamabad",
+      "popularity": "high"
+    },
+    {
+      "id": "isb_att_02",
+      "name": "Daman-e-Koh",
+      "category": "nature",
+      "description": "A hilltop viewpoint in the Margalla Hills offering panoramic views over Islamabad, popular for hiking and sunset views.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Margalla Hills, Islamabad",
+      "popularity": "high"
+    },
+    {
+      "id": "isb_att_03",
+      "name": "Pakistan Monument",
+      "category": "historical",
+      "description": "A national monument shaped like a blooming flower, symbolizing Pakistan's four provinces and territories, with an adjoining museum.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Shakarparian Hills, Islamabad",
+      "popularity": "high"
+    },
+    {
+      "id": "isb_att_04",
+      "name": "Lok Virsa Museum",
+      "category": "museum",
+      "description": "A museum dedicated to Pakistan's folk heritage, crafts, and cultural traditions from across all provinces.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Shakarparian, Islamabad",
+      "popularity": "medium"
+    },
+    {
+      "id": "isb_att_05",
+      "name": "Centaurus Mall",
+      "category": "shopping",
+      "description": "One of Islamabad's largest modern shopping malls, with retail, dining, and entertainment options.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Jinnah Avenue, Islamabad",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "isb_food_01",
+      "name": "Monal Restaurant",
+      "cuisine": "Pakistani/continental",
+      "price_level": "premium",
+      "approx_cost_per_person_pkr": 2500,
+      "family_friendly": true,
+      "specialty": "Hilltop dining with panoramic city views over the Margalla Hills"
+    },
+    {
+      "id": "isb_food_02",
+      "name": "Kabul Restaurant",
+      "cuisine": "Afghan/Pashtun",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1200,
+      "family_friendly": true,
+      "specialty": "Traditional Afghan pulao and kebabs"
+    },
+    {
+      "id": "isb_food_03",
+      "name": "Street food at F-10 Markaz / Jinnah Super",
+      "cuisine": "street food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Casual local eats popular with students"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "isb_trans_01",
+      "from_city": "Islamabad",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Motorway coach via M-2",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 240,
+      "notes": "Fast, direct route via the M-2 Motorway"
+    },
+    {
+      "id": "isb_trans_02",
+      "from_city": "Islamabad",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Motorway coach via M-1",
+      "estimated_cost_pkr": 1000,
+      "duration_min": 120,
+      "notes": "Fast route via the M-1 Motorway"
+    },
+    {
+      "id": "isb_trans_03",
+      "from_city": "Islamabad",
+      "to_city": "Islamabad",
+      "transport_type": "metro_bus",
+      "route": "Metrobus (Islamabad-Rawalpindi corridor)",
+      "estimated_cost_pkr": 30,
+      "duration_min": 40,
+      "notes": "Cheap way to travel between Islamabad and twin-city Rawalpindi"
+    },
+    {
+      "id": "isb_trans_04",
+      "from_city": "Islamabad",
+      "to_city": "Islamabad",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 350,
+      "duration_min": 20,
+      "notes": "Convenient given the city's spread-out sector layout"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "isb_acc_01",
+      "name": "Budget guesthouse near G-9/F-8",
+      "price_range": "budget",
+      "approx_price_pkr": 4500,
+      "family_friendly": true,
+      "rating": 3.6
+    },
+    {
+      "id": "isb_acc_02",
+      "name": "Mid-range hotel near Blue Area",
+      "price_range": "moderate",
+      "approx_price_pkr": 11000,
+      "family_friendly": true,
+      "rating": 4.2
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Humid subtropical climate with four distinct seasons, milder than most of Pakistan due to elevation and greenery",
+    "best_time_to_visit": "March-April and September-November (mild and green)",
+    "avoid_months": "June-July (hot, occasional heavy monsoon downpours)",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cool, 2-18°C, occasional light rain and hill fog" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Warm, 25-38°C, generally milder than Punjab's plains" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Heavy rain spells, lush green Margalla Hills" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "isb_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Islamabad Expressway to move quickly between the airport, Rawalpindi, and central sectors, avoiding sector-internal roads."
+    },
+    {
+      "id": "isb_tip_02",
+      "category": "local_transport",
+      "tip": "Islamabad's sector-based grid layout (F-6, F-7, G-9, etc.) can be confusing for first-time visitors -- ride-hailing apps handle navigation well."
+    },
+    {
+      "id": "isb_tip_03",
+      "category": "safety",
+      "tip": "Islamabad is generally one of Pakistan's safer and more orderly cities for tourists, but standard city precautions still apply in busy markets."
+    },
+    {
+      "id": "isb_tip_04",
+      "category": "timing",
+      "tip": "Visit Daman-e-Koh and Faisal Mosque in the late afternoon for the best light and cooler temperatures, especially in summer."
+    }
+  ],
+  "history": {
+    "founded": "A planned city, purpose-built starting in the 1960s to replace Karachi as Pakistan's capital",
+    "city_history": "Islamabad was designed by Greek architect Constantinos Doxiadis as a modern, sector-based planned city, officially becoming Pakistan's capital in 1967. Unlike Pakistan's older cities, it has relatively little ancient history itself, but sits near the historic Taxila region, one of the great centers of ancient learning on the Silk Road.",
+    "province_history": "As a federal territory rather than a province, Islamabad was carved out specifically to serve as Pakistan's capital, chosen partly for its central location and proximity to the military headquarters in Rawalpindi."
+  }
+}

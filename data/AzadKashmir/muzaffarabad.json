@@ -1,0 +1,140 @@
+{
+  "city": "Muzaffarabad",
+  "province": "Azad Jammu & Kashmir",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "muz_att_01",
+      "name": "Red Fort (Muzaffarabad Fort)",
+      "category": "historical",
+      "description": "A centuries-old fort overlooking the confluence of the Neelum and Jhelum rivers.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Muzaffarabad",
+      "popularity": "medium"
+    },
+    {
+      "id": "muz_att_02",
+      "name": "Neelum Valley",
+      "category": "nature",
+      "description": "A stunning, forested river valley extending northeast from Muzaffarabad, considered one of the most scenic areas in Pakistan-administered Kashmir.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 240,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Neelum Valley, near Muzaffarabad",
+      "popularity": "high"
+    },
+    {
+      "id": "muz_att_03",
+      "name": "Pir Chinasi",
+      "category": "nature",
+      "description": "A mountain shrine and viewpoint offering panoramic views over Muzaffarabad and the surrounding valleys.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~20km from Muzaffarabad",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "muz_food_01",
+      "name": "Local trout restaurants (Neelum Valley route)",
+      "cuisine": "mountain cuisine",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1000,
+      "family_friendly": true,
+      "specialty": "Fresh river trout from Neelum Valley streams"
+    },
+    {
+      "id": "muz_food_02",
+      "name": "Kashmiri tea houses",
+      "cuisine": "tea/snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 250,
+      "family_friendly": true,
+      "specialty": "Traditional Kashmiri pink tea (noon chai)"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "muz_trans_01",
+      "from_city": "Muzaffarabad",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 800,
+      "duration_min": 150,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "muz_trans_02",
+      "from_city": "Muzaffarabad",
+      "to_city": "Muzaffarabad",
+      "transport_type": "local_jeep",
+      "route": "Jeep/car for Neelum Valley trips",
+      "estimated_cost_pkr": 4000,
+      "duration_min": 180,
+      "notes": "Recommended for exploring the Neelum Valley road"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "muz_acc_01",
+      "name": "Budget guesthouse in central Muzaffarabad",
+      "price_range": "budget",
+      "approx_price_pkr": 3200,
+      "family_friendly": true,
+      "rating": 3.4
+    },
+    {
+      "id": "muz_acc_02",
+      "name": "Mid-range hotel near the river confluence",
+      "price_range": "moderate",
+      "approx_price_pkr": 7500,
+      "family_friendly": true,
+      "rating": 4.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Humid subtropical highland climate, cooler than the plains due to elevation and river valleys",
+    "best_time_to_visit": "April to October",
+    "avoid_months": "Heavy winter snowfall can restrict access to upper Neelum Valley",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cold, occasional snowfall, especially in upper valley areas" },
+      { "season": "Summer (Apr-Aug)", "avg_condition": "Mild and pleasant, 18-30°C" },
+      { "season": "Monsoon", "avg_condition": "Regular rainfall, lush green valleys" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "muz_tip_01",
+      "category": "shortcut_route",
+      "tip": "The Neelum Valley road follows the river closely and offers some of the most scenic driving in the region, but can be narrow in places -- drive carefully."
+    },
+    {
+      "id": "muz_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local jeep or car for Neelum Valley trips, as public transport options are limited further up the valley."
+    },
+    {
+      "id": "muz_tip_03",
+      "category": "safety",
+      "tip": "Check current road conditions before heading into the Neelum Valley, especially after heavy rain or in winter."
+    },
+    {
+      "id": "muz_tip_04",
+      "category": "timing",
+      "tip": "Visit between April and October for the best combination of pleasant weather and open mountain roads."
+    }
+  ],
+  "history": {
+    "founded": "Historically linked to the broader Kashmir region, with the city taking its current name from Sultan Muzaffar Khan in the 18th century",
+    "city_history": "Muzaffarabad has served as the capital of Azad Jammu & Kashmir since the region's formation in 1947, following the partition of British India and the Kashmir conflict. The city sits at the confluence of the Neelum and Jhelum rivers and serves as the gateway to the scenic Neelum Valley.",
+    "province_history": "Azad Jammu & Kashmir is a self-governing territory of Pakistan, formed in 1947 in the aftermath of the partition of British India and the subsequent Kashmir conflict, distinct from the neighboring Indian-administered Jammu and Kashmir."
+  }
+}

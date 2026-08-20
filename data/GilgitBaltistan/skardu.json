@@ -1,0 +1,162 @@
+{
+  "city": "Skardu",
+  "province": "Gilgit-Baltistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "skd_att_01",
+      "name": "Shangrila Resort (Lower Kachura Lake)",
+      "category": "nature",
+      "description": "A famous resort built around a turquoise lake, often called 'Heaven on Earth', one of the most photographed spots in Pakistan.",
+      "entry_fee_pkr": 100,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~30km from Skardu",
+      "popularity": "high"
+    },
+    {
+      "id": "skd_att_02",
+      "name": "Skardu Fort (Kharpocho Fort)",
+      "category": "historical",
+      "description": "A centuries-old fort overlooking Skardu city and the Indus River, built by a local Balti ruler.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Skardu",
+      "popularity": "medium"
+    },
+    {
+      "id": "skd_att_03",
+      "name": "Deosai National Park",
+      "category": "nature",
+      "description": "One of the highest plateaus in the world, known as the 'Land of Giants', with vast alpine meadows and wildlife.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 300,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~3 hours from Skardu",
+      "popularity": "high"
+    },
+    {
+      "id": "skd_att_04",
+      "name": "Sarfaranga Cold Desert",
+      "category": "nature",
+      "description": "A unique high-altitude desert with sand dunes surrounded by snow-capped mountains, popular for jeep safaris.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~30km from Skardu",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "skd_food_01",
+      "name": "Local Balti cuisine restaurants",
+      "cuisine": "Balti",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Traditional Balti dishes like prapu and mamtu"
+    },
+    {
+      "id": "skd_food_02",
+      "name": "Apricot and dry fruit vendors",
+      "cuisine": "snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Locally grown apricots and walnuts"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "skd_trans_01",
+      "from_city": "Skardu",
+      "to_city": "Islamabad",
+      "transport_type": "flight",
+      "route": "Domestic flight (weather permitting)",
+      "estimated_cost_pkr": 15000,
+      "duration_min": 60,
+      "notes": "One of the world's most scenic commercial flights, past Nanga Parbat; frequently weather-dependent"
+    },
+    {
+      "id": "skd_trans_02",
+      "from_city": "Skardu",
+      "to_city": "Gilgit",
+      "transport_type": "bus",
+      "route": "Karakoram Highway connecting road",
+      "estimated_cost_pkr": 1500,
+      "duration_min": 300,
+      "notes": "Scenic mountain road connecting the two main G-B hubs"
+    },
+    {
+      "id": "skd_trans_03",
+      "from_city": "Skardu",
+      "to_city": "Skardu",
+      "transport_type": "local_jeep",
+      "route": "Jeep hire for Deosai and Sarfaranga",
+      "estimated_cost_pkr": 6000,
+      "duration_min": 300,
+      "notes": "4x4 recommended for Deosai plateau access"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "skd_acc_01",
+      "name": "Budget guesthouse in central Skardu",
+      "price_range": "budget",
+      "approx_price_pkr": 3800,
+      "family_friendly": true,
+      "rating": 3.5
+    },
+    {
+      "id": "skd_acc_02",
+      "name": "Mid-range resort near Kachura Lake",
+      "price_range": "moderate",
+      "approx_price_pkr": 12000,
+      "family_friendly": true,
+      "rating": 4.4
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Cold desert mountain climate, dry with large day-night temperature swings",
+    "best_time_to_visit": "May to September (Deosai plateau only accessible in this window)",
+    "avoid_months": "November to April (Deosai closed due to snow; other areas remain very cold)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Apr)", "avg_condition": "Very cold, frequent snowfall, many high routes closed" },
+      { "season": "Summer (May-Sep)", "avg_condition": "Mild and pleasant, 15-28°C during the day" },
+      { "season": "Deosai season", "avg_condition": "Only accessible June-September due to heavy snow the rest of the year" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "skd_tip_01",
+      "category": "shortcut_route",
+      "tip": "Flying to Skardu is far faster than the overland route, but always book with flexible dates since flights are frequently delayed or cancelled due to weather."
+    },
+    {
+      "id": "skd_tip_02",
+      "category": "local_transport",
+      "tip": "A 4x4 jeep is essential for reaching Deosai National Park and the Sarfaranga cold desert -- regular cars aren't suitable for these roads."
+    },
+    {
+      "id": "skd_tip_03",
+      "category": "safety",
+      "tip": "Deosai plateau has no mobile signal in many areas and is only open in summer -- travel with a guide or organized tour rather than alone."
+    },
+    {
+      "id": "skd_tip_04",
+      "category": "timing",
+      "tip": "Plan a Deosai trip strictly between June and September; the road is snowed shut the rest of the year."
+    }
+  ],
+  "history": {
+    "founded": "Historic capital of the ancient Kingdom of Baltistan, with settlement dating back over a thousand years",
+    "city_history": "Skardu was the seat of the Maqpon dynasty, rulers of the ancient Kingdom of Baltistan, a region historically influenced by Tibetan Buddhist culture before the spread of Islam. Kharpocho Fort, built in the 16th century, symbolizes this royal history. Today Skardu is the main gateway to K2 and the Karakoram mountain range, a base for trekkers and mountaineers worldwide.",
+    "province_history": "Gilgit-Baltistan is a mountainous region in northern Pakistan, home to some of the world's highest peaks including K2. It has a distinct administrative status, having acceded to Pakistan in 1947 separately from the rest of the country, and was granted a measure of self-governance in 2009."
+  }
+}

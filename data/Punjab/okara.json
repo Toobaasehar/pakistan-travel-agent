@@ -1,0 +1,128 @@
+{
+  "city": "Okara",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "okr_att_01",
+      "name": "Okara Cantt & Renala Khurd",
+      "category": "cultural",
+      "description": "A cantonment area and nearby historic railway town linked to Okara's colonial-era development.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Okara district",
+      "popularity": "low"
+    },
+    {
+      "id": "okr_att_02",
+      "name": "Okara dairy/agricultural farms",
+      "category": "nature",
+      "description": "Okara district is known for large-scale dairy farming and agriculture; countryside visits showcase rural Punjab life.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Surrounding Okara district",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "okr_food_01",
+      "name": "Local Punjabi karahi houses",
+      "cuisine": "Punjabi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and tikka"
+    },
+    {
+      "id": "okr_food_02",
+      "name": "Local dairy shops (lassi, milk products)",
+      "cuisine": "dairy/beverages",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 150,
+      "family_friendly": true,
+      "specialty": "Fresh dairy products, given the region's dairy farming reputation"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "okr_trans_01",
+      "from_city": "Okara",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Intercity coach / train",
+      "estimated_cost_pkr": 400,
+      "duration_min": 120,
+      "notes": "Regular daily departures, also served by train"
+    },
+    {
+      "id": "okr_trans_02",
+      "from_city": "Okara",
+      "to_city": "Okara",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "okr_acc_01",
+      "name": "Budget guesthouse in central Okara",
+      "price_range": "budget",
+      "approx_price_pkr": 2500,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "okr_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.5
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool, 6-20°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-42°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "okr_tip_01",
+      "category": "shortcut_route",
+      "tip": "Okara sits directly between Lahore and Sahiwal on the main highway/rail corridor, making it an easy stopover."
+    },
+    {
+      "id": "okr_tip_02",
+      "category": "local_transport",
+      "tip": "Rickshaws and local taxis are the main way to get around this mid-sized town."
+    },
+    {
+      "id": "okr_tip_03",
+      "category": "safety",
+      "tip": "Standard travel precautions apply; Okara is a calm agricultural district."
+    },
+    {
+      "id": "okr_tip_04",
+      "category": "timing",
+      "tip": "Visit rural farming areas in the cooler morning hours, especially in summer."
+    }
+  ],
+  "history": {
+    "founded": "Developed significantly under British colonial canal-colony planning in the early 20th century",
+    "city_history": "Okara grew as part of the extensive British-era canal irrigation system in Punjab, becoming an important agricultural and military cantonment town. Renala Khurd nearby was historically significant as an early hydroelectric power site in the region.",
+    "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+  }
+}
