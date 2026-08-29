@@ -59,8 +59,8 @@ app.add_middleware(
 
 @app.get("/")
 def serve_ui():
-    """Serves the web UI as the site's homepage."""
-    return FileResponse("static/index.html")
+    """Serves the web UI as the site's homepage with cache-busting headers."""
+    return FileResponse("static/index.html", headers={"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache", "Expires": "0"})
 
 
 @app.get("/favicon.ico", include_in_schema=False)
