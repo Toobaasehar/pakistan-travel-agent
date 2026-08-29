@@ -8,17 +8,26 @@ Run with:
 """
 
 import sys
+import os
 import time
 import threading
 import webbrowser
 import uvicorn
 
+# Force UTF-8 on Windows terminal output to prevent UnicodeEncodeError
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 
 def launch_browser():
     """Waits for server to start, then automatically opens the default web browser."""
-    time.sleep(1.2)
+    time.sleep(1.5)
     url = "http://127.0.0.1:8000"
-    print(f"\n🌐 Opening web application automatically in your browser: {url}\n")
+    print(f"\n>> Opening web application in your browser: {url}\n")
     try:
         webbrowser.open(url, new=2)
     except Exception as e:
@@ -27,7 +36,7 @@ def launch_browser():
 
 def main():
     print("=" * 60)
-    print("  🇵🇰 Pakistan Travel Agent — Starting Server & UI...")
+    print("  Pakistan Travel Agent -- Starting Server & UI...")
     print("=" * 60)
 
     # Launch browser automatically in a background daemon thread

@@ -469,17 +469,25 @@ def get_dest_recommendations(destination_id: int, db: Session = Depends(get_db))
 
 
 if __name__ == "__main__":
+    import sys
     import uvicorn
     import webbrowser
     import threading
     import time
 
+    if sys.platform == "win32":
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+            sys.stderr.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
+
     def open_browser():
         time.sleep(1.2)
         webbrowser.open("http://127.0.0.1:8000")
 
-    print("\n🇵🇰 Starting Pakistan Travel Agent...")
-    print("🌐 Automatically launching http://127.0.0.1:8000 in your browser...\n")
+    print("\n>> Starting Pakistan Travel Agent...")
+    print(">> Automatically launching http://127.0.0.1:8000 in your browser...\n")
     threading.Thread(target=open_browser, daemon=True).start()
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
 
