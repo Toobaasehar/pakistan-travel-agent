@@ -30,6 +30,8 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", 1
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
 
 
+import random
+
 # --- Pydantic Schemas ---
 class UserRegisterRequest(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
@@ -43,11 +45,25 @@ class UserLoginRequest(BaseModel):
     password: str
 
 
+class EmailVerifyRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=120)
+    code: str = Field(..., min_length=6, max_length=6)
+
+
+class ResendCodeRequest(BaseModel):
+    email: str = Field(..., min_length=5, max_length=120)
+
+
+class DeleteAccountRequest(BaseModel):
+    password: str = Field(..., min_length=1)
+
+
 class UserResponse(BaseModel):
     id: int
     username: str
     email: str
     full_name: Optional[str] = None
+    is_verified: bool = False
     created_at: Optional[datetime] = None
 
     class Config:
@@ -58,6 +74,11 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     user: UserResponse
+
+
+def generate_verification_code() -> str:
+    """Generates a secure 6-digit numeric verification code."""
+    return f"{random.randint(100000, 999999)}"
 
 
 # --- Password Utilities (Direct bcrypt for speed & safety) ---

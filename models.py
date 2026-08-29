@@ -58,6 +58,9 @@ class User(Base):
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(100), nullable=True)
     is_active = Column(Boolean, default=True)
+    is_verified = Column(Boolean, default=False)
+    verification_code = Column(String(6), nullable=True)
+    verification_code_expires_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, server_default=func.now())
 
     # Relationships

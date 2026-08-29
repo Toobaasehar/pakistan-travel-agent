@@ -33,8 +33,8 @@ def main():
     # Launch browser automatically in a background daemon thread
     threading.Thread(target=launch_browser, daemon=True).start()
 
-    # Start the FastAPI server
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=False)
+    # Start the FastAPI server with auto-reload enabled
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
 
 
 if __name__ == "__main__":

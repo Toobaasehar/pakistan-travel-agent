@@ -6,6 +6,8 @@ agent simulation heuristics, and FastAPI API routes.
 """
 
 import sys
+import time
+import json
 import unittest
 import sqlite3
 from fastapi.testclient import TestClient

@@ -1,3 +1,4 @@
+
 # Phase 1 dependencies — backend server only.
 # We will ADD to this file in later phases (database driver, Anthropic SDK, etc.)
 # rather than replacing it, so you can see the project grow.

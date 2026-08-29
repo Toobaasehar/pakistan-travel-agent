@@ -15,7 +15,7 @@ import json
 from datetime import datetime
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
@@ -24,6 +24,7 @@ from typing import Optional, List, Dict, Any
 from database import engine, get_db, Base
 from models import Destination, DestinationImage, User, UserWishlist, SavedTrip
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
+from recommendations import get_recommendations_for_destination
 from agent_mock import run_mock_agent
 from auth import (
     UserRegisterRequest,
@@ -60,6 +61,12 @@ app.add_middleware(
 def serve_ui():
     """Serves the web UI as the site's homepage."""
     return FileResponse("static/index.html")
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    """Returns empty 204 to prevent 404 logs from browser icon requests."""
+    return Response(status_code=204)
 
 
 # Mounted at /static for static assets (images, CSS, JS)
@@ -426,6 +433,13 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
             "estimated_budget_per_day": alt.get("estimated_budget_per_day"),
         })
 
+    rec_data = get_recommendations_for_destination(
+        district=details.get("district"),
+        province=details.get("province"),
+        category=details.get("category"),
+        budget_per_day=details.get("estimated_budget_per_day"),
+    )
+
     return {
         "destination": details,
         "cost": cost,
@@ -435,7 +449,23 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         "latitude": details.get("latitude"),
         "longitude": details.get("longitude"),
         "alternatives": alternatives,
+        "restaurants": rec_data.get("restaurants", []),
+        "hotels": rec_data.get("hotels", []),
     }
+
+
+@app.get("/destinations/{destination_id}/recommendations")
+def get_dest_recommendations(destination_id: int, db: Session = Depends(get_db)):
+    """Returns curated restaurant and hotel recommendations for a destination."""
+    dest = db.query(Destination).filter(Destination.id == destination_id).first()
+    if not dest:
+        raise HTTPException(status_code=404, detail="Destination not found")
+    return get_recommendations_for_destination(
+        district=dest.district,
+        province=dest.province,
+        category=dest.category,
+        budget_per_day=dest.estimated_budget_per_day,
+    )
 
 
 if __name__ == "__main__":
