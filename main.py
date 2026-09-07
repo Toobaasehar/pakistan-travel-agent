@@ -38,6 +38,7 @@ from auth import (
     verify_password,
     create_access_token,
     get_current_user,
+    generate_verification_code,
     get_optional_user,
 )
 
@@ -173,9 +174,10 @@ class SaveTripRequest(BaseModel):
 
 
 # --- Authentication Endpoints ---
+# --- Authentication Endpoints ---
 @app.post("/auth/register", response_model=TokenResponse)
 def register(req: UserRegisterRequest, db: Session = Depends(get_db)):
-    """Creates a new user account with secure bcrypt password hashing."""
+    """Creates a new user account with secure bcrypt password hashing and an email verification OTP."""
     existing_email = db.query(User).filter(User.email == req.email.lower().strip()).first()
     if existing_email:
         raise HTTPException(
@@ -191,22 +193,35 @@ def register(req: UserRegisterRequest, db: Session = Depends(get_db)):
         )
 
     hashed_pw = hash_password(req.password)
+    
+    # Generate 6-digit OTP code using your helper function from auth.py
+    otp_code = generate_verification_code()
+
     user = User(
         username=req.username.strip(),
         email=req.email.lower().strip(),
         hashed_password=hashed_pw,
         full_name=req.full_name.strip() if req.full_name else req.username.strip(),
+        is_verified=False,          # Block them from logging in immediately
+        verification_code=otp_code  # Store the OTP code in the database
     )
+
     db.add(user)
     db.commit()
     db.refresh(user)
 
-    token = create_access_token({"sub": str(user.id), "username": user.username})
+    # For testing output in your terminal loop
+    print(f"\n========================================")
+    print(f" OTP VERIFICATION CODE FOR {user.email}: {otp_code} ")
+    print(f"========================================\n")
+
+    # Since they are not verified yet, we return dummy/empty tokens for now
     return {
-        "access_token": token,
+        "access_token": "pending_verification",
         "token_type": "bearer",
-        "user": user,
+        "user": user
     }
+
 
 
 @app.post("/auth/login", response_model=TokenResponse)
@@ -229,6 +244,18 @@ def login(req: UserLoginRequest, db: Session = Depends(get_db)):
             status_code=status.HTTP_403_FORBIDDEN,
             detail="This account is deactivated.",
         )
+        if not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="This account is deactivated.",
+        )
+
+    
+    if not user.is_verified:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Your email is not verified yet. Please submit your OTP code first."
+        )
 
     token = create_access_token({"sub": str(user.id), "username": user.username})
     return {
@@ -236,6 +263,7 @@ def login(req: UserLoginRequest, db: Session = Depends(get_db)):
         "token_type": "bearer",
         "user": user,
     }
+
 
 
 @app.get("/auth/me", response_model=UserResponse)
@@ -593,3 +621,22 @@ if __name__ == "__main__":
     print(">> Automatically launching http://127.0.0.1:8000 in your browser...\n")
     threading.Thread(target=open_browser, daemon=True).start()
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+        if not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="This account is deactivated.",
+        )
+
+    # ---> ADD THIS BLOCK HERE (Line 247):
+    if not user.is_verified:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Your email is not verified yet. Please submit your OTP code first."
+        )
+
+    token = create_access_token({"sub": str(user.id), "username": user.username})
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "user": user,
+    }
