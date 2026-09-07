@@ -152,4 +152,13 @@ CITY_COORDINATES = {
     # Gilgit-Baltistan
     "Gilgit": (35.9221, 74.3087),
     "Skardu": (35.2971, 75.6333),
+    # Gilgit-Baltistan — newly added districts
+    "Hunza": (36.3167, 74.6500),
+    "Nagar": (36.2333, 74.7833),
+    "Ghizer": (36.1667, 73.7000),
+    "Ghanche": (35.2500, 76.3167),
+    "Shigar": (35.4267, 75.7386),
+    "Kharmang": (35.0333, 75.9167),
+    "Diamer": (35.4222, 74.1006),
+    "Astore": (35.3667, 74.9000),
 }

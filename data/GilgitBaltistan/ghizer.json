@@ -1,0 +1,125 @@
+{
+  "city": "Ghizer",
+  "province": "Gilgit-Baltistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "ghz_att_01",
+      "name": "Phander Lake & Valley",
+      "category": "nature",
+      "description": "A serene turquoise lake surrounded by green meadows and pine forest, one of Ghizer's most scenic spots.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Phander, Ghizer District",
+      "popularity": "high"
+    },
+    {
+      "id": "ghz_att_02",
+      "name": "Ishkoman Valley",
+      "category": "mountains",
+      "description": "A remote, less-visited valley with glacial rivers and traditional villages, popular with trekkers.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 150,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Ishkoman, Ghizer District",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "ghz_food_01",
+      "name": "Local Ghizeri eatery",
+      "cuisine": "Shina/Khowar",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional mountain-region dishes"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "ghz_trans_01",
+      "from_city": "Ghizer",
+      "to_city": "Gilgit",
+      "transport_type": "van",
+      "route": "Local van/jeep via Karakoram Highway or district road",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Most common route to the regional hub"
+    },
+    {
+      "id": "ghz_trans_02",
+      "from_city": "Ghizer",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "NATCO/private coach via Karakoram Highway",
+      "estimated_cost_pkr": 3500,
+      "duration_min": 720,
+      "notes": "Long scenic journey; flights from Gilgit/Skardu are a faster alternative when weather permits"
+    },
+    {
+      "id": "ghz_trans_03",
+      "from_city": "Ghizer",
+      "to_city": "Ghizer",
+      "transport_type": "jeep",
+      "route": "Local jeep hire within the district",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 60,
+      "notes": "Jeeps are often required for higher valleys and glacier areas"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "ghz_acc_01",
+      "name": "Guesthouse near Phander Lake",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "High-altitude mountain climate with cold winters and mild summers",
+    "best_time_to_visit": "May to October",
+    "avoid_months": "December to March (heavy snow, many roads/passes close)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (May-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C in valleys, the main tourist season"
+      },
+      {
+        "season": "Autumn (Oct)",
+        "avg_condition": "Crisp and colorful, famous for golden/red foliage in Hunza and nearby valleys"
+      },
+      {
+        "season": "Winter (Nov-Apr)",
+        "avg_condition": "Very cold, heavy snowfall, many high-altitude roads and passes close"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "ghz_tip_01",
+      "category": "timing",
+      "tip": "Visit Ghizer between May and October — many higher areas are snowed in or inaccessible in winter."
+    },
+    {
+      "id": "ghz_tip_02",
+      "category": "local_transport",
+      "tip": "A 4x4 jeep is often necessary for side valleys and glacier viewpoints; book local drivers in advance during peak season (July-August)."
+    },
+    {
+      "id": "ghz_tip_03",
+      "category": "safety",
+      "tip": "Roads can be affected by landslides, especially after rain — check current road conditions before travel, particularly along the Karakoram Highway."
+    }
+  ],
+  "history": {
+    "founded": "A historic district along the Gilgit River's upper tributaries, home to diverse Shina, Khowar, and Burushaski-speaking communities",
+    "city_history": "Ghizer District, headquartered at Gahkuch, is one of Gilgit-Baltistan's most linguistically diverse districts, known for scenic lakes and valleys including Phander and Ishkoman.",
+    "province_history": "Gilgit-Baltistan is a mountainous region in northern Pakistan, home to some of the world's highest peaks including K2, Nanga Parbat, and parts of the Karakoram, Himalaya, and Hindu Kush ranges. Historically composed of small princely states (including Hunza and Nagar) along the ancient Silk Road, the region acceded to Pakistan in 1947-48 and is administered separately from Azad Kashmir, with its own Legislative Assembly since 2009."
+  }
+}

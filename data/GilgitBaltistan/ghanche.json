@@ -1,0 +1,133 @@
+{
+  "city": "Ghanche",
+  "province": "Gilgit-Baltistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "gnc_att_01",
+      "name": "Khaplu Palace (Yabgo Khar)",
+      "category": "historical",
+      "description": "A beautifully restored 19th-century royal palace of the former Khaplu kingdom, now a heritage hotel and museum showcasing Balti architecture.",
+      "entry_fee_pkr": 300,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Khaplu, Ghanche District",
+      "popularity": "high"
+    },
+    {
+      "id": "gnc_att_02",
+      "name": "Hushe Valley",
+      "category": "mountains",
+      "description": "A dramatic valley leading toward Masherbrum and other Karakoram giants, a base for high-altitude trekking expeditions.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 150,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Hushe, Ghanche District",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "gnc_food_01",
+      "name": "Khaplu local restaurant",
+      "cuisine": "Balti",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Traditional Balti cuisine including apricot and buckwheat dishes"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "gnc_trans_01",
+      "from_city": "Ghanche",
+      "to_city": "Gilgit",
+      "transport_type": "van",
+      "route": "Local van/jeep via Karakoram Highway or district road",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Most common route to the regional hub"
+    },
+    {
+      "id": "gnc_trans_02",
+      "from_city": "Ghanche",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "NATCO/private coach via Karakoram Highway",
+      "estimated_cost_pkr": 3500,
+      "duration_min": 720,
+      "notes": "Long scenic journey; flights from Gilgit/Skardu are a faster alternative when weather permits"
+    },
+    {
+      "id": "gnc_trans_03",
+      "from_city": "Ghanche",
+      "to_city": "Ghanche",
+      "transport_type": "jeep",
+      "route": "Local jeep hire within the district",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 60,
+      "notes": "Jeeps are often required for higher valleys and glacier areas"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "gnc_acc_01",
+      "name": "Khaplu Palace heritage hotel",
+      "price_range": "premium",
+      "approx_price_pkr": 25000,
+      "family_friendly": true,
+      "rating": 4.6
+    },
+    {
+      "id": "gnc_acc_02",
+      "name": "Basic guesthouse in Khaplu town",
+      "price_range": "budget",
+      "approx_price_pkr": 4000,
+      "family_friendly": true,
+      "rating": 3.3
+    }
+  ],
+  "weather_info": {
+    "climate_type": "High-altitude mountain climate with cold winters and mild summers",
+    "best_time_to_visit": "May to October",
+    "avoid_months": "December to March (heavy snow, many roads/passes close)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (May-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C in valleys, the main tourist season"
+      },
+      {
+        "season": "Autumn (Oct)",
+        "avg_condition": "Crisp and colorful, famous for golden/red foliage in Hunza and nearby valleys"
+      },
+      {
+        "season": "Winter (Nov-Apr)",
+        "avg_condition": "Very cold, heavy snowfall, many high-altitude roads and passes close"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "gnc_tip_01",
+      "category": "timing",
+      "tip": "Visit Ghanche between May and October — many higher areas are snowed in or inaccessible in winter."
+    },
+    {
+      "id": "gnc_tip_02",
+      "category": "local_transport",
+      "tip": "A 4x4 jeep is often necessary for side valleys and glacier viewpoints; book local drivers in advance during peak season (July-August)."
+    },
+    {
+      "id": "gnc_tip_03",
+      "category": "safety",
+      "tip": "Roads can be affected by landslides, especially after rain — check current road conditions before travel, particularly along the Karakoram Highway."
+    }
+  ],
+  "history": {
+    "founded": "Historic Baltistan-region district headquartered at Khaplu, once a separate small Balti kingdom",
+    "city_history": "Ghanche District, centered on Khaplu, was historically an independent Balti principality, known for its restored royal palace and as a gateway to some of the world's highest peaks including K2 and Gasherbrum.",
+    "province_history": "Gilgit-Baltistan is a mountainous region in northern Pakistan, home to some of the world's highest peaks including K2, Nanga Parbat, and parts of the Karakoram, Himalaya, and Hindu Kush ranges. Historically composed of small princely states (including Hunza and Nagar) along the ancient Silk Road, the region acceded to Pakistan in 1947-48 and is administered separately from Azad Kashmir, with its own Legislative Assembly since 2009."
+  }
+}

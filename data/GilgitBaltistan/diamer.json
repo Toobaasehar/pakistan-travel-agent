@@ -1,0 +1,133 @@
+{
+  "city": "Diamer",
+  "province": "Gilgit-Baltistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "dmr_att_01",
+      "name": "Nanga Parbat Viewpoint (Fairy Meadows)",
+      "category": "mountains",
+      "description": "A stunning alpine meadow offering close-up views of Nanga Parbat, the world's ninth-highest peak, reached by jeep and a short trek.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Fairy Meadows, Diamer District",
+      "popularity": "high"
+    },
+    {
+      "id": "dmr_att_02",
+      "name": "Chilas Rock Carvings",
+      "category": "historical",
+      "description": "Thousands of ancient Buddhist-era petroglyphs and inscriptions carved into rocks along the old Silk Road route, dating back over a thousand years.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Chilas town",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "dmr_food_01",
+      "name": "Chilas KKH roadside restaurant",
+      "cuisine": "Shina/Pakistani",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional travelers' meals along the Karakoram Highway"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "dmr_trans_01",
+      "from_city": "Diamer",
+      "to_city": "Gilgit",
+      "transport_type": "van",
+      "route": "Local van/jeep via Karakoram Highway or district road",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Most common route to the regional hub"
+    },
+    {
+      "id": "dmr_trans_02",
+      "from_city": "Diamer",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "NATCO/private coach via Karakoram Highway",
+      "estimated_cost_pkr": 3500,
+      "duration_min": 720,
+      "notes": "Long scenic journey; flights from Gilgit/Skardu are a faster alternative when weather permits"
+    },
+    {
+      "id": "dmr_trans_03",
+      "from_city": "Diamer",
+      "to_city": "Diamer",
+      "transport_type": "jeep",
+      "route": "Local jeep hire within the district",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 60,
+      "notes": "Jeeps are often required for higher valleys and glacier areas"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "dmr_acc_01",
+      "name": "Guesthouse/camp at Fairy Meadows",
+      "price_range": "moderate",
+      "approx_price_pkr": 7000,
+      "family_friendly": true,
+      "rating": 4.0
+    },
+    {
+      "id": "dmr_acc_02",
+      "name": "Basic hotel in Chilas",
+      "price_range": "budget",
+      "approx_price_pkr": 4000,
+      "family_friendly": true,
+      "rating": 3.1
+    }
+  ],
+  "weather_info": {
+    "climate_type": "High-altitude mountain climate with cold winters and mild summers",
+    "best_time_to_visit": "May to October",
+    "avoid_months": "December to March (heavy snow, many roads/passes close)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (May-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C in valleys, the main tourist season"
+      },
+      {
+        "season": "Autumn (Oct)",
+        "avg_condition": "Crisp and colorful, famous for golden/red foliage in Hunza and nearby valleys"
+      },
+      {
+        "season": "Winter (Nov-Apr)",
+        "avg_condition": "Very cold, heavy snowfall, many high-altitude roads and passes close"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "dmr_tip_01",
+      "category": "timing",
+      "tip": "Visit Diamer between May and October — many higher areas are snowed in or inaccessible in winter."
+    },
+    {
+      "id": "dmr_tip_02",
+      "category": "local_transport",
+      "tip": "A 4x4 jeep is often necessary for side valleys and glacier viewpoints; book local drivers in advance during peak season (July-August)."
+    },
+    {
+      "id": "dmr_tip_03",
+      "category": "safety",
+      "tip": "Roads can be affected by landslides, especially after rain — check current road conditions before travel, particularly along the Karakoram Highway."
+    }
+  ],
+  "history": {
+    "founded": "A historic district headquartered at Chilas, along the ancient route now followed by the Karakoram Highway",
+    "city_history": "Diamer District is home to Nanga Parbat, the world's ninth-highest peak and one of the most dangerous mountains to climb, historically nicknamed the 'Killer Mountain'. Chilas has been a trade and travel waypoint on the Silk Road for centuries.",
+    "province_history": "Gilgit-Baltistan is a mountainous region in northern Pakistan, home to some of the world's highest peaks including K2, Nanga Parbat, and parts of the Karakoram, Himalaya, and Hindu Kush ranges. Historically composed of small princely states (including Hunza and Nagar) along the ancient Silk Road, the region acceded to Pakistan in 1947-48 and is administered separately from Azad Kashmir, with its own Legislative Assembly since 2009."
+  }
+}
