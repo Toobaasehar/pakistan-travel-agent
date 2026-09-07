@@ -1,0 +1,125 @@
+{
+  "city": "Buner",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "bnr_att_01",
+      "name": "Elum Top",
+      "category": "mountains",
+      "description": "A scenic mountain viewpoint with panoramic views over the Buner and Swat valleys, popular for picnics and camping.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Elum, Buner District",
+      "popularity": "medium"
+    },
+    {
+      "id": "bnr_att_02",
+      "name": "Shrine of Pir Baba",
+      "category": "religious",
+      "description": "A revered Sufi shrine drawing pilgrims from across the region, an important spiritual site in Buner.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Pir Baba, Buner District",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "bnr_food_01",
+      "name": "Daggar bazaar food stalls",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 450,
+      "family_friendly": true,
+      "specialty": "Traditional regional meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "bnr_trans_01",
+      "from_city": "Buner",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach/van via provincial highway",
+      "estimated_cost_pkr": 600,
+      "duration_min": 150,
+      "notes": "Most common route to the provincial hub"
+    },
+    {
+      "id": "bnr_trans_02",
+      "from_city": "Buner",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway/motorway",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 300,
+      "notes": "Daily coach services available from the main bus stand"
+    },
+    {
+      "id": "bnr_trans_03",
+      "from_city": "Buner",
+      "to_city": "Buner",
+      "transport_type": "local_van",
+      "route": "Suzuki/local van within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Shared local vans are the main way to get around"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "bnr_acc_01",
+      "name": "Basic guesthouse in Daggar",
+      "price_range": "budget",
+      "approx_price_pkr": 3100,
+      "family_friendly": true,
+      "rating": 2.9
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain/alpine climate with cold winters and mild summers",
+    "best_time_to_visit": "May to September",
+    "avoid_months": "December to February (heavy snowfall, road closures)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Jun-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C, the main visiting season for mountain areas"
+      },
+      {
+        "season": "Winter (Dec-Feb)",
+        "avg_condition": "Cold, often below freezing at higher elevations; heavy snowfall can close roads"
+      },
+      {
+        "season": "Spring/Autumn",
+        "avg_condition": "Cool and scenic, good for travel with fewer crowds"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "bnr_tip_01",
+      "category": "timing",
+      "tip": "Visit Buner in the warmer months (roughly May to September) if it's a mountain area, since roads can close in winter snow."
+    },
+    {
+      "id": "bnr_tip_02",
+      "category": "local_transport",
+      "tip": "Shared vans (Suzuki/Hiace) and intercity coaches are the main way to reach and travel around the district."
+    },
+    {
+      "id": "bnr_tip_03",
+      "category": "safety",
+      "tip": "Arrange accommodation and local transport in advance, especially in more remote mountain areas."
+    }
+  ],
+  "history": {
+    "founded": "Split from Swat District in 1991",
+    "city_history": "Buner is a mountainous district known for the shrine of Pir Baba, a revered Sufi saint, and for Elum Top, a popular hill-station viewpoint.",
+    "province_history": "Khyber Pakhtunkhwa (formerly North-West Frontier Province) has been a historic crossroads between South and Central Asia for millennia, home to Gandhara civilization sites, the ancient Silk Road route through the Khyber Pass, and a mix of Pashtun tribal, Mughal, Sikh, and British colonial influence before becoming part of Pakistan in 1947. In 2018, the former Federally Administered Tribal Areas (FATA) were formally merged into Khyber Pakhtunkhwa as regular districts."
+  }
+}

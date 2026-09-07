@@ -1,0 +1,137 @@
+{
+  "city": "Umerkot",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "umk_att_01",
+      "name": "Umerkot Fort",
+      "category": "historical",
+      "description": "A historic sandstone fort where Mughal Emperor Akbar was born in 1542, one of Sindh's most significant historical sites.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Umerkot city center",
+      "popularity": "high"
+    },
+    {
+      "id": "umk_att_02",
+      "name": "Thar Desert Gateway",
+      "category": "nature",
+      "description": "Umerkot marks the entry point to the Thar Desert, with sand dunes and traditional desert villages nearby.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Outskirts of Umerkot",
+      "popularity": "medium"
+    },
+    {
+      "id": "umk_att_03",
+      "name": "Shiv Mandir & Hindu Temples",
+      "category": "religious",
+      "description": "Umerkot has a large Hindu community and several notable temples reflecting Sindh's religious diversity.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Umerkot town",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "umk_food_01",
+      "name": "Local Thari/Sindhi eatery",
+      "cuisine": "Sindhi/Thari",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 350,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi and Thari desert-region cuisine, including bajra roti"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "umk_trans_01",
+      "from_city": "Umerkot",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Local/intercity coach via national highway",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Most common route to the nearest major transport hub"
+    },
+    {
+      "id": "umk_trans_02",
+      "from_city": "Umerkot",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via National Highway N-5",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Direct coach services run daily from the main bus stand"
+    },
+    {
+      "id": "umk_trans_03",
+      "from_city": "Umerkot",
+      "to_city": "Umerkot",
+      "transport_type": "local_rickshaw",
+      "route": "Rickshaw/local transport within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Rickshaws and local vans are the main way to get around town"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "umk_acc_01",
+      "name": "Budget guesthouse in Umerkot",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 3.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, semi-arid to arid climate typical of interior Sindh",
+    "best_time_to_visit": "November to February (mild and dry)",
+    "avoid_months": "May to July (extreme heat, often above 40°C)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and pleasant, 10-24°C, best time to visit"
+      },
+      {
+        "season": "Summer (Mar-Jun)",
+        "avg_condition": "Extremely hot and dry, often 40-48°C"
+      },
+      {
+        "season": "Monsoon (Jul-Sep)",
+        "avg_condition": "Occasional heavy rain, humid, risk of flooding in low areas"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "umk_tip_01",
+      "category": "timing",
+      "tip": "Visit Umerkot in the cooler months (November to February) for the most comfortable travel experience."
+    },
+    {
+      "id": "umk_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity buses and shared vans (Suzuki/coaster) are the most common way to reach and travel around the district."
+    },
+    {
+      "id": "umk_tip_03",
+      "category": "safety",
+      "tip": "As with most small-town travel in Sindh, arrange accommodation and local guides in advance, especially outside the main town center."
+    }
+  ],
+  "history": {
+    "founded": "An ancient town on the edge of the Thar Desert, historically significant since at least the medieval Sindhi Soomra era",
+    "city_history": "Umerkot is famously the birthplace of Mughal Emperor Akbar in 1542, born while his father Humayun was in exile there. The town has a significant Hindu population and sits at the gateway to the Thar Desert.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

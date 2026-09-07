@@ -1,0 +1,121 @@
+{
+  "city": "Kech",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "kch_att_01",
+      "name": "Turbat Fort (Miri Kalat)",
+      "category": "historical",
+      "description": "An ancient fort overlooking Turbat, believed to have origins dating back over a thousand years, a symbol of Makran's history.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Turbat, Kech District",
+      "popularity": "medium"
+    },
+    {
+      "id": "kch_att_02",
+      "name": "Kech Date Palm Groves",
+      "category": "nature",
+      "description": "Extensive date palm cultivation along the Kech River, central to the district's economy and culture.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kech District",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "kch_food_01",
+      "name": "Turbat local restaurant",
+      "cuisine": "Balochi/seafood-influenced",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional Makrani Balochi cuisine and fresh dates"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "kch_trans_01",
+      "from_city": "Kech",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "kch_trans_02",
+      "from_city": "Kech",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "kch_trans_03",
+      "from_city": "Kech",
+      "to_city": "Kech",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "kch_acc_01",
+      "name": "Mid-range hotel in Turbat",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.4
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, arid desert climate",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "May to August (extreme heat)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and dry, 10-25°C, best time to visit"
+      },
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Extremely hot and arid, often above 40°C"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "kch_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Kech — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "kch_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "kch_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "Historic Makran region center, headquartered at Turbat, one of the oldest continuously inhabited areas of Balochistan",
+    "city_history": "Kech District, centered on Turbat, is the historic and cultural heart of the Makran region, known for its ancient forts, date palm agriculture, and as Balochistan's second-largest city.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

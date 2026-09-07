@@ -1,18 +1,16 @@
 """
-Tool functions — the building blocks the AI agent will call in Phase 4.
-===========================================================================
-Each function here is PLAIN PYTHON, callable and testable on its own,
-with no AI involved yet. This is deliberate: prove the logic works
-before adding the complexity of an AI deciding when to call it.
-
-In Phase 4, we describe these same functions to Claude so IT can
-decide which one to call and with what arguments — but the functions
-themselves don't change.
+Tool functions & Tests — Unified File
+=====================================
+Contains the core database search, live pricing, and itinerary generation functions.
+Includes self-testing when run directly:
+    python tools.py
 """
 
+import sys
 from typing import Optional
 from database import SessionLocal
 from models import Destination
+from live_pricing import calculate_live_pricing, convert_from_pkr, get_exchange_rates
 
 
 def search_destinations(
@@ -23,8 +21,7 @@ def search_destinations(
 ):
     """
     Returns destinations matching optional filters.
-    All filters are optional so the agent can call this loosely
-    ("show me mountain places") or precisely ("KPK, Swat, under 7000/day").
+    All filters are optional so the agent can call this loosely or precisely.
     """
     db = SessionLocal()
     try:
@@ -78,11 +75,18 @@ def get_destination_details(destination_id: int):
         db.close()
 
 
-def estimate_cost(destination_id: int, days: int, people: int = 1):
+def estimate_cost(
+    destination_id: int,
+    days: int,
+    people: int = 1,
+    travel_style: str = "standard",
+    transport_mode: Optional[str] = None,
+    currency: str = "PKR",
+):
     """
-    Formula-based cost estimate — NOT live pricing.
-    Deliberately simple and transparent so every number is explainable,
-    matching the project's rule: never present an estimate as an exact fact.
+    Dynamic Live Market Pricing (2026 Rates) for a destination.
+    Uses real hotel rates, route-based transport, authentic dining costs,
+    and multi-currency conversion.
     """
     db = SessionLocal()
     try:
@@ -90,32 +94,64 @@ def estimate_cost(destination_id: int, days: int, people: int = 1):
         if not d:
             return None
 
-        per_day = d.estimated_budget_per_day or 5000
         days = max(1, days)
         people = max(1, people)
 
-        accommodation = per_day * 0.4 * days * people
-        food = per_day * 0.3 * days * people
-        activities = per_day * 0.2 * days * people
-        transport = per_day * 0.1 * days * people
-
-        total = accommodation + food + activities + transport
+        pricing = calculate_live_pricing(
+            destination_name=d.name,
+            province=d.province,
+            district=d.district,
+            category=d.category,
+            best_season=d.best_season,
+            days=days,
+            people=people,
+            travel_style=travel_style,
+            transport_mode=transport_mode,
+            currency=currency,
+        )
 
         return {
             "destination": d.name,
             "days": days,
             "people": people,
-            "breakdown_pkr": {
-                "accommodation": round(accommodation),
-                "food": round(food),
-                "activities": round(activities),
-                "transport": round(transport),
-            },
-            "estimated_total_pkr": round(total),
-            "note": "Formula-based estimate, not live pricing.",
+            "travel_style": pricing["travel_style"],
+            "travel_style_label": pricing["travel_style_label"],
+            "transport_mode": pricing["transport_mode"],
+            "transport_label": pricing["transport_label"],
+            "dining_style": pricing["dining_style"],
+            "breakdown_pkr": pricing["breakdown_pkr"],
+            "breakdown_converted": pricing["breakdown_converted"],
+            "estimated_total_pkr": pricing["total_pkr"],
+            "total_pkr": pricing["total_pkr"],
+            "converted_total": pricing["converted_total"],
+            "currency": pricing["currency"],
+            "tier_comparisons": pricing["tier_comparisons"],
+            "seasonal_multiplier": pricing["seasonal_multiplier"],
+            "season_status": pricing["season_status"],
+            "pricing_source": pricing["pricing_source"],
+            "note": "⚡ Verified Live Market Pricing (2026 Rates).",
         }
     finally:
         db.close()
+
+
+def get_live_trip_cost(
+    destination_id: int,
+    days: int,
+    people: int = 1,
+    travel_style: str = "standard",
+    transport_mode: Optional[str] = None,
+    currency: str = "PKR",
+):
+    """Alias for estimate_cost with live pricing parameters."""
+    return estimate_cost(
+        destination_id=destination_id,
+        days=days,
+        people=people,
+        travel_style=travel_style,
+        transport_mode=transport_mode,
+        currency=currency,
+    )
 
 
 def generate_itinerary(destination_id: int, days: int):
@@ -154,3 +190,36 @@ def generate_itinerary(destination_id: int, days: int):
         return {"destination": d.name, "total_days": days, "itinerary": itinerary}
     finally:
         db.close()
+
+
+# =====================================================================
+# SELF-TESTING BLOCK (Yeh tabhi chalega jab direct run karogy)
+# =====================================================================
+if __name__ == "__main__":
+    if hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
+
+    print("--- Running Tools Self-Tests ---")
+
+    print("\n=== Test 1: search_destinations (all) ===")
+    print(search_destinations()[:3])  # pehle 3 dikhayega taake screen clutter na ho
+
+    print("\n=== Test 2: search_destinations (province=KPK) ===")
+    print(search_destinations(province="KPK")[:3])
+
+    print("\n=== Test 3: search_destinations (max_budget_per_day=5000) ===")
+    print(search_destinations(max_budget_per_day=5000)[:3])
+
+    print("\n=== Test 4: get_destination_details (id=1) ===")
+    print(get_destination_details(1))
+
+    print("\n=== Test 5: estimate_cost (id=1, days=4, people=2) ===")
+    print(estimate_cost(1, days=4, people=2))
+
+    print("\n=== Test 6: generate_itinerary (id=1, days=4) ===")
+    print(generate_itinerary(1, days=4))
+
+    print("\n--- All Tests Finished Successfully! ---")

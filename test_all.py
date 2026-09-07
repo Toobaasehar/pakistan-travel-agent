@@ -15,6 +15,9 @@ from fastapi.testclient import TestClient
 from main import app
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
 from agent_mock import extract_budget, extract_days, extract_category, extract_location, run_mock_agent
+from ml.predict_budget import predict_budget
+from ml.similar_destinations import get_similar_destinations
+from ml.explain_budget import explain_budget_prediction
 
 
 class TestDatabaseIntegrity(unittest.TestCase):
@@ -132,6 +135,112 @@ class TestMockAgentParser(unittest.TestCase):
         self.assertIn("Itinerary", reply)
 
 
+class TestMLBudgetPrediction(unittest.TestCase):
+    def test_predict_budget_returns_positive_estimate(self):
+        result = predict_budget(
+            province="Gilgit-Baltistan",
+            category="mountains",
+            recommended_days=2,
+            activities=["hiking", "camping"],
+        )
+        self.assertIn("predicted_budget_per_day", result)
+        self.assertGreater(result["predicted_budget_per_day"], 0)
+
+    def test_predict_budget_handles_unseen_category_gracefully(self):
+        # Category/province outside the training data shouldn't raise —
+        # the encoder should just ignore the unknown value.
+        result = predict_budget(
+            province="Some New Region",
+            category="skydiving",
+            recommended_days=1,
+        )
+        self.assertIn("predicted_budget_per_day", result)
+
+    def test_mock_agent_uses_ml_estimate_when_no_exact_match(self):
+        # Province + category combo unlikely to exist as an exact DB match
+        reply = run_mock_agent("Plan a beach trip in Islamabad for 2 days")
+        self.assertTrue(
+            "AI Budget Estimate" in reply or "PKR" in reply,
+            "Should either give an ML estimate or a real destination match",
+        )
+
+
+class TestSimilarDestinations(unittest.TestCase):
+    def test_returns_requested_count(self):
+        result = get_similar_destinations(destination_id=1, top_n=5)
+        self.assertEqual(result["destination_id"], 1)
+        self.assertIsNotNone(result["cluster"])
+        self.assertLessEqual(len(result["similar"]), 5)
+        self.assertGreater(len(result["similar"]), 0)
+
+    def test_does_not_recommend_itself(self):
+        result = get_similar_destinations(destination_id=1, top_n=5)
+        similar_ids = [item["id"] for item in result["similar"]]
+        self.assertNotIn(1, similar_ids)
+
+    def test_unknown_id_returns_empty(self):
+        result = get_similar_destinations(destination_id=999999, top_n=5)
+        self.assertEqual(result["similar"], [])
+
+    def test_similar_destinations_endpoint(self):
+        client = TestClient(app)
+        res = client.get("/destinations/1/similar?top_n=3")
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertLessEqual(len(data["similar"]), 3)
+        for item in data["similar"]:
+            self.assertIn("name", item)
+            self.assertIn("similarity_distance", item)
+
+    def test_similar_destinations_endpoint_404_for_unknown_id(self):
+        client = TestClient(app)
+        res = client.get("/destinations/999999/similar")
+        self.assertEqual(res.status_code, 404)
+
+
+class TestExplainableBudget(unittest.TestCase):
+    def test_explanation_has_contributions(self):
+        result = explain_budget_prediction(
+            province="Gilgit-Baltistan",
+            category="mountains",
+            recommended_days=2,
+            activities=["hiking", "camping"],
+        )
+        self.assertIn("predicted_budget_per_day", result)
+        self.assertIn("base_value", result)
+        self.assertIn("contributions", result)
+        self.assertGreater(len(result["contributions"]), 0)
+        for c in result["contributions"]:
+            self.assertIn("feature", c)
+            self.assertIn("impact", c)
+
+    def test_contributions_sorted_by_absolute_impact(self):
+        result = explain_budget_prediction(
+            province="Punjab", category="historical", recommended_days=1
+        )
+        impacts = [abs(c["impact"]) for c in result["contributions"]]
+        self.assertEqual(impacts, sorted(impacts, reverse=True))
+
+    def test_respects_top_n(self):
+        result = explain_budget_prediction(
+            province="Sindh", category="museum", recommended_days=1, top_n=3
+        )
+        self.assertLessEqual(len(result["contributions"]), 3)
+
+    def test_explain_budget_endpoint(self):
+        client = TestClient(app)
+        res = client.post("/predict-budget/explain", json={
+            "province": "Gilgit-Baltistan",
+            "category": "mountains",
+            "recommended_days": 2,
+            "activities": ["hiking", "camping"],
+        })
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertIn("contributions", data)
+        self.assertGreater(len(data["contributions"]), 0)
+
+
 class TestFastAPIEndpoints(unittest.TestCase):
     def setUp(self):
         self.client = TestClient(app)
@@ -188,6 +297,22 @@ class TestFastAPIEndpoints(unittest.TestCase):
         data = res.json()
         self.assertIn("reply", data)
         self.assertIn("engine", data)
+
+    def test_predict_budget_endpoint(self):
+        res = self.client.post("/predict-budget", json={
+            "province": "Punjab",
+            "category": "historical",
+            "recommended_days": 1,
+            "activities": ["sightseeing", "photography"],
+        })
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertIn("predicted_budget_per_day", data)
+        self.assertGreater(data["predicted_budget_per_day"], 0)
+
+    def test_predict_budget_endpoint_missing_required_field(self):
+        res = self.client.post("/predict-budget", json={"province": "Punjab"})
+        self.assertEqual(res.status_code, 422)  # Pydantic validation error
 
 
 class TestUserAuthenticationAndSecurity(unittest.TestCase):

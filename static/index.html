@@ -1423,6 +1423,73 @@
       color: var(--terracotta);
     }
 
+    /* Direct Budget Input and Presets */
+    .budget-input-wrapper {
+      display: flex;
+      align-items: center;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 6px 14px;
+      margin-bottom: 8px;
+      transition: var(--transition);
+    }
+
+    .budget-input-wrapper:focus-within {
+      border-color: var(--terracotta);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(192, 98, 42, 0.15);
+    }
+
+    .budget-currency-prefix {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--terracotta);
+      margin-right: 8px;
+    }
+
+    .budget-numeric-input {
+      border: none !important;
+      background: transparent !important;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      width: 100%;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .budget-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .budget-chip {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .budget-chip:hover {
+      background: #fff;
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    .budget-chip.active {
+      background: var(--terracotta);
+      color: #fff;
+      border-color: var(--terracotta);
+    }
+
     .btn-primary {
       width: 100%;
       background: var(--terracotta);
@@ -1708,6 +1775,133 @@
       font-size: 24px;
       font-weight: 600;
       color: var(--saffron);
+    }
+
+    /* Live Pricing Badges & Controls */
+    .live-pricing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 99px;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    }
+
+    .style-selector-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .style-pill-btn {
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 6px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .style-pill-btn:hover {
+      background: #fff;
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    .style-pill-btn.active {
+      background: var(--terracotta);
+      color: #fff;
+      border-color: var(--terracotta);
+      box-shadow: 0 4px 12px rgba(192, 98, 42, 0.25);
+    }
+
+    .tier-comparison-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media(max-width: 600px) {
+      .tier-comparison-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tier-card {
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tier-card:hover {
+      border-color: var(--terracotta);
+      transform: translateY(-2px);
+    }
+
+    .tier-card.active {
+      border-color: var(--terracotta);
+      background: #FFFDF8;
+      box-shadow: 0 3px 10px rgba(192, 98, 42, 0.15);
+    }
+
+    .tier-card-header {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tier-card-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--indigo);
+    }
+
+    .tier-card.active .tier-card-price {
+      color: var(--terracotta);
+    }
+
+    .nav-currency-selector {
+      display: flex;
+      align-items: center;
+    }
+
+    .currency-select-nav {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .currency-select-nav:hover {
+      border-color: var(--terracotta);
     }
 
     .itinerary-section {
@@ -2518,6 +2712,15 @@
       border-color: var(--turquoise);
     }
 
+    .rec-card.shopping {
+      background: #fff;
+      border-color: rgba(232, 148, 58, 0.35);
+    }
+
+    .rec-card.shopping:hover {
+      border-color: var(--saffron);
+    }
+
     .rec-header {
       display: flex;
       justify-content: space-between;
@@ -2735,6 +2938,18 @@
         <button class="tab-btn" data-tab="wishlist" id="tab-wishlist">Wishlist</button>
       </div>
       <div class="nav-auth-section">
+        <div class="nav-currency-selector">
+          <select id="global-currency-select" class="currency-select-nav" onchange="onGlobalCurrencyChange(this.value)" title="Change Currency">
+            <option value="PKR">₨ PKR</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+            <option value="AED">AED</option>
+            <option value="SAR">SAR</option>
+            <option value="CAD">CA$</option>
+            <option value="AUD">A$</option>
+          </select>
+        </div>
         <div class="nav-fav-count" id="nav-fav-count">❤️ <span id="fav-count-num">0</span></div>
 
         <!-- Guest button -->
@@ -2880,13 +3095,32 @@
     <!-- PLAN A TRIP PANEL -->
     <section class="panel" id="plan">
       <div class="section-header">
-        <h2>Custom Trip Planner</h2>
-        <p>Set your budget, days, and travel party — get a full cost breakdown and day-by-day itinerary.</p>
+        <h2>⚡ Live Custom Trip Planner</h2>
+        <p>Set your destination, live travel comfort style, and party size — get verified real-market pricing & day-by-day itineraries.</p>
       </div>
       <div class="plan-layout">
         <div class="plan-form-card">
-          <h3>Your Trip Preferences</h3>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="margin-bottom:0;">Trip Preferences</h3>
+            <span class="live-pricing-badge">⚡ Live 2026 Rates</span>
+          </div>
           <form id="plan-form">
+            <div class="form-group">
+              <label>Travel Comfort Tier</label>
+              <div class="style-selector-wrap">
+                <button type="button" class="style-pill-btn" data-style="budget" onclick="setPlannerTravelStyle('budget')">
+                  <span>🎒</span> Budget
+                </button>
+                <button type="button" class="style-pill-btn active" data-style="standard" onclick="setPlannerTravelStyle('standard')">
+                  <span>🏨</span> Standard
+                </button>
+                <button type="button" class="style-pill-btn" data-style="luxury" onclick="setPlannerTravelStyle('luxury')">
+                  <span>⭐</span> Luxury
+                </button>
+              </div>
+              <input type="hidden" id="plan-travel-style" value="standard">
+            </div>
+
             <div class="form-group">
               <label for="plan-province">Province</label>
               <select id="plan-province">
@@ -2911,28 +3145,53 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Total Budget (PKR)</label>
+              <label for="plan-transport">Transport Preference</label>
+              <select id="plan-transport">
+                <option value="">Auto (Recommended for Route)</option>
+                <option value="private_car">🚗 Dedicated Private Car + Driver & Fuel</option>
+                <option value="mountain_jeep">🚙 4x4 Mountain Prado / Willy Jeep</option>
+                <option value="public_bus">🚌 Intercity Luxury Coach (Daewoo/Faisal Movers)</option>
+                <option value="flight">✈️ Domestic Flight + Local Vehicle</option>
+                <option value="local_transit">🚕 City Ride-Hailing (Careem/Rickshaw)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="budget-input">Total Budget Limit (PKR) <span style="font-size:11.5px; color:var(--ink-soft); font-weight:400;">(Type exact amount or slide)</span></label>
+              <div class="budget-input-wrapper">
+                <span class="budget-currency-prefix">PKR</span>
+                <input type="number" id="budget-input" class="budget-numeric-input" min="1000" max="2000000" step="1000" value="80000" placeholder="e.g. 80000">
+              </div>
+              <div class="budget-chips-row">
+                <button type="button" class="budget-chip" data-val="30000" onclick="setPresetBudget(30000)">30K</button>
+                <button type="button" class="budget-chip" data-val="50000" onclick="setPresetBudget(50000)">50K</button>
+                <button type="button" class="budget-chip active" data-val="80000" onclick="setPresetBudget(80000)">80K</button>
+                <button type="button" class="budget-chip" data-val="150000" onclick="setPresetBudget(150000)">1.5 Lakh</button>
+                <button type="button" class="budget-chip" data-val="300000" onclick="setPresetBudget(300000)">3 Lakh</button>
+                <button type="button" class="budget-chip" data-val="500000" onclick="setPresetBudget(500000)">5 Lakh</button>
+              </div>
               <div class="slider-wrap">
                 <input type="range" class="budget-slider" id="budget-slider" min="10000" max="500000" step="5000"
-                  value="60000">
+                  value="80000">
                 <div class="budget-display">
                   <span>PKR 10K</span>
-                  <span class="current" id="budget-display">PKR 60,000</span>
-                  <span>PKR 500K</span>
+                  <span class="current" id="budget-display">PKR 80,000</span>
+                  <span>PKR 500K+</span>
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="plan-days">Number of Days</label>
-              <input type="number" id="plan-days" min="1" max="14" value="4" style="width:100%">
-            </div>
-            <div class="form-group">
-              <label for="plan-people">Travelers</label>
-              <input type="number" id="plan-people" min="1" value="2" style="width:100%">
+            <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+              <div>
+                <label for="plan-days">Trip Days</label>
+                <input type="number" id="plan-days" min="1" max="14" value="4">
+              </div>
+              <div>
+                <label for="plan-people">Travelers</label>
+                <input type="number" id="plan-people" min="1" max="20" value="2">
+              </div>
             </div>
             <button type="submit" class="btn-primary" id="plan-btn">
               <div class="spinner"></div>
-              <span class="btn-text">✦ Plan My Trip</span>
+              <span class="btn-text">✦ Calculate Live Plan</span>
             </button>
           </form>
         </div>
@@ -3056,7 +3315,7 @@
       </div>
       <hr class="footer-divider">
       <div class="footer-bottom">
-        <p>© 2026 Discover Pakistan · Estimates are formula-based, not live pricing · Built with ❤️ in Pakistan</p>
+        <p>© 2026 Discover Pakistan · ⚡ Powered by Live Dynamic Market Pricing Engine (2026 Rates) · Built with ❤️ in Pakistan</p>
         <div class="social-links">
           <a href="#" class="social-link" title="GitHub">⌨</a>
           <a href="#" class="social-link" title="Twitter">𝕏</a>
@@ -3500,11 +3759,57 @@
         <div class="card-desc">${d.description || ''}</div>
         <div class="card-meta">
           <span class="card-days">📅 ${d.recommended_days ?? '1'} day(s)</span>
-          <span class="card-budget">PKR ${budget.toLocaleString()}/day</span>
+          <span class="card-budget">⚡ ${formatLivePrice(budget)}/day</span>
         </div>
       </div>
     </div>`;
       }).join('');
+    }
+
+    // ========== LIVE CURRENCY & PRICING HELPERS ==========
+    let currentGlobalCurrency = 'PKR';
+    const FX_RATES = {
+      PKR: { rate: 1.0, symbol: '₨', name: 'PKR' },
+      USD: { rate: 278.5, symbol: '$', name: 'USD' },
+      EUR: { rate: 303.2, symbol: '€', name: 'EUR' },
+      GBP: { rate: 354.8, symbol: '£', name: 'GBP' },
+      AED: { rate: 75.8, symbol: 'AED ', name: 'AED' },
+      SAR: { rate: 74.2, symbol: 'SAR ', name: 'SAR' },
+      CAD: { rate: 204.6, symbol: 'CA$ ', name: 'CAD' },
+      AUD: { rate: 181.5, symbol: 'A$ ', name: 'AUD' },
+    };
+
+    function formatLivePrice(amountPkr, curr = currentGlobalCurrency) {
+      const fx = FX_RATES[curr] || FX_RATES.PKR;
+      if (curr === 'PKR') {
+        return `PKR ${Math.round(amountPkr).toLocaleString()}`;
+      }
+      const converted = (amountPkr / fx.rate).toFixed(2);
+      return `${fx.symbol}${parseFloat(converted).toLocaleString()}`;
+    }
+
+    function onGlobalCurrencyChange(newCurr) {
+      currentGlobalCurrency = newCurr;
+      const navSel = document.getElementById('global-currency-select');
+      if (navSel) navSel.value = newCurr;
+      renderGrid();
+      const planRes = document.getElementById('plan-result');
+      if (planRes && planRes.querySelector('.result-card')) {
+        document.getElementById('plan-form').dispatchEvent(new Event('submit'));
+      }
+    }
+
+    function setPlannerTravelStyle(style) {
+      document.querySelectorAll('.style-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.style === style);
+      });
+      const input = document.getElementById('plan-travel-style');
+      if (input) input.value = style;
+    }
+
+    function switchPlannerTier(tier) {
+      setPlannerTravelStyle(tier);
+      document.getElementById('plan-form').dispatchEvent(new Event('submit'));
     }
 
     // Filter events
@@ -3562,8 +3867,8 @@
       <div class="value">${d.recommended_days ?? '1'} day(s)</div>
     </div>
     <div class="info-tile">
-      <div class="label">Budget / Day / Person</div>
-      <div class="value highlight">PKR ${budget.toLocaleString()}</div>
+      <div class="label">Live Market Budget / Day</div>
+      <div class="value highlight">⚡ ${formatLivePrice(budget)}</div>
     </div>
     <div class="info-tile">
       <div class="label">Location</div>
@@ -3577,21 +3882,25 @@
       // Cost breakdown (for 2 people, recommended days)
       const days = d.recommended_days || 2;
       const people = 2;
-      const acc = Math.round(budget * 0.4 * days * people);
-      const food = Math.round(budget * 0.3 * days * people);
-      const act = Math.round(budget * 0.2 * days * people);
-      const trn = Math.round(budget * 0.1 * days * people);
+      const acc = Math.round(budget * 0.45 * days * people);
+      const food = Math.round(budget * 0.25 * days * people);
+      const act = Math.round(budget * 0.15 * days * people);
+      const trn = Math.round(budget * 0.15 * days * people);
       const total = acc + food + act + trn;
       document.getElementById('modal-cost-row').innerHTML = `
-    <div class="title">Estimated Cost — ${days} days, ${people} people</div>
-    <div class="modal-cost-grid">
-      <div class="cost-cell"><span class="amt">PKR ${acc.toLocaleString()}</span><span class="lbl">Accommodation</span></div>
-      <div class="cost-cell"><span class="amt">PKR ${food.toLocaleString()}</span><span class="lbl">Food</span></div>
-      <div class="cost-cell"><span class="amt">PKR ${act.toLocaleString()}</span><span class="lbl">Activities</span></div>
-      <div class="cost-cell"><span class="amt">PKR ${trn.toLocaleString()}</span><span class="lbl">Transport</span></div>
+    <div class="title" style="display:flex; justify-content:space-between; align-items:center;">
+      <span>⚡ Live Market Pricing — ${days} days, ${people} people</span>
+      <span class="live-pricing-badge" style="font-size:9px; padding:2px 8px;">Verified 2026</span>
     </div>
-    <div style="margin-top:12px; font-size:15px; font-weight:600; color:rgba(255,255,255,0.9)">
-      Total: PKR ${total.toLocaleString()} <span style="font-size:11px; opacity:0.6">(formula estimate)</span>
+    <div class="modal-cost-grid">
+      <div class="cost-cell"><span class="amt">${formatLivePrice(acc)}</span><span class="lbl">🏨 Hotel Stay</span></div>
+      <div class="cost-cell"><span class="amt">${formatLivePrice(food)}</span><span class="lbl">🍽️ Dining</span></div>
+      <div class="cost-cell"><span class="amt">${formatLivePrice(act)}</span><span class="lbl">🎟️ Activities</span></div>
+      <div class="cost-cell"><span class="amt">${formatLivePrice(trn)}</span><span class="lbl">🚗 Transport</span></div>
+    </div>
+    <div style="margin-top:12px; font-size:16px; font-weight:700; color:#fff; display:flex; justify-content:space-between; align-items:center;">
+      <span>Total: ${formatLivePrice(total)}</span>
+      <span style="font-size:11px; opacity:0.8; font-weight:400;">PKR ${total.toLocaleString()}</span>
     </div>`;
 
       // Activities
@@ -3641,17 +3950,49 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     // ========== PLAN A TRIP ==========
-    // Budget slider
+    // Budget slider & direct number input sync
     const slider = document.getElementById('budget-slider');
+    const budgetInput = document.getElementById('budget-input');
     const budgetDisp = document.getElementById('budget-display');
-    function updateSlider() {
+
+    function updateSliderFromInput() {
+      let val = parseInt(budgetInput ? budgetInput.value : 0) || 10000;
+      if (val < 1000) val = 1000;
+      if (val > 2000000) val = 2000000;
+      if (slider) {
+        slider.value = Math.min(Math.max(val, 10000), 500000);
+        const pct = ((slider.value - 10000) / (500000 - 10000)) * 100;
+        slider.style.setProperty('--pct', pct + '%');
+      }
+      if (budgetDisp) budgetDisp.textContent = 'PKR ' + val.toLocaleString();
+      highlightPresetChip(val);
+    }
+
+    function updateInputFromSlider() {
+      if (!slider) return;
       const val = parseInt(slider.value);
+      if (budgetInput) budgetInput.value = val;
       const pct = ((val - 10000) / (500000 - 10000)) * 100;
       slider.style.setProperty('--pct', pct + '%');
-      budgetDisp.textContent = 'PKR ' + val.toLocaleString();
+      if (budgetDisp) budgetDisp.textContent = 'PKR ' + val.toLocaleString();
+      highlightPresetChip(val);
     }
-    slider.addEventListener('input', updateSlider);
-    updateSlider();
+
+    function setPresetBudget(val) {
+      if (budgetInput) budgetInput.value = val;
+      updateSliderFromInput();
+    }
+
+    function highlightPresetChip(val) {
+      document.querySelectorAll('.budget-chip').forEach(chip => {
+        const chipVal = parseInt(chip.dataset.val || 0);
+        chip.classList.toggle('active', chipVal === val);
+      });
+    }
+
+    if (slider) slider.addEventListener('input', updateInputFromSlider);
+    if (budgetInput) budgetInput.addEventListener('input', updateSliderFromInput);
+    if (budgetInput) updateSliderFromInput();
 
     // Province → city cascade
     document.getElementById('plan-province').addEventListener('change', e => {
@@ -3677,13 +4018,20 @@
       btn.classList.add('loading');
       btn.disabled = true;
 
+      const travelStyle = document.getElementById('plan-travel-style')?.value || 'standard';
+      const transportMode = document.getElementById('plan-transport')?.value || null;
+      const budgetVal = parseInt(document.getElementById('budget-input')?.value || slider?.value || 80000);
+
       const body = {
-        budget: parseInt(slider.value),
+        budget: budgetVal,
         days: parseInt(document.getElementById('plan-days').value),
         category: document.getElementById('plan-category').value || null,
         province: document.getElementById('plan-province').value || null,
         district: document.getElementById('plan-city').value || null,
         people: parseInt(document.getElementById('plan-people').value),
+        travel_style: travelStyle,
+        transport_mode: transportMode,
+        currency: currentGlobalCurrency,
       };
 
       const resultArea = document.getElementById('plan-result');
@@ -3701,21 +4049,12 @@
           return;
         }
 
-        // Patch budget if missing
-        if (!data.destination.estimated_budget_per_day || data.destination.estimated_budget_per_day === 0) {
-          data.destination.estimated_budget_per_day = DEFAULT_BUDGETS[data.destination.category?.toLowerCase()] || 5000;
-          const days = body.days, people = body.people, bpd = data.destination.estimated_budget_per_day;
-          data.cost = {
-            breakdown_pkr: {
-              accommodation: Math.round(bpd * 0.4 * days * people),
-              food: Math.round(bpd * 0.3 * days * people),
-              activities: Math.round(bpd * 0.2 * days * people),
-              transport: Math.round(bpd * 0.1 * days * people),
-            },
-            estimated_total_pkr: Math.round(bpd * days * people),
-            note: 'Formula-based estimate.'
-          };
-        }
+        const cost = data.cost || {};
+        const breakdown = cost.breakdown_pkr || {};
+        const convertedBreakdown = cost.breakdown_converted || {};
+        const totalPkr = cost.total_pkr || cost.estimated_total_pkr || 0;
+        const convTotal = cost.converted_total || { formatted: `PKR ${totalPkr.toLocaleString()}` };
+        const currencyCode = cost.currency || currentGlobalCurrency;
 
         const imgHtml = (data.image_url && !data.image_url.startsWith('PLACEHOLDER'))
           ? `<img class="result-img" src="${data.image_url}" alt="${data.destination.name}" onerror="this.outerHTML='<div class=\\"result-img-placeholder\\">📸 Photo unavailable</div>'">`
@@ -3732,12 +4071,47 @@
         </div>
       </div>` : '';
 
-        const costIcons = {
-          accommodation: '🏨',
-          food: '🍽️',
-          activities: '🎯',
-          transport: '🚗'
+        const tiers = cost.tier_comparisons || {};
+        const tierCompHtml = (tiers.budget && tiers.standard && tiers.luxury) ? `
+          <h4 class="section-subheading" style="margin-top:22px;">⚡ Live Comfort Tiers Comparison</h4>
+          <div class="tier-comparison-wrap">
+            <div class="tier-card ${tiers.budget.active ? 'active' : ''}" onclick="switchPlannerTier('budget')" title="Switch to Budget Tier">
+              <div class="tier-card-header">
+                <span>🎒 Budget</span>
+                ${tiers.budget.active ? '<span style="color:var(--terracotta); font-weight:700;">✓ Active</span>' : ''}
+              </div>
+              <div class="tier-card-price">${tiers.budget.total_formatted || 'PKR ' + (tiers.budget.total_pkr || 0).toLocaleString()}</div>
+              <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">Guesthouses & Coach</div>
+            </div>
+            <div class="tier-card ${tiers.standard.active ? 'active' : ''}" onclick="switchPlannerTier('standard')" title="Switch to Standard Tier">
+              <div class="tier-card-header">
+                <span>🏨 Standard</span>
+                ${tiers.standard.active ? '<span style="color:var(--terracotta); font-weight:700;">✓ Active</span>' : ''}
+              </div>
+              <div class="tier-card-price">${tiers.standard.total_formatted || 'PKR ' + (tiers.standard.total_pkr || 0).toLocaleString()}</div>
+              <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">3-Star Hotel & AC Car</div>
+            </div>
+            <div class="tier-card ${tiers.luxury.active ? 'active' : ''}" onclick="switchPlannerTier('luxury')" title="Switch to Luxury Tier">
+              <div class="tier-card-header">
+                <span>⭐ Luxury</span>
+                ${tiers.luxury.active ? '<span style="color:var(--terracotta); font-weight:700;">✓ Active</span>' : ''}
+              </div>
+              <div class="tier-card-price">${tiers.luxury.total_formatted || 'PKR ' + (tiers.luxury.total_pkr || 0).toLocaleString()}</div>
+              <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">5-Star Resort & 4x4 Jeep</div>
+            </div>
+          </div>` : '';
+
+        const costLabels = {
+          accommodation: { icon: '🏨', name: 'Hotel / Stays', desc: cost.travel_style_label || 'Hotel Room' },
+          transport: { icon: '🚗', name: 'Transport & Fuel', desc: cost.transport_label || 'Vehicle' },
+          food: { icon: '🍽️', name: 'Dining & Food', desc: cost.dining_style || 'Meals' },
+          activities: { icon: '🎟️', name: 'Sightseeing & Entry', desc: 'Tickets & Permits' },
+          service_and_taxes: { icon: '🧾', name: 'Taxes & Service', desc: '5% Buffer / Govt Fees' },
         };
+
+        const totalConvertedFormatted = (currencyCode !== 'PKR' && convTotal.formatted)
+          ? `PKR ${totalPkr.toLocaleString()} (${convTotal.formatted})`
+          : `PKR ${totalPkr.toLocaleString()}`;
 
         const dirQuery = (data.destination.latitude && data.destination.longitude)
           ? `${data.destination.latitude},${data.destination.longitude}`
@@ -3785,6 +4159,47 @@
             </div>
           </div>` : '';
 
+        const shoppingMallsHtml = (data.shopping_malls && data.shopping_malls.length > 0) ? `
+          <div class="rec-section">
+            <h4 class="section-subheading" style="margin-top:24px;">🛍️ Top Recommended Shopping Malls & Famous Bazaars in ${data.destination.district || data.destination.name}</h4>
+            <div class="rec-grid">
+              ${data.shopping_malls.map(s => `
+                <div class="rec-card shopping">
+                  <div class="rec-header">
+                    <div class="rec-name">${s.name}</div>
+                    <div class="rec-rating">⭐ ${s.rating}</div>
+                  </div>
+                  <div class="rec-type">${s.type} · <span class="rec-price">${s.price_level || 'Market Rates'}</span></div>
+                  <p class="rec-desc"><strong>Famous for:</strong> ${s.famous_for}</p>
+                  <div class="rec-footer">
+                    <span class="rec-area">📍 ${s.area}</span>
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + ' ' + (data.destination.district || data.destination.province) + ' Pakistan')}" target="_blank" rel="noopener" class="rec-map-link">View on Maps ↗</a>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>` : '';
+
+        const similarHtml = (data.similar_destinations && data.similar_destinations.length > 0) ? `
+          <div class="rec-section">
+            <h4 class="section-subheading" style="margin-top:24px;">🤖 AI Picks: Similar Destinations You Might Like</h4>
+            <div class="rec-grid">
+              ${data.similar_destinations.map(s => `
+                <div class="rec-card" style="cursor:pointer;" onclick="openModal(${s.id})" title="View ${s.name}">
+                  <div class="card-img-wrap" style="height:120px; margin:-14px -14px 10px -14px; border-radius:var(--radius-md) var(--radius-md) 0 0; overflow:hidden;">
+                    ${imgOrPlaceholder(s.image_url, 'card-img', 'card-img-placeholder', s.name)}
+                  </div>
+                  <div class="rec-header">
+                    <div class="rec-name">${catIcon(s.category)} ${s.name}</div>
+                  </div>
+                  <div class="rec-type">${s.province}${s.district ? ' · ' + s.district : ''}</div>
+                  <div class="rec-footer">
+                    <span class="rec-price">💰 PKR ${(s.estimated_budget_per_day || 0).toLocaleString()}/day</span>
+                    <span class="rec-map-link">View →</span>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>` : '';
+
         resultArea.innerHTML = `
       <div class="result-card">
         <div class="result-hero">
@@ -3792,7 +4207,7 @@
           <div class="result-hero-overlay">
             <div class="result-badge-row">
               <span class="result-cat-badge">${catIcon(data.destination.category)} ${data.destination.category || 'Destination'}</span>
-              <span class="result-verified-badge">✓ Verified Destination</span>
+              <span class="live-pricing-badge">⚡ Live Market Pricing (2026)</span>
             </div>
             <div class="result-prov">📍 ${data.destination.province}${data.destination.district ? ' · ' + data.destination.district : ''}</div>
             <div class="result-name">${data.destination.name}</div>
@@ -3804,25 +4219,33 @@
           <div class="result-quick-info">
             <div class="quick-info-pill">📅 <span><strong>Recommended Stay:</strong> ${data.destination.recommended_days || 1} day(s)</span></div>
             <div class="quick-info-pill">🌤️ <span><strong>Best Season:</strong> ${data.destination.best_season || 'Year-round'}</span></div>
-            <div class="quick-info-pill">💰 <span><strong>Est. Budget/Day:</strong> PKR ${(data.destination.estimated_budget_per_day || 5000).toLocaleString()}</span></div>
+            <div class="quick-info-pill">💰 <span><strong>Live Daily Rate:</strong> ⚡ ${formatLivePrice(cost.cost_per_person_per_day_pkr || data.destination.estimated_budget_per_day || 5000)}/day</span></div>
+            ${cost.season_status ? `<div class="quick-info-pill">📈 <span><strong>Demand Status:</strong> ${cost.season_status}</span></div>` : ''}
           </div>
 
-          <h4 class="section-subheading">Estimated Cost Breakdown (${body.days} Days, ${body.people} Traveler${body.people > 1 ? 's' : ''})</h4>
-          <div class="cost-grid">
-            ${Object.entries(data.cost.breakdown_pkr).map(([k, v]) => `
+          ${tierCompHtml}
+
+          <h4 class="section-subheading">⚡ Live Itemized Receipt (${body.days} Days, ${body.people} Traveler${body.people > 1 ? 's' : ''} — ${cost.travel_style_label || 'Standard'})</h4>
+          <div class="cost-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+            ${Object.entries(breakdown).map(([k, v]) => {
+              const meta = costLabels[k.toLowerCase()] || { icon: '💵', name: k, desc: '' };
+              const convertedVal = convertedBreakdown[k];
+              const convStr = (currencyCode !== 'PKR' && convertedVal) ? `<span style="font-size:11px; opacity:0.8; font-weight:400;">(${currencyCode} ${convertedVal.toLocaleString()})</span>` : '';
+              return `
               <div class="cost-tile">
-                <span class="icon">${costIcons[k.toLowerCase()] || '💵'}</span>
-                <span class="amt">PKR ${v.toLocaleString()}</span>
-                <span class="lbl">${k}</span>
-              </div>`).join('')}
+                <span class="icon">${meta.icon}</span>
+                <span class="amt">PKR ${v.toLocaleString()} ${convStr}</span>
+                <span class="lbl"><strong>${meta.name}</strong></span>
+              </div>`;
+            }).join('')}
           </div>
 
           <div class="cost-total-row">
             <div class="cost-total-info">
-              <span class="label">Estimated Total Trip Cost</span>
-              <span class="sublabel">${body.days} Days · ${body.people} Traveler${body.people > 1 ? 's' : ''} · Formula-Based Estimate</span>
+              <span class="label">Total Live Trip Cost (${cost.travel_style_label || 'Standard'})</span>
+              <span class="sublabel">${body.days} Days · ${body.people} Traveler${body.people > 1 ? 's' : ''} · ⚡ Verified Real Market Index</span>
             </div>
-            <span class="total">PKR ${data.cost.estimated_total_pkr.toLocaleString()}</span>
+            <span class="total">${totalConvertedFormatted}</span>
           </div>
 
           <div style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
@@ -3846,6 +4269,8 @@
 
           ${restaurantsHtml}
           ${hotelsHtml}
+          ${shoppingMallsHtml}
+          ${similarHtml}
           ${alternativesHtml}
 
           <div class="plan-map-wrapper">

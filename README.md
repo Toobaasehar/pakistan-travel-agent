@@ -32,10 +32,13 @@ pakistan-travel-agent/
 ```bash
 # 1. Create and activate virtual environment
 python -m venv venv
-venv\Scripts\Activate.ps1        # Windows
-# source venv/bin/activate       # Mac/Linux
-
+    # Mac/Linux
+   .\venv\Scripts\Activate.ps1
+   # if u get security policy error ,run this first ,then activate
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+    .\venv\Scripts\Activate.ps1 
 # 2. Install dependencies
+
 pip install -r requirements.txt
 
 # 3. Seed database (154 destinations with verified Wikimedia images)

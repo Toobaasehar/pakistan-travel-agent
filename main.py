@@ -26,6 +26,9 @@ from models import Destination, DestinationImage, User, UserWishlist, SavedTrip
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
 from recommendations import get_recommendations_for_destination
 from agent_mock import run_mock_agent
+from ml.predict_budget import predict_budget
+from ml.similar_destinations import get_similar_destinations
+from ml.explain_budget import explain_budget_prediction
 from auth import (
     UserRegisterRequest,
     UserLoginRequest,
@@ -143,6 +146,13 @@ class TripRequest(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1)
+
+
+class BudgetPredictionRequest(BaseModel):
+    province: str
+    category: str
+    recommended_days: int = Field(..., gt=0)
+    activities: Optional[List[str]] = None
 
 
 class WishlistToggleRequest(BaseModel):
@@ -440,6 +450,25 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         budget_per_day=details.get("estimated_budget_per_day"),
     )
 
+    # ML-based "similar destinations" (KMeans clustering), enriched with
+    # display info so the frontend doesn't need a second round-trip.
+    similar_raw = get_similar_destinations(destination_id=chosen_id, top_n=4)
+    similar_destinations = []
+    for item in similar_raw.get("similar", []):
+        sim_dest = db.query(Destination).filter(Destination.id == item["id"]).first()
+        if not sim_dest:
+            continue
+        sim_image = sim_dest.images[0].image_url if sim_dest.images else None
+        similar_destinations.append({
+            "id": sim_dest.id,
+            "name": sim_dest.name,
+            "province": sim_dest.province,
+            "district": sim_dest.district,
+            "category": sim_dest.category,
+            "estimated_budget_per_day": sim_dest.estimated_budget_per_day,
+            "image_url": sim_image,
+        })
+
     return {
         "destination": details,
         "cost": cost,
@@ -451,7 +480,81 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         "alternatives": alternatives,
         "restaurants": rec_data.get("restaurants", []),
         "hotels": rec_data.get("hotels", []),
+        "similar_destinations": similar_destinations,
     }
+
+
+@app.post("/predict-budget")
+def predict_budget_endpoint(req: BudgetPredictionRequest):
+    """
+    ML-based budget-per-day estimate (Random Forest, trained on all 154 destinations)
+    for a destination profile that may not exist in the database yet. Lets the
+    'Plan a Trip' form give the user a live cost estimate by province/category/duration
+    before an exact destination match is found.
+    """
+    try:
+        return predict_budget(
+            province=req.province,
+            category=req.category,
+            recommended_days=req.recommended_days,
+            activities=req.activities,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Budget prediction failed: {e}")
+
+
+@app.post("/predict-budget/explain")
+def explain_budget_endpoint(req: BudgetPredictionRequest):
+    """
+    Explainable AI (SHAP) breakdown of a budget prediction — shows which
+    factors (province, category, duration, activity count) pushed the
+    estimate up or down, and by how much. Useful for a "why this estimate?"
+    UI element next to the plain /predict-budget number.
+    """
+    try:
+        return explain_budget_prediction(
+            province=req.province,
+            category=req.category,
+            recommended_days=req.recommended_days,
+            activities=req.activities,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Explanation failed: {e}")
+
+
+@app.get("/destinations/{destination_id}/similar")
+def get_similar_destinations_endpoint(destination_id: int, top_n: int = 5, db: Session = Depends(get_db)):
+    """
+    ML-based 'similar destinations' recommendation (KMeans clustering on
+    province, category, budget, duration, and activity count). Returns the
+    closest destinations within the same cluster, with full details attached.
+    """
+    dest = db.query(Destination).filter(Destination.id == destination_id).first()
+    if not dest:
+        raise HTTPException(status_code=404, detail="Destination not found")
+
+    result = get_similar_destinations(destination_id=destination_id, top_n=top_n)
+
+    enriched = []
+    for item in result["similar"]:
+        sim_dest = db.query(Destination).filter(Destination.id == item["id"]).first()
+        if not sim_dest:
+            continue
+        image_url = None
+        if sim_dest.images:
+            image_url = sim_dest.images[0].image_url
+        enriched.append({
+            "id": sim_dest.id,
+            "name": sim_dest.name,
+            "province": sim_dest.province,
+            "district": sim_dest.district,
+            "category": sim_dest.category,
+            "estimated_budget_per_day": sim_dest.estimated_budget_per_day,
+            "image_url": image_url,
+            "similarity_distance": item["distance"],
+        })
+
+    return {"destination_id": destination_id, "cluster": result["cluster"], "similar": enriched}
 
 
 @app.get("/destinations/{destination_id}/recommendations")
@@ -490,4 +593,3 @@ if __name__ == "__main__":
     print(">> Automatically launching http://127.0.0.1:8000 in your browser...\n")
     threading.Thread(target=open_browser, daemon=True).start()
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
-

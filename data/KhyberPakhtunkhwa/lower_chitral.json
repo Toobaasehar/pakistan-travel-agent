@@ -1,0 +1,145 @@
+{
+  "city": "Lower Chitral",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "lch_att_01",
+      "name": "Chitral Fort & Shahi Masjid",
+      "category": "historical",
+      "description": "The historic fort and grand mosque of the former Mehtar (ruler) of Chitral State, reflecting the region's royal past.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Chitral town",
+      "popularity": "high"
+    },
+    {
+      "id": "lch_att_02",
+      "name": "Kalash Valleys (Bumburet, Rumbur, Birir)",
+      "category": "cultural",
+      "description": "Home to the Kalash people, a unique indigenous community with pre-Islamic traditions, distinctive dress, and festivals, unlike anywhere else in Pakistan.",
+      "entry_fee_pkr": 100,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kalash Valleys, Lower Chitral District",
+      "popularity": "high"
+    },
+    {
+      "id": "lch_att_03",
+      "name": "Chitral Gol National Park",
+      "category": "wildlife",
+      "description": "A national park adjacent to Chitral town, home to markhor and snow leopard habitat.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Chitral Gol, Lower Chitral District",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "lch_food_01",
+      "name": "Chitral town restaurant",
+      "cuisine": "Chitrali",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 550,
+      "family_friendly": true,
+      "specialty": "Traditional Chitrali dishes including local walnut and mulberry specialties"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "lch_trans_01",
+      "from_city": "Lower Chitral",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach/van via provincial highway",
+      "estimated_cost_pkr": 600,
+      "duration_min": 150,
+      "notes": "Most common route to the provincial hub"
+    },
+    {
+      "id": "lch_trans_02",
+      "from_city": "Lower Chitral",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway/motorway",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 300,
+      "notes": "Daily coach services available from the main bus stand"
+    },
+    {
+      "id": "lch_trans_03",
+      "from_city": "Lower Chitral",
+      "to_city": "Lower Chitral",
+      "transport_type": "local_van",
+      "route": "Suzuki/local van within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Shared local vans are the main way to get around"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "lch_acc_01",
+      "name": "Guesthouse in Chitral town",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.7
+    },
+    {
+      "id": "lch_acc_02",
+      "name": "Kalash Valley homestay",
+      "price_range": "budget",
+      "approx_price_pkr": 4500,
+      "family_friendly": true,
+      "rating": 3.5
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain/alpine climate with cold winters and mild summers",
+    "best_time_to_visit": "May to September",
+    "avoid_months": "December to February (heavy snowfall, road closures)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Jun-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C, the main visiting season for mountain areas"
+      },
+      {
+        "season": "Winter (Dec-Feb)",
+        "avg_condition": "Cold, often below freezing at higher elevations; heavy snowfall can close roads"
+      },
+      {
+        "season": "Spring/Autumn",
+        "avg_condition": "Cool and scenic, good for travel with fewer crowds"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "lch_tip_01",
+      "category": "timing",
+      "tip": "Visit Lower Chitral in the warmer months (roughly May to September) if it's a mountain area, since roads can close in winter snow."
+    },
+    {
+      "id": "lch_tip_02",
+      "category": "local_transport",
+      "tip": "Shared vans (Suzuki/Hiace) and intercity coaches are the main way to reach and travel around the district."
+    },
+    {
+      "id": "lch_tip_03",
+      "category": "safety",
+      "tip": "Arrange accommodation and local transport in advance, especially in more remote mountain areas."
+    }
+  ],
+  "history": {
+    "founded": "Split from Chitral District in 2018, covering the former Chitral Tehsil",
+    "city_history": "Lower Chitral, centered on Chitral town, was the seat of the former princely State of Chitral, and is home to the famous Kalash Valleys with their unique pre-Islamic culture.",
+    "province_history": "Khyber Pakhtunkhwa (formerly North-West Frontier Province) has been a historic crossroads between South and Central Asia for millennia, home to Gandhara civilization sites, the ancient Silk Road route through the Khyber Pass, and a mix of Pashtun tribal, Mughal, Sikh, and British colonial influence before becoming part of Pakistan in 1947. In 2018, the former Federally Administered Tribal Areas (FATA) were formally merged into Khyber Pakhtunkhwa as regular districts."
+  }
+}

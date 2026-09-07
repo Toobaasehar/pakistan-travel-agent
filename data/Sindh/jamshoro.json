@@ -1,0 +1,137 @@
+{
+  "city": "Jamshoro",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "jam_att_01",
+      "name": "Ranikot Fort",
+      "category": "historical",
+      "description": "An enormous stone fort with a circumference of roughly 26 km, sometimes called the 'Great Wall of Sindh' — one of the largest forts in the world.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Ranikot, Jamshoro District",
+      "popularity": "high"
+    },
+    {
+      "id": "jam_att_02",
+      "name": "Kotri Barrage",
+      "category": "nature",
+      "description": "A major barrage on the Indus River providing irrigation to lower Sindh, with scenic river views.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kotri, Jamshoro District",
+      "popularity": "medium"
+    },
+    {
+      "id": "jam_att_03",
+      "name": "University of Sindh Campus",
+      "category": "cultural",
+      "description": "One of Pakistan's oldest universities, with a large green campus at the foot of the Kirthar hills.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Jamshoro city",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "jam_food_01",
+      "name": "Kotri riverside food stalls",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 350,
+      "family_friendly": true,
+      "specialty": "Fresh fish from the Indus and traditional Sindhi curries"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "jam_trans_01",
+      "from_city": "Jamshoro",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Local/intercity coach via national highway",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Most common route to the nearest major transport hub"
+    },
+    {
+      "id": "jam_trans_02",
+      "from_city": "Jamshoro",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via National Highway N-5",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Direct coach services run daily from the main bus stand"
+    },
+    {
+      "id": "jam_trans_03",
+      "from_city": "Jamshoro",
+      "to_city": "Jamshoro",
+      "transport_type": "local_rickshaw",
+      "route": "Rickshaw/local transport within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Rickshaws and local vans are the main way to get around town"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "jam_acc_01",
+      "name": "Guesthouse near University area",
+      "price_range": "budget",
+      "approx_price_pkr": 3300,
+      "family_friendly": true,
+      "rating": 3.2
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, semi-arid to arid climate typical of interior Sindh",
+    "best_time_to_visit": "November to February (mild and dry)",
+    "avoid_months": "May to July (extreme heat, often above 40°C)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and pleasant, 10-24°C, best time to visit"
+      },
+      {
+        "season": "Summer (Mar-Jun)",
+        "avg_condition": "Extremely hot and dry, often 40-48°C"
+      },
+      {
+        "season": "Monsoon (Jul-Sep)",
+        "avg_condition": "Occasional heavy rain, humid, risk of flooding in low areas"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "jam_tip_01",
+      "category": "timing",
+      "tip": "Visit Jamshoro in the cooler months (November to February) for the most comfortable travel experience."
+    },
+    {
+      "id": "jam_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity buses and shared vans (Suzuki/coaster) are the most common way to reach and travel around the district."
+    },
+    {
+      "id": "jam_tip_03",
+      "category": "safety",
+      "tip": "As with most small-town travel in Sindh, arrange accommodation and local guides in advance, especially outside the main town center."
+    }
+  ],
+  "history": {
+    "founded": "Developed in the 20th century around Kotri Barrage and the University of Sindh campus",
+    "city_history": "Jamshoro grew as an industrial and academic town, home to the University of Sindh and the Kotri Barrage on the Indus River. The district also contains Ranikot Fort, believed to be the largest fort in the world by circumference.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "city": "Zone V",
+  "province": "Islamabad Capital Territory",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices. Zone boundaries are large areas, not points — coordinates represent a landmark within the zone, not a true centroid.",
+  "attractions": [
+    {
+      "id": "isb5_att_01",
+      "name": "Soan River Valley",
+      "category": "nature",
+      "description": "A rural river valley on Islamabad's outskirts, with farmland and a quieter, undeveloped landscape.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Soan River, Zone V",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "isb5_food_01",
+      "name": "Local roadside dhaba",
+      "cuisine": "Pakistani",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 450,
+      "family_friendly": true,
+      "specialty": "Simple rural meals along the Soan River road"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "isb5_trans_01",
+      "from_city": "Zone V",
+      "to_city": "Rawalpindi",
+      "transport_type": "metro_bus",
+      "route": "Islamabad Metro Bus (Red Line)",
+      "estimated_cost_pkr": 30,
+      "duration_min": 45,
+      "notes": "Fast, affordable BRT connecting Islamabad and Rawalpindi"
+    },
+    {
+      "id": "isb5_trans_02",
+      "from_city": "Zone V",
+      "to_city": "Islamabad International Airport",
+      "transport_type": "taxi",
+      "route": "Careem/InDrive/local taxi",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 40,
+      "notes": "Ride-hailing apps are the most convenient option to/from the airport"
+    },
+    {
+      "id": "isb5_trans_03",
+      "from_city": "Zone V",
+      "to_city": "Zone V",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within the city",
+      "estimated_cost_pkr": 350,
+      "duration_min": 20,
+      "notes": "Ride-hailing apps are widely used and reliable across Islamabad"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "isb5_acc_01",
+      "name": "Basic guesthouse in rural Zone V",
+      "price_range": "budget",
+      "approx_price_pkr": 4000,
+      "family_friendly": true,
+      "rating": 3.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Humid subtropical climate with four distinct seasons",
+    "best_time_to_visit": "March-April and September-November",
+    "avoid_months": "June-August (hot, humid, monsoon rain)",
+    "seasonal_notes": [
+      {
+        "season": "Spring (Mar-Apr)",
+        "avg_condition": "Mild and green, 15-25°C, one of the best times to visit"
+      },
+      {
+        "season": "Summer (May-Aug)",
+        "avg_condition": "Warm to hot, 30-40°C, with monsoon rain in July-August"
+      },
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Cool, 5-18°C, occasional light rain, Margalla Hills sometimes get a dusting of snow"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "isb5_tip_01",
+      "category": "timing",
+      "tip": "Spring (March-April) and autumn offer the most pleasant weather for sightseeing in Islamabad."
+    },
+    {
+      "id": "isb5_tip_02",
+      "category": "local_transport",
+      "tip": "Ride-hailing apps (Careem, InDrive) are the easiest way to get around; the Metro Bus is a cheap option between Islamabad and Rawalpindi."
+    },
+    {
+      "id": "isb5_tip_03",
+      "category": "general",
+      "tip": "Zone V is one of five planning zones in Islamabad Capital Territory — attractions here are grouped by zone rather than by separate towns."
+    }
+  ],
+  "history": {
+    "founded": "Designated as Islamabad's largest rural development zone, covering the city's western and southwestern periphery",
+    "city_history": "Zone V is predominantly rural, crossed by the Soan River, and includes farmland and small villages that remain relatively undeveloped compared to the city's urban core.",
+    "province_history": "Islamabad was purpose-built starting in 1960 as Pakistan's new capital, replacing Karachi, and was inaugurated in 1967. Designed by Greek architect Constantinos Doxiadis on a grid of numbered sectors at the foot of the Margalla Hills, it is one of the few purpose-planned capital cities in South Asia."
+  }
+}
