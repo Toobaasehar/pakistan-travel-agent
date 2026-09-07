@@ -54,7 +54,8 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String(50), unique=True, index=True, nullable=False)
-    email = Column(String(120), unique=True, index=True, nullable=False)
+    email = Column(String(128), unique=True, index=True, nullable=True) # Changed False to True
+    phone_number = Column(String(20), unique=True, index=True, nullable=True) # Add this new line
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(100), nullable=True)
     is_active = Column(Boolean, default=True)
