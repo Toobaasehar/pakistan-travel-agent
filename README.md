@@ -1,6 +1,6 @@
 # Pakistan Travel Agent — Complete v1.0
 
-AI-powered trip planner for Pakistan tourism. Real, hand-verified destinations across all 4 provinces + Gilgit-Baltistan + Azad Kashmir + Islamabad, with a responsive web UI, OpenStreetMap Leaflet integration, cost & itinerary engine, AI chat, and automated test suite.
+AI-powered trip planner for Pakistan tourism. Real, hand-verified destinations across all 4 provinces + Gilgit-Baltistan + Azad Kashmir + Islamabad, with a responsive web UI, OpenStreetMap Leaflet [...]
 
 ## Project Structure
 
@@ -30,15 +30,22 @@ pakistan-travel-agent/
 ## Setup & Quick Start
 
 ```bash
-# 1. Create and activate virtual environment
+# 1. Create virtual environment
 python -m venv venv
-    # Mac/Linux
-   .\venv\Scripts\Activate.ps1
-   # if u get security policy error ,run this first ,then activate
-   Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
-    .\venv\Scripts\Activate.ps1 
-# 2. Install dependencies
 
+# Windows (PowerShell)
+# If you get a PowerShell execution policy error, run this once in PowerShell (you may need to run PowerShell as Administrator):
+#   Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+# Then activate the virtual environment:
+.\venv\Scripts\Activate.ps1
+
+# Windows (Command Prompt)
+venv\Scripts\activate.bat
+
+# macOS / Linux (bash, zsh)
+source venv/bin/activate
+
+# 2. Install dependencies
 pip install -r requirements.txt
 
 # 3. Seed database (154 destinations with verified Wikimedia images)
@@ -79,4 +86,5 @@ Runs all 23 unit and API integration tests covering database schemas, tool funct
 python agent.py          # Real Claude AI reasoning (requires ANTHROPIC_API_KEY in .env)
 python agent_mock.py     # Rule-based NLP engine (free, no API key needed)
 ```
+
 
