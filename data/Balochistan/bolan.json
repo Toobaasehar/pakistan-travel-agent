@@ -1,0 +1,121 @@
+{
+  "city": "Bolan",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "bln_att_01",
+      "name": "Bolan Pass",
+      "category": "historical",
+      "description": "A historic mountain pass connecting the Indus plains to the Balochistan highlands, used since ancient times and famous for its dramatic gorge scenery and colonial-era railway.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Bolan District",
+      "popularity": "high"
+    },
+    {
+      "id": "bln_att_02",
+      "name": "Bolan River Gorge",
+      "category": "nature",
+      "description": "Dramatic rocky gorge scenery along the Bolan River, especially scenic along the historic railway route.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Bolan Pass area",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "bln_food_01",
+      "name": "Local Balochi eatery",
+      "cuisine": "Balochi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 450,
+      "family_friendly": true,
+      "specialty": "Traditional Balochi meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "bln_trans_01",
+      "from_city": "Bolan",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "bln_trans_02",
+      "from_city": "Bolan",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "bln_trans_03",
+      "from_city": "Bolan",
+      "to_city": "Bolan",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "bln_acc_01",
+      "name": "Basic guesthouse in Mach/Bolan",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 2.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain climate with mild summers and cold winters",
+    "best_time_to_visit": "April to September",
+    "avoid_months": "December to February (cold, possible snow)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Mild, 15-30°C, main visiting season for highland areas"
+      },
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Cold, often below freezing, occasional snow at higher elevations"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "bln_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Bolan — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "bln_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "bln_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "Named after the historic Bolan Pass, a strategic mountain route since ancient times",
+    "city_history": "Bolan District (historically Kachhi) contains the famous Bolan Pass, a strategic mountain corridor used by traders and armies for millennia, later developed by the British as a key rail and road route between Sindh and Quetta.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

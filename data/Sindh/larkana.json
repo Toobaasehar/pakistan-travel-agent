@@ -1,0 +1,140 @@
+{
+  "city": "Larkana",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "lrk_att_01",
+      "name": "Mohenjo-daro",
+      "category": "historical",
+      "description": "A UNESCO World Heritage Site and one of the world's oldest urban settlements, dating back over 4,500 years, showcasing remarkably advanced Indus Valley city planning.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 150,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~25km from Larkana city",
+      "popularity": "high"
+    },
+    {
+      "id": "lrk_att_02",
+      "name": "Mohenjo-daro Museum",
+      "category": "museum",
+      "description": "A site museum displaying artifacts excavated from Mohenjo-daro, including seals, pottery, and jewelry.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Mohenjo-daro site",
+      "popularity": "medium"
+    },
+    {
+      "id": "lrk_att_03",
+      "name": "Garhi Khuda Bakhsh (Bhutto family mausoleum)",
+      "category": "historical",
+      "description": "The mausoleum of the Bhutto family, a significant political landmark in Pakistan's history.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Larkana",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "lrk_food_01",
+      "name": "Local Sindhi karahi houses",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi-style karahi"
+    },
+    {
+      "id": "lrk_food_02",
+      "name": "Larkana sweet shops",
+      "cuisine": "desserts",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 250,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi sweets"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "lrk_trans_01",
+      "from_city": "Larkana",
+      "to_city": "Sukkur",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Short regional route"
+    },
+    {
+      "id": "lrk_trans_02",
+      "from_city": "Larkana",
+      "to_city": "Larkana",
+      "transport_type": "local_taxi",
+      "route": "Local taxi to Mohenjo-daro site",
+      "estimated_cost_pkr": 1500,
+      "duration_min": 40,
+      "notes": "Round-trip taxi fare is typical since public transport to the site is limited"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "lrk_acc_01",
+      "name": "Budget guesthouse in central Larkana",
+      "price_range": "budget",
+      "approx_price_pkr": 2800,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "lrk_acc_02",
+      "name": "PTDC Motel near Mohenjo-daro",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert climate, similar to Sukkur, with very hot summers",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "May to July (extremely hot)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 12-25°C, best time for the Mohenjo-daro site visit" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Extremely hot, often 42-48°C" },
+      { "season": "Monsoon", "avg_condition": "Light rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "lrk_tip_01",
+      "category": "shortcut_route",
+      "tip": "The most direct route to Mohenjo-daro from Larkana is a well-maintained road, roughly a 30-40 minute drive."
+    },
+    {
+      "id": "lrk_tip_02",
+      "category": "local_transport",
+      "tip": "Arrange a taxi for a half-day round trip to Mohenjo-daro since public transport doesn't run directly to the site."
+    },
+    {
+      "id": "lrk_tip_03",
+      "category": "safety",
+      "tip": "Carry water and sun protection when exploring the open archaeological site, as there is little shade."
+    },
+    {
+      "id": "lrk_tip_04",
+      "category": "timing",
+      "tip": "Visit Mohenjo-daro in the early morning, both for cooler temperatures and better light for photography."
+    }
+  ],
+  "history": {
+    "founded": "The modern city grew around its role as a regional administrative center; the nearby Mohenjo-daro site dates back over 4,500 years",
+    "city_history": "Larkana is best known as the gateway to Mohenjo-daro, one of the largest and most sophisticated cities of the ancient Indus Valley Civilization, featuring advanced urban planning, drainage systems, and standardized construction that predate most other ancient civilizations. The region is also historically significant as the ancestral home of the Bhutto political family.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

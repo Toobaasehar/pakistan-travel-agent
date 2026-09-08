@@ -1,0 +1,128 @@
+{
+  "city": "Loralai",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "lrl_att_01",
+      "name": "Loralai River valley",
+      "category": "nature",
+      "description": "A fertile river valley surrounded by the arid mountains typical of northeastern Balochistan.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Around Loralai town",
+      "popularity": "low"
+    },
+    {
+      "id": "lrl_att_02",
+      "name": "Loralai local bazaars",
+      "category": "shopping",
+      "description": "Local markets known for regional handicrafts, dry fruits, and everyday goods.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Loralai",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "lrl_food_01",
+      "name": "Local Balochi/Pashtun karahi houses",
+      "cuisine": "Balochi/Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and grilled meats"
+    },
+    {
+      "id": "lrl_food_02",
+      "name": "Local dry fruit stalls",
+      "cuisine": "snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 250,
+      "family_friendly": true,
+      "specialty": "Regional dry fruits and nuts"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "lrl_trans_01",
+      "from_city": "Loralai",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "lrl_trans_02",
+      "from_city": "Loralai",
+      "to_city": "Loralai",
+      "transport_type": "local_taxi",
+      "route": "Local taxi within town",
+      "estimated_cost_pkr": 250,
+      "duration_min": 15,
+      "notes": "Simple, short local trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "lrl_acc_01",
+      "name": "Budget guesthouse in central Loralai",
+      "price_range": "budget",
+      "approx_price_pkr": 2500,
+      "family_friendly": true,
+      "rating": 3.1
+    },
+    {
+      "id": "lrl_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.4
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with cold winters (moderate elevation)",
+    "best_time_to_visit": "April to October",
+    "avoid_months": "December to February (cold)",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cold, can approach freezing at night" },
+      { "season": "Summer (May-Aug)", "avg_condition": "Warm and dry, 25-36°C" },
+      { "season": "Monsoon", "avg_condition": "Minimal rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "lrl_tip_01",
+      "category": "shortcut_route",
+      "tip": "Loralai serves as a connecting point between Quetta and Dera Ghazi Khan in Punjab for overland travelers."
+    },
+    {
+      "id": "lrl_tip_02",
+      "category": "local_transport",
+      "tip": "Local taxis are the simplest way to get around; the town itself is compact."
+    },
+    {
+      "id": "lrl_tip_03",
+      "category": "safety",
+      "tip": "Check current travel advisories before planning a visit, as with other parts of northern Balochistan."
+    },
+    {
+      "id": "lrl_tip_04",
+      "category": "timing",
+      "tip": "Pack warm clothing for winter visits given the cooler elevation."
+    }
+  ],
+  "history": {
+    "founded": "Developed as a British colonial administrative post in the late 19th century",
+    "city_history": "Loralai grew as a regional trading and administrative center under British rule, positioned along routes connecting Quetta to Dera Ghazi Khan in Punjab. It remains an important market town for the surrounding agricultural areas of northeastern Balochistan.",
+    "province_history": "Balochistan is Pakistan's largest province by area, historically home to various Baloch and Pashtun tribal confederacies, and was governed as British Balochistan before its princely states acceded to Pakistan between 1947 and 1948."
+  }
+}

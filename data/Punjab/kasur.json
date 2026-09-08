@@ -1,0 +1,128 @@
+{
+  "city": "Kasur",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "ksr_att_01",
+      "name": "Tomb of Bulleh Shah",
+      "category": "religious",
+      "description": "The shrine of Bulleh Shah, one of the most celebrated Punjabi Sufi poets, a significant pilgrimage and cultural site.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Kasur",
+      "popularity": "high"
+    },
+    {
+      "id": "ksr_att_02",
+      "name": "Kasur old city bazaars",
+      "category": "shopping",
+      "description": "Historic markets known for traditional shoes (khussa), textiles, and local crafts.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Old city, Kasur",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "ksr_food_01",
+      "name": "Local Punjabi karahi houses",
+      "cuisine": "Punjabi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and tikka"
+    },
+    {
+      "id": "ksr_food_02",
+      "name": "Kasur sweet shops",
+      "cuisine": "desserts",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Traditional Punjabi sweets"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "ksr_trans_01",
+      "from_city": "Kasur",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 200,
+      "duration_min": 60,
+      "notes": "Short, frequent route"
+    },
+    {
+      "id": "ksr_trans_02",
+      "from_city": "Kasur",
+      "to_city": "Kasur",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "ksr_acc_01",
+      "name": "Budget guesthouse in central Kasur",
+      "price_range": "budget",
+      "approx_price_pkr": 2500,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "ksr_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot and humid)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool, 6-20°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-42°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "ksr_tip_01",
+      "category": "shortcut_route",
+      "tip": "Kasur is a short, easy day trip from Lahore, well connected by a direct road."
+    },
+    {
+      "id": "ksr_tip_02",
+      "category": "local_transport",
+      "tip": "Rickshaws are the easiest way to get around the compact old city area."
+    },
+    {
+      "id": "ksr_tip_03",
+      "category": "safety",
+      "tip": "Standard travel precautions apply in busy bazaar areas."
+    },
+    {
+      "id": "ksr_tip_04",
+      "category": "timing",
+      "tip": "Visit the shrine of Bulleh Shah in the evening, when it's most atmospheric and often features devotional music."
+    }
+  ],
+  "history": {
+    "founded": "An old city with a history stretching back several centuries",
+    "city_history": "Kasur is best known as the home and burial place of Bulleh Shah, one of the most revered Sufi poets in the Punjabi language, whose verses remain widely sung and quoted across Punjab today. The city has long been known for its traditional leather shoe (khussa) making craft.",
+    "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "city": "Chitral",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "cht_att_01",
+      "name": "Chitral Fort (Qaqlasht)",
+      "category": "historical",
+      "description": "A centuries-old fort that was once the seat of the Mehtars (rulers) of Chitral, overlooking the Chitral River.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Chitral",
+      "popularity": "medium"
+    },
+    {
+      "id": "cht_att_02",
+      "name": "Shahi Mosque Chitral",
+      "category": "religious",
+      "description": "A grand mosque built in 1924 by a former Mehtar of Chitral, known for its distinctive minarets and domes.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Chitral",
+      "popularity": "medium"
+    },
+    {
+      "id": "cht_att_03",
+      "name": "Kalash Valleys (Bumburet, Rumbur, Birir)",
+      "category": "cultural",
+      "description": "Home to the Kalash people, a small indigenous community with a distinct pre-Islamic culture, language, and festivals.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 300,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~40km from Chitral town",
+      "popularity": "high"
+    },
+    {
+      "id": "cht_att_04",
+      "name": "Tirich Mir viewpoint",
+      "category": "nature",
+      "description": "Views of Tirich Mir, the highest peak in the Hindu Kush range, visible from several points around Chitral town.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Chitral town",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "cht_food_01",
+      "name": "Local Chitrali cuisine restaurants",
+      "cuisine": "Chitrali",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Regional dishes like Shupinak (a local bread) and Chitrali qahwa"
+    },
+    {
+      "id": "cht_food_02",
+      "name": "Kalash valley guesthouses (meals included)",
+      "cuisine": "Kalash/mountain cuisine",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Home-cooked meals as part of guesthouse stays in the Kalash valleys"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "cht_trans_01",
+      "from_city": "Chitral",
+      "to_city": "Chitral",
+      "transport_type": "flight",
+      "route": "Domestic flight from Peshawar/Islamabad (weather permitting)",
+      "estimated_cost_pkr": 10000,
+      "duration_min": 60,
+      "notes": "Scenic mountain flight, frequently affected by weather delays"
+    },
+    {
+      "id": "cht_trans_02",
+      "from_city": "Chitral",
+      "to_city": "Chitral",
+      "transport_type": "bus",
+      "route": "Lowari Tunnel road route from Dir/Peshawar",
+      "estimated_cost_pkr": 2000,
+      "duration_min": 480,
+      "notes": "The Lowari Tunnel has made this route accessible year-round, unlike the old pass"
+    },
+    {
+      "id": "cht_trans_03",
+      "from_city": "Chitral",
+      "to_city": "Chitral",
+      "transport_type": "local_jeep",
+      "route": "Jeep to Kalash valleys",
+      "estimated_cost_pkr": 4000,
+      "duration_min": 90,
+      "notes": "Shared or private jeep needed for the mountain road into the Kalash valleys"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "cht_acc_01",
+      "name": "Budget guesthouse in Chitral town",
+      "price_range": "budget",
+      "approx_price_pkr": 3200,
+      "family_friendly": true,
+      "rating": 3.4
+    },
+    {
+      "id": "cht_acc_02",
+      "name": "Kalash valley guesthouse",
+      "price_range": "moderate",
+      "approx_price_pkr": 7000,
+      "family_friendly": true,
+      "rating": 4.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Cold mountain climate with dramatic seasonal swings, sheltered valley microclimate",
+    "best_time_to_visit": "May to October (accessible roads, mild days)",
+    "avoid_months": "December to March (heavy snow can close mountain roads)",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Mar)", "avg_condition": "Cold, frequent snowfall, some roads may close" },
+      { "season": "Summer (May-Aug)", "avg_condition": "Mild and pleasant, 20-30°C in the valley" },
+      { "season": "Kalash festivals", "avg_condition": "Major Kalash festivals (like Uchal and Choimus) draw visitors at specific times of year -- check current dates" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "cht_tip_01",
+      "category": "shortcut_route",
+      "tip": "The Lowari Tunnel has cut travel time from Dir dramatically and keeps the route open even in winter, unlike the old Lowari Pass road."
+    },
+    {
+      "id": "cht_tip_02",
+      "category": "local_transport",
+      "tip": "Book Kalash valley jeep transport in advance during festival periods, as demand and prices rise sharply."
+    },
+    {
+      "id": "cht_tip_03",
+      "category": "safety",
+      "tip": "Flights to Chitral are frequently delayed or cancelled due to mountain weather -- always have the road route as a backup plan."
+    },
+    {
+      "id": "cht_tip_04",
+      "category": "timing",
+      "tip": "If visiting for Kalash culture specifically, time your trip around one of their seasonal festivals for the most memorable experience."
+    }
+  ],
+  "history": {
+    "founded": "An ancient princely state with a distinct identity, ruled by Mehtars for centuries until 1969",
+    "city_history": "Chitral was an independent princely state for much of its history, ruled by a line of Mehtars, and was one of the last regions in the area to be merged into Pakistan in 1969. Its relative isolation, protected by high mountain passes, allowed unique cultures like the Kalash people to survive largely undisturbed for centuries.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

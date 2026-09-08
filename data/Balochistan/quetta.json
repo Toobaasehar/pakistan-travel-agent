@@ -1,0 +1,184 @@
+{
+  "city": "Quetta",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "uet_att_01",
+      "name": "Hanna Lake",
+      "category": "nature",
+      "description": "A scenic lake surrounded by the Chiltan mountain range, popular for boating and picnics.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~12km from central Quetta",
+      "popularity": "high"
+    },
+    {
+      "id": "uet_att_02",
+      "name": "Hazarganji-Chiltan National Park",
+      "category": "nature",
+      "description": "A national park in the mountains near Quetta, home to the rare Chiltan wild goat (markhor-like ibex).",
+      "entry_fee_pkr": 100,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~20km southwest of Quetta",
+      "popularity": "medium"
+    },
+    {
+      "id": "uet_att_03",
+      "name": "Quetta Geological Museum",
+      "category": "museum",
+      "description": "A museum showcasing minerals, fossils, and geological specimens from across Balochistan.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Sariab Road, Quetta",
+      "popularity": "low"
+    },
+    {
+      "id": "uet_att_04",
+      "name": "Liaquat Bazaar",
+      "category": "shopping",
+      "description": "A busy central market known for dry fruits, carpets, and traditional Balochi handicrafts.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Quetta",
+      "popularity": "high"
+    },
+    {
+      "id": "uet_att_05",
+      "name": "Quetta Fruit Market",
+      "category": "cultural",
+      "description": "A vibrant market famous for Balochistan's renowned fresh fruit, especially apples, grapes, and pomegranates in season.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Quetta",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "uet_food_01",
+      "name": "Balochi Sajji houses (Sariab Road area)",
+      "cuisine": "Balochi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1200,
+      "family_friendly": true,
+      "specialty": "Traditional whole-lamb/chicken sajji roasted over open fire"
+    },
+    {
+      "id": "uet_food_02",
+      "name": "Lahori Karahi Quetta",
+      "cuisine": "Pakistani",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Chicken and mutton karahi"
+    },
+    {
+      "id": "uet_food_03",
+      "name": "Local dry fruit and nut stalls",
+      "cuisine": "snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Quetta is famous nationwide for its dry fruits and nuts"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "uet_trans_01",
+      "from_city": "Quetta",
+      "to_city": "Karachi",
+      "transport_type": "flight",
+      "route": "Domestic flight",
+      "estimated_cost_pkr": 18000,
+      "duration_min": 90,
+      "notes": "Fastest option; flying is generally preferred over long road travel"
+    },
+    {
+      "id": "uet_trans_02",
+      "from_city": "Quetta",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via N-25 (RCD Highway)",
+      "estimated_cost_pkr": 3500,
+      "duration_min": 720,
+      "notes": "Long overland route; check current road conditions before travel"
+    },
+    {
+      "id": "uet_trans_03",
+      "from_city": "Quetta",
+      "to_city": "Quetta",
+      "transport_type": "local_taxi",
+      "route": "Local taxi/rideshare within city",
+      "estimated_cost_pkr": 350,
+      "duration_min": 20,
+      "notes": "Ride-hailing app availability is more limited than in Lahore/Karachi"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "uet_acc_01",
+      "name": "Budget guesthouse near Jinnah Road",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "uet_acc_02",
+      "name": "Mid-range hotel near Zarghoon Road",
+      "price_range": "moderate",
+      "approx_price_pkr": 8500,
+      "family_friendly": true,
+      "rating": 3.9
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Cold semi-arid, highland climate (Quetta sits at ~1,680m elevation)",
+    "best_time_to_visit": "April to October (mild days, cool evenings)",
+    "avoid_months": "December to February (very cold, occasional snowfall)",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cold, can drop below 0°C at night; occasional snow" },
+      { "season": "Summer (Jun-Aug)", "avg_condition": "Mild and pleasant, 25-35°C days, cool nights" },
+      { "season": "Spring/Autumn", "avg_condition": "Generally the most comfortable time to visit" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "uet_tip_01",
+      "category": "shortcut_route",
+      "tip": "The Airport Road bypass helps avoid the congested Jinnah Road area when heading toward Hanna Lake or the national park."
+    },
+    {
+      "id": "uet_tip_02",
+      "category": "local_transport",
+      "tip": "Ride-hailing app coverage is limited compared to major cities; arranging a local taxi or driver in advance is often more reliable."
+    },
+    {
+      "id": "uet_tip_03",
+      "category": "safety",
+      "tip": "Check current travel advisories before visiting, and prefer flying over long overland routes when possible."
+    },
+    {
+      "id": "uet_tip_04",
+      "category": "timing",
+      "tip": "Pack warm clothing even outside winter, as evenings in Quetta stay cool year-round due to its high elevation."
+    }
+  ],
+  "history": {
+  "founded": "Historically significant as a frontier garrison town, with older settlement in the surrounding region going back centuries",
+  "city_history": "Quetta grew in strategic importance under British colonial rule due to its location near the Bolan Pass, a historic gateway between South and Central Asia. It became the capital of Balochistan after Pakistan's independence in 1947 and remains an important military and administrative center.",
+  "province_history": "Balochistan is Pakistan's largest province by area, historically home to various Baloch and Pashtun tribal confederacies, and was governed as British Balochistan before its princely states acceded to Pakistan between 1947 and 1948."
+}
+
+}

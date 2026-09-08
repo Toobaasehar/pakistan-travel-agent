@@ -1,0 +1,109 @@
+{
+  "city": "Qila Saifullah",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "qsf_att_01",
+      "name": "Qila Saifullah Orchards",
+      "category": "nature",
+      "description": "Fruit-growing region typical of upper Balochistan's mountain valleys.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Rural Qila Saifullah",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "qsf_food_01",
+      "name": "Local Pashtun eatery",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional regional meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "qsf_trans_01",
+      "from_city": "Qila Saifullah",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "qsf_trans_02",
+      "from_city": "Qila Saifullah",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "qsf_trans_03",
+      "from_city": "Qila Saifullah",
+      "to_city": "Qila Saifullah",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "qsf_acc_01",
+      "name": "Basic guesthouse in Qila Saifullah town",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 2.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain climate with mild summers and cold winters",
+    "best_time_to_visit": "April to September",
+    "avoid_months": "December to February (cold, possible snow)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Mild, 15-30°C, main visiting season for highland areas"
+      },
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Cold, often below freezing, occasional snow at higher elevations"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "qsf_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Qila Saifullah — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "qsf_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "qsf_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "Separated from Zhob District, developed as an agricultural market town",
+    "city_history": "Qila Saifullah is known for its fruit orchards and mineral resources, situated in the Zhob division's mountainous terrain.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

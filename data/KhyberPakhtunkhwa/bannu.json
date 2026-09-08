@@ -1,0 +1,138 @@
+{
+  "city": "Bannu",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "ban_att_01",
+      "name": "Bannu Fort (Dhamtaur area)",
+      "category": "historical",
+      "description": "A fort with roots in the British colonial era, historically significant for regional administration and defense.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Bannu",
+      "popularity": "low"
+    },
+    {
+      "id": "ban_att_02",
+      "name": "Bannu bazaars",
+      "category": "shopping",
+      "description": "Local markets known for traditional Pashtun handicrafts, textiles, and everyday goods.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Bannu",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "ban_food_01",
+      "name": "Local Pashtun karahi and BBQ houses",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and grilled meats"
+    },
+    {
+      "id": "ban_food_02",
+      "name": "Local tea houses",
+      "cuisine": "tea/snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 150,
+      "family_friendly": true,
+      "specialty": "Traditional Pashtun tea and snacks"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "ban_trans_01",
+      "from_city": "Bannu",
+      "to_city": "Kohat",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "ban_trans_02",
+      "from_city": "Bannu",
+      "to_city": "Dera Ismail Khan",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Short regional route"
+    },
+    {
+      "id": "ban_trans_03",
+      "from_city": "Bannu",
+      "to_city": "Bannu",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "ban_acc_01",
+      "name": "Budget guesthouse in central Bannu",
+      "price_range": "budget",
+      "approx_price_pkr": 2700,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "ban_acc_02",
+      "name": "Mid-range hotel near Bannu Cantt",
+      "price_range": "moderate",
+      "approx_price_pkr": 5800,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and mild winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot and dry)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 5-20°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-42°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Light to moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "ban_tip_01",
+      "category": "shortcut_route",
+      "tip": "Bannu serves as a useful stopover between Kohat and Dera Ismail Khan for travelers heading further south."
+    },
+    {
+      "id": "ban_tip_02",
+      "category": "local_transport",
+      "tip": "Rickshaws and local taxis are the main way to get around; ride-hailing app coverage is limited here."
+    },
+    {
+      "id": "ban_tip_03",
+      "category": "safety",
+      "tip": "Check current local travel advisories before planning a visit, and stick to well-known city areas."
+    },
+    {
+      "id": "ban_tip_04",
+      "category": "timing",
+      "tip": "Visit the bazaars in the morning or early evening, avoiding the hottest part of the day in summer."
+    }
+  ],
+  "history": {
+    "founded": "Founded in 1848 by British officer Sir Herbert Edwardes",
+    "city_history": "Bannu was established by the British as a garrison town to help control the surrounding tribal frontier region. It has long served as an important administrative and trading center for southern Khyber Pakhtunkhwa.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

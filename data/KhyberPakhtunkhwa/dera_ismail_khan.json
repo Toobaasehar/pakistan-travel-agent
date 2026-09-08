@@ -1,0 +1,128 @@
+{
+  "city": "Dera Ismail Khan",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "dik_att_01",
+      "name": "Indus River waterfront",
+      "category": "nature",
+      "description": "Scenic views along the Indus River, which forms the district's eastern boundary.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Dera Ismail Khan riverside",
+      "popularity": "medium"
+    },
+    {
+      "id": "dik_att_02",
+      "name": "Dera Ismail Khan bazaars",
+      "category": "shopping",
+      "description": "Local markets known for traditional handicrafts, pottery, and woodwork.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Dera Ismail Khan",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "dik_food_01",
+      "name": "Local Pashtun karahi houses",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and grilled meats"
+    },
+    {
+      "id": "dik_food_02",
+      "name": "Local sweet shops",
+      "cuisine": "desserts",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Traditional regional sweets"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "dik_trans_01",
+      "from_city": "Dera Ismail Khan",
+      "to_city": "Bannu",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Short regional route"
+    },
+    {
+      "id": "dik_trans_02",
+      "from_city": "Dera Ismail Khan",
+      "to_city": "Dera Ismail Khan",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "dik_acc_01",
+      "name": "Budget guesthouse in central Dera Ismail Khan",
+      "price_range": "budget",
+      "approx_price_pkr": 2700,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "dik_acc_02",
+      "name": "Mid-range hotel near Circular Road",
+      "price_range": "moderate",
+      "approx_price_pkr": 5800,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and mild winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot and dry)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 6-22°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 32-44°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Light to moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "dik_tip_01",
+      "category": "shortcut_route",
+      "tip": "Dera Ismail Khan serves as a southern gateway point in Khyber Pakhtunkhwa, connecting toward Punjab and Balochistan."
+    },
+    {
+      "id": "dik_tip_02",
+      "category": "local_transport",
+      "tip": "Rickshaws and local taxis are the main way to get around this district town."
+    },
+    {
+      "id": "dik_tip_03",
+      "category": "safety",
+      "tip": "Check current local travel advisories before planning a visit, and stick to well-known city areas."
+    },
+    {
+      "id": "dik_tip_04",
+      "category": "timing",
+      "tip": "Visit the bazaars in the morning or early evening to avoid the hottest part of the day in summer."
+    }
+  ],
+  "history": {
+    "founded": "Named after Sheikh Ismail Khan, a Baloch chieftain who founded the city in the 15th century",
+    "city_history": "Dera Ismail Khan has long served as a trading link between the Indus Valley plains and the mountainous tribal regions to the west. Historically part of the Derajat region, it developed as an important administrative and commercial center in southern Khyber Pakhtunkhwa.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

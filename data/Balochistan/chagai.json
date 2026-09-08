@@ -1,0 +1,121 @@
+{
+  "city": "Chagai",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "chg_att_01",
+      "name": "Ras Koh Hills",
+      "category": "historical",
+      "description": "The site of Pakistan's 1998 nuclear tests, a historically significant location in the country's modern history.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Chagai District",
+      "popularity": "medium"
+    },
+    {
+      "id": "chg_att_02",
+      "name": "Chagai Desert",
+      "category": "nature",
+      "description": "Vast desert terrain characteristic of Pakistan's largest district.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Chagai District",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "chg_food_01",
+      "name": "Local Balochi eatery",
+      "cuisine": "Balochi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional Balochi meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "chg_trans_01",
+      "from_city": "Chagai",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "chg_trans_02",
+      "from_city": "Chagai",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "chg_trans_03",
+      "from_city": "Chagai",
+      "to_city": "Chagai",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "chg_acc_01",
+      "name": "Basic guesthouse in Dalbandin",
+      "price_range": "budget",
+      "approx_price_pkr": 2900,
+      "family_friendly": true,
+      "rating": 2.5
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, arid desert climate",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "May to August (extreme heat)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and dry, 10-25°C, best time to visit"
+      },
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Extremely hot and arid, often above 40°C"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "chg_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Chagai — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "chg_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "chg_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "Pakistan's largest district by area, historically significant as the site of Pakistan's 1998 nuclear tests",
+    "city_history": "Chagai is Pakistan's largest district geographically, home to the Ras Koh Hills where Pakistan conducted its first nuclear tests in 1998, and to significant copper and gold deposits at Reko Diq.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

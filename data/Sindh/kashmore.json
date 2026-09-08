@@ -1,0 +1,125 @@
+{
+  "city": "Kashmore",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "ksm_att_01",
+      "name": "Indus Riverside at Kashmore",
+      "category": "nature",
+      "description": "Riverside views of the Indus near the Sindh-Punjab border, with a working ferry crossing.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kashmore riverside",
+      "popularity": "low"
+    },
+    {
+      "id": "ksm_att_02",
+      "name": "Kandhkot Bazaar",
+      "category": "shopping",
+      "description": "Local market town bazaar serving the surrounding farming communities.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kandhkot, Kashmore District",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "ksm_food_01",
+      "name": "Local riverside food stalls",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Fresh river fish and simple Sindhi fare"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "ksm_trans_01",
+      "from_city": "Kashmore",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Local/intercity coach via national highway",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Most common route to the nearest major transport hub"
+    },
+    {
+      "id": "ksm_trans_02",
+      "from_city": "Kashmore",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via National Highway N-5",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Direct coach services run daily from the main bus stand"
+    },
+    {
+      "id": "ksm_trans_03",
+      "from_city": "Kashmore",
+      "to_city": "Kashmore",
+      "transport_type": "local_rickshaw",
+      "route": "Rickshaw/local transport within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Rickshaws and local vans are the main way to get around town"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "ksm_acc_01",
+      "name": "Basic guesthouse in Kandhkot",
+      "price_range": "budget",
+      "approx_price_pkr": 2700,
+      "family_friendly": true,
+      "rating": 2.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, semi-arid to arid climate typical of interior Sindh",
+    "best_time_to_visit": "November to February (mild and dry)",
+    "avoid_months": "May to July (extreme heat, often above 40°C)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and pleasant, 10-24°C, best time to visit"
+      },
+      {
+        "season": "Summer (Mar-Jun)",
+        "avg_condition": "Extremely hot and dry, often 40-48°C"
+      },
+      {
+        "season": "Monsoon (Jul-Sep)",
+        "avg_condition": "Occasional heavy rain, humid, risk of flooding in low areas"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "ksm_tip_01",
+      "category": "timing",
+      "tip": "Visit Kashmore in the cooler months (November to February) for the most comfortable travel experience."
+    },
+    {
+      "id": "ksm_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity buses and shared vans (Suzuki/coaster) are the most common way to reach and travel around the district."
+    },
+    {
+      "id": "ksm_tip_03",
+      "category": "safety",
+      "tip": "As with most small-town travel in Sindh, arrange accommodation and local guides in advance, especially outside the main town center."
+    }
+  ],
+  "history": {
+    "founded": "Grew along the Indus River as a riverside trading and farming settlement",
+    "city_history": "Kashmore became a separate district (Kashmore @ Kandhkot) in 2005, split from Jacobabad district. It lies on the Sindh-Punjab-Balochistan border region along the Indus.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

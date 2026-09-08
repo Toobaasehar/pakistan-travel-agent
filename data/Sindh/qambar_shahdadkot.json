@@ -1,0 +1,125 @@
+{
+  "city": "Qambar Shahdadkot",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "qsd_att_01",
+      "name": "Shahdadkot Agricultural Belt",
+      "category": "nature",
+      "description": "Extensive cotton and wheat fields characteristic of upper Sindh's farming economy.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Rural Shahdadkot",
+      "popularity": "low"
+    },
+    {
+      "id": "qsd_att_02",
+      "name": "Qambar Old Town",
+      "category": "historical",
+      "description": "A small historic town with traditional Sindhi architecture, part of the district's original settlement.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Qambar town",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "qsd_food_01",
+      "name": "Local Sindhi dhaba",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 350,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi curries and fresh tandoori roti"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "qsd_trans_01",
+      "from_city": "Qambar Shahdadkot",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Local/intercity coach via national highway",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Most common route to the nearest major transport hub"
+    },
+    {
+      "id": "qsd_trans_02",
+      "from_city": "Qambar Shahdadkot",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via National Highway N-5",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Direct coach services run daily from the main bus stand"
+    },
+    {
+      "id": "qsd_trans_03",
+      "from_city": "Qambar Shahdadkot",
+      "to_city": "Qambar Shahdadkot",
+      "transport_type": "local_rickshaw",
+      "route": "Rickshaw/local transport within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Rickshaws and local vans are the main way to get around town"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "qsd_acc_01",
+      "name": "Budget guesthouse in Shahdadkot",
+      "price_range": "budget",
+      "approx_price_pkr": 2900,
+      "family_friendly": true,
+      "rating": 2.8
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, semi-arid to arid climate typical of interior Sindh",
+    "best_time_to_visit": "November to February (mild and dry)",
+    "avoid_months": "May to July (extreme heat, often above 40°C)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and pleasant, 10-24°C, best time to visit"
+      },
+      {
+        "season": "Summer (Mar-Jun)",
+        "avg_condition": "Extremely hot and dry, often 40-48°C"
+      },
+      {
+        "season": "Monsoon (Jul-Sep)",
+        "avg_condition": "Occasional heavy rain, humid, risk of flooding in low areas"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "qsd_tip_01",
+      "category": "timing",
+      "tip": "Visit Qambar Shahdadkot in the cooler months (November to February) for the most comfortable travel experience."
+    },
+    {
+      "id": "qsd_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity buses and shared vans (Suzuki/coaster) are the most common way to reach and travel around the district."
+    },
+    {
+      "id": "qsd_tip_03",
+      "category": "safety",
+      "tip": "As with most small-town travel in Sindh, arrange accommodation and local guides in advance, especially outside the main town center."
+    }
+  ],
+  "history": {
+    "founded": "Developed as an agricultural district town near the Larkana region",
+    "city_history": "Qambar Shahdadkot became a separate district in 2005, split from Larkana district. It's a major cotton and wheat farming area fed by the Rice and Warah canal systems.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

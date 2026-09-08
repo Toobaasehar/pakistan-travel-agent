@@ -1,0 +1,140 @@
+{
+  "city": "Thatta",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "tht_att_01",
+      "name": "Makli Necropolis",
+      "category": "historical",
+      "description": "A UNESCO World Heritage Site and one of the largest funerary sites in the world, with hundreds of thousands of tombs spanning several centuries.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Thatta city",
+      "popularity": "high"
+    },
+    {
+      "id": "tht_att_02",
+      "name": "Shah Jahan Mosque",
+      "category": "religious",
+      "description": "A 17th-century Mughal-era mosque famous for its intricate tile work, built during the reign of Emperor Shah Jahan.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Thatta",
+      "popularity": "high"
+    },
+    {
+      "id": "tht_att_03",
+      "name": "Keenjhar Lake",
+      "category": "nature",
+      "description": "One of the largest freshwater lakes in Pakistan, popular for boating and picnics, and an important bird habitat.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~20km from Thatta",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "tht_food_01",
+      "name": "Keenjhar Lake fish restaurants",
+      "cuisine": "seafood/Sindhi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Fresh lake fish"
+    },
+    {
+      "id": "tht_food_02",
+      "name": "Local Sindhi karahi houses",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi-style karahi"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "tht_trans_01",
+      "from_city": "Thatta",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Regular daily departures, easy day trip from Karachi"
+    },
+    {
+      "id": "tht_trans_02",
+      "from_city": "Thatta",
+      "to_city": "Thatta",
+      "transport_type": "local_taxi",
+      "route": "Local taxi to Keenjhar Lake",
+      "estimated_cost_pkr": 1000,
+      "duration_min": 30,
+      "notes": "Round-trip fare typical for the lake visit"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "tht_acc_01",
+      "name": "Budget guesthouse in central Thatta",
+      "price_range": "budget",
+      "approx_price_pkr": 2500,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "tht_acc_02",
+      "name": "Mid-range hotel near Keenjhar Lake",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.8
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, humid coastal-influenced climate",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "April to June (hot and humid)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 14-26°C, ideal for visiting Makli and Keenjhar Lake" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot and humid, 35-42°C" },
+      { "season": "Monsoon", "avg_condition": "Coastal weather systems can bring periodic rain" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "tht_tip_01",
+      "category": "shortcut_route",
+      "tip": "Thatta is an easy day trip from Karachi, well connected by a direct highway."
+    },
+    {
+      "id": "tht_tip_02",
+      "category": "local_transport",
+      "tip": "Combine a Makli Necropolis visit with Keenjhar Lake and the Shah Jahan Mosque in a single day trip, all relatively close together."
+    },
+    {
+      "id": "tht_tip_03",
+      "category": "safety",
+      "tip": "Wear comfortable shoes for walking around the extensive, uneven terrain of the Makli Necropolis."
+    },
+    {
+      "id": "tht_tip_04",
+      "category": "timing",
+      "tip": "Visit Makli Necropolis in the morning to avoid the afternoon heat, since much of the site is exposed with little shade."
+    }
+  ],
+  "history": {
+    "founded": "An ancient city with a history spanning over a thousand years, once a major center of learning and trade",
+    "city_history": "Thatta served as the capital of Sindh under several dynasties and was once described by travelers as one of the greatest cities in the Islamic world, with hundreds of schools and a thriving textile trade. Today it's best known for the Makli Necropolis, one of the largest burial sites in the world, and the beautifully tiled Shah Jahan Mosque.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "city": "Upper Dir",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "udr_att_01",
+      "name": "Kumrat Valley",
+      "category": "mountains",
+      "description": "A stunning, less-crowded alpine valley of dense pine forest, waterfalls, and rivers — one of KP's rising tourism destinations.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 150,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kumrat, Upper Dir District",
+      "popularity": "high"
+    },
+    {
+      "id": "udr_att_02",
+      "name": "Thal Town",
+      "category": "cultural",
+      "description": "The gateway town to Kumrat Valley, with traditional Dir-region markets.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Thal, Upper Dir District",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "udr_food_01",
+      "name": "Kumrat riverside food stalls",
+      "cuisine": "Pashtun",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Trout fish and traditional mountain fare"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "udr_trans_01",
+      "from_city": "Upper Dir",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach/van via provincial highway",
+      "estimated_cost_pkr": 600,
+      "duration_min": 150,
+      "notes": "Most common route to the provincial hub"
+    },
+    {
+      "id": "udr_trans_02",
+      "from_city": "Upper Dir",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway/motorway",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 300,
+      "notes": "Daily coach services available from the main bus stand"
+    },
+    {
+      "id": "udr_trans_03",
+      "from_city": "Upper Dir",
+      "to_city": "Upper Dir",
+      "transport_type": "local_van",
+      "route": "Suzuki/local van within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Shared local vans are the main way to get around"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "udr_acc_01",
+      "name": "Camping/guesthouse in Kumrat",
+      "price_range": "moderate",
+      "approx_price_pkr": 6500,
+      "family_friendly": true,
+      "rating": 3.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain/alpine climate with cold winters and mild summers",
+    "best_time_to_visit": "May to September",
+    "avoid_months": "December to February (heavy snowfall, road closures)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Jun-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C, the main visiting season for mountain areas"
+      },
+      {
+        "season": "Winter (Dec-Feb)",
+        "avg_condition": "Cold, often below freezing at higher elevations; heavy snowfall can close roads"
+      },
+      {
+        "season": "Spring/Autumn",
+        "avg_condition": "Cool and scenic, good for travel with fewer crowds"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "udr_tip_01",
+      "category": "timing",
+      "tip": "Visit Upper Dir in the warmer months (roughly May to September) if it's a mountain area, since roads can close in winter snow."
+    },
+    {
+      "id": "udr_tip_02",
+      "category": "local_transport",
+      "tip": "Shared vans (Suzuki/Hiace) and intercity coaches are the main way to reach and travel around the district."
+    },
+    {
+      "id": "udr_tip_03",
+      "category": "safety",
+      "tip": "Arrange accommodation and local transport in advance, especially in more remote mountain areas."
+    }
+  ],
+  "history": {
+    "founded": "Split from Dir District in 1996",
+    "city_history": "Upper Dir covers the northern, more mountainous part of the historic princely State of Dir, known for its forests and the popular Kumrat Valley.",
+    "province_history": "Khyber Pakhtunkhwa (formerly North-West Frontier Province) has been a historic crossroads between South and Central Asia for millennia, home to Gandhara civilization sites, the ancient Silk Road route through the Khyber Pass, and a mix of Pashtun tribal, Mughal, Sikh, and British colonial influence before becoming part of Pakistan in 1947. In 2018, the former Federally Administered Tribal Areas (FATA) were formally merged into Khyber Pakhtunkhwa as regular districts."
+  }
+}

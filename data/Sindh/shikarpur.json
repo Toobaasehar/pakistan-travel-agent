@@ -1,0 +1,134 @@
+{
+  "city": "Shikarpur",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "shk_att_01",
+      "name": "Shikarpur Old City Bazaars",
+      "category": "shopping",
+      "description": "Historic covered bazaars (like Shahi Bazaar) reflecting Shikarpur's past as a major Mughal-era trading hub.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Old City, Shikarpur",
+      "popularity": "medium"
+    },
+    {
+      "id": "shk_att_02",
+      "name": "Lakhi Dar & Historic Havelis",
+      "category": "historical",
+      "description": "Ornately carved wooden havelis (merchant mansions) from Shikarpur's era as a banking and trade capital.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Shikarpur Old City",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "shk_food_01",
+      "name": "Shikarpuri Achar Market",
+      "cuisine": "local produce",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 250,
+      "family_friendly": true,
+      "specialty": "Shikarpur is famous across Pakistan for its traditional spicy mixed pickles (achar)"
+    },
+    {
+      "id": "shk_food_02",
+      "name": "Local Sindhi eatery",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi curries and biryani"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "shk_trans_01",
+      "from_city": "Shikarpur",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Local/intercity coach via national highway",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Most common route to the nearest major transport hub"
+    },
+    {
+      "id": "shk_trans_02",
+      "from_city": "Shikarpur",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via National Highway N-5",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Direct coach services run daily from the main bus stand"
+    },
+    {
+      "id": "shk_trans_03",
+      "from_city": "Shikarpur",
+      "to_city": "Shikarpur",
+      "transport_type": "local_rickshaw",
+      "route": "Rickshaw/local transport within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Rickshaws and local vans are the main way to get around town"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "shk_acc_01",
+      "name": "Budget hotel near Old City",
+      "price_range": "budget",
+      "approx_price_pkr": 3200,
+      "family_friendly": true,
+      "rating": 3.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, semi-arid to arid climate typical of interior Sindh",
+    "best_time_to_visit": "November to February (mild and dry)",
+    "avoid_months": "May to July (extreme heat, often above 40°C)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and pleasant, 10-24°C, best time to visit"
+      },
+      {
+        "season": "Summer (Mar-Jun)",
+        "avg_condition": "Extremely hot and dry, often 40-48°C"
+      },
+      {
+        "season": "Monsoon (Jul-Sep)",
+        "avg_condition": "Occasional heavy rain, humid, risk of flooding in low areas"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "shk_tip_01",
+      "category": "timing",
+      "tip": "Visit Shikarpur in the cooler months (November to February) for the most comfortable travel experience."
+    },
+    {
+      "id": "shk_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity buses and shared vans (Suzuki/coaster) are the most common way to reach and travel around the district."
+    },
+    {
+      "id": "shk_tip_03",
+      "category": "safety",
+      "tip": "As with most small-town travel in Sindh, arrange accommodation and local guides in advance, especially outside the main town center."
+    }
+  ],
+  "history": {
+    "founded": "Founded around 1617 by Daudpota rulers, later becoming one of South Asia's most important trading cities",
+    "city_history": "Shikarpur was historically one of the wealthiest trading and banking centers in South Asia during the Mughal and Talpur eras, with merchant networks reaching as far as Central Asia. It is still known for its historic havelis and bazaars.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

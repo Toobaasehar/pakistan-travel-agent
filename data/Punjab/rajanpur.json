@@ -1,0 +1,149 @@
+{
+  "city": "Rajanpur",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "raj_att_01",
+      "name": "Harrand Fort",
+      "category": "historical",
+      "description": "Historic fort in the foothills of the Sulaiman Range.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Harrand Fort, Rajanpur, Punjab",
+      "popularity": "high"
+    },
+    {
+      "id": "raj_att_02",
+      "name": "Koh-e-Sulaiman Foothills",
+      "category": "nature",
+      "description": "Mountain landscapes west of Rajanpur.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Koh-e-Sulaiman Foothills, Rajanpur, Punjab",
+      "popularity": "high"
+    },
+    {
+      "id": "raj_att_03",
+      "name": "Indus River Belt",
+      "category": "nature",
+      "description": "Riverine landscapes east of Rajanpur.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Indus River Belt, Rajanpur, Punjab",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "raj_food_01",
+      "name": "Local Punjabi restaurants in Rajanpur",
+      "cuisine": "Punjabi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Local karahi, BBQ and Punjabi dishes"
+    },
+    {
+      "id": "raj_food_02",
+      "name": "Traditional food market in Rajanpur",
+      "cuisine": "Pakistani",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Local street food and regional specialties"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "raj_trans_01",
+      "from_city": "Rajanpur",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 300,
+      "notes": "Prototype estimate; verify current fare."
+    },
+    {
+      "id": "raj_trans_02",
+      "from_city": "Rajanpur",
+      "to_city": "Rajanpur",
+      "transport_type": "local_rideshare",
+      "route": "Local rickshaw/rideshare",
+      "estimated_cost_pkr": 250,
+      "duration_min": 20,
+      "notes": "Approximate local short-trip estimate."
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "raj_acc_01",
+      "name": "Budget guesthouse in Rajanpur",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "raj_acc_02",
+      "name": "Mid-range hotel in Rajanpur",
+      "price_range": "moderate",
+      "approx_price_pkr": 7000,
+      "family_friendly": true,
+      "rating": 3.9
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot semi-arid climate; conditions vary across Punjab.",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to August where extreme summer heat is common",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild to cool days; generally comfortable for sightseeing"
+      },
+      {
+        "season": "Summer (Apr-Aug)",
+        "avg_condition": "Very hot, especially in southern and western Punjab"
+      },
+      {
+        "season": "Monsoon",
+        "avg_condition": "Variable rainfall and hot, humid conditions"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "raj_tip_01",
+      "category": "timing",
+      "tip": "Start outdoor sightseeing early during warmer months."
+    },
+    {
+      "id": "raj_tip_02",
+      "category": "local_transport",
+      "tip": "Use local rides for city trips and arrange transport for attractions outside the city."
+    },
+    {
+      "id": "raj_tip_03",
+      "category": "verification",
+      "tip": "Confirm current entry fees, opening hours and transport fares before travel."
+    },
+    {
+      "id": "raj_tip_04",
+      "category": "safety",
+      "tip": "Carry water and sun protection when visiting outdoor or remote sites."
+    }
+  ],
+  "history": {
+    "founded": "Historical founding date varies by source; verify before production use.",
+    "city_history": "Rajanpur is a historic district/city of Punjab with local cultural, historical and geographic significance.",
+    "province_history": "Punjab contains major archaeological, Mughal, Sikh, Sufi and colonial heritage."
+  }
+}

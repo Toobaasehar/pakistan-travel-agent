@@ -1,0 +1,171 @@
+{
+  "city": "Sukkur",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "skr_att_01",
+      "name": "Sukkur Barrage",
+      "category": "cultural",
+      "description": "A major British-era irrigation barrage on the Indus River, an engineering landmark feeding Sindh's canal network.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Indus River, Sukkur",
+      "popularity": "medium"
+    },
+    {
+      "id": "skr_att_02",
+      "name": "Sadhu Bela Temple",
+      "category": "religious",
+      "description": "A Hindu temple complex located on an island in the Indus River, accessible by boat.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Indus River island, Sukkur",
+      "popularity": "medium"
+    },
+    {
+      "id": "skr_att_03",
+      "name": "Lansdowne Bridge",
+      "category": "historical",
+      "description": "A historic cantilever bridge over the Indus River, an important piece of colonial-era engineering.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Indus River, Sukkur",
+      "popularity": "low"
+    },
+    {
+      "id": "skr_att_04",
+      "name": "Mohenjo-daro (day trip)",
+      "category": "historical",
+      "description": "One of the world's oldest urban archaeological sites from the Indus Valley Civilization, a UNESCO World Heritage Site, reachable as a day trip from Sukkur.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 150,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~100km from Sukkur, near Larkana",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "skr_food_01",
+      "name": "Sukkur's famous fish restaurants",
+      "cuisine": "seafood/Sindhi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Fried Indus river fish, a Sukkur specialty"
+    },
+    {
+      "id": "skr_food_02",
+      "name": "Local biryani houses",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Sindhi-style biryani"
+    },
+    {
+      "id": "skr_food_03",
+      "name": "Bandar Road food stalls",
+      "cuisine": "street food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Casual local snacks and chaat"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "skr_trans_01",
+      "from_city": "Sukkur",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 1000,
+      "duration_min": 240,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "skr_trans_02",
+      "from_city": "Sukkur",
+      "to_city": "Larkana",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Short regional route, useful for Mohenjo-daro day trips"
+    },
+    {
+      "id": "skr_trans_03",
+      "from_city": "Sukkur",
+      "to_city": "Sukkur",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 250,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short in-city trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "skr_acc_01",
+      "name": "Budget guesthouse near Bandar Road",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "skr_acc_02",
+      "name": "Mid-range hotel near Barrage Road",
+      "price_range": "moderate",
+      "approx_price_pkr": 7000,
+      "family_friendly": true,
+      "rating": 3.8
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert climate, one of the hottest regions in Pakistan",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "May to July (extremely hot, frequently 45°C+)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 12-25°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Extremely hot, often 42-48°C" },
+      { "season": "Monsoon", "avg_condition": "Light, irregular rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "skr_tip_01",
+      "category": "shortcut_route",
+      "tip": "If visiting Mohenjo-daro, go via Larkana rather than directly, as the road connections are better maintained on that route."
+    },
+    {
+      "id": "skr_tip_02",
+      "category": "local_transport",
+      "tip": "Arrange a car or driver for day trips to Mohenjo-daro, since ride-hailing app coverage drops off outside the city."
+    },
+    {
+      "id": "skr_tip_03",
+      "category": "safety",
+      "tip": "Carry extra water and sun protection for summer visits given the extreme heat this region experiences."
+    },
+    {
+      "id": "skr_tip_04",
+      "category": "timing",
+      "tip": "Visit Mohenjo-daro early morning to avoid both the heat and tour crowds."
+    }
+  ],
+  "history": {
+    "founded": "An ancient settlement on the Indus River, with the modern city shaped heavily by British-era irrigation projects",
+    "city_history": "Sukkur grew significantly after the British built the Sukkur Barrage in the 1930s, one of the largest irrigation systems in the world at the time, transforming the surrounding desert into fertile farmland. It also serves as the gateway to Mohenjo-daro, one of the most important archaeological sites of the ancient Indus Valley Civilization.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

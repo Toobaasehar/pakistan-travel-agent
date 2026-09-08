@@ -1,0 +1,128 @@
+{
+  "city": "Nawabshah",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "nws_att_01",
+      "name": "Bhitshah (Shrine of Shah Abdul Latif Bhittai, day trip)",
+      "category": "religious",
+      "description": "The shrine of Sindh's most revered Sufi poet, a major cultural and spiritual site with a distinct musical tradition.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~50km from Nawabshah",
+      "popularity": "high"
+    },
+    {
+      "id": "nws_att_02",
+      "name": "Nawabshah city bazaars",
+      "category": "shopping",
+      "description": "Local markets known for Sindhi textiles, ajrak, and traditional handicrafts.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Nawabshah",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "nws_food_01",
+      "name": "Local Sindhi biryani houses",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi biryani"
+    },
+    {
+      "id": "nws_food_02",
+      "name": "Sindhi sweet shops",
+      "cuisine": "desserts",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 250,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi sweets"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "nws_trans_01",
+      "from_city": "Nawabshah",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "nws_trans_02",
+      "from_city": "Nawabshah",
+      "to_city": "Nawabshah",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "nws_acc_01",
+      "name": "Budget guesthouse in central Nawabshah",
+      "price_range": "budget",
+      "approx_price_pkr": 2800,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "nws_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert climate, very hot summers",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "April to June (extremely hot)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 12-25°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Extremely hot, often 42-46°C" },
+      { "season": "Monsoon", "avg_condition": "Light, irregular rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "nws_tip_01",
+      "category": "shortcut_route",
+      "tip": "Nawabshah sits on the main route between Hyderabad and Sukkur, making it a convenient stopover for a Bhitshah day trip."
+    },
+    {
+      "id": "nws_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local car or taxi for the Bhitshah shrine trip, as it's most comfortably reached by road from Nawabshah."
+    },
+    {
+      "id": "nws_tip_03",
+      "category": "safety",
+      "tip": "Carry water and sun protection given the very high summer temperatures in this region."
+    },
+    {
+      "id": "nws_tip_04",
+      "category": "timing",
+      "tip": "Visit Bhitshah during a Thursday evening if possible, when traditional Sufi music (raag) performances are held at the shrine."
+    }
+  ],
+  "history": {
+    "founded": "Named after the Nawab family that historically administered the area",
+    "city_history": "Nawabshah developed as an agricultural trading hub in central Sindh. The district was renamed Shaheed Benazirabad in 2009 in honor of former Prime Minister Benazir Bhutto, though the city is still commonly referred to as Nawabshah. It serves as a gateway to Bhitshah, the shrine of Sindh's most celebrated Sufi poet.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

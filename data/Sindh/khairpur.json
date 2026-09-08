@@ -1,0 +1,166 @@
+{
+  "city": "Khairpur",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "khp_att_01",
+      "name": "Kot Diji Fort",
+      "category": "historical",
+      "description": "A massive 18th-century hilltop fortress built by the Talpur rulers, offering sweeping views over the surrounding plains — one of Sindh's most iconic forts.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kot Diji, Khairpur District",
+      "popularity": "high"
+    },
+    {
+      "id": "khp_att_02",
+      "name": "Faiz Mahal",
+      "category": "historical",
+      "description": "The grand palace of the former Khairpur princely state, known for its striking colonial-Mughal architecture.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Khairpur city center",
+      "popularity": "high"
+    },
+    {
+      "id": "khp_att_03",
+      "name": "Tombs of the Talpur Mirs",
+      "category": "historical",
+      "description": "Ornate royal mausoleums of the Talpur rulers of Khairpur, featuring intricate tilework.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Khairpur city",
+      "popularity": "medium"
+    },
+    {
+      "id": "khp_att_04",
+      "name": "Khairpur Date Farms",
+      "category": "nature",
+      "description": "Khairpur produces the majority of Pakistan's dates; date palm orchards are a distinctive part of the local landscape, especially at harvest season.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Rural Khairpur",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "khp_food_01",
+      "name": "Khairpur Dates Market",
+      "cuisine": "local produce",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Fresh and dried dates in dozens of varieties, a signature Khairpur product"
+    },
+    {
+      "id": "khp_food_02",
+      "name": "Local Sindhi restaurant",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi curries and biryani"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "khp_trans_01",
+      "from_city": "Khairpur",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Local/intercity coach via national highway",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Most common route to the nearest major transport hub"
+    },
+    {
+      "id": "khp_trans_02",
+      "from_city": "Khairpur",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via National Highway N-5",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Direct coach services run daily from the main bus stand"
+    },
+    {
+      "id": "khp_trans_03",
+      "from_city": "Khairpur",
+      "to_city": "Khairpur",
+      "transport_type": "local_rickshaw",
+      "route": "Rickshaw/local transport within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Rickshaws and local vans are the main way to get around town"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "khp_acc_01",
+      "name": "Mid-range hotel in Khairpur city",
+      "price_range": "moderate",
+      "approx_price_pkr": 6500,
+      "family_friendly": true,
+      "rating": 3.8
+    },
+    {
+      "id": "khp_acc_02",
+      "name": "Budget guesthouse near bus terminal",
+      "price_range": "budget",
+      "approx_price_pkr": 3200,
+      "family_friendly": true,
+      "rating": 3.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, semi-arid to arid climate typical of interior Sindh",
+    "best_time_to_visit": "November to February (mild and dry)",
+    "avoid_months": "May to July (extreme heat, often above 40°C)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and pleasant, 10-24°C, best time to visit"
+      },
+      {
+        "season": "Summer (Mar-Jun)",
+        "avg_condition": "Extremely hot and dry, often 40-48°C"
+      },
+      {
+        "season": "Monsoon (Jul-Sep)",
+        "avg_condition": "Occasional heavy rain, humid, risk of flooding in low areas"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "khp_tip_01",
+      "category": "timing",
+      "tip": "Visit Khairpur in the cooler months (November to February) for the most comfortable travel experience."
+    },
+    {
+      "id": "khp_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity buses and shared vans (Suzuki/coaster) are the most common way to reach and travel around the district."
+    },
+    {
+      "id": "khp_tip_03",
+      "category": "safety",
+      "tip": "As with most small-town travel in Sindh, arrange accommodation and local guides in advance, especially outside the main town center."
+    }
+  ],
+  "history": {
+    "founded": "Founded in 1783 as the capital of the princely state of Khairpur under the Talpur Mirs",
+    "city_history": "Khairpur was once a semi-autonomous princely state that acceded to Pakistan in 1947. It remains famous for the Faiz Mahal palace, the Talpur royal tombs, and being Pakistan's largest producer of dates (khajoor).",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

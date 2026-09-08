@@ -1,0 +1,166 @@
+{
+  "city": "Mansehra",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "mns_att_01",
+      "name": "Kaghan Valley",
+      "category": "mountains",
+      "description": "A famous alpine valley of pine forests, rivers, and mountain villages, the gateway to Naran and Lake Saiful Muluk.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kaghan, Mansehra District",
+      "popularity": "high"
+    },
+    {
+      "id": "mns_att_02",
+      "name": "Lake Saiful Muluk",
+      "category": "nature",
+      "description": "A glacial lake near Naran surrounded by snow-capped peaks, one of KP's most photographed spots, tied to local folklore.",
+      "entry_fee_pkr": 200,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Naran, Mansehra District",
+      "popularity": "high"
+    },
+    {
+      "id": "mns_att_03",
+      "name": "Shogran & Siri Paye Meadows",
+      "category": "nature",
+      "description": "High-altitude alpine meadows reached by jeep from Kaghan, popular for camping and panoramic mountain views.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 150,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Shogran, Mansehra District",
+      "popularity": "high"
+    },
+    {
+      "id": "mns_att_04",
+      "name": "Ashoka Rock Edict",
+      "category": "historical",
+      "description": "A 3rd-century BCE rock inscription of Buddhist Emperor Ashoka, a rare and significant archaeological site.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Mansehra city",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "mns_food_01",
+      "name": "Naran/Kaghan roadside dhabas",
+      "cuisine": "Pashtun/Hazara",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Fresh trout fish, chapli kebab, and mountain-style tea"
+    },
+    {
+      "id": "mns_food_02",
+      "name": "Mansehra city restaurant",
+      "cuisine": "Pakistani",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Traditional Hazara-style meat dishes"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "mns_trans_01",
+      "from_city": "Mansehra",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach/van via provincial highway",
+      "estimated_cost_pkr": 600,
+      "duration_min": 150,
+      "notes": "Most common route to the provincial hub"
+    },
+    {
+      "id": "mns_trans_02",
+      "from_city": "Mansehra",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway/motorway",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 300,
+      "notes": "Daily coach services available from the main bus stand"
+    },
+    {
+      "id": "mns_trans_03",
+      "from_city": "Mansehra",
+      "to_city": "Mansehra",
+      "transport_type": "local_van",
+      "route": "Suzuki/local van within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Shared local vans are the main way to get around"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "mns_acc_01",
+      "name": "Guesthouse in Naran",
+      "price_range": "moderate",
+      "approx_price_pkr": 8000,
+      "family_friendly": true,
+      "rating": 3.8
+    },
+    {
+      "id": "mns_acc_02",
+      "name": "Budget hotel in Mansehra city",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.2
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain/alpine climate with cold winters and mild summers",
+    "best_time_to_visit": "May to September",
+    "avoid_months": "December to February (heavy snowfall, road closures)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Jun-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C, the main visiting season for mountain areas"
+      },
+      {
+        "season": "Winter (Dec-Feb)",
+        "avg_condition": "Cold, often below freezing at higher elevations; heavy snowfall can close roads"
+      },
+      {
+        "season": "Spring/Autumn",
+        "avg_condition": "Cool and scenic, good for travel with fewer crowds"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "mns_tip_01",
+      "category": "timing",
+      "tip": "Visit Mansehra in the warmer months (roughly May to September) if it's a mountain area, since roads can close in winter snow."
+    },
+    {
+      "id": "mns_tip_02",
+      "category": "local_transport",
+      "tip": "Shared vans (Suzuki/Hiace) and intercity coaches are the main way to reach and travel around the district."
+    },
+    {
+      "id": "mns_tip_03",
+      "category": "safety",
+      "tip": "Arrange accommodation and local transport in advance, especially in more remote mountain areas."
+    }
+  ],
+  "history": {
+    "founded": "An old Hazara-region town, gateway to the Kaghan Valley since ancient times",
+    "city_history": "Mansehra sits at the entrance to the Kaghan Valley and has been a trade route junction for centuries; a famous Ashoka rock edict (3rd century BCE) is inscribed near the town.",
+    "province_history": "Khyber Pakhtunkhwa (formerly North-West Frontier Province) has been a historic crossroads between South and Central Asia for millennia, home to Gandhara civilization sites, the ancient Silk Road route through the Khyber Pass, and a mix of Pashtun tribal, Mughal, Sikh, and British colonial influence before becoming part of Pakistan in 1947. In 2018, the former Federally Administered Tribal Areas (FATA) were formally merged into Khyber Pakhtunkhwa as regular districts."
+  }
+}

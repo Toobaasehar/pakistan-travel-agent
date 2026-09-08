@@ -1,0 +1,121 @@
+{
+  "city": "Pishin",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "psh_att_01",
+      "name": "Pishin Karez Irrigation System",
+      "category": "cultural",
+      "description": "Ancient underground water channels (karez) still used to irrigate the district's famous orchards, a centuries-old engineering tradition.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Pishin District",
+      "popularity": "medium"
+    },
+    {
+      "id": "psh_att_02",
+      "name": "Pishin Fruit Orchards",
+      "category": "nature",
+      "description": "Extensive apple and grape orchards that make Pishin one of Balochistan's key fruit-growing areas.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Rural Pishin",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "psh_food_01",
+      "name": "Local Pashtun eatery",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 450,
+      "family_friendly": true,
+      "specialty": "Traditional Pashtun meals and fresh seasonal fruit"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "psh_trans_01",
+      "from_city": "Pishin",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "psh_trans_02",
+      "from_city": "Pishin",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "psh_trans_03",
+      "from_city": "Pishin",
+      "to_city": "Pishin",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "psh_acc_01",
+      "name": "Basic guesthouse in Pishin town",
+      "price_range": "budget",
+      "approx_price_pkr": 3200,
+      "family_friendly": true,
+      "rating": 2.9
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain climate with mild summers and cold winters",
+    "best_time_to_visit": "April to September",
+    "avoid_months": "December to February (cold, possible snow)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Mild, 15-30°C, main visiting season for highland areas"
+      },
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Cold, often below freezing, occasional snow at higher elevations"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "psh_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Pishin — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "psh_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "psh_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "An old Pashtun agricultural town near the Afghan border, historically a British garrison area",
+    "city_history": "Pishin is known for its fruit orchards (especially apples and grapes) irrigated by traditional karez underground channels, and its role as a historic trade route toward Afghanistan.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "city": "Sherani",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "shr_att_01",
+      "name": "Takht-e-Sulaiman",
+      "category": "mountains",
+      "description": "A sacred mountain peak in the Sulaiman Range, considered holy by local Pashtun tribes and associated with regional folklore.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Sherani District",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "shr_food_01",
+      "name": "Local Pashtun eatery",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional regional meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "shr_trans_01",
+      "from_city": "Sherani",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "shr_trans_02",
+      "from_city": "Sherani",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "shr_trans_03",
+      "from_city": "Sherani",
+      "to_city": "Sherani",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "shr_acc_01",
+      "name": "Basic guesthouse in Sherani",
+      "price_range": "budget",
+      "approx_price_pkr": 2900,
+      "family_friendly": true,
+      "rating": 2.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain climate with mild summers and cold winters",
+    "best_time_to_visit": "April to September",
+    "avoid_months": "December to February (cold, possible snow)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Mild, 15-30°C, main visiting season for highland areas"
+      },
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Cold, often below freezing, occasional snow at higher elevations"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "shr_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Sherani — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "shr_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "shr_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "Separated from Zhob District in 2005",
+    "city_history": "Sherani is home to Takht-e-Sulaiman, a sacred peak in the Sulaiman Mountain range with deep cultural and religious significance to local Pashtun tribes.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

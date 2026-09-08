@@ -1,0 +1,128 @@
+{
+  "city": "Nowshera",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "nsh_att_01",
+      "name": "Kabul River confluence",
+      "category": "nature",
+      "description": "Scenic views where the Kabul River flows through Nowshera district, historically an important crossing point.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Nowshera district",
+      "popularity": "low"
+    },
+    {
+      "id": "nsh_att_02",
+      "name": "Cherat Hill Station",
+      "category": "nature",
+      "description": "A hill station and military cantonment area offering cooler weather and views over the surrounding plains.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~40km from Nowshera",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "nsh_food_01",
+      "name": "Local Pashtun karahi and tikka houses",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and grilled meats"
+    },
+    {
+      "id": "nsh_food_02",
+      "name": "GT Road highway restaurants",
+      "cuisine": "mixed",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Popular stopover restaurants for travelers"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "nsh_trans_01",
+      "from_city": "Nowshera",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach / GT Road",
+      "estimated_cost_pkr": 200,
+      "duration_min": 45,
+      "notes": "Short, frequent route"
+    },
+    {
+      "id": "nsh_trans_02",
+      "from_city": "Nowshera",
+      "to_city": "Nowshera",
+      "transport_type": "local_taxi",
+      "route": "Local taxi to Cherat",
+      "estimated_cost_pkr": 1500,
+      "duration_min": 50,
+      "notes": "Round-trip fare typical for the hill station visit"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "nsh_acc_01",
+      "name": "Budget guesthouse in central Nowshera",
+      "price_range": "budget",
+      "approx_price_pkr": 2600,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "nsh_acc_02",
+      "name": "Mid-range hotel near Nowshera Cantt",
+      "price_range": "moderate",
+      "approx_price_pkr": 5800,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and mild winters, cooler at Cherat's higher elevation",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 5-20°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-42°C in the plains, milder at Cherat" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "nsh_tip_01",
+      "category": "shortcut_route",
+      "tip": "Nowshera sits directly on GT Road/the M-1 corridor, making it an easy stopover between Peshawar and Islamabad."
+    },
+    {
+      "id": "nsh_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local taxi for the Cherat hill station trip, since it involves a winding mountain road."
+    },
+    {
+      "id": "nsh_tip_03",
+      "category": "safety",
+      "tip": "Standard travel precautions apply; the Cherat road has some sharp turns, so drive carefully or hire an experienced local driver."
+    },
+    {
+      "id": "nsh_tip_04",
+      "category": "timing",
+      "tip": "Visit Cherat in the late afternoon for cooler temperatures and good views as the sun starts to set."
+    }
+  ],
+  "history": {
+    "founded": "An ancient crossing point on the Kabul River, with the modern town developing significantly under British rule",
+    "city_history": "Nowshera has long been strategically important as a crossing point on the Kabul River, and developed into a major military cantonment under British colonial rule -- a role it retains today as an important garrison town in Khyber Pakhtunkhwa.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

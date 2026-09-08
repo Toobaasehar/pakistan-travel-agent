@@ -1,0 +1,109 @@
+{
+  "city": "Sohbatpur",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "sbt_att_01",
+      "name": "Sohbatpur Plains",
+      "category": "nature",
+      "description": "Agricultural plains land typical of the district.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Rural Sohbatpur",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "sbt_food_01",
+      "name": "Local eatery",
+      "cuisine": "Balochi/Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional plains-region cuisine"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "sbt_trans_01",
+      "from_city": "Sohbatpur",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "sbt_trans_02",
+      "from_city": "Sohbatpur",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "sbt_trans_03",
+      "from_city": "Sohbatpur",
+      "to_city": "Sohbatpur",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "sbt_acc_01",
+      "name": "Basic guesthouse in Sohbatpur",
+      "price_range": "budget",
+      "approx_price_pkr": 2800,
+      "family_friendly": true,
+      "rating": 2.5
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, arid desert climate",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "May to August (extreme heat)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and dry, 10-25°C, best time to visit"
+      },
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Extremely hot and arid, often above 40°C"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "sbt_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Sohbatpur — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "sbt_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "sbt_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "Separated from Jaffarabad District in 2017",
+    "city_history": "Sohbatpur is one of Balochistan's newer districts, carved from Jaffarabad to better serve this agricultural plains area.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

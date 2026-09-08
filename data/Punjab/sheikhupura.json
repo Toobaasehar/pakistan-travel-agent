@@ -1,0 +1,150 @@
+{
+  "city": "Sheikhupura",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "shk_att_01",
+      "name": "Hiran Minar",
+      "category": "historical",
+      "description": "A Mughal-era monument and reservoir built by Emperor Jahangir in memory of his pet antelope, a unique and peaceful historic site.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Sheikhupura city",
+      "popularity": "medium"
+    },
+    {
+      "id": "shk_att_02",
+      "name": "Sheikhupura Fort",
+      "category": "historical",
+      "description": "A Mughal-era fort built by Emperor Jahangir, later used by Sikh rulers, showcasing a blend of architectural styles.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Sheikhupura",
+      "popularity": "medium"
+    },
+    {
+      "id": "shk_att_03",
+      "name": "Nankana Sahib (day trip)",
+      "category": "religious",
+      "description": "The birthplace of Guru Nanak, founder of Sikhism, and one of the most sacred Sikh pilgrimage sites in the world, a short trip from Sheikhupura.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~25km from Sheikhupura",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "shk_food_01",
+      "name": "Local Punjabi dhabas",
+      "cuisine": "Punjabi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional roadside-style Punjabi food"
+    },
+    {
+      "id": "shk_food_02",
+      "name": "GT Road highway restaurants",
+      "cuisine": "mixed",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Popular stopover restaurants for travelers on GT Road"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "shk_trans_01",
+      "from_city": "Sheikhupura",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 250,
+      "duration_min": 60,
+      "notes": "Short, frequent route"
+    },
+    {
+      "id": "shk_trans_02",
+      "from_city": "Sheikhupura",
+      "to_city": "Faisalabad",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "shk_trans_03",
+      "from_city": "Sheikhupura",
+      "to_city": "Sheikhupura",
+      "transport_type": "local_rideshare",
+      "route": "Local rideshare/rickshaw within city",
+      "estimated_cost_pkr": 200,
+      "duration_min": 15,
+      "notes": "Rickshaws are common for short trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "shk_acc_01",
+      "name": "Budget guesthouse near GT Road",
+      "price_range": "budget",
+      "approx_price_pkr": 2500,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "shk_acc_02",
+      "name": "Mid-range hotel in central Sheikhupura",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot and humid)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool, 6-20°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-42°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "shk_tip_01",
+      "category": "shortcut_route",
+      "tip": "Sheikhupura sits directly on GT Road/the M-2 corridor, making it an easy stopover between Lahore and Faisalabad."
+    },
+    {
+      "id": "shk_tip_02",
+      "category": "local_transport",
+      "tip": "Combine a visit to Hiran Minar, Sheikhupura Fort, and Nankana Sahib into a single day trip from Lahore if time is limited."
+    },
+    {
+      "id": "shk_tip_03",
+      "category": "safety",
+      "tip": "Standard travel precautions apply; the area is generally calm and welcoming to visitors, including Sikh pilgrims visiting Nankana Sahib."
+    },
+    {
+      "id": "shk_tip_04",
+      "category": "timing",
+      "tip": "Visit Hiran Minar in the early morning or late afternoon for the best light over the reservoir."
+    }
+  ],
+  "history": {
+    "founded": "Founded in the early 17th century by Mughal Emperor Jahangir",
+    "city_history": "Sheikhupura was established by Emperor Jahangir as a hunting ground, giving rise to landmarks like Hiran Minar and Sheikhupura Fort. The nearby town of Nankana Sahib, within Sheikhupura district, is one of the holiest sites in Sikhism as the birthplace of Guru Nanak.",
+    "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+  }
+}
