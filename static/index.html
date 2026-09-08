@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Discover Pakistan — AI Travel Planner</title>
   <meta name="description"
-    content="Plan your perfect Pakistan trip with AI-powered recommendations. Browse 30+ verified destinations across all provinces — mountains, history, nature and beaches.">
+    content="Plan your perfect Pakistan trip with AI-powered recommendations. Browse 295+ verified destinations across all 4 provinces and 3 territories — mountains, history, nature and beaches.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -2995,7 +2995,7 @@
     <div class="hero-content">
       <div class="hero-eyebrow">✦ AI-Powered Travel Planner</div>
       <h1>Discover <em>Pakistan,</em><br>Plan Smarter.</h1>
-      <p class="hero-desc">Real, hand-verified destinations across every province. Mountains, history, nature and
+      <p class="hero-desc">Real, hand-verified destinations across every province and territory. Mountains, history, nature and
         culture — all in one intelligent trip planner.</p>
       
       <div class="hero-cta-wrap">
@@ -3025,8 +3025,16 @@
           <span class="lbl">Destinations</span>
         </div>
         <div class="hero-stat">
-          <span class="num">7</span>
+          <span class="num">4</span>
           <span class="lbl">Provinces</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">3</span>
+          <span class="lbl">Territories<br><small style="font-weight:400; opacity:0.75;">Capital, Azad Kashmir, Gilgit-Baltistan</small></span>
+        </div>
+        <div class="hero-stat">
+          <span class="num" id="stat-districts">—</span>
+          <span class="lbl">Cities &amp; Districts</span>
         </div>
         <div class="hero-stat">
           <span class="num">5</span>
@@ -3291,7 +3299,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="name">🇵🇰 Discover Pakistan</div>
-          <p>An AI-powered travel planner for Pakistan tourism. Real, verified destinations across all provinces.</p>
+          <p>An AI-powered travel planner for Pakistan tourism. Real, verified destinations across all 4 provinces and 3 territories.</p>
         </div>
         <div class="footer-col">
           <h4>Explore</h4>
@@ -3303,13 +3311,20 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Provinces</h4>
+          <h4>4 Provinces</h4>
           <ul>
-            <li><a href="#">Gilgit-Baltistan</a></li>
-            <li><a href="#">Khyber Pakhtunkhwa</a></li>
             <li><a href="#">Punjab</a></li>
             <li><a href="#">Sindh</a></li>
+            <li><a href="#">Khyber Pakhtunkhwa</a></li>
             <li><a href="#">Balochistan</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Territories</h4>
+          <ul>
+            <li><a href="#">Islamabad Capital Territory</a></li>
+            <li><a href="#">Azad Kashmir</a></li>
+            <li><a href="#">Gilgit-Baltistan</a></li>
           </ul>
         </div>
       </div>
@@ -3675,6 +3690,8 @@
         });
 
         document.getElementById('stat-dest').textContent = allDestinations.length + '+';
+        const uniqueDistricts = new Set(allDestinations.map(d => d.district).filter(Boolean));
+        document.getElementById('stat-districts').textContent = uniqueDistricts.size + '+';
 
         // Populate province dropdowns
         const provinces = [...new Set(allDestinations.map(d => d.province))].sort();

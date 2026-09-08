@@ -25,7 +25,7 @@ from database import engine, get_db, Base
 from models import Destination, DestinationImage, User, UserWishlist, SavedTrip
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
 from recommendations import get_recommendations_for_destination
-from agent_mock import run_mock_agent
+from agent import run_mock_agent
 from ml.predict_budget import predict_budget
 from ml.similar_destinations import get_similar_destinations
 from ml.explain_budget import explain_budget_prediction
@@ -38,7 +38,6 @@ from auth import (
     verify_password,
     create_access_token,
     get_current_user,
-    generate_verification_code,
     get_optional_user,
 )
 
@@ -143,6 +142,10 @@ class TripRequest(BaseModel):
     province: Optional[str] = None
     district: Optional[str] = None
     people: int = Field(default=1, gt=0, description="Number of travelers")
+    travel_style: Optional[str] = "budget"
+    transport_mode: Optional[str] = None
+    currency: Optional[str] = "PKR"
+    is_local_or_day_trip: Optional[bool] = None
 
 
 class ChatRequest(BaseModel):
@@ -174,10 +177,9 @@ class SaveTripRequest(BaseModel):
 
 
 # --- Authentication Endpoints ---
-# --- Authentication Endpoints ---
 @app.post("/auth/register", response_model=TokenResponse)
 def register(req: UserRegisterRequest, db: Session = Depends(get_db)):
-    """Creates a new user account with secure bcrypt password hashing and an email verification OTP."""
+    """Creates a new user account with secure bcrypt password hashing."""
     existing_email = db.query(User).filter(User.email == req.email.lower().strip()).first()
     if existing_email:
         raise HTTPException(
@@ -193,35 +195,22 @@ def register(req: UserRegisterRequest, db: Session = Depends(get_db)):
         )
 
     hashed_pw = hash_password(req.password)
-    
-    # Generate 6-digit OTP code using your helper function from auth.py
-    otp_code = generate_verification_code()
-
     user = User(
         username=req.username.strip(),
         email=req.email.lower().strip(),
         hashed_password=hashed_pw,
         full_name=req.full_name.strip() if req.full_name else req.username.strip(),
-        is_verified=False,          # Block them from logging in immediately
-        verification_code=otp_code  # Store the OTP code in the database
     )
-
     db.add(user)
     db.commit()
     db.refresh(user)
 
-    # For testing output in your terminal loop
-    print(f"\n========================================")
-    print(f" OTP VERIFICATION CODE FOR {user.email}: {otp_code} ")
-    print(f"========================================\n")
-
-    # Since they are not verified yet, we return dummy/empty tokens for now
+    token = create_access_token({"sub": str(user.id), "username": user.username})
     return {
-        "access_token": "pending_verification",
+        "access_token": token,
         "token_type": "bearer",
-        "user": user
+        "user": user,
     }
-
 
 
 @app.post("/auth/login", response_model=TokenResponse)
@@ -244,18 +233,6 @@ def login(req: UserLoginRequest, db: Session = Depends(get_db)):
             status_code=status.HTTP_403_FORBIDDEN,
             detail="This account is deactivated.",
         )
-        if not user.is_active:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="This account is deactivated.",
-        )
-
-    
-    if not user.is_verified:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Your email is not verified yet. Please submit your OTP code first."
-        )
 
     token = create_access_token({"sub": str(user.id), "username": user.username})
     return {
@@ -263,7 +240,6 @@ def login(req: UserLoginRequest, db: Session = Depends(get_db)):
         "token_type": "bearer",
         "user": user,
     }
-
 
 
 @app.get("/auth/me", response_model=UserResponse)
@@ -436,6 +412,14 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         category=req.category,
     )
     if not matches:
+        # Relax budget constraint so user still gets the best destination for their city/interest
+        matches = search_destinations(
+            province=req.province,
+            district=req.district,
+            category=req.category,
+        )
+
+    if not matches:
         return {
             "error": "No destinations matched this criteria. Try selecting a different city, interest, or increasing your budget."
         }
@@ -448,7 +432,47 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         cat = (details.get("category") or "").lower()
         details["estimated_budget_per_day"] = DEFAULT_BUDGETS.get(cat, 5000)
 
-    cost = estimate_cost(chosen_id, days=req.days, people=req.people)
+    # Determine day trip / local resident status
+    is_day_trip = (req.days == 1) or bool(req.is_local_or_day_trip)
+
+    # Honor user's travel style or pick best fitting tier
+    target_tier = (req.travel_style or "budget").lower().strip()
+    cost = estimate_cost(
+        chosen_id,
+        days=req.days,
+        people=req.people,
+        travel_style=target_tier,
+        transport_mode=req.transport_mode,
+        currency=req.currency or "PKR",
+        user_budget=req.budget,
+        is_local_or_day_trip=is_day_trip,
+    )
+
+    # If the user-selected tier exceeds budget, check if a cheaper tier fits nicely
+    if cost and cost.get("total_pkr", 0) > req.budget and cost.get("tier_comparisons"):
+        tiers_by_price = sorted(
+            cost["tier_comparisons"].items(),
+            key=lambda kv: kv[1]["total_pkr"],
+        )
+        for tier_name, tier_data in tiers_by_price:
+            if tier_data["total_pkr"] <= req.budget:
+                target_tier = tier_name
+                cost = estimate_cost(
+                    chosen_id,
+                    days=req.days,
+                    people=req.people,
+                    travel_style=target_tier,
+                    transport_mode=req.transport_mode,
+                    currency=req.currency or "PKR",
+                    user_budget=req.budget,
+                    is_local_or_day_trip=is_day_trip,
+                )
+                break
+
+    cost["within_budget"] = bool(cost["total_pkr"] <= req.budget)
+    cost["requested_budget"] = req.budget
+    cost["savings_pkr"] = max(0, req.budget - cost["total_pkr"])
+
     itinerary = generate_itinerary(chosen_id, days=req.days)
 
     dest_row = db.query(Destination).filter(Destination.id == chosen_id).first()
@@ -621,22 +645,3 @@ if __name__ == "__main__":
     print(">> Automatically launching http://127.0.0.1:8000 in your browser...\n")
     threading.Thread(target=open_browser, daemon=True).start()
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
-        if not user.is_active:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="This account is deactivated.",
-        )
-
-    # ---> ADD THIS BLOCK HERE (Line 247):
-    if not user.is_verified:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Your email is not verified yet. Please submit your OTP code first."
-        )
-
-    token = create_access_token({"sub": str(user.id), "username": user.username})
-    return {
-        "access_token": token,
-        "token_type": "bearer",
-        "user": user,
-    }
