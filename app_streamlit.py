@@ -5,9 +5,13 @@ Interactive, full-featured Python dashboard.
 Automatically opens in your browser when you run:
     streamlit run app_streamlit.py
 """
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import streamlit as st
 import pandas as pd
+import requests
 from database import SessionLocal
 from models import Destination, DestinationImage
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
@@ -112,13 +116,105 @@ st.sidebar.title("🇵🇰 Discover Pakistan")
 st.sidebar.caption("AI-Powered Tourism & Trip Planner")
 menu = st.sidebar.radio(
     "Navigation",
-    ["✈️ Plan a Trip", "🗺️ Browse Destinations", "📍 Interactive Map", "💬 AI Chat Assistant"]
+    ["🔑 Login / Register", "🗺️ Plan a Trip", "🏔️ Browse Destinations", "📍 Interactive Map", "💬 AI Chat Assistant"]
 )
+
+st.sidebar.markdown("---")
+if st.sidebar.button("🚨 Wipe Profile & Delete Account"):
+    if "access_token" in st.session_state and st.session_state["access_token"] != "pending_verification":
+        headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
+        try:
+            res = requests.delete("http://127.0.0", headers=headers)
+            if res.status_code == 200:
+                st.sidebar.success("Account permanently removed.")
+                st.session_state.clear()
+                st.rerun()
+            else:
+                st.sidebar.error("Failed to delete account. Session might have timed out.")
+        except Exception:
+            st.sidebar.error("Could not connect to the backend server.")
+    else:
+        st.sidebar.warning("Please sign in first to verify ownership before deletion.")
+
 
 # -------------------------------------------------------------
 # 1. PLAN A TRIP TAB
+if menu == "🔑 Login / Register":
+    st.markdown('<div class="main-header">Account Portal</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">Sign up, verify your email, or manage your travel agent profile.</div>', unsafe_allow_html=True)
+    
+    tab1, tab2 = st.tabs(["Existing User Sign-In", "Create New Account"])
+    
+    with tab1:
+        with st.form("login_form"):
+            st.subheader("Login to Your Travel Dashboard")
+            identity = st.text_input("Username or Email Address")
+            password = st.text_input("Password", type="password")
+            if st.form_submit_button("Secure Sign-In"):
+                payload = {"email_or_username": identity, "password": password}
+                try:
+                    res = requests.post("http://127.0.0", json=payload)
+                    if res.status_code == 200:
+                        st.session_state["access_token"] = res.json().get("access_token")
+                        st.success("Successfully logged in! You can now browse our travel planner system.")
+                    else:
+                        st.error(res.json().get("detail", "Incorrect credentials or unverified profile account."))
+                except Exception:
+                    st.error("Could not connect to the backend server. Make sure run.py is running.")
+
+    with tab2:
+        reg_type = st.radio("Choose Registration Framework", ["Standard Email Verification", "Mobile Phone Registry"])
+        
+        if reg_type == "Standard Email Verification":
+            with st.form("email_reg_form"):
+                u_name = st.text_input("Choose Username*")
+                e_mail = st.text_input("Email Address*")
+                f_name = st.text_input("Full Name")
+                p_word = st.text_input("Choose Password*", type="password")
+                if st.form_submit_button("Generate Account OTP"):
+                    payload = {"username": u_name, "email": e_mail, "full_name": f_name, "password": p_word}
+                    try:
+                        res = requests.post("http://127.0.0", json=payload)
+                        if res.status_code == 200:
+                            st.info("Registration request created successfully! Check your backend terminal window console to copy your 6-digit verification code.")
+                        else:
+                            st.error(res.json().get("detail", "Failed to construct profile registry account."))
+                    except Exception:
+                        st.error("Backend server connection failed.")
+                        
+            st.markdown("---")
+            with st.form("otp_verification_gate"):
+                st.subheader("Submit Received Account OTP Code")
+                target_email = st.text_input("Confirm Registration Email Address")
+                otp_code = st.text_input("6-Digit Code", max_chars=6)
+                if st.form_submit_button("Verify & Activate Profile"):
+                    try:
+                        res = requests.post(f"http://127.0.0{target_email}&otp={otp_code}")
+                        if res.status_code == 200:
+                            st.success("Verification successful! You can now sign in using the Existing User tab.")
+                        else:
+                            st.error(res.json().get("detail", "Invalid token code entry values."))
+                    except Exception:
+                        st.error("Backend server connection failed.")
+                        
+        elif reg_type == "Mobile Phone Registry":
+            with st.form("phone_registration_form"):
+                st.subheader("Mobile Verification Registry")
+                new_phone = st.text_input("Mobile Number (e.g., +923001234567)")
+                phone_username = st.text_input("Username Link")
+                phone_fullname = st.text_input("Full Name")
+                if st.form_submit_button("Complete Account Form"):
+                    params = {"phone_number": new_phone, "username": phone_username, "full_name": phone_fullname}
+                    try:
+                        res = requests.post("http://127.0.0", params=params)
+                        if res.status_code == 200:
+                            st.success("Phone account provisioned successfully! You are active and ready.")
+                        else:
+                            st.error(res.json().get("detail", "Failed to build target account."))
+                    except Exception:
+                        st.error("Backend server connection failed.")
 # -------------------------------------------------------------
-if menu == "✈️ Plan a Trip":
+elif menu == "✈️ Plan a Trip":
     st.markdown('<div class="main-header">Plan Your Perfect Pakistan Trip</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Select your preferences below to generate an instant itinerary, cost breakdown, and route.</div>', unsafe_allow_html=True)
 
