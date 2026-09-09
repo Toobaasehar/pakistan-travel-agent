@@ -225,11 +225,12 @@ def login(req: UserLoginRequest, db: Session = Depends(get_db)):
             status_code=status.HTTP_403_FORBIDDEN,
             detail="This account is deactivated.",
         )
-        if not user.is_verified:
+    if not user.is_verified:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Your email is not verified yet. Please submit your OTP code first."
         )
+
 
     token = create_access_token({"sub": str(user.id), "username": user.username})
     return {
