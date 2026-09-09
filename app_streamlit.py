@@ -5,6 +5,9 @@ Interactive, full-featured Python dashboard.
 Automatically opens in your browser when you run:
     streamlit run app_streamlit.py
 """
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import streamlit as st
 import pandas as pd
