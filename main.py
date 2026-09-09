@@ -142,10 +142,9 @@ class TripRequest(BaseModel):
     province: Optional[str] = None
     district: Optional[str] = None
     people: int = Field(default=1, gt=0, description="Number of travelers")
-    travel_style: Optional[str] = "budget"
-    transport_mode: Optional[str] = None
-    currency: Optional[str] = "PKR"
-    is_local_or_day_trip: Optional[bool] = None
+    from_city: Optional[str] = Field(default=None, description="User's current location, e.g. 'Lahore' -- enables route-based transport pricing")
+    include_hotel: bool = Field(default=True, description="False if the user won't be staying overnight (day trip, staying with family, etc.)")
+    travel_style: Optional[str] = Field(default=None, description="'budget'/'standard'/'luxury' if the user picked a tier manually; omit to auto-select the best tier that fits their budget")
 
 
 class ChatRequest(BaseModel):
@@ -412,14 +411,6 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         category=req.category,
     )
     if not matches:
-        # Relax budget constraint so user still gets the best destination for their city/interest
-        matches = search_destinations(
-            province=req.province,
-            district=req.district,
-            category=req.category,
-        )
-
-    if not matches:
         return {
             "error": "No destinations matched this criteria. Try selecting a different city, interest, or increasing your budget."
         }
@@ -432,46 +423,46 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         cat = (details.get("category") or "").lower()
         details["estimated_budget_per_day"] = DEFAULT_BUDGETS.get(cat, 5000)
 
-    # Determine day trip / local resident status
-    is_day_trip = (req.days == 1) or bool(req.is_local_or_day_trip)
-
-    # Honor user's travel style or pick best fitting tier
-    target_tier = (req.travel_style or "budget").lower().strip()
+    # If the user explicitly picked a tier (Budget/Standard/Luxury buttons in
+    # the UI), respect that choice directly. Otherwise, auto-select whichever
+    # tier fits best under their stated budget -- estimate_cost() already
+    # computes all 3 tiers internally (tier_comparisons), so we reuse that
+    # instead of guessing.
     cost = estimate_cost(
-        chosen_id,
-        days=req.days,
-        people=req.people,
-        travel_style=target_tier,
-        transport_mode=req.transport_mode,
-        currency=req.currency or "PKR",
-        user_budget=req.budget,
-        is_local_or_day_trip=is_day_trip,
+        chosen_id, days=req.days, people=req.people,
+        travel_style=req.travel_style or "standard",
+        from_city=req.from_city, include_hotel=req.include_hotel,
     )
 
-    # If the user-selected tier exceeds budget, check if a cheaper tier fits nicely
-    if cost and cost.get("total_pkr", 0) > req.budget and cost.get("tier_comparisons"):
-        tiers_by_price = sorted(
-            cost["tier_comparisons"].items(),
-            key=lambda kv: kv[1]["total_pkr"],
+    if req.travel_style:
+        best_tier = req.travel_style
+    else:
+        best_tier = None
+        if cost and cost.get("tier_comparisons"):
+            tiers_by_price = sorted(
+                cost["tier_comparisons"].items(),
+                key=lambda kv: kv[1]["total_pkr"],
+            )
+            # Pick the most expensive tier that still fits within the user's budget
+            for tier_name, tier_data in reversed(tiers_by_price):
+                if tier_data["total_pkr"] <= req.budget:
+                    best_tier = tier_name
+                    break
+            # If even the cheapest tier exceeds the budget, fall back to the
+            # cheapest tier anyway and say so honestly, rather than hiding it.
+            if best_tier is None:
+                best_tier = tiers_by_price[0][0]
+
+    # Re-fetch with the correct tier so every field (hotel label, dining style,
+    # transport, breakdown) is internally consistent — not just the total.
+    if best_tier and best_tier != cost.get("travel_style"):
+        cost = estimate_cost(
+            chosen_id, days=req.days, people=req.people, travel_style=best_tier,
+            from_city=req.from_city, include_hotel=req.include_hotel,
         )
-        for tier_name, tier_data in tiers_by_price:
-            if tier_data["total_pkr"] <= req.budget:
-                target_tier = tier_name
-                cost = estimate_cost(
-                    chosen_id,
-                    days=req.days,
-                    people=req.people,
-                    travel_style=target_tier,
-                    transport_mode=req.transport_mode,
-                    currency=req.currency or "PKR",
-                    user_budget=req.budget,
-                    is_local_or_day_trip=is_day_trip,
-                )
-                break
 
     cost["within_budget"] = bool(cost["total_pkr"] <= req.budget)
     cost["requested_budget"] = req.budget
-    cost["savings_pkr"] = max(0, req.budget - cost["total_pkr"])
 
     itinerary = generate_itinerary(chosen_id, days=req.days)
 

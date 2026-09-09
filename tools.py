@@ -82,12 +82,12 @@ def estimate_cost(
     travel_style: str = "standard",
     transport_mode: Optional[str] = None,
     currency: str = "PKR",
-    user_budget: Optional[int] = None,
-    is_local_or_day_trip: Optional[bool] = None,
+    from_city: Optional[str] = None,
+    include_hotel: bool = True,
 ):
     """
     Dynamic Live Market Pricing (2026 Rates) for a destination.
-    Uses real hotel rates, route-based transport (including Auto-Rickshaw / InDrive),
+    Uses real hotel rates, route-based transport (when from_city is given),
     authentic dining costs, and multi-currency conversion.
     """
     db = SessionLocal()
@@ -110,8 +110,8 @@ def estimate_cost(
             travel_style=travel_style,
             transport_mode=transport_mode,
             currency=currency,
-            user_budget=user_budget,
-            is_local_or_day_trip=is_local_or_day_trip,
+            from_city=from_city,
+            include_hotel=include_hotel,
         )
 
         return {
@@ -122,6 +122,10 @@ def estimate_cost(
             "travel_style_label": pricing["travel_style_label"],
             "transport_mode": pricing["transport_mode"],
             "transport_label": pricing["transport_label"],
+            "from_city": pricing["from_city"],
+            "distance_km": pricing["distance_km"],
+            "route_note": pricing["route_note"],
+            "include_hotel": pricing["include_hotel"],
             "dining_style": pricing["dining_style"],
             "breakdown_pkr": pricing["breakdown_pkr"],
             "breakdown_converted": pricing["breakdown_converted"],
@@ -132,10 +136,6 @@ def estimate_cost(
             "tier_comparisons": pricing["tier_comparisons"],
             "seasonal_multiplier": pricing["seasonal_multiplier"],
             "season_status": pricing["season_status"],
-            "is_day_trip": pricing.get("is_day_trip", days == 1),
-            "within_budget": pricing.get("within_budget", True),
-            "requested_budget": pricing.get("requested_budget", user_budget),
-            "savings_pkr": pricing.get("savings_pkr", 0),
             "pricing_source": pricing["pricing_source"],
             "note": "⚡ Verified Live Market Pricing (2026 Rates).",
         }
@@ -150,6 +150,8 @@ def get_live_trip_cost(
     travel_style: str = "standard",
     transport_mode: Optional[str] = None,
     currency: str = "PKR",
+    from_city: Optional[str] = None,
+    include_hotel: bool = True,
 ):
     """Alias for estimate_cost with live pricing parameters."""
     return estimate_cost(
@@ -159,6 +161,8 @@ def get_live_trip_cost(
         travel_style=travel_style,
         transport_mode=transport_mode,
         currency=currency,
+        from_city=from_city,
+        include_hotel=include_hotel,
     )
 
 

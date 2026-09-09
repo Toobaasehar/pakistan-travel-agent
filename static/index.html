@@ -3130,13 +3130,20 @@
             </div>
 
             <div class="form-group">
-              <label for="plan-province">Province</label>
+              <label for="plan-from-city">Your Current Location <span style="font-size:11.5px; color:var(--ink-soft); font-weight:400;">(for route-based transport pricing)</span></label>
+              <select id="plan-from-city">
+                <option value="">Not sure / skip this</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="plan-province">Destination Province</label>
               <select id="plan-province">
                 <option value="">Any Province</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="plan-city">City / District</label>
+              <label for="plan-city">Destination City / District</label>
               <select id="plan-city" disabled>
                 <option value="">Select a province first</option>
               </select>
@@ -3162,6 +3169,18 @@
                 <option value="flight">✈️ Domestic Flight + Local Vehicle</option>
                 <option value="local_transit">🚕 City Ride-Hailing (Careem/Rickshaw)</option>
               </select>
+            </div>
+            <div class="form-group">
+              <label>Do You Need a Hotel Stay?</label>
+              <div class="style-selector-wrap">
+                <button type="button" class="style-pill-btn hotel-pill-btn active" data-hotel="yes" onclick="setPlannerHotelChoice('yes')">
+                  <span>🏨</span> Yes, book a hotel
+                </button>
+                <button type="button" class="style-pill-btn hotel-pill-btn" data-hotel="no" onclick="setPlannerHotelChoice('no')">
+                  <span>🚗</span> No, same-day / staying with family
+                </button>
+              </div>
+              <input type="hidden" id="plan-include-hotel" value="yes">
             </div>
             <div class="form-group">
               <label for="budget-input">Total Budget Limit (PKR) <span style="font-size:11.5px; color:var(--ink-soft); font-weight:400;">(Type exact amount or slide)</span></label>
@@ -3702,6 +3721,16 @@
           planProvSelect.insertAdjacentHTML('beforeend', `<option value="${p}">${p}</option>`);
         });
 
+        // Populate "Your Current Location" dropdown with every known city/district,
+        // regardless of province -- the user could be starting from anywhere.
+        const fromCitySelect = document.getElementById('plan-from-city');
+        if (fromCitySelect) {
+          const allCities = [...uniqueDistricts].sort();
+          allCities.forEach(c => {
+            fromCitySelect.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`);
+          });
+        }
+
         populateBrowseCities();
         renderGrid();
         updateFavCount();
@@ -3817,11 +3846,19 @@
     }
 
     function setPlannerTravelStyle(style) {
-      document.querySelectorAll('.style-pill-btn').forEach(btn => {
+      document.querySelectorAll('.style-pill-btn[data-style]').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.style === style);
       });
       const input = document.getElementById('plan-travel-style');
       if (input) input.value = style;
+    }
+
+    function setPlannerHotelChoice(choice) {
+      document.querySelectorAll('.hotel-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.hotel === choice);
+      });
+      const input = document.getElementById('plan-include-hotel');
+      if (input) input.value = choice;
     }
 
     function switchPlannerTier(tier) {
@@ -4038,6 +4075,8 @@
       const travelStyle = document.getElementById('plan-travel-style')?.value || 'standard';
       const transportMode = document.getElementById('plan-transport')?.value || null;
       const budgetVal = parseInt(document.getElementById('budget-input')?.value || slider?.value || 80000);
+      const fromCity = document.getElementById('plan-from-city')?.value || null;
+      const includeHotel = (document.getElementById('plan-include-hotel')?.value || 'yes') === 'yes';
 
       const body = {
         budget: budgetVal,
@@ -4049,6 +4088,8 @@
         travel_style: travelStyle,
         transport_mode: transportMode,
         currency: currentGlobalCurrency,
+        from_city: fromCity,
+        include_hotel: includeHotel,
       };
 
       const resultArea = document.getElementById('plan-result');
@@ -4116,6 +4157,19 @@
               <div class="tier-card-price">${tiers.luxury.total_formatted || 'PKR ' + (tiers.luxury.total_pkr || 0).toLocaleString()}</div>
               <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">5-Star Resort & 4x4 Jeep</div>
             </div>
+          </div>` : '';
+
+        const budgetFitHtml = (typeof cost.within_budget === 'boolean') ? `
+          <div style="margin-top:14px; padding:10px 14px; border-radius:10px; font-size:13px; font-weight:600;
+            background:${cost.within_budget ? '#e8f5e9' : '#fff3e0'}; color:${cost.within_budget ? '#2e7d32' : '#e65100'};">
+            ${cost.within_budget
+              ? `✅ This fits within your PKR ${(cost.requested_budget || 0).toLocaleString()} budget`
+              : `⚠️ This is the cheapest option available, but it's above your PKR ${(cost.requested_budget || 0).toLocaleString()} budget`}
+          </div>` : '';
+
+        const routeNoteHtml = cost.route_note ? `
+          <div style="margin-top:10px; padding:10px 14px; border-radius:10px; font-size:13px; background:#f0f4ff; color:#2b3a6b;">
+            🛣️ ${cost.route_note} · ${cost.transport_label || ''}
           </div>` : '';
 
         const costLabels = {
@@ -4241,6 +4295,8 @@
           </div>
 
           ${tierCompHtml}
+          ${budgetFitHtml}
+          ${routeNoteHtml}
 
           <h4 class="section-subheading">⚡ Live Itemized Receipt (${body.days} Days, ${body.people} Traveler${body.people > 1 ? 's' : ''} — ${cost.travel_style_label || 'Standard'})</h4>
           <div class="cost-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
