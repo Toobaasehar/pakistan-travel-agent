@@ -16,6 +16,7 @@ from database import SessionLocal
 from models import Destination, DestinationImage
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
 from agent import run_mock_agent
+from review_ui import show_reviews_section
 
 # Base URL of the FastAPI backend (main.py / run.py). All account-related
 # actions in this Streamlit app go through the same REST API the web UI uses.
@@ -120,12 +121,12 @@ st.sidebar.title("🇵🇰 Discover Pakistan")
 st.sidebar.caption("AI-Powered Tourism & Trip Planner")
 menu = st.sidebar.radio(
     "Navigation",
-    ["🔑 Login / Register", "🗺️ Plan a Trip", "🏔️ Browse Destinations", "📍 Interactive Map", "💬 AI Chat Assistant"]
+    ["🔑 Login / Register", "🗺️ Plan a Trip", "🏔️ Browse Destinations", "📍 Interactive Map", "💬 AI Chat Assistant", "⭐ Reviews"]
 )
 
 st.sidebar.markdown("---")
 if st.sidebar.button("🚨 Wipe Profile & Delete Account"):
-    if "access_token" in st.session_state and st.session_state["access_token"] != "pending_verification":
+    if "access_token" in st.session_state and st.session_state["access_token"]:
         headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
         try:
             res = requests.delete(f"{BACKEND_URL}/user/delete-account", headers=headers)
@@ -234,7 +235,7 @@ if menu == "🔑 Login / Register":
                     except Exception:
                         st.error("Backend server connection failed.")
 # -------------------------------------------------------------
-elif menu == "✈️ Plan a Trip":
+elif menu == "🗺️ Plan a Trip":
     st.markdown('<div class="main-header">Plan Your Perfect Pakistan Trip</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Select your preferences below to generate an instant itinerary, cost breakdown, and route.</div>', unsafe_allow_html=True)
 
@@ -341,7 +342,7 @@ elif menu == "✈️ Plan a Trip":
 # -------------------------------------------------------------
 # 2. BROWSE DESTINATIONS TAB
 # -------------------------------------------------------------
-elif menu == "🗺️ Browse Destinations":
+elif menu == "🏔️ Browse Destinations":
     st.markdown('<div class="main-header">Browse Pakistan Destinations</div>', unsafe_allow_html=True)
     st.markdown(f'<div class="sub-header">Exploring {len(df_dests)} verified landmarks, hill stations, and cultural sites.</div>', unsafe_allow_html=True)
 
@@ -434,3 +435,9 @@ elif menu == "💬 AI Chat Assistant":
                 reply = run_mock_agent(user_prompt)
                 st.markdown(reply)
                 st.session_state.messages.append({"role": "assistant", "content": reply})
+
+# -------------------------------------------------------------
+# ⭐ REVIEWS
+# -------------------------------------------------------------
+elif menu == "⭐ Reviews":
+    show_reviews_section()

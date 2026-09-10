@@ -346,6 +346,40 @@
       background: #FDE8E8;
     }
 
+    /* Review modal: interactive star picker */
+    .star-picker {
+      font-size: 32px;
+      letter-spacing: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .star-pick {
+      color: var(--border);
+      transition: var(--transition);
+    }
+
+    .star-pick.filled {
+      color: var(--saffron);
+    }
+
+    .auth-secondary-btn-plain {
+      background: none;
+      border: none;
+      color: var(--ink-soft);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 6px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .auth-secondary-btn-plain:hover {
+      color: var(--terracotta);
+      text-decoration: underline;
+    }
+
     /* ========== AUTH MODAL & SAVED TRIPS ========== */
     .auth-modal-wrap {
       position: fixed;
@@ -2971,6 +3005,51 @@
     </div>
   </div>
 
+  <!-- ===== REVIEW MODAL (shown right after a trip is saved) ===== -->
+  <div class="auth-modal-wrap" id="review-modal-wrap" role="dialog" aria-modal="true">
+    <div class="auth-box">
+      <div class="auth-header">
+        <h3>How was your trip planning experience?</h3>
+        <p id="review-modal-subtitle">Rate <strong id="review-dest-name"></strong> for other travelers</p>
+        <button class="auth-close-btn" id="review-close-btn" aria-label="Close">✕</button>
+      </div>
+      <div class="auth-body">
+        <div class="auth-alert" id="review-alert"></div>
+        <form class="auth-form active" id="form-review" onsubmit="submitTripReview(event)">
+          <div class="auth-input-group">
+            <label>Your Rating</label>
+            <div class="star-picker" id="star-picker">
+              <span class="star-pick" data-value="1">☆</span>
+              <span class="star-pick" data-value="2">☆</span>
+              <span class="star-pick" data-value="3">☆</span>
+              <span class="star-pick" data-value="4">☆</span>
+              <span class="star-pick" data-value="5">☆</span>
+            </div>
+          </div>
+          <div class="auth-input-group">
+            <label for="review-title">Review Title</label>
+            <input type="text" id="review-title" required minlength="3" maxlength="100"
+              placeholder="e.g. Planning made easy!">
+          </div>
+          <div class="auth-input-group">
+            <label for="review-comment">Your Review</label>
+            <textarea id="review-comment" required minlength="10" maxlength="1000" rows="4"
+              placeholder="What did you like? What could be better?"
+              style="width:100%; padding:11px 13px; border:1.5px solid var(--border); border-radius:var(--radius-sm); font-family:inherit; font-size:13.5px; resize:vertical;"></textarea>
+          </div>
+          <div class="auth-input-group">
+            <label for="review-visited">When are you planning to visit? (optional)</label>
+            <input type="text" id="review-visited" maxlength="50" placeholder="e.g. December 2026">
+          </div>
+          <button type="submit" class="auth-submit-btn" id="btn-review-submit">
+            <span>Post Review</span>
+          </button>
+          <button type="button" class="auth-secondary-btn-plain" onclick="closeReviewModal()">Maybe later</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== NAVBAR ===== -->
   <nav id="navbar">
     <div class="nav-inner">
@@ -4493,6 +4572,99 @@
       }
     });
 
+    // ========== POST-TRIP REVIEW MODAL ==========
+    let reviewTripId = null;
+    let reviewRating = 0;
+
+    function openReviewModal(destinationName, tripId) {
+      reviewTripId = tripId || null;
+      reviewRating = 0;
+      document.getElementById('review-dest-name').textContent = destinationName || 'this destination';
+      document.getElementById('review-title').value = '';
+      document.getElementById('review-comment').value = '';
+      document.getElementById('review-visited').value = '';
+      document.getElementById('review-alert').style.display = 'none';
+      renderStarPicker();
+      document.getElementById('review-modal-wrap').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeReviewModal() {
+      document.getElementById('review-modal-wrap').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('review-close-btn').addEventListener('click', closeReviewModal);
+    document.getElementById('review-modal-wrap').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeReviewModal();
+    });
+
+    function renderStarPicker() {
+      document.querySelectorAll('#star-picker .star-pick').forEach(el => {
+        const val = parseInt(el.dataset.value, 10);
+        el.textContent = val <= reviewRating ? '★' : '☆';
+        el.classList.toggle('filled', val <= reviewRating);
+      });
+    }
+
+    document.querySelectorAll('#star-picker .star-pick').forEach(el => {
+      el.addEventListener('click', () => {
+        reviewRating = parseInt(el.dataset.value, 10);
+        renderStarPicker();
+      });
+    });
+
+    function showReviewAlert(message, type = 'error') {
+      const alertEl = document.getElementById('review-alert');
+      alertEl.textContent = message;
+      alertEl.className = `auth-alert ${type}`;
+      alertEl.style.display = 'flex';
+    }
+
+    async function submitTripReview(e) {
+      e.preventDefault();
+      if (reviewRating < 1) {
+        showReviewAlert('Please pick a star rating.', 'error');
+        return;
+      }
+      if (!authToken) {
+        showReviewAlert('Please sign in to post a review.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-review-submit');
+      btn.disabled = true;
+      btn.innerHTML = '<span>Posting...</span>';
+
+      const payload = {
+        destination_name: document.getElementById('review-dest-name').textContent,
+        rating: reviewRating,
+        title: document.getElementById('review-title').value.trim(),
+        comment: document.getElementById('review-comment').value.trim(),
+        visited_month: document.getElementById('review-visited').value.trim() || null,
+        trip_id: reviewTripId,
+      };
+
+      try {
+        const res = await fetch(`${API}/reviews/`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showReviewAlert(data.detail || 'Could not post your review.', 'error');
+          return;
+        }
+        showReviewAlert('Thanks! Your review has been posted.', 'success');
+        setTimeout(closeReviewModal, 1000);
+      } catch (err) {
+        showReviewAlert(`Network error: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Post Review</span>';
+      }
+    }
+
     // ========== SAVED TRIPS FUNCTIONS ==========
     async function saveCurrentTripPlan() {
       if (!currentPlannedTrip) {
@@ -4526,6 +4698,11 @@
               btn.innerHTML = '💾 Save Trip to My Profile';
             }, 2500);
           }
+          // Prompt for a review right after saving -- this is the natural
+          // moment the user has just finished planning the trip.
+          setTimeout(() => {
+            openReviewModal(currentPlannedTrip.destination_name, data.trip_id);
+          }, 900);
         } else {
           alert(`Error saving trip: ${data.detail || 'Could not save.'}`);
           if (btn) { btn.disabled = false; btn.innerHTML = '💾 Save Trip to My Profile'; }

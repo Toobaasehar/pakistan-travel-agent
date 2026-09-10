@@ -28,6 +28,18 @@ from ml.predict_budget import predict_budget
 from ml.similar_destinations import get_similar_destinations
 from ml.explain_budget import explain_budget_prediction
 
+# RAG — Retrieval-Augmented Generation (knowledge base search)
+try:
+    from rag.rag_tool import search_knowledge_base, get_rag_context
+    _RAG_AVAILABLE = True
+except Exception as _rag_err:
+    print(f"[agent] RAG not available: {_rag_err}")
+    _RAG_AVAILABLE = False
+    def search_knowledge_base(query: str, top_k: int = 5) -> dict:
+        return {"results": [], "count": 0, "engine": "disabled"}
+    def get_rag_context(query: str, top_k: int = 5) -> str:
+        return ""
+
 load_dotenv()
 
 # =====================================================================
@@ -158,6 +170,30 @@ CLAUDE_TOOLS = [
             "required": ["province", "category", "recommended_days"],
         },
     },
+    {
+        "name": "search_knowledge_base",
+        "description": (
+            "Search the Pakistan travel knowledge base for rich contextual information. "
+            "Use this tool FIRST for questions about: history of a city/region, weather & best season, "
+            "travel tips & safety advice, local attractions & what to do, food & dining culture, "
+            "transport options between cities, and general travel advice. "
+            "This retrieves curated expert knowledge that goes beyond the destinations database."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "Natural language question or topic, e.g. 'best time to visit Hunza' or 'travel tips for Swat Valley'",
+                },
+                "top_k": {
+                    "type": "integer",
+                    "description": "Number of results to return (default 5, max 10)",
+                },
+            },
+            "required": ["query"],
+        },
+    },
 ]
 
 GROQ_TOOLS = [
@@ -269,6 +305,33 @@ GROQ_TOOLS = [
             },
         },
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "search_knowledge_base",
+            "description": (
+                "Search the Pakistan travel knowledge base for rich contextual information. "
+                "Use this tool FIRST for questions about: history of a city/region, weather & best season, "
+                "travel tips & safety advice, local attractions & what to do, food & dining culture, "
+                "transport options between cities, and general travel advice. "
+                "This retrieves curated expert knowledge that goes beyond the destinations database."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Natural language question or topic",
+                    },
+                    "top_k": {
+                        "type": "integer",
+                        "description": "Number of results to return (default 5)",
+                    },
+                },
+                "required": ["query"],
+            },
+        },
+    },
 ]
 
 TOOL_FUNCTIONS = {
@@ -279,6 +342,7 @@ TOOL_FUNCTIONS = {
     "predict_trip_budget": predict_trip_budget,
     "find_similar_destinations": find_similar_destinations,
     "explain_trip_budget": explain_trip_budget,
+    "search_knowledge_base": search_knowledge_base,
 }
 
 
@@ -437,7 +501,12 @@ def extract_location(text: str) -> Tuple[Optional[str], Optional[str]]:
 
 
 def run_mock_agent(user_message: str) -> str:
-    """Executes rule-based agent reasoning and returns a structured response with Live Market Pricing."""
+    """
+    Rule-based agent with RAG context enrichment.
+    Retrieves relevant knowledge base passages before building the
+    structured trip plan, so the response includes tips, weather info,
+    and attraction highlights grounded in real curated data.
+    """
     budget = extract_budget(user_message)
     days = extract_days(user_message)
     category = extract_category(user_message)
@@ -448,6 +517,39 @@ def run_mock_agent(user_message: str) -> str:
 
     per_day_budget = (budget // days) if budget else None
 
+    # ── RAG: Retrieve relevant knowledge base context ──────────────────────────
+    rag_context_lines = []
+    try:
+        rag_results = search_knowledge_base(user_message, top_k=4)
+        for r in rag_results.get("results", []):
+            meta = r.get("metadata", {})
+            section = meta.get("section", "")
+            text = r.get("text", "")
+            score = r.get("score", 0)
+
+            # Only include high-confidence results, skip generic/low-score ones
+            if score < 0.05 or not text:
+                continue
+
+            # Map sections to user-friendly emoji prefixes
+            section_icons = {
+                "weather": "🌤️ **Weather & Season**",
+                "travel_tips": "💡 **Travel Tips**",
+                "history": "🏛️ **History**",
+                "attraction": "📍 **Attraction**",
+                "food": "🍽️ **Local Food**",
+                "transport": "🚌 **Getting There**",
+                "accommodations": "🏨 **Accommodation**",
+                "destination": "📌 **Destination Info**",
+            }
+            icon = section_icons.get(section, "ℹ️")
+            # Truncate long passages
+            snippet = text[:380] + ("..." if len(text) > 380 else "")
+            rag_context_lines.append(f"{icon}: {snippet}")
+    except Exception as _rag_ex:
+        pass  # RAG failure is non-blocking
+
+    # ── Standard destination search ────────────────────────────────────────────
     # 1. Search with all extracted criteria
     matches = search_destinations(
         province=province,
@@ -497,6 +599,12 @@ def run_mock_agent(user_message: str) -> str:
                 "",
                 "Try browsing other destinations in that province or category for a specific plan!",
             ])
+            # Append RAG context if available
+            if rag_context_lines:
+                lines.append("")
+                lines.append("---")
+                lines.append("#### 📚 Relevant Travel Knowledge")
+                lines.extend(f"- {cl}" for cl in rag_context_lines[:3])
             return "\n".join(lines)
 
     # 4. Search by province or category alone
@@ -554,6 +662,14 @@ def run_mock_agent(user_message: str) -> str:
         lines.append("")
         lines.append(f"**Other Great Options Nearby**: {', '.join(alt_names)}")
 
+    # ── Append RAG knowledge context ───────────────────────────────────────────
+    if rag_context_lines:
+        lines.append("")
+        lines.append("---")
+        lines.append("#### 📚 Additional Travel Knowledge")
+        for cl in rag_context_lines[:4]:
+            lines.append(f"- {cl}")
+
     return "\n".join(lines)
 
 
@@ -576,10 +692,17 @@ def run_groq_agent(user_message: str, max_turns: int = 8) -> str:
             "role": "system",
             "content": (
                 "You are an expert, warm, and helpful Pakistan Travel AI Assistant. "
-                "You have access to tools for querying a real database of 150+ verified destinations in Pakistan. "
-                "Always use the available tools to search for destinations, calculate real budget estimates, "
-                "fetch destination details, and generate day-by-day itineraries. "
-                "Format costs cleanly in PKR with bullet points and emojis."
+                "You have access to tools for querying a real database of 150+ verified destinations in Pakistan "
+                "AND a rich knowledge base with detailed city histories, weather guides, travel tips, "
+                "attractions, food recommendations, and transport information.\n\n"
+                "TOOL USAGE GUIDELINES:\n"
+                "1. For questions about history, culture, weather/seasons, travel tips, safety, "
+                "   attractions, local food, or transport — call search_knowledge_base FIRST "
+                "   to retrieve accurate, curated context before answering.\n"
+                "2. For trip planning, budget estimation, and itinerary generation — use "
+                "   search_destinations, estimate_cost, and generate_itinerary.\n"
+                "3. Always format costs clearly in PKR with bullet points and emojis.\n"
+                "4. Ground your answers in the retrieved context — do NOT invent facts."
             )
         },
         {"role": "user", "content": user_message}

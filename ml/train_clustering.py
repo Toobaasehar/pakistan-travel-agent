@@ -17,8 +17,14 @@ from sklearn.metrics import silhouette_score
 
 from pathlib import Path
 
-DB_PATH = "travel.db"
-MODEL_PATH = Path(__file__).parent / "clustering_model.joblib"
+# Resolve travel.db the same way train_budget_model.py does: prefer the
+# project root (one level up from ml/), fall back to the current working
+# directory. A bare "travel.db" relative path breaks if this script is run
+# from anywhere other than the project root.
+ML_DIR = Path(__file__).parent
+BASE_DIR = ML_DIR.parent
+DB_PATH = str(BASE_DIR / "travel.db") if (BASE_DIR / "travel.db").exists() else "travel.db"
+MODEL_PATH = ML_DIR / "clustering_model.joblib"
 N_CLUSTERS = 9
 
 CATEGORICAL_FEATURES = ["province", "category"]

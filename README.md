@@ -38,6 +38,12 @@ pakistan-travel-agent/
 ├── run.py                             ← One-click FastAPI launcher (auto-opens browser)
 ├── app_streamlit.py                    ← Streamlit UI dashboard (talks to the FastAPI backend over HTTP)
 ├── check_status.py                      ← Debug script: inspect stored image URLs
+├── review_models.py                      ← Pydantic schemas for the reviews feature
+├── reviews.py                             ← Review data access (SQLAlchemy, uses models.Review)
+├── review_routes.py                        ← FastAPI router: POST/DELETE require login, GET is public
+├── review_ui.py                             ← Streamlit "Reviews" tab (login-gated writing, open browsing)
+├── scripts/
+│   └── fetch_real_images.py                   ← Pulls real destination photos from Wikipedia (see setup step 4)
 ├── test_all.py                           ← Full automated test suite (unit & integration tests)
 ├── requirements.txt                       ← Project dependencies
 ├── .env.example                            ← Environment variables template
@@ -90,14 +96,21 @@ python seed.py
 ```
 This creates `travel.db`, inserts the 150+ curated destinations, and imports any city JSON files under `data/`.
 
-### 4. (Optional) Train the ML models
+### 4. (Optional) Fetch real destination images
+By default, newly seeded destinations get a placeholder image. To replace placeholders with real photos pulled automatically from Wikipedia:
+```bash
+python scripts/fetch_real_images.py
+```
+This only touches destinations that still have a placeholder image — it won't overwrite any images you've already curated manually (use `--all` to force a re-fetch of everything, or `--limit 20` to test on a small batch first). Requires internet access. See the script's docstring for the licensing caveat: Wikipedia images are generally reusable, but the exact license varies per image, so spot-check before using any commercially — the same "needs verification" convention used elsewhere in this project's data.
+
+### 5. (Optional) Train the ML models
 Only needed if `ml/*.joblib` files aren't already present, or after re-seeding with substantially different data:
 ```bash
 python ml/train_budget_model.py
 python ml/train_clustering.py
 ```
 
-### 5. Run it
+### 6. Run it
 
 **Option 1 — FastAPI web app (recommended)**
 ```bash
@@ -133,11 +146,22 @@ Covers database integrity, tool functions, the mock-agent parser, the ML budget/
 
 A full pass was done across the codebase (backend, ML layer, Streamlit UI, data seeding). Fixed in this pass:
 
-**New since last pass**
-- `main.py` — `/auth/phone-register` now sends a 6-digit OTP (printed to the console, same as email registration) instead of auto-verifying the account. The account stays `is_verified=False` until confirmed.
-- `main.py` — `/auth/verify-otp` now accepts either an email or a phone number as the `identifier` (was email-only before), so it works for both registration flows.
-- `main.py` — `/auth/login` now also matches by phone number, not just email/username, so phone-registered users can log in with their phone number.
-- `app_streamlit.py` — added a "Submit Received Phone OTP Code" form under the phone registration tab, mirroring the existing email OTP form.
+**New since last pass — Reviews feature**
+- Added a `Review` table (`models.py`) linked to `User` and, optionally, a specific `SavedTrip` — reviews now always require a logged-in account (`review_routes.py` uses `get_current_user`), replacing an earlier draft that let anyone submit a review under any typed-in name.
+- After a user saves a trip plan (`static/index.h
+tml`'s "Save Trip to My Profile"), a review prompt now opens automatically, pre-filled with that destination and linked to the trip (`trip_id`) — reviews created this way are marked `is_verified=True` since the backend can confirm the user actually planned that trip.
+- New endpoints: `POST /reviews/` (login required), `GET /reviews/{destination_name}`, `GET /reviews/{destination_name}/summary`, `GET /reviews/all`, `DELETE /reviews/{review_id}` (only the review's author can delete it).
+- `app_streamlit.py` gained a "⭐ Reviews" tab (`review_ui.py`) — writing a review requires being signed in there too; browsing stays open to everyone.
+- Along the way, fixed a pre-existing bug in `app_streamlit.py`'s sidebar: two menu options (`Plan a Trip`, `Browse Destinations`) used different emoji in the `st.sidebar.radio()` list than in their `elif menu == ...` dispatch conditions, so selecting them rendered a blank page. Also removed a stale `!= "pending_verification"` check left over from before registration returned a real token immediately.
+
+**New since last pass — Real destination images**
+- Added `scripts/fetch_real_images.py`, which looks up each destination on Wikipedia and replaces its placeholder image with a real photo URL (only touching destinations that are still on the placeholder, unless run with `--all`). See setup step 4 above.
+
+**New since last pass — Simple email/phone registration (no OTP)**
+- `main.py` — `/auth/register` and `/auth/phone-register` both create a verified account and return a real, immediately-usable JWT in one step. An earlier version of this project briefly required OTP verification before login (accounts stayed `is_verified=False` until a code was confirmed); that step was deliberately removed to keep registration simple — accounts are now instantly usable, matching how the original UI was designed to behave.
+- `main.py` — `/auth/login` matches by email, username, *or* phone number, so phone-registered users can log in with their phone number.
+- `static/index.html` — the "Create Account" form now has an Email/Phone toggle so users can register either way from the same modal; registering logs the user in immediately (fixing a real bug where the old code treated the backend's old placeholder `"pending_verification"` string as a valid login token, silently breaking every authenticated request afterward).
+- `static/index.html` — added a "🗑️ Delete Account" option to the profile dropdown (the backend endpoint already existed; there was previously no UI for it), with a type-DELETE-to-confirm safeguard since the action is irreversible.
 
 **Correctness bugs**
 - `main.py` — `/auth/phone-register` referenced `user` before it was ever assigned (it was defined *inside* an `if` block, after an unconditional `raise`), throwing `NameError` on every successful call. Also silently omitted the required `hashed_password` field, which would have failed with a `NOT NULL` constraint error. Both fixed; the endpoint now requires a `password` and checks for a duplicate username too.
@@ -158,5 +182,7 @@ A full pass was done across the codebase (backend, ML layer, Streamlit UI, data 
 
 **Known limitations carried forward (not yet fixed, worth tracking)**
 - `live_pricing.py`'s `EXCHANGE_RATES` and `ml/predict_budget.py`'s `FX_RATES` are two separately maintained currency tables (now with matching values for shared currencies, including the previously-missing CAD/AUD) — if you update one, update the other, or the formula-based and ML-based price estimates will drift apart again.
-- `main.py`'s `/auth/verify-otp` and `/auth/phone-register` take query parameters rather than a Pydantic request body, unlike every other POST endpoint in the file — inconsistent but functional.
-- No automated tests currently cover the Streamlit app or the ML training scripts themselves (only their inference output, via `test_all.py`).
+- `main.py`'s `/auth/verify-otp` endpoint and `generate_verification_code()` are still present but now unused/orphaned — nothing calls them since registration no longer generates a code. Harmless dead code; remove them, or wire them back in, whichever this project needs later.
+- `main.py`'s `/auth/phone-register` takes query parameters rather than a Pydantic request body, unlike every other POST endpoint in the file — inconsistent but functional.
+- `reviews.py` opens a new `SessionLocal()` per function call rather than using FastAPI's `Depends(get_db)` pattern the rest of `main.py` uses — works fine, but is a different style from the rest of the codebase; worth unifying if this module grows.
+- No automated tests currently cover the Streamlit app, the ML training scripts, `scripts/fetch_real_images.py`, or the reviews feature (only `test_all.py`'s existing coverage applies).

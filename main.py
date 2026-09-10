@@ -1,8 +1,7 @@
 """
 Pakistan Travel Agent — Backend Entry Point
 =============================================
-Phase 6: now also serves the web UI (static/index.html) and a
-/plan-trip endpoint that the frontend calls to get a full trip plan.
+Phase 8: Added RAG (Retrieval-Augmented Generation) for semantic knowledge search.
 
 Run with:
     uvicorn main:app --reload
@@ -29,6 +28,7 @@ from agent import run_mock_agent
 from ml.predict_budget import predict_budget
 from ml.similar_destinations import get_similar_destinations
 from ml.explain_budget import explain_budget_prediction
+from review_routes import router as reviews_router
 from auth import (
     UserRegisterRequest,
     UserLoginRequest,
@@ -42,13 +42,24 @@ from auth import (
     generate_verification_code,
 )
 
+# RAG knowledge base search (Phase 8)
+try:
+    from rag.rag_tool import search_knowledge_base as rag_search
+    _RAG_READY = True
+    print("[main] RAG module loaded successfully ✓")
+except Exception as _rag_err:
+    _RAG_READY = False
+    print(f"[main] RAG not available: {_rag_err}")
+    def rag_search(query: str, top_k: int = 5) -> dict:
+        return {"results": [], "count": 0, "engine": "disabled"}
+
 # Automatically create all database tables (including users, user_wishlists, saved_trips)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Pakistan Travel Agent API",
     description="Backend for an AI-powered trip planner for Pakistan tourism.",
-    version="1.1.0",
+    version="1.2.0",
 )
 
 # Enable CORS for cross-origin frontend requests
@@ -59,6 +70,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Reviews feature: POST/DELETE require a logged-in user (see review_routes.py)
+app.include_router(reviews_router)
+
+
+@app.on_event("startup")
+async def warmup_rag():
+    """Pre-warm the RAG index on server startup so the first chat request is fast."""
+    if _RAG_READY:
+        try:
+            import threading
+            def _build():
+                from rag.retriever import get_retriever
+                get_retriever()  # builds/loads index
+                print("[main] RAG index ready ✓")
+            threading.Thread(target=_build, daemon=True).start()
+        except Exception as e:
+            print(f"[main] RAG warmup error: {e}")
 
 
 @app.get("/")
@@ -80,8 +109,37 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/health")
 def health_check():
     """Health endpoint for monitoring and uptime checks."""
-    return {"status": "ok", "version": "1.0.0"}
+    return {"status": "ok", "version": "1.2.0", "rag_ready": _RAG_READY}
 
+
+# ── RAG Endpoint (Phase 8) ────────────────────────────────────────────────────
+
+@app.get("/rag/search")
+def rag_search_endpoint(q: str, top_k: int = 5):
+    """
+    Semantic knowledge base search over Pakistan travel data.
+    Returns relevant passages about attractions, weather, history,
+    travel tips, food, transport, and more.
+
+    Example: GET /rag/search?q=best+time+to+visit+Hunza&top_k=5
+    """
+    if not q or not q.strip():
+        raise HTTPException(status_code=400, detail="Query parameter 'q' is required.")
+    top_k = min(max(1, top_k), 10)
+    try:
+        result = rag_search(query=q.strip(), top_k=top_k)
+        return {
+            "query": q.strip(),
+            "top_k": top_k,
+            "engine": result.get("engine", "unknown"),
+            "count": result.get("count", 0),
+            "results": result.get("results", []),
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"RAG search failed: {e}")
+
+
+# ── Destinations ──────────────────────────────────────────────────────────────
 
 @app.get("/destinations")
 def list_destinations(
@@ -136,6 +194,8 @@ def list_destinations(
     return output
 
 
+# ── Pydantic Models ───────────────────────────────────────────────────────────
+
 class TripRequest(BaseModel):
     budget: int = Field(..., gt=0, description="Total budget in PKR")
     days: int = Field(..., gt=0, description="Number of trip days")
@@ -176,7 +236,8 @@ class SaveTripRequest(BaseModel):
     trip_plan_json: str
 
 
-# --- Authentication Endpoints ---
+# ── Authentication Endpoints ──────────────────────────────────────────────────
+
 @app.post("/auth/register", response_model=TokenResponse)
 def register(req: UserRegisterRequest, db: Session = Depends(get_db)):
     existing_email = db.query(User).filter(User.email == req.email.lower().strip()).first()
@@ -244,7 +305,8 @@ def get_me(current_user: User = Depends(get_current_user)):
     return current_user
 
 
-# --- User Data Endpoints (Wishlist & Saved Trips) ---
+# ── User Data Endpoints (Wishlist & Saved Trips) ──────────────────────────────
+
 @app.get("/api/user/wishlist")
 def get_user_wishlist(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Returns all destination IDs saved in the current user's database wishlist."""
@@ -354,6 +416,8 @@ def delete_user_trip(trip_id: int, current_user: User = Depends(get_current_user
     return {"status": "ok", "message": "Trip deleted successfully."}
 
 
+# ── Trip Planning ─────────────────────────────────────────────────────────────
+
 DEFAULT_BUDGETS = {
     "mountains": 7000,
     "historical": 3000,
@@ -372,6 +436,7 @@ def chat_endpoint(req: ChatRequest):
     """
     AI Chat endpoint — dynamically routes to live AI agent (Groq or Claude)
     if API keys are set, or seamlessly uses the rule-based simulation agent.
+    Both modes are enhanced with RAG knowledge base retrieval.
     """
     groq_key = os.getenv("GROQ_API_KEY", "").strip()
     anthropic_key = os.getenv("ANTHROPIC_API_KEY", "").strip()
@@ -383,14 +448,14 @@ def chat_endpoint(req: ChatRequest):
             from agent import run_agent
             reply = run_agent(req.message)
             engine = "groq" if (groq_key and groq_key != "your_key_here") else "claude"
-            return {"reply": reply, "engine": engine}
+            return {"reply": reply, "engine": engine, "rag_enabled": _RAG_READY}
         except Exception as e:
             print(f"[agent fallback] Error with live agent: {e}. Falling back to mock agent.")
             reply = run_mock_agent(req.message)
-            return {"reply": reply, "engine": "mock", "notice": f"Fallback to rule engine: {e}"}
+            return {"reply": reply, "engine": "mock", "rag_enabled": _RAG_READY, "notice": f"Fallback to rule engine: {e}"}
     else:
         reply = run_mock_agent(req.message)
-        return {"reply": reply, "engine": "mock"}
+        return {"reply": reply, "engine": "mock", "rag_enabled": _RAG_READY}
 
 
 @app.post("/plan-trip")
@@ -420,11 +485,6 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         cat = (details.get("category") or "").lower()
         details["estimated_budget_per_day"] = DEFAULT_BUDGETS.get(cat, 5000)
 
-    # If the user explicitly picked a tier (Budget/Standard/Luxury buttons in
-    # the UI), respect that choice directly. Otherwise, auto-select whichever
-    # tier fits best under their stated budget -- estimate_cost() already
-    # computes all 3 tiers internally (tier_comparisons), so we reuse that
-    # instead of guessing.
     cost = estimate_cost(
         chosen_id, days=req.days, people=req.people,
         travel_style=req.travel_style or "standard",
@@ -440,18 +500,13 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
                 cost["tier_comparisons"].items(),
                 key=lambda kv: kv[1]["total_pkr"],
             )
-            # Pick the most expensive tier that still fits within the user's budget
             for tier_name, tier_data in reversed(tiers_by_price):
                 if tier_data["total_pkr"] <= req.budget:
                     best_tier = tier_name
                     break
-            # If even the cheapest tier exceeds the budget, fall back to the
-            # cheapest tier anyway and say so honestly, rather than hiding it.
             if best_tier is None:
                 best_tier = tiers_by_price[0][0]
 
-    # Re-fetch with the correct tier so every field (hotel label, dining style,
-    # transport, breakdown) is internally consistent — not just the total.
     if best_tier and best_tier != cost.get("travel_style"):
         cost = estimate_cost(
             chosen_id, days=req.days, people=req.people, travel_style=best_tier,
@@ -471,7 +526,6 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         image_url = first_img.image_url
         image_attribution = first_img.attribution
 
-    # Alternative destination suggestions matching the same criteria
     alternatives = []
     for alt in matches[1:4]:
         alternatives.append({
@@ -490,8 +544,6 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         budget_per_day=details.get("estimated_budget_per_day"),
     )
 
-    # ML-based "similar destinations" (KMeans clustering), enriched with
-    # display info so the frontend doesn't need a second round-trip.
     similar_raw = get_similar_destinations(destination_id=chosen_id, top_n=4)
     similar_destinations = []
     for item in similar_raw.get("similar", []):
@@ -509,6 +561,17 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
             "image_url": sim_image,
         })
 
+    # RAG: Fetch relevant travel knowledge for this destination
+    rag_knowledge = []
+    try:
+        dest_name = details.get("name", "")
+        district_name = details.get("district", "")
+        rag_query = f"{dest_name} {district_name} travel tips weather attractions"
+        rag_result = rag_search(query=rag_query, top_k=4)
+        rag_knowledge = rag_result.get("results", [])
+    except Exception:
+        pass
+
     return {
         "destination": details,
         "cost": cost,
@@ -521,16 +584,16 @@ def plan_trip(req: TripRequest, db: Session = Depends(get_db)):
         "restaurants": rec_data.get("restaurants", []),
         "hotels": rec_data.get("hotels", []),
         "similar_destinations": similar_destinations,
+        "rag_knowledge": rag_knowledge,
     }
 
+
+# ── ML / Budget Prediction ────────────────────────────────────────────────────
 
 @app.post("/predict-budget")
 def predict_budget_endpoint(req: BudgetPredictionRequest):
     """
-    ML-based budget-per-day estimate (Random Forest, trained on all 154 destinations)
-    for a destination profile that may not exist in the database yet. Lets the
-    'Plan a Trip' form give the user a live cost estimate by province/category/duration
-    before an exact destination match is found.
+    ML-based budget-per-day estimate (Random Forest, trained on all 154 destinations).
     """
     try:
         return predict_budget(
@@ -546,10 +609,7 @@ def predict_budget_endpoint(req: BudgetPredictionRequest):
 @app.post("/predict-budget/explain")
 def explain_budget_endpoint(req: BudgetPredictionRequest):
     """
-    Explainable AI (SHAP) breakdown of a budget prediction — shows which
-    factors (province, category, duration, activity count) pushed the
-    estimate up or down, and by how much. Useful for a "why this estimate?"
-    UI element next to the plain /predict-budget number.
+    Explainable AI (SHAP) breakdown of a budget prediction.
     """
     try:
         return explain_budget_prediction(
@@ -565,9 +625,7 @@ def explain_budget_endpoint(req: BudgetPredictionRequest):
 @app.get("/destinations/{destination_id}/similar")
 def get_similar_destinations_endpoint(destination_id: int, top_n: int = 5, db: Session = Depends(get_db)):
     """
-    ML-based 'similar destinations' recommendation (KMeans clustering on
-    province, category, budget, duration, and activity count). Returns the
-    closest destinations within the same cluster, with full details attached.
+    ML-based 'similar destinations' recommendation (KMeans clustering).
     """
     dest = db.query(Destination).filter(Destination.id == destination_id).first()
     if not dest:
@@ -610,13 +668,12 @@ def get_dest_recommendations(destination_id: int, db: Session = Depends(get_db))
         budget_per_day=dest.estimated_budget_per_day,
     )
 
+
+# ── Auth Extras ───────────────────────────────────────────────────────────────
+
 @app.post("/auth/verify-otp")
 def verify_otp(identifier: str, otp: str, db: Session = Depends(get_db)):
-    """
-    Verifies the 6-digit OTP sent during registration. `identifier` can be
-    either the email (for /auth/register accounts) or the phone number (for
-    /auth/phone-register accounts) — whichever the account was created with.
-    """
+    """Verifies the 6-digit OTP sent during registration."""
     cleaned = identifier.strip()
     user = db.query(User).filter(
         (User.email == cleaned.lower()) | (User.phone_number == cleaned)
@@ -629,6 +686,7 @@ def verify_otp(identifier: str, otp: str, db: Session = Depends(get_db)):
         db.commit()
         return {"status": "success", "message": "Account verified successfully! You can now log in."}
     raise HTTPException(status_code=400, detail="Invalid verification code.")
+
 
 @app.post("/auth/phone-register", response_model=TokenResponse)
 def phone_register(phone_number: str, username: str, password: str, full_name: Optional[str] = None, db: Session = Depends(get_db)):
@@ -655,11 +713,13 @@ def phone_register(phone_number: str, username: str, password: str, full_name: O
     token = create_access_token({"sub": str(user.id), "username": user.username})
     return {"access_token": token, "token_type": "bearer", "user": user}
 
+
 @app.delete("/user/delete-account")
 def delete_account(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     db.delete(current_user)
     db.commit()
     return {"status": "success", "message": "Your profile has been permanently removed."}
+
 
 if __name__ == "__main__":
     import sys
@@ -679,7 +739,7 @@ if __name__ == "__main__":
         time.sleep(1.2)
         webbrowser.open("http://127.0.0.1:8000")
 
-    print("\n>> Starting Pakistan Travel Agent...")
+    print("\n>> Starting Pakistan Travel Agent (with RAG)...")
     print(">> Automatically launching http://127.0.0.1:8000 in your browser...\n")
     threading.Thread(target=open_browser, daemon=True).start()
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

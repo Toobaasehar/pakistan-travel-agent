@@ -102,4 +102,28 @@ class SavedTrip(Base):
     created_at = Column(DateTime, server_default=func.now())
 
     user = relationship("User", back_populates="saved_trips")
+    reviews = relationship("Review", back_populates="trip", cascade="all, delete-orphan")
+
+
+class Review(Base):
+    __tablename__ = "reviews"
+
+    id = Column(Integer, primary_key=True, index=True)
+    # Who wrote it -- reviews always require a logged-in user now (no more
+    # free-text reviewer_name the client could set to anything).
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    # Which trip prompted this review, if any. Nullable because a user might
+    # still want to review a destination they didn't plan through this app's
+    # trip planner (e.g. from the destination page directly).
+    trip_id = Column(Integer, ForeignKey("saved_trips.id"), nullable=True, index=True)
+    destination_name = Column(String(150), nullable=False, index=True)
+    rating = Column(Integer, nullable=False)  # 1-5, enforced in review_models.ReviewCreate
+    title = Column(String(100), nullable=False)
+    comment = Column(Text, nullable=False)
+    visited_month = Column(String(50), nullable=True)
+    is_verified = Column(Boolean, default=False)  # True if trip_id links to a real completed trip
+    created_at = Column(DateTime, server_default=func.now())
+
+    user = relationship("User")
+    trip = relationship("SavedTrip", back_populates="reviews")
 

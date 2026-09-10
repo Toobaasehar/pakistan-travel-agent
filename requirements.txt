@@ -28,3 +28,9 @@ joblib>=1.3.0
 
 # ML — explainability (SHAP)
 shap>=0.44.0
+
+# Phase 8 — RAG (Retrieval-Augmented Generation)
+# sentence-transformers: semantic embedding (all-MiniLM-L6-v2, ~90MB)
+sentence-transformers>=2.7.0
+# faiss-cpu: fast vector similarity search (optional but recommended)
+faiss-cpu>=1.8.0

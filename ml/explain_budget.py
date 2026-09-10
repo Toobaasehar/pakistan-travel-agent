@@ -36,6 +36,9 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from functools import lru_cache
+from typing import Optional, List
+
+from ml.predict_budget import apply_price_floor
 
 MODEL_PATH = Path(__file__).parent / "budget_model.joblib"
 
@@ -74,7 +77,7 @@ def explain_budget_prediction(
     province: str,
     category: str,
     recommended_days: int,
-    activities: list[str] | None = None,
+    activities: Optional[List[str]] = None,
     top_n: int = 6,
 ) -> dict:
     """
@@ -124,8 +127,13 @@ def explain_budget_prediction(
     contributions.sort(key=lambda c: abs(c["impact"]), reverse=True)
     contributions = contributions[:top_n]
 
+    # Match predict_budget()'s headline number exactly (same floor/rounding
+    # rule) so /predict-budget and /predict-budget/explain never disagree on
+    # the number shown to the user for identical inputs. The SHAP
+    # base_value/contributions below still explain the raw model output —
+    # only this one reported field is floored to match.
     return {
-        "predicted_budget_per_day": round(predicted, -2),
+        "predicted_budget_per_day": apply_price_floor(predicted),
         "base_value": round(base_value, 1),
         "contributions": contributions,
     }

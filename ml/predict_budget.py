@@ -19,7 +19,11 @@ def load_model():
     return joblib.load(MODEL_PATH)
 
 
-# Currency rates for instant multi-currency quotes
+# Currency rates for instant multi-currency quotes.
+# NOTE: kept in sync with live_pricing.EXCHANGE_RATES (rate_to_pkr values) —
+# if you add/change a currency there, mirror it here too, or the ML fallback
+# estimate and the formula-based live estimate will quote different numbers
+# for the same currency.
 FX_RATES = {
     "PKR": 1.0,
     "USD": 278.5,
@@ -27,7 +31,21 @@ FX_RATES = {
     "GBP": 354.8,
     "AED": 75.8,
     "SAR": 74.2,
+    "CAD": 204.6,
+    "AUD": 181.5,
 }
+
+
+def apply_price_floor(raw_predicted: float) -> float:
+    """
+    Rounds a raw model prediction to the nearest hundred and applies a floor
+    of 2500 PKR/day. This is the single source of truth for turning a raw
+    regression output into the "standard tier" headline number — both
+    predict_budget() and explain_budget_prediction() must use this exact
+    function, or the two endpoints can report different numbers for the
+    same input.
+    """
+    return max(2500.0, round(raw_predicted, -2))
 
 
 def predict_budget(
@@ -70,7 +88,7 @@ def predict_budget(
     )
 
     base_predicted = float(pipeline.predict(X)[0])
-    standard_rate = max(2500.0, round(base_predicted, -2))
+    standard_rate = apply_price_floor(base_predicted)
     budget_rate = max(1800.0, round(standard_rate * 0.55, -2))
     luxury_rate = round(standard_rate * 2.2, -2)
 
