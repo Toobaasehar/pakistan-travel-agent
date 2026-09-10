@@ -129,8 +129,11 @@ def estimate_cost(
             "dining_style": pricing["dining_style"],
             "breakdown_pkr": pricing["breakdown_pkr"],
             "breakdown_converted": pricing["breakdown_converted"],
-            "estimated_total_pkr": pricing["total_pkr"],
+            # total_pkr is the canonical field. estimated_total_pkr is kept as
+            # an alias only because test_all.py and older callers already
+            # depend on that name -- don't let the two values drift apart.
             "total_pkr": pricing["total_pkr"],
+            "estimated_total_pkr": pricing["total_pkr"],
             "converted_total": pricing["converted_total"],
             "currency": pricing["currency"],
             "tier_comparisons": pricing["tier_comparisons"],

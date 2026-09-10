@@ -335,6 +335,17 @@
       background: #FDE8E8;
     }
 
+    .dropdown-item.danger {
+      color: #C0392B;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+      padding-top: 10px;
+    }
+
+    .dropdown-item.danger:hover {
+      background: #FDE8E8;
+    }
+
     /* ========== AUTH MODAL & SAVED TRIPS ========== */
     .auth-modal-wrap {
       position: fixed;
@@ -530,6 +541,32 @@
       color: #1E4620;
       border: 1px solid rgba(46, 139, 122, 0.3);
       display: flex;
+    }
+
+    /* Register: Email vs Phone method toggle */
+    .auth-method-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .auth-method-btn {
+      padding: 9px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--parchment);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .auth-method-btn.active {
+      background: var(--indigo);
+      border-color: var(--indigo);
+      color: #fff;
     }
 
     /* Saved Trips Modal */
@@ -2867,8 +2904,8 @@
         <!-- Login Form -->
         <form class="auth-form active" id="form-login" onsubmit="handleLoginSubmit(event)">
           <div class="auth-input-group">
-            <label for="login-identifier">Email or Username</label>
-            <input type="text" id="login-identifier" required placeholder="name@example.com or username"
+            <label for="login-identifier">Email, Username, or Phone</label>
+            <input type="text" id="login-identifier" required placeholder="name@example.com, username, or +92xxxxxxxxxx"
               autocomplete="username">
           </div>
           <div class="auth-input-group">
@@ -2882,6 +2919,12 @@
 
         <!-- Register Form -->
         <form class="auth-form" id="form-register" onsubmit="handleRegisterSubmit(event)">
+          <div class="auth-method-toggle">
+            <button type="button" class="auth-method-btn active" id="reg-method-email"
+              onclick="switchRegMethod('email')">📧 Email</button>
+            <button type="button" class="auth-method-btn" id="reg-method-phone"
+              onclick="switchRegMethod('phone')">📱 Phone</button>
+          </div>
           <div class="auth-input-group">
             <label for="reg-fullname">Full Name</label>
             <input type="text" id="reg-fullname" placeholder="e.g. Ali Khan">
@@ -2891,9 +2934,13 @@
             <input type="text" id="reg-username" required placeholder="e.g. travel_ali" minlength="3"
               autocomplete="username">
           </div>
-          <div class="auth-input-group">
+          <div class="auth-input-group" id="reg-email-group">
             <label for="reg-email">Email Address</label>
-            <input type="email" id="reg-email" required placeholder="ali@example.com" autocomplete="email">
+            <input type="email" id="reg-email" placeholder="ali@example.com" autocomplete="email">
+          </div>
+          <div class="auth-input-group" id="reg-phone-group" style="display:none;">
+            <label for="reg-phone">Phone Number</label>
+            <input type="tel" id="reg-phone" placeholder="+923001234567" autocomplete="tel">
           </div>
           <div class="auth-input-group">
             <label for="reg-password">Password</label>
@@ -2982,6 +3029,9 @@
             </button>
             <button class="dropdown-item logout" onclick="handleLogout()">
               <span>🚪</span> Sign Out
+            </button>
+            <button class="dropdown-item danger" onclick="handleDeleteAccount()">
+              <span>🗑️</span> Delete Account
             </button>
           </div>
         </div>
@@ -3456,6 +3506,19 @@
       if (e.target === e.currentTarget) closeAuthModal();
     });
 
+    // Tracks which registration method (email or phone) is currently selected.
+    let regMethod = 'email';
+
+    function switchRegMethod(method) {
+      regMethod = method;
+      document.getElementById('reg-method-email').classList.toggle('active', method === 'email');
+      document.getElementById('reg-method-phone').classList.toggle('active', method === 'phone');
+      document.getElementById('reg-email-group').style.display = method === 'email' ? '' : 'none';
+      document.getElementById('reg-phone-group').style.display = method === 'phone' ? '' : 'none';
+      document.getElementById('reg-email').required = method === 'email';
+      document.getElementById('reg-phone').required = method === 'phone';
+    }
+
     function switchAuthTab(tab) {
       const tabLogin = document.getElementById('tab-auth-login');
       const tabReg = document.getElementById('tab-auth-register');
@@ -3478,6 +3541,7 @@
         tabReg.classList.add('active');
         formLogin.classList.remove('active');
         formReg.classList.add('active');
+        switchRegMethod('email');
         title.textContent = 'Create Free Account';
         subtitle.textContent = 'Join to save custom travel itineraries across all devices';
       }
@@ -3535,33 +3599,41 @@
       btn.disabled = true;
       btn.innerHTML = '<span>Creating Account...</span>';
 
-      const body = {
-        full_name: document.getElementById('reg-fullname').value.trim() || null,
-        username: document.getElementById('reg-username').value.trim(),
-        email: document.getElementById('reg-email').value.trim(),
-        password: document.getElementById('reg-password').value,
-      };
+      const fullName = document.getElementById('reg-fullname').value.trim() || null;
+      const username = document.getElementById('reg-username').value.trim();
+      const password = document.getElementById('reg-password').value;
 
       try {
-        const res = await fetch(`${API}/auth/register`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
+        let res;
+        if (regMethod === 'phone') {
+          const phone = document.getElementById('reg-phone').value.trim();
+          const params = new URLSearchParams({ phone_number: phone, username, password });
+          if (fullName) params.append('full_name', fullName);
+          res = await fetch(`${API}/auth/phone-register?${params.toString()}`, { method: 'POST' });
+        } else {
+          const email = document.getElementById('reg-email').value.trim();
+          res = await fetch(`${API}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ full_name: fullName, username, email, password }),
+          });
+        }
+
         const data = await res.json();
         if (!res.ok) {
           showAuthAlert(data.detail || 'Registration failed. Please verify your details.', 'error');
-        } else {
-          authToken = data.access_token;
-          currentUser = data.user;
-          localStorage.setItem('pk_auth_token', authToken);
-          updateAuthUI(currentUser);
-          showAuthAlert(`Account created successfully! Welcome, ${currentUser.username}.`, 'success');
-          setTimeout(async () => {
-            closeAuthModal();
-            await syncUserWishlist();
-          }, 700);
+          return;
         }
+
+        authToken = data.access_token;
+        currentUser = data.user;
+        localStorage.setItem('pk_auth_token', authToken);
+        updateAuthUI(currentUser);
+        showAuthAlert(`Account created successfully! Welcome, ${currentUser.username}.`, 'success');
+        setTimeout(async () => {
+          closeAuthModal();
+          await syncUserWishlist();
+        }, 700);
       } catch (err) {
         showAuthAlert(`Network error: ${err.message}`, 'error');
       } finally {
@@ -3577,6 +3649,44 @@
       updateAuthUI(null);
       if (showMessage) {
         alert('You have been signed out.');
+      }
+    }
+
+    async function handleDeleteAccount() {
+      if (!authToken) return;
+
+      // Deleting an account is permanent (it removes the row from the
+      // database — there's no "undo"). Require the user to type DELETE to
+      // confirm, rather than a single click / a simple OK-Cancel dialog.
+      const confirmText = prompt(
+        `This will permanently delete your account "${currentUser ? currentUser.username : ''}", ` +
+        `your wishlist, and your saved trips. This cannot be undone.\n\n` +
+        `Type DELETE (all caps) to confirm:`
+      );
+      if (confirmText !== 'DELETE') {
+        if (confirmText !== null) {
+          alert('Account deletion cancelled — the confirmation text didn\'t match.');
+        }
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API}/user/delete-account`, {
+          method: 'DELETE',
+          headers: getAuthHeaders(),
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          alert(data.detail || 'Failed to delete account. Please try again.');
+          return;
+        }
+
+        closeUserDropdown();
+        handleLogout(false);
+        alert('Your account has been permanently deleted.');
+      } catch (err) {
+        alert(`Network error while deleting account: ${err.message}`);
       }
     }
 

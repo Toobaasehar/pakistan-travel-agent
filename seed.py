@@ -51,12 +51,23 @@ def normalize(name: str) -> str:
 
 
 def is_duplicate(new_name: str, existing_names_normalized: set) -> bool:
-    """Checks whether the attraction/destination is already present."""
+    """
+    Checks whether the attraction/destination is already present.
+
+    Exact match always counts as a duplicate. A substring match only counts
+    if the shorter name makes up most of the longer one (>=70% of its
+    length) -- plain "X in Y" substring containment was too loose and could
+    flag an unrelated short name (e.g. "Valley", "Fort") as a duplicate of
+    every "X Valley"/"X Fort" entry already in the database.
+    """
     n = normalize(new_name)
     if not n:
         return True
     for existing in existing_names_normalized:
-        if n == existing or (len(n) > 4 and n in existing) or (len(existing) > 4 and existing in n):
+        if n == existing:
+            return True
+        shorter, longer = (n, existing) if len(n) <= len(existing) else (existing, n)
+        if len(shorter) > 4 and shorter in longer and len(shorter) >= 0.7 * len(longer):
             return True
     return False
 

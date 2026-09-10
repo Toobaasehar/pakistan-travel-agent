@@ -21,8 +21,16 @@ from sqlalchemy.orm import Session
 from database import get_db
 from models import User
 
-# Load config from environment or use secure defaults
-JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "pakistan_travel_agent_jwt_super_secret_key_2026_secure")
+# Load config from environment. JWT_SECRET_KEY has NO hardcoded fallback on
+# purpose: a secret baked into source control is a secret anyone reading this
+# repo already knows, which lets them forge valid tokens for any user. Set
+# JWT_SECRET_KEY in your .env before running the app.
+JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "").strip()
+if not JWT_SECRET_KEY:
+    raise RuntimeError(
+        "JWT_SECRET_KEY is not set. Add a long random value to your .env file "
+        "(e.g. `python -c \"import secrets; print(secrets.token_hex(32))\"`)."
+    )
 JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", 1440))  # 24 hours
 
@@ -30,7 +38,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", 1
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
 
 
-import random
+import secrets
 
 # --- Pydantic Schemas ---
 class UserRegisterRequest(BaseModel):
@@ -77,8 +85,8 @@ class TokenResponse(BaseModel):
 
 
 def generate_verification_code() -> str:
-    """Generates a secure 6-digit numeric verification code."""
-    return f"{random.randint(100000, 999999)}"
+    """Generates a cryptographically secure 6-digit numeric verification code."""
+    return f"{secrets.randbelow(900000) + 100000}"
 
 
 # --- Password Utilities (Direct bcrypt for speed & safety) ---

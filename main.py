@@ -185,37 +185,42 @@ def register(req: UserRegisterRequest, db: Session = Depends(get_db)):
     existing_username = db.query(User).filter(User.username == req.username.strip()).first()
     if existing_username:
         raise HTTPException(status_code=400, detail="This username is already taken.")
-    
+
     hashed_pw = hash_password(req.password)
-    otp_code = generate_verification_code()
 
     user = User(
         username=req.username.strip(),
         email=req.email.lower().strip(),
         hashed_password=hashed_pw,
         full_name=req.full_name.strip() if req.full_name else req.username.strip(),
-        is_verified=False,
-        verification_code=otp_code
+        is_verified=True,
     )
     db.add(user)
     db.commit()
     db.refresh(user)
-    print(f"\n========================================\n OTP VERIFICATION CODE FOR {user.email}: {otp_code} \n========================================\n")
-    return {"access_token": "pending_verification", "token_type": "bearer", "user": user}
+
+    token = create_access_token({"sub": str(user.id), "username": user.username})
+    return {"access_token": token, "token_type": "bearer", "user": user}
 
 
 @app.post("/auth/login", response_model=TokenResponse)
 def login(req: UserLoginRequest, db: Session = Depends(get_db)):
-    """Authenticates user credentials and issues a signed JWT access token."""
-    identifier = req.email_or_username.lower().strip()
+    """
+    Authenticates user credentials and issues a signed JWT access token.
+    Accepts an email, username, or phone number as the identifier, since
+    accounts can be created via either the email or phone registration flow.
+    """
+    identifier = req.email_or_username.strip()
     user = db.query(User).filter(
-        (User.email == identifier) | (User.username.ilike(identifier))
+        (User.email == identifier.lower())
+        | (User.username.ilike(identifier))
+        | (User.phone_number == identifier)
     ).first()
 
     if not user or not verify_password(req.password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid email/username or password.",
+            detail="Invalid email/username/phone or password.",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
@@ -224,12 +229,6 @@ def login(req: UserLoginRequest, db: Session = Depends(get_db)):
             status_code=status.HTTP_403_FORBIDDEN,
             detail="This account is deactivated.",
         )
-    if not user.is_verified:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Your email is not verified yet. Please submit your OTP code first."
-        )
-
 
     token = create_access_token({"sub": str(user.id), "username": user.username})
     return {
@@ -612,27 +611,49 @@ def get_dest_recommendations(destination_id: int, db: Session = Depends(get_db))
     )
 
 @app.post("/auth/verify-otp")
-def verify_otp(email: str, otp: str, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.email == email.lower().strip()).first()
+def verify_otp(identifier: str, otp: str, db: Session = Depends(get_db)):
+    """
+    Verifies the 6-digit OTP sent during registration. `identifier` can be
+    either the email (for /auth/register accounts) or the phone number (for
+    /auth/phone-register accounts) — whichever the account was created with.
+    """
+    cleaned = identifier.strip()
+    user = db.query(User).filter(
+        (User.email == cleaned.lower()) | (User.phone_number == cleaned)
+    ).first()
     if not user:
         raise HTTPException(status_code=404, detail="User account not found.")
     if user.verification_code == otp:
         user.is_verified = True
         user.verification_code = None
         db.commit()
-        return {"status": "success", "message": "Email verified successfully! You can now log in."}
+        return {"status": "success", "message": "Account verified successfully! You can now log in."}
     raise HTTPException(status_code=400, detail="Invalid verification code.")
 
-@app.post("/auth/phone-register", response_model=UserResponse)
-def phone_register(phone_number: str, username: str, full_name: Optional[str] = None, db: Session = Depends(get_db)):
-    existing_phone = db.query(User).filter(User.phone_number == phone_number.strip()).first()
+@app.post("/auth/phone-register", response_model=TokenResponse)
+def phone_register(phone_number: str, username: str, password: str, full_name: Optional[str] = None, db: Session = Depends(get_db)):
+    """Creates a phone-based account and logs the user in immediately."""
+    phone = phone_number.strip()
+    existing_phone = db.query(User).filter(User.phone_number == phone).first()
     if existing_phone:
         raise HTTPException(status_code=400, detail="This phone number is already registered.")
-        user = User(username=username.strip(), phone_number=phone_number.strip(), full_name=full_name if full_name else username, is_verified=True)
+    existing_username = db.query(User).filter(User.username == username.strip()).first()
+    if existing_username:
+        raise HTTPException(status_code=400, detail="This username is already taken.")
+
+    user = User(
+        username=username.strip(),
+        phone_number=phone,
+        hashed_password=hash_password(password),
+        full_name=full_name if full_name else username.strip(),
+        is_verified=True,
+    )
     db.add(user)
     db.commit()
     db.refresh(user)
-    return user
+
+    token = create_access_token({"sub": str(user.id), "username": user.username})
+    return {"access_token": token, "token_type": "bearer", "user": user}
 
 @app.delete("/user/delete-account")
 def delete_account(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):

@@ -15,7 +15,11 @@ import requests
 from database import SessionLocal
 from models import Destination, DestinationImage
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
-from agent_mock import run_mock_agent
+from agent import run_mock_agent
+
+# Base URL of the FastAPI backend (main.py / run.py). All account-related
+# actions in this Streamlit app go through the same REST API the web UI uses.
+BACKEND_URL = os.getenv("BACKEND_URL", "http://127.0.0.1:8000")
 
 # Page Configuration
 st.set_page_config(
@@ -124,7 +128,7 @@ if st.sidebar.button("🚨 Wipe Profile & Delete Account"):
     if "access_token" in st.session_state and st.session_state["access_token"] != "pending_verification":
         headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
         try:
-            res = requests.delete("http://127.0.0", headers=headers)
+            res = requests.delete(f"{BACKEND_URL}/user/delete-account", headers=headers)
             if res.status_code == 200:
                 st.sidebar.success("Account permanently removed.")
                 st.session_state.clear()
@@ -153,7 +157,7 @@ if menu == "🔑 Login / Register":
             if st.form_submit_button("Secure Sign-In"):
                 payload = {"email_or_username": identity, "password": password}
                 try:
-                    res = requests.post("http://127.0.0", json=payload)
+                    res = requests.post(f"{BACKEND_URL}/auth/login", json=payload)
                     if res.status_code == 200:
                         st.session_state["access_token"] = res.json().get("access_token")
                         st.success("Successfully logged in! You can now browse our travel planner system.")
@@ -174,7 +178,7 @@ if menu == "🔑 Login / Register":
                 if st.form_submit_button("Generate Account OTP"):
                     payload = {"username": u_name, "email": e_mail, "full_name": f_name, "password": p_word}
                     try:
-                        res = requests.post("http://127.0.0", json=payload)
+                        res = requests.post(f"{BACKEND_URL}/auth/register", json=payload)
                         if res.status_code == 200:
                             st.info("Registration request created successfully! Check your backend terminal window console to copy your 6-digit verification code.")
                         else:
@@ -189,7 +193,7 @@ if menu == "🔑 Login / Register":
                 otp_code = st.text_input("6-Digit Code", max_chars=6)
                 if st.form_submit_button("Verify & Activate Profile"):
                     try:
-                        res = requests.post(f"http://127.0.0{target_email}&otp={otp_code}")
+                        res = requests.post(f"{BACKEND_URL}/auth/verify-otp", params={"identifier": target_email, "otp": otp_code})
                         if res.status_code == 200:
                             st.success("Verification successful! You can now sign in using the Existing User tab.")
                         else:
@@ -203,14 +207,30 @@ if menu == "🔑 Login / Register":
                 new_phone = st.text_input("Mobile Number (e.g., +923001234567)")
                 phone_username = st.text_input("Username Link")
                 phone_fullname = st.text_input("Full Name")
+                phone_password = st.text_input("Choose Password*", type="password")
                 if st.form_submit_button("Complete Account Form"):
-                    params = {"phone_number": new_phone, "username": phone_username, "full_name": phone_fullname}
+                    params = {"phone_number": new_phone, "username": phone_username, "password": phone_password, "full_name": phone_fullname}
                     try:
-                        res = requests.post("http://127.0.0", params=params)
+                        res = requests.post(f"{BACKEND_URL}/auth/phone-register", params=params)
                         if res.status_code == 200:
-                            st.success("Phone account provisioned successfully! You are active and ready.")
+                            st.info("Registration request created successfully! Check your backend terminal window console to copy your 6-digit verification code.")
                         else:
                             st.error(res.json().get("detail", "Failed to build target account."))
+                    except Exception:
+                        st.error("Backend server connection failed.")
+
+            st.markdown("---")
+            with st.form("phone_otp_verification_gate"):
+                st.subheader("Submit Received Phone OTP Code")
+                target_phone = st.text_input("Confirm Registration Phone Number")
+                phone_otp_code = st.text_input("6-Digit Code", max_chars=6, key="phone_otp")
+                if st.form_submit_button("Verify & Activate Phone Profile"):
+                    try:
+                        res = requests.post(f"{BACKEND_URL}/auth/verify-otp", params={"identifier": target_phone, "otp": phone_otp_code})
+                        if res.status_code == 200:
+                            st.success("Verification successful! You can now sign in using the Existing User tab.")
+                        else:
+                            st.error(res.json().get("detail", "Invalid token code entry values."))
                     except Exception:
                         st.error("Backend server connection failed.")
 # -------------------------------------------------------------
