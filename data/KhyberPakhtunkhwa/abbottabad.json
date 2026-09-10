@@ -1,0 +1,171 @@
+{
+  "city": "Abbottabad",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "abt_att_01",
+      "name": "Shimla Hill",
+      "category": "nature",
+      "description": "A scenic viewpoint offering panoramic views of Abbottabad city, popular for its cool climate and greenery.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Abbottabad city outskirts",
+      "popularity": "medium"
+    },
+    {
+      "id": "abt_att_02",
+      "name": "Thandiani",
+      "category": "nature",
+      "description": "A hill station near Abbottabad known for pine forests, cool weather, and mountain views, popular for day trips.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~35km from Abbottabad city",
+      "popularity": "high"
+    },
+    {
+      "id": "abt_att_03",
+      "name": "Ilyasi Mosque",
+      "category": "religious",
+      "description": "A historic mosque known for its unique wooden architecture, one of the oldest in the region.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Abbottabad",
+      "popularity": "low"
+    },
+    {
+      "id": "abt_att_04",
+      "name": "Abbottabad Cantt & Mall Road",
+      "category": "cultural",
+      "description": "A pleasant colonial-era cantonment area with tree-lined streets, cafes, and a cooler climate than the plains.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Cantt area, Abbottabad",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "abt_food_01",
+      "name": "Mall Road cafes and restaurants",
+      "cuisine": "mixed/continental",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1000,
+      "family_friendly": true,
+      "specialty": "Popular hangout spots with a cool hill-town atmosphere"
+    },
+    {
+      "id": "abt_food_02",
+      "name": "Local karahi and tikka houses",
+      "cuisine": "Pashtun/Pakistani",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Traditional grilled meats and karahi"
+    },
+    {
+      "id": "abt_food_03",
+      "name": "Corn on the cob and chaat stalls (Thandiani route)",
+      "cuisine": "street food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Popular roadside snacks on the way to hill viewpoints"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "abt_trans_01",
+      "from_city": "Abbottabad",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Hazara Motorway (E-35) coach",
+      "estimated_cost_pkr": 700,
+      "duration_min": 90,
+      "notes": "Fast route via the Hazara Motorway"
+    },
+    {
+      "id": "abt_trans_02",
+      "from_city": "Abbottabad",
+      "to_city": "Murree",
+      "transport_type": "bus",
+      "route": "Regional coach/private car",
+      "estimated_cost_pkr": 800,
+      "duration_min": 150,
+      "notes": "Scenic mountain route"
+    },
+    {
+      "id": "abt_trans_03",
+      "from_city": "Abbottabad",
+      "to_city": "Abbottabad",
+      "transport_type": "local_taxi",
+      "route": "Local taxi/rideshare within city",
+      "estimated_cost_pkr": 300,
+      "duration_min": 20,
+      "notes": "For trips up to Thandiani, hiring a car for a half-day is common"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "abt_acc_01",
+      "name": "Budget guesthouse near Mandian",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.5
+    },
+    {
+      "id": "abt_acc_02",
+      "name": "Mid-range hotel near Mall Road",
+      "price_range": "moderate",
+      "approx_price_pkr": 8000,
+      "family_friendly": true,
+      "rating": 4.1
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Humid subtropical highland climate, noticeably cooler than the plains due to elevation (~1,200m)",
+    "best_time_to_visit": "March to June and September to November",
+    "avoid_months": "December to February (cold, occasional snow at higher points like Thandiani)",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cold, 0-15°C, occasional snowfall in surrounding hills" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Mild and pleasant, 20-32°C, a popular summer retreat" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Regular rainfall, lush green hillsides" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "abt_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Hazara Motorway (E-35) for the fastest, most comfortable route between Islamabad and Abbottabad."
+    },
+    {
+      "id": "abt_tip_02",
+      "category": "local_transport",
+      "tip": "For hill destinations like Thandiani, hiring a local car/driver for the day is more practical than ride-hailing apps, which have limited coverage outside the city center."
+    },
+    {
+      "id": "abt_tip_03",
+      "category": "safety",
+      "tip": "Mountain roads to Thandiani can be narrow and winding -- avoid driving after dark or in fog/rain if unfamiliar with the route."
+    },
+    {
+      "id": "abt_tip_04",
+      "category": "timing",
+      "tip": "Visit Thandiani in the morning to enjoy clear mountain views before afternoon clouds typically roll in."
+    }
+  ],
+  "history": {
+    "founded": "Named after British Major James Abbott, who founded the town in 1853",
+    "city_history": "Abbottabad developed as a British colonial hill station and military cantonment, valued for its cool climate and scenic surroundings in the foothills of the Himalayas. It remains an important educational and military center in Khyber Pakhtunkhwa, popular with tourists seeking a cooler retreat from Pakistan's hot plains.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

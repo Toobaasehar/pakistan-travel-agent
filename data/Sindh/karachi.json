@@ -1,0 +1,224 @@
+{
+  "city": "Karachi",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "khi_att_01",
+      "name": "Mazar-e-Quaid (Quaid's Mausoleum)",
+      "category": "historical",
+      "description": "The marble mausoleum of Muhammad Ali Jinnah, founder of Pakistan, set in a large landscaped park.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "M.A. Jinnah Road, Karachi",
+      "popularity": "high"
+    },
+    {
+      "id": "khi_att_02",
+      "name": "Clifton Beach",
+      "category": "nature",
+      "description": "Karachi's most popular beach, known for camel rides, food stalls, and sunset views along the Arabian Sea.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Clifton, Karachi",
+      "popularity": "high"
+    },
+    {
+      "id": "khi_att_03",
+      "name": "Empress Market",
+      "category": "shopping",
+      "description": "A historic Victorian-era covered market from the British colonial period, selling everything from spices to pets.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Saddar, Karachi",
+      "popularity": "medium"
+    },
+    {
+      "id": "khi_att_04",
+      "name": "Mohatta Palace",
+      "category": "museum",
+      "description": "A pink-stone former private palace, now an art and cultural museum reflecting Karachi's colonial-era architecture.",
+      "entry_fee_pkr": 100,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Clifton, Karachi",
+      "popularity": "medium"
+    },
+    {
+      "id": "khi_att_05",
+      "name": "Do Darya",
+      "category": "leisure",
+      "description": "A waterfront dining and hangout strip along a creek, popular for evening food outings.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Do Darya, DHA Phase 8, Karachi",
+      "popularity": "high"
+    },
+    {
+      "id": "khi_att_06",
+      "name": "Port Grand",
+      "category": "leisure",
+      "description": "A waterfront food and entertainment complex on the harbor, with restaurants and live performances.",
+      "entry_fee_pkr": 100,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Native Jetty Bridge, Karachi",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "khi_food_01",
+      "name": "Burns Road Food Street",
+      "cuisine": "street food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Nihari, BBQ, and traditional Karachi street food"
+    },
+    {
+      "id": "khi_food_02",
+      "name": "Kolachi Restaurant",
+      "cuisine": "Pakistani/BBQ",
+      "price_level": "premium",
+      "approx_cost_per_person_pkr": 2500,
+      "family_friendly": true,
+      "specialty": "Seafront dining with harbor views"
+    },
+    {
+      "id": "khi_food_03",
+      "name": "Student Biryani",
+      "cuisine": "biryani",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 350,
+      "family_friendly": true,
+      "specialty": "Iconic Karachi-origin biryani chain"
+    },
+    {
+      "id": "khi_food_04",
+      "name": "Xander's",
+      "cuisine": "fast food/burgers",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Popular local burger and fries chain"
+    },
+    {
+      "id": "khi_food_05",
+      "name": "Cafe Flo / Boat Basin food street",
+      "cuisine": "mixed/desserts",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1000,
+      "family_friendly": true,
+      "specialty": "Late-night hangout spot with cafes and desserts"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "khi_trans_01",
+      "from_city": "Karachi",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Motorway coach via M-9",
+      "estimated_cost_pkr": 700,
+      "duration_min": 120,
+      "notes": "Fast route via the M-9 Motorway"
+    },
+    {
+      "id": "khi_trans_02",
+      "from_city": "Karachi",
+      "to_city": "Lahore",
+      "transport_type": "flight",
+      "route": "Domestic flight",
+      "estimated_cost_pkr": 15000,
+      "duration_min": 120,
+      "notes": "Fastest option; multiple daily flights"
+    },
+    {
+      "id": "khi_trans_03",
+      "from_city": "Karachi",
+      "to_city": "Karachi",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 400,
+      "duration_min": 25,
+      "notes": "Traffic-dependent; can take longer during rush hour"
+    },
+    {
+      "id": "khi_trans_04",
+      "from_city": "Karachi",
+      "to_city": "Karachi",
+      "transport_type": "brt",
+      "route": "Karachi Green Line BRT",
+      "estimated_cost_pkr": 55,
+      "duration_min": 40,
+      "notes": "Budget option along the BRT corridor"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "khi_acc_01",
+      "name": "Budget guesthouse near Saddar",
+      "price_range": "budget",
+      "approx_price_pkr": 4500,
+      "family_friendly": true,
+      "rating": 3.5
+    },
+    {
+      "id": "khi_acc_02",
+      "name": "Mid-range hotel near Clifton/DHA",
+      "price_range": "moderate",
+      "approx_price_pkr": 12000,
+      "family_friendly": true,
+      "rating": 4.2
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert/coastal climate, humid due to sea proximity",
+    "best_time_to_visit": "November to February (mild, dry, and pleasant)",
+    "avoid_months": "May to August (very hot and humid; monsoon spells in July-August can cause urban flooding)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild and pleasant, 15-25°C, ideal for sightseeing" },
+      { "season": "Summer (Mar-Jun)", "avg_condition": "Very hot and humid, often 35-40°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Humid with occasional heavy rain and possible waterlogging" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "khi_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Lyari Expressway or Northern Bypass to avoid heavy traffic when crossing the city east-west, especially during rush hours (8-10am, 5-8pm)."
+    },
+    {
+      "id": "khi_tip_02",
+      "category": "local_transport",
+      "tip": "Ride-hailing apps (Careem, InDrive, Yango) are generally more convenient and safer for tourists than hailing a rickshaw directly."
+    },
+    {
+      "id": "khi_tip_03",
+      "category": "safety",
+      "tip": "Avoid displaying expensive electronics openly in crowded markets like Saddar or Burns Road; keep valuables secure."
+    },
+    {
+      "id": "khi_tip_04",
+      "category": "timing",
+      "tip": "Visit beachfront areas like Clifton and Do Darya in the evening to avoid daytime heat and enjoy the sunset."
+    }
+  ],
+  "history": {
+  "founded": "Grew from a small fishing village called Kolachi in the 18th century",
+  "city_history": "Karachi rose to prominence as a port city under British colonial rule after 1839, becoming a major trading hub. It served as Pakistan's first capital from 1947 to the 1960s before the capital moved to Islamabad, and today remains Pakistan's largest city and main economic and financial center.",
+  "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+}
+
+}

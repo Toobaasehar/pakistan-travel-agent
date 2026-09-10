@@ -1,0 +1,113 @@
+{
+  "city": "Kharmang",
+  "province": "Gilgit-Baltistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "khm_att_01",
+      "name": "Kharmang Indus Riverside",
+      "category": "nature",
+      "description": "Scenic Indus River valley views characteristic of the district's landscape.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kharmang District",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "khm_food_01",
+      "name": "Local Balti eatery",
+      "cuisine": "Balti",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional Balti mountain cuisine"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "khm_trans_01",
+      "from_city": "Kharmang",
+      "to_city": "Gilgit",
+      "transport_type": "van",
+      "route": "Local van/jeep via Karakoram Highway or district road",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Most common route to the regional hub"
+    },
+    {
+      "id": "khm_trans_02",
+      "from_city": "Kharmang",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "NATCO/private coach via Karakoram Highway",
+      "estimated_cost_pkr": 3500,
+      "duration_min": 720,
+      "notes": "Long scenic journey; flights from Gilgit/Skardu are a faster alternative when weather permits"
+    },
+    {
+      "id": "khm_trans_03",
+      "from_city": "Kharmang",
+      "to_city": "Kharmang",
+      "transport_type": "jeep",
+      "route": "Local jeep hire within the district",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 60,
+      "notes": "Jeeps are often required for higher valleys and glacier areas"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "khm_acc_01",
+      "name": "Basic guesthouse in Tolti",
+      "price_range": "budget",
+      "approx_price_pkr": 3800,
+      "family_friendly": true,
+      "rating": 3.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "High-altitude mountain climate with cold winters and mild summers",
+    "best_time_to_visit": "May to October",
+    "avoid_months": "December to March (heavy snow, many roads/passes close)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (May-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C in valleys, the main tourist season"
+      },
+      {
+        "season": "Autumn (Oct)",
+        "avg_condition": "Crisp and colorful, famous for golden/red foliage in Hunza and nearby valleys"
+      },
+      {
+        "season": "Winter (Nov-Apr)",
+        "avg_condition": "Very cold, heavy snowfall, many high-altitude roads and passes close"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "khm_tip_01",
+      "category": "timing",
+      "tip": "Visit Kharmang between May and October — many higher areas are snowed in or inaccessible in winter."
+    },
+    {
+      "id": "khm_tip_02",
+      "category": "local_transport",
+      "tip": "A 4x4 jeep is often necessary for side valleys and glacier viewpoints; book local drivers in advance during peak season (July-August)."
+    },
+    {
+      "id": "khm_tip_03",
+      "category": "safety",
+      "tip": "Roads can be affected by landslides, especially after rain — check current road conditions before travel, particularly along the Karakoram Highway."
+    }
+  ],
+  "history": {
+    "founded": "Separated from Skardu District in 2015, headquartered at Tolti",
+    "city_history": "Kharmang is one of Gilgit-Baltistan's newer and more remote districts, situated along the Indus River between Skardu and the Line of Control.",
+    "province_history": "Gilgit-Baltistan is a mountainous region in northern Pakistan, home to some of the world's highest peaks including K2, Nanga Parbat, and parts of the Karakoram, Himalaya, and Hindu Kush ranges. Historically composed of small princely states (including Hunza and Nagar) along the ancient Silk Road, the region acceded to Pakistan in 1947-48 and is administered separately from Azad Kashmir, with its own Legislative Assembly since 2009."
+  }
+}

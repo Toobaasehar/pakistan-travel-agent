@@ -1,0 +1,150 @@
+{
+  "city": "Kohat",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "koh_att_01",
+      "name": "Kohat Fort",
+      "category": "historical",
+      "description": "A fort with roots in the British colonial era, historically significant for controlling access to the Kohat Pass.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Kohat",
+      "popularity": "low"
+    },
+    {
+      "id": "koh_att_02",
+      "name": "Tanda Dam",
+      "category": "nature",
+      "description": "A reservoir and picnic spot near Kohat, popular for boating and family outings.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~15km from Kohat city",
+      "popularity": "medium"
+    },
+    {
+      "id": "koh_att_03",
+      "name": "Kohat Pass",
+      "category": "historical",
+      "description": "A historic mountain pass connecting Kohat to the Khyber region, significant in colonial-era military history.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Kohat city",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "koh_food_01",
+      "name": "Local Pashtun karahi and tikka houses",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and grilled meats"
+    },
+    {
+      "id": "koh_food_02",
+      "name": "Tanda Dam picnic food stalls",
+      "cuisine": "street food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Casual snacks popular with picnicking families"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "koh_trans_01",
+      "from_city": "Kohat",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Kohat Tunnel road",
+      "estimated_cost_pkr": 300,
+      "duration_min": 60,
+      "notes": "Short, direct route via the Kohat Tunnel"
+    },
+    {
+      "id": "koh_trans_02",
+      "from_city": "Kohat",
+      "to_city": "Bannu",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "koh_trans_03",
+      "from_city": "Kohat",
+      "to_city": "Kohat",
+      "transport_type": "local_taxi",
+      "route": "Local taxi to Tanda Dam",
+      "estimated_cost_pkr": 800,
+      "duration_min": 20,
+      "notes": "Short trip from the city center"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "koh_acc_01",
+      "name": "Budget guesthouse in central Kohat",
+      "price_range": "budget",
+      "approx_price_pkr": 2800,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "koh_acc_02",
+      "name": "Mid-range hotel near Kohat Cantt",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and mild winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot and dry)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 5-20°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-42°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "koh_tip_01",
+      "category": "shortcut_route",
+      "tip": "The Kohat Tunnel provides a fast, direct connection to Peshawar, avoiding the older mountain pass route."
+    },
+    {
+      "id": "koh_tip_02",
+      "category": "local_transport",
+      "tip": "Local taxis are the most convenient way to reach Tanda Dam and other spots outside the city center."
+    },
+    {
+      "id": "koh_tip_03",
+      "category": "safety",
+      "tip": "Standard travel precautions apply; stick to well-known city areas and main routes."
+    },
+    {
+      "id": "koh_tip_04",
+      "category": "timing",
+      "tip": "Visit Tanda Dam in the late afternoon for a pleasant picnic atmosphere as temperatures cool."
+    }
+  ],
+  "history": {
+    "founded": "An old settlement that grew significantly in importance during British colonial rule",
+    "city_history": "Kohat developed as a key garrison town under British rule due to its strategic position controlling access through the Kohat Pass toward the tribal areas. It remains an important military and administrative center in Khyber Pakhtunkhwa today.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "city": "Jacobabad",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "jcb_att_01",
+      "name": "Jacobabad Clock Tower",
+      "category": "historical",
+      "description": "A colonial-era landmark from the city's founding by General John Jacob.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "City center, Jacobabad",
+      "popularity": "low"
+    },
+    {
+      "id": "jcb_att_02",
+      "name": "Local Agricultural Markets",
+      "category": "shopping",
+      "description": "Bustling grain and produce markets reflecting the district's farming economy.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Jacobabad town",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "jcb_food_01",
+      "name": "Local Sindhi dhaba",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 350,
+      "family_friendly": true,
+      "specialty": "Simple, hearty Sindhi meals — note: best avoided at peak summer midday heat"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "jcb_trans_01",
+      "from_city": "Jacobabad",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Local/intercity coach via national highway",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Most common route to the nearest major transport hub"
+    },
+    {
+      "id": "jcb_trans_02",
+      "from_city": "Jacobabad",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via National Highway N-5",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Direct coach services run daily from the main bus stand"
+    },
+    {
+      "id": "jcb_trans_03",
+      "from_city": "Jacobabad",
+      "to_city": "Jacobabad",
+      "transport_type": "local_rickshaw",
+      "route": "Rickshaw/local transport within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Rickshaws and local vans are the main way to get around town"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "jcb_acc_01",
+      "name": "Budget guesthouse in town",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 2.8
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot, semi-arid to arid climate typical of interior Sindh",
+    "best_time_to_visit": "November to February (mild and dry)",
+    "avoid_months": "May to July (extreme heat, often above 40°C)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and pleasant, 10-24°C, best time to visit"
+      },
+      {
+        "season": "Summer (Mar-Jun)",
+        "avg_condition": "Extremely hot and dry, often 40-48°C"
+      },
+      {
+        "season": "Monsoon (Jul-Sep)",
+        "avg_condition": "Occasional heavy rain, humid, risk of flooding in low areas"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "jcb_tip_01",
+      "category": "timing",
+      "tip": "Visit Jacobabad in the cooler months (November to February) for the most comfortable travel experience."
+    },
+    {
+      "id": "jcb_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity buses and shared vans (Suzuki/coaster) are the most common way to reach and travel around the district."
+    },
+    {
+      "id": "jcb_tip_03",
+      "category": "safety",
+      "tip": "As with most small-town travel in Sindh, arrange accommodation and local guides in advance, especially outside the main town center."
+    }
+  ],
+  "history": {
+    "founded": "Founded in 1847 by British General John Jacob, after whom the city is named",
+    "city_history": "Jacobabad was developed by the British as a military and administrative outpost. It remains an agricultural center and is known as one of the hottest cities in the world, with summer temperatures regularly exceeding 45°C.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

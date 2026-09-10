@@ -1,0 +1,171 @@
+{
+  "city": "Rawalpindi",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "rwp_att_01",
+      "name": "Raja Bazaar",
+      "category": "shopping",
+      "description": "One of Rawalpindi's oldest and busiest markets, known for jewelry, textiles, and traditional goods.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Rawalpindi",
+      "popularity": "high"
+    },
+    {
+      "id": "rwp_att_02",
+      "name": "Ayub National Park",
+      "category": "nature",
+      "description": "A large public park with a lake, gardens, and a mini zoo, popular for family outings.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "The Mall, Rawalpindi",
+      "popularity": "medium"
+    },
+    {
+      "id": "rwp_att_03",
+      "name": "Rawalpindi Cantt / Mall Road",
+      "category": "cultural",
+      "description": "A colonial-era military cantonment area with old churches, heritage buildings, and tree-lined avenues.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Cantt area, Rawalpindi",
+      "popularity": "medium"
+    },
+    {
+      "id": "rwp_att_04",
+      "name": "Army Museum Rawalpindi",
+      "category": "museum",
+      "description": "A military history museum showcasing Pakistan Army equipment, weapons, and historical exhibits.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Rawalpindi Cantt",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "rwp_food_01",
+      "name": "Food Street Committee Chowk",
+      "cuisine": "Pakistani/BBQ",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Popular open-air food street with grilled and BBQ dishes"
+    },
+    {
+      "id": "rwp_food_02",
+      "name": "Melody Food Park",
+      "cuisine": "mixed/fast food",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Casual dining area with a variety of local and fast-food outlets"
+    },
+    {
+      "id": "rwp_food_03",
+      "name": "Local dhabas (Raja Bazaar area)",
+      "cuisine": "Punjabi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional roadside-style Punjabi food"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "rwp_trans_01",
+      "from_city": "Rawalpindi",
+      "to_city": "Islamabad",
+      "transport_type": "metro_bus",
+      "route": "Metrobus corridor",
+      "estimated_cost_pkr": 30,
+      "duration_min": 35,
+      "notes": "Cheapest and most reliable way to reach Islamabad"
+    },
+    {
+      "id": "rwp_trans_02",
+      "from_city": "Rawalpindi",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Motorway coach via M-2",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 250,
+      "notes": "Frequent daily departures"
+    },
+    {
+      "id": "rwp_trans_03",
+      "from_city": "Rawalpindi",
+      "to_city": "Rawalpindi",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 300,
+      "duration_min": 20,
+      "notes": "Convenient for reaching Raja Bazaar and the Cantt area"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "rwp_acc_01",
+      "name": "Budget guesthouse near Committee Chowk",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.4
+    },
+    {
+      "id": "rwp_acc_02",
+      "name": "Mid-range hotel near Saddar",
+      "price_range": "moderate",
+      "approx_price_pkr": 8500,
+      "family_friendly": true,
+      "rating": 4.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Humid subtropical climate, similar to neighboring Islamabad, milder than Punjab's plains cities",
+    "best_time_to_visit": "March-April and September-November",
+    "avoid_months": "June-July (hot, humid before and during monsoon)",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cool, 3-18°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Warm to hot, 25-40°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Heavy rain spells, occasional urban flooding in low areas" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "rwp_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the IJP Road or Islamabad Expressway to move between Rawalpindi and Islamabad instead of local roads during peak hours."
+    },
+    {
+      "id": "rwp_tip_02",
+      "category": "local_transport",
+      "tip": "The Metrobus is the easiest and cheapest way to travel between Rawalpindi and Islamabad -- much faster than driving during rush hour."
+    },
+    {
+      "id": "rwp_tip_03",
+      "category": "safety",
+      "tip": "Raja Bazaar can get very crowded, especially in the evenings -- keep valuables secure."
+    },
+    {
+      "id": "rwp_tip_04",
+      "category": "timing",
+      "tip": "Visit Raja Bazaar in the morning for a calmer experience, and Committee Chowk food street in the evening when it's liveliest."
+    }
+  ],
+  "history": {
+    "founded": "Ancient settlement dating back over 2,000 years, historically linked to the nearby Gandhara civilization",
+    "city_history": "Rawalpindi grew into prominence under British colonial rule as a major military garrison town, a role it retains today as the headquarters of the Pakistan Army. Often called 'Pindi', it functions as a twin city to Islamabad, with a much older and more traditional character reflected in areas like Raja Bazaar.",
+    "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+  }
+}

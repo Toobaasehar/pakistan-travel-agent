@@ -1,0 +1,113 @@
+{
+  "city": "Lakki Marwat",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "lkm_att_01",
+      "name": "Lakki Marwat Agricultural Plains",
+      "category": "nature",
+      "description": "Flat farmland typical of southern KP, with traditional rural Pashtun village life.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Rural Lakki Marwat",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "lkm_food_01",
+      "name": "Local Pashtun dhaba",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional tandoori bread and meat curries"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "lkm_trans_01",
+      "from_city": "Lakki Marwat",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach/van via provincial highway",
+      "estimated_cost_pkr": 600,
+      "duration_min": 150,
+      "notes": "Most common route to the provincial hub"
+    },
+    {
+      "id": "lkm_trans_02",
+      "from_city": "Lakki Marwat",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway/motorway",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 300,
+      "notes": "Daily coach services available from the main bus stand"
+    },
+    {
+      "id": "lkm_trans_03",
+      "from_city": "Lakki Marwat",
+      "to_city": "Lakki Marwat",
+      "transport_type": "local_van",
+      "route": "Suzuki/local van within town",
+      "estimated_cost_pkr": 150,
+      "duration_min": 15,
+      "notes": "Shared local vans are the main way to get around"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "lkm_acc_01",
+      "name": "Basic guesthouse in Lakki Marwat town",
+      "price_range": "budget",
+      "approx_price_pkr": 2800,
+      "family_friendly": true,
+      "rating": 2.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Warm plains climate, hot summers and mild winters",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "June to August (extreme heat)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Mild and pleasant, 8-20°C, ideal for sightseeing"
+      },
+      {
+        "season": "Summer (Apr-Jul)",
+        "avg_condition": "Hot, often 35-42°C"
+      },
+      {
+        "season": "Monsoon (Jul-Aug)",
+        "avg_condition": "Occasional heavy rain"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "lkm_tip_01",
+      "category": "timing",
+      "tip": "Visit Lakki Marwat in the warmer months (roughly May to September) if it's a mountain area, since roads can close in winter snow."
+    },
+    {
+      "id": "lkm_tip_02",
+      "category": "local_transport",
+      "tip": "Shared vans (Suzuki/Hiace) and intercity coaches are the main way to reach and travel around the district."
+    },
+    {
+      "id": "lkm_tip_03",
+      "category": "safety",
+      "tip": "Arrange accommodation and local transport in advance, especially in more remote mountain areas."
+    }
+  ],
+  "history": {
+    "founded": "Separated from Bannu District in 1992",
+    "city_history": "Lakki Marwat is a predominantly agricultural district on the plains south of Bannu, known for its Marwat Pashtun tribal heritage.",
+    "province_history": "Khyber Pakhtunkhwa (formerly North-West Frontier Province) has been a historic crossroads between South and Central Asia for millennia, home to Gandhara civilization sites, the ancient Silk Road route through the Khyber Pass, and a mix of Pashtun tribal, Mughal, Sikh, and British colonial influence before becoming part of Pakistan in 1947. In 2018, the former Federally Administered Tribal Areas (FATA) were formally merged into Khyber Pakhtunkhwa as regular districts."
+  }
+}

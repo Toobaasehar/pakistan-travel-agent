@@ -1,0 +1,171 @@
+{
+  "city": "Gwadar",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "gwd_att_01",
+      "name": "Gwadar Port & Marina",
+      "category": "cultural",
+      "description": "Pakistan's strategic deep-sea port on the Arabian Sea, central to the China-Pakistan Economic Corridor (CPEC).",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Gwadar Port area",
+      "popularity": "medium"
+    },
+    {
+      "id": "gwd_att_02",
+      "name": "Hammerhead / Koh-e-Batil",
+      "category": "nature",
+      "description": "A rocky headland offering sweeping views of the Arabian Sea and Gwadar's coastline, especially at sunset.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Gwadar coastline",
+      "popularity": "high"
+    },
+    {
+      "id": "gwd_att_03",
+      "name": "Gwadar Beach",
+      "category": "nature",
+      "description": "A long, relatively undeveloped sandy beach along the Arabian Sea, popular for walks and fishing culture.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Gwadar coastal area",
+      "popularity": "high"
+    },
+    {
+      "id": "gwd_att_04",
+      "name": "Old Gwadar Bazaar",
+      "category": "shopping",
+      "description": "A traditional coastal market reflecting the town's fishing heritage and historical ties to Oman.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Gwadar",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "gwd_food_01",
+      "name": "Local seafood stalls along the harbor",
+      "cuisine": "seafood",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1000,
+      "family_friendly": true,
+      "specialty": "Fresh grilled fish and prawns, a Gwadar specialty"
+    },
+    {
+      "id": "gwd_food_02",
+      "name": "Traditional Balochi tea houses",
+      "cuisine": "tea/snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Balochi-style tea and light snacks"
+    },
+    {
+      "id": "gwd_food_03",
+      "name": "Simple local eateries near the bazaar",
+      "cuisine": "Balochi/Pakistani",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Basic home-style Balochi meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "gwd_trans_01",
+      "from_city": "Gwadar",
+      "to_city": "Karachi",
+      "transport_type": "flight",
+      "route": "Domestic flight",
+      "estimated_cost_pkr": 20000,
+      "duration_min": 90,
+      "notes": "Fastest and most comfortable option; flight frequency can be limited, check schedules"
+    },
+    {
+      "id": "gwd_trans_02",
+      "from_city": "Gwadar",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Coastal Highway (N-10) coach",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 480,
+      "notes": "Long scenic coastal drive; check current road/security conditions before travel"
+    },
+    {
+      "id": "gwd_trans_03",
+      "from_city": "Gwadar",
+      "to_city": "Gwadar",
+      "transport_type": "local_taxi",
+      "route": "Local taxi within town",
+      "estimated_cost_pkr": 300,
+      "duration_min": 15,
+      "notes": "Ride-hailing app coverage is very limited; arrange transport locally"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "gwd_acc_01",
+      "name": "Budget guesthouse near the old bazaar",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "gwd_acc_02",
+      "name": "Mid-range hotel near the marina",
+      "price_range": "moderate",
+      "approx_price_pkr": 9000,
+      "family_friendly": true,
+      "rating": 3.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert coastal climate, humid due to sea proximity, generally milder than inland Balochistan",
+    "best_time_to_visit": "November to March",
+    "avoid_months": "May to July (very hot and humid)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 18-28°C, the most comfortable time to visit" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot and humid, 32-40°C" },
+      { "season": "Monsoon", "avg_condition": "Minimal rainfall, occasional coastal weather systems" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "gwd_tip_01",
+      "category": "shortcut_route",
+      "tip": "The Coastal Highway (N-10) is the main and most scenic route connecting Gwadar to Karachi; flying is recommended over the long overland drive when possible."
+    },
+    {
+      "id": "gwd_tip_02",
+      "category": "local_transport",
+      "tip": "Arrange local transport in advance through your accommodation, since ride-hailing apps have very limited presence in Gwadar."
+    },
+    {
+      "id": "gwd_tip_03",
+      "category": "safety",
+      "tip": "Check current travel advisories before visiting, as some coastal areas may have periodic security or access restrictions -- travel with a local guide or arranged transport where possible."
+    },
+    {
+      "id": "gwd_tip_04",
+      "category": "timing",
+      "tip": "Visit the Hammerhead viewpoint in the late afternoon for one of the best sunset views on Pakistan's coastline."
+    }
+  ],
+  "history": {
+    "founded": "A centuries-old fishing settlement with historical ties to Oman, which administered Gwadar until 1958",
+    "city_history": "Gwadar was ruled by the Sultanate of Oman for nearly two centuries before Pakistan purchased it in 1958. In recent years it has become globally significant as the site of a major deep-sea port developed under the China-Pakistan Economic Corridor (CPEC), transforming it from a small fishing town into a strategic economic hub.",
+    "province_history": "Balochistan is Pakistan's largest province by area, historically home to various Baloch and Pashtun tribal confederacies, and was governed as British Balochistan before its princely states acceded to Pakistan between 1947 and 1948."
+  }
+}

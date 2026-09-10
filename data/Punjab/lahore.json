@@ -1,0 +1,245 @@
+{
+  "city": "Lahore",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "lhr_att_01",
+      "name": "Badshahi Mosque",
+      "category": "historical",
+      "description": "A 17th-century Mughal-era mosque, one of the largest in the world, known for its red sandstone architecture and marble domes.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Walled City, near Lahore Fort",
+      "popularity": "high"
+    },
+    {
+      "id": "lhr_att_02",
+      "name": "Lahore Fort (Shahi Qila)",
+      "category": "historical",
+      "description": "A UNESCO World Heritage citadel showcasing Mughal architecture, including the Sheesh Mahal and Alamgiri Gate.",
+      "entry_fee_pkr": 500,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Walled City, Lahore",
+      "popularity": "high"
+    },
+    {
+      "id": "lhr_att_03",
+      "name": "Shalimar Gardens",
+      "category": "nature",
+      "description": "A Mughal-era terraced garden with fountains and reflecting pools, a UNESCO World Heritage Site.",
+      "entry_fee_pkr": 100,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "GT Road, Baghbanpura",
+      "popularity": "medium"
+    },
+    {
+      "id": "lhr_att_04",
+      "name": "Minar-e-Pakistan",
+      "category": "historical",
+      "description": "A national monument in Iqbal Park marking the site of the 1940 Lahore Resolution.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Iqbal Park, Lahore",
+      "popularity": "high"
+    },
+    {
+      "id": "lhr_att_05",
+      "name": "Lahore Museum",
+      "category": "museum",
+      "description": "One of Pakistan's oldest and largest museums, housing Mughal, Sikh, and colonial-era artifacts.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "The Mall, Lahore",
+      "popularity": "medium"
+    },
+    {
+      "id": "lhr_att_06",
+      "name": "Anarkali Bazaar",
+      "category": "shopping",
+      "description": "One of the oldest surviving markets in South Asia, known for clothing, handicrafts, and street food.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "The Mall area, Lahore",
+      "popularity": "high"
+    },
+    {
+      "id": "lhr_att_07",
+      "name": "Wagah Border Flag Ceremony",
+      "category": "cultural",
+      "description": "A daily military ceremony at the Pakistan-India border, popular for its patriotic atmosphere.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Wagah, ~25km from central Lahore",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "lhr_food_01",
+      "name": "Phajja Siri Paye",
+      "cuisine": "traditional breakfast",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Siri paye and traditional Lahori breakfast"
+    },
+    {
+      "id": "lhr_food_02",
+      "name": "Food Street Fort Road (near Badshahi Mosque)",
+      "cuisine": "Lahori/Punjabi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1200,
+      "family_friendly": true,
+      "specialty": "Rooftop dining with views of Badshahi Mosque"
+    },
+    {
+      "id": "lhr_food_03",
+      "name": "Butt Karahi",
+      "cuisine": "Punjabi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Chicken and mutton karahi"
+    },
+    {
+      "id": "lhr_food_04",
+      "name": "Yasir Broast",
+      "cuisine": "fast food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Broasted chicken, casual family dining"
+    },
+    {
+      "id": "lhr_food_05",
+      "name": "Haji Belaram Kulfi",
+      "cuisine": "desserts",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Traditional kulfi and falooda"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "lhr_trans_01",
+      "from_city": "Lahore",
+      "to_city": "Multan",
+      "transport_type": "bus",
+      "route": "Daewoo Express (intercity coach)",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 300,
+      "notes": "AC coach service, multiple daily departures"
+    },
+    {
+      "id": "lhr_trans_02",
+      "from_city": "Lahore",
+      "to_city": "Bahawalpur",
+      "transport_type": "bus",
+      "route": "Daewoo Express (intercity coach)",
+      "estimated_cost_pkr": 2200,
+      "duration_min": 360,
+      "notes": "AC coach service"
+    },
+    {
+      "id": "lhr_trans_03",
+      "from_city": "Lahore",
+      "to_city": "Faisalabad",
+      "transport_type": "bus",
+      "route": "Intercity coach / train",
+      "estimated_cost_pkr": 900,
+      "duration_min": 150,
+      "notes": "Frequent departures, also served by train"
+    },
+    {
+      "id": "lhr_trans_04",
+      "from_city": "Lahore",
+      "to_city": "Lahore",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 300,
+      "duration_min": 20,
+      "notes": "Approximate per-trip cost for short in-city rides"
+    },
+    {
+      "id": "lhr_trans_05",
+      "from_city": "Lahore",
+      "to_city": "Lahore",
+      "transport_type": "metro_bus",
+      "route": "Lahore Metrobus",
+      "estimated_cost_pkr": 30,
+      "duration_min": 30,
+      "notes": "Cheapest local option along the metro corridor"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "lhr_acc_01",
+      "name": "Budget guesthouse near Mall Road",
+      "price_range": "budget",
+      "approx_price_pkr": 4000,
+      "family_friendly": true,
+      "rating": 3.6
+    },
+    {
+      "id": "lhr_acc_02",
+      "name": "Mid-range hotel near Gulberg",
+      "price_range": "moderate",
+      "approx_price_pkr": 9000,
+      "family_friendly": true,
+      "rating": 4.1
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers, mild winters, and a monsoon spell",
+    "best_time_to_visit": "October to March (cool, comfortable, ideal for sightseeing and the Wagah ceremony)",
+    "avoid_months": "May to July (very hot, often 40°C+, and humid before monsoon)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool and pleasant, 5-20°C, occasional morning fog/smog in Dec-Jan" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Very hot and dry, frequently 38-45°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Humid with heavy rain spells, occasional urban flooding" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "lhr_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Lahore Ring Road to bypass the congested city center when traveling between the airport, Gulberg, and the Walled City area."
+    },
+    {
+      "id": "lhr_tip_02",
+      "category": "local_transport",
+      "tip": "The Orange Line Metro Train and Metrobus are the cheapest ways to move between major landmarks; ride-hailing apps are best for door-to-door convenience."
+    },
+    {
+      "id": "lhr_tip_03",
+      "category": "safety",
+      "tip": "Keep valuables secure in crowded areas like Anarkali Bazaar and the Walled City, especially during peak shopping hours."
+    },
+    {
+      "id": "lhr_tip_04",
+      "category": "timing",
+      "tip": "Visit the Walled City (Badshahi Mosque, Lahore Fort) early morning or late afternoon to avoid midday heat and crowds; arrive at Wagah Border by 4-4:30pm for the evening ceremony."
+    }
+  ],
+  "history": {
+  "founded": "Ancient city with references going back over 2,000 years",
+  "city_history": "Lahore has been a major cultural and political center for centuries, serving as a capital under the Ghaznavids, the Delhi Sultanate, and most famously the Mughal Empire, who left behind the Lahore Fort, Badshahi Mosque, and Shalimar Gardens. It later became a key city of the Sikh Empire under Ranjit Singh, then the capital of British Punjab, and today remains Pakistan's cultural capital.",
+  "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+}
+}

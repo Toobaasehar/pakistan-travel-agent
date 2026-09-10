@@ -1,0 +1,128 @@
+{
+  "city": "Rawalakot",
+  "province": "Azad Jammu & Kashmir",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "rwk_att_01",
+      "name": "Banjosa Lake",
+      "category": "nature",
+      "description": "A scenic artificial lake surrounded by pine forests, popular for boating and picnics.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~9km from Rawalakot",
+      "popularity": "high"
+    },
+    {
+      "id": "rwk_att_02",
+      "name": "Toli Pir",
+      "category": "nature",
+      "description": "A high-altitude meadow offering panoramic views of surrounding valleys and, on clear days, distant snow-capped peaks.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~40km from Rawalakot",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "rwk_food_01",
+      "name": "Local Kashmiri restaurants",
+      "cuisine": "Kashmiri/Pakistani",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Regional Kashmiri-style dishes"
+    },
+    {
+      "id": "rwk_food_02",
+      "name": "Banjosa Lake food stalls",
+      "cuisine": "snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Casual snacks for lakeside visitors"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "rwk_trans_01",
+      "from_city": "Rawalakot",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Scenic mountain route"
+    },
+    {
+      "id": "rwk_trans_02",
+      "from_city": "Rawalakot",
+      "to_city": "Rawalakot",
+      "transport_type": "local_taxi",
+      "route": "Local taxi to Banjosa Lake/Toli Pir",
+      "estimated_cost_pkr": 2000,
+      "duration_min": 60,
+      "notes": "Recommended for reaching the lake and mountain meadow areas"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "rwk_acc_01",
+      "name": "Budget guesthouse in Rawalakot town",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 3.4
+    },
+    {
+      "id": "rwk_acc_02",
+      "name": "Mid-range hotel near Banjosa Lake",
+      "price_range": "moderate",
+      "approx_price_pkr": 7500,
+      "family_friendly": true,
+      "rating": 4.1
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Humid subtropical highland climate, cool and green given the pine forest surroundings",
+    "best_time_to_visit": "April to October",
+    "avoid_months": "Heavy winter snowfall can restrict access to Toli Pir",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cold, occasional snowfall, especially at Toli Pir" },
+      { "season": "Summer (Apr-Aug)", "avg_condition": "Mild and pleasant, 18-28°C" },
+      { "season": "Monsoon", "avg_condition": "Regular rainfall, lush green surroundings" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "rwk_tip_01",
+      "category": "shortcut_route",
+      "tip": "Rawalakot is reached via a scenic but winding mountain road from Islamabad -- allow extra travel time compared to flat-terrain routes."
+    },
+    {
+      "id": "rwk_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local taxi for trips to Banjosa Lake and Toli Pir, since both involve mountain roads best driven by someone familiar with them."
+    },
+    {
+      "id": "rwk_tip_03",
+      "category": "safety",
+      "tip": "Check road conditions before heading to Toli Pir in winter, as snow can temporarily close the route."
+    },
+    {
+      "id": "rwk_tip_04",
+      "category": "timing",
+      "tip": "Visit Banjosa Lake in the early morning or late afternoon for the most peaceful atmosphere and best light for photos."
+    }
+  ],
+  "history": {
+    "founded": "A historic town in the Poonch region, with settlement dating back centuries",
+    "city_history": "Rawalakot serves as the main town of the Poonch district of Azad Jammu & Kashmir, an area with a long history tied to the broader Kashmir region before the 1947 partition. Today it's known primarily as a gateway to the scenic lakes and meadows of the surrounding hills.",
+    "province_history": "Azad Jammu & Kashmir is a self-governing territory of Pakistan, formed in 1947 in the aftermath of the partition of British India and the subsequent Kashmir conflict, distinct from the neighboring Indian-administered Jammu and Kashmir."
+  }
+}

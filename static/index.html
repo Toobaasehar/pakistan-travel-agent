@@ -1,0 +1,4718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discover Pakistan — AI Travel Planner</title>
+  <meta name="description"
+    content="Plan your perfect Pakistan trip with AI-powered recommendations. Browse 295+ verified destinations across all 4 provinces and 3 territories — mountains, history, nature and beaches.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    /* ========== DESIGN TOKENS ========== */
+    :root {
+      --terracotta: #C0622A;
+      --terracotta-lt: #D97840;
+      --saffron: #E8943A;
+      --indigo: #1B3A6B;
+      --indigo-lt: #264F8F;
+      --turquoise: #2E8B7A;
+      --turquoise-lt: #3AADA0;
+      --cream: #FAF5EC;
+      --parchment: #EEE5D0;
+      --parchment-dk: #DDD0B8;
+      --ink: #2B2520;
+      --ink-soft: #6A5F55;
+      --ink-muted: #9B8E84;
+      --card: #FFFFFF;
+      --border: rgba(43, 37, 32, 0.12);
+      --shadow-sm: 0 1px 4px rgba(43, 37, 32, 0.08);
+      --shadow-md: 0 4px 18px rgba(43, 37, 32, 0.12);
+      --shadow-lg: 0 12px 40px rgba(43, 37, 32, 0.18);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --transition: 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .serif {
+      font-family: 'Playfair Display', serif;
+    }
+
+    img {
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ========== SCROLLBAR ========== */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--parchment);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--parchment-dk);
+      border-radius: 99px;
+    }
+
+    /* ========== GEOMETRIC PATTERN ========== */
+    .geo-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1'/%3E%3Cpath d='M40 10 L70 40 L40 70 L10 40Z' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='6' fill='none' stroke='rgba(255,255,255,0.06)' stroke-width='1'/%3E%3C/svg%3E");
+    }
+
+    /* ========== NAVBAR ENHANCED ========== */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(13, 27, 42, 0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(232, 148, 58, 0.28);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+      transition: var(--transition);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 24px;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin-right: 16px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo .flag {
+      font-size: 22px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .tab-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 7px 16px;
+      border-radius: 99px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: rgba(255, 255, 255, 0.78);
+      transition: var(--transition);
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--terracotta) 0%, var(--saffron) 100%);
+      box-shadow: 0 2px 14px rgba(232, 148, 58, 0.45);
+      border-color: rgba(255, 255, 255, 0.3);
+      font-weight: 600;
+    }
+
+    .nav-fav-count {
+      background: var(--saffron);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 99px;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .nav-fav-count.visible {
+      display: flex;
+    }
+
+    /* ========== AUTH & USER NAVBAR ========== */
+    .nav-auth-section {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .nav-sign-in-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-sign-in-btn:hover {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      transform: translateY(-1px);
+    }
+
+    .user-pill-wrap {
+      position: relative;
+      display: none;
+    }
+
+    .user-pill-wrap.visible {
+      display: block;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 4px 12px 4px 4px;
+      border-radius: 99px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .user-pill:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .user-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--saffron), var(--terracotta));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      min-width: 200px;
+      padding: 6px;
+      z-index: 1001;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      animation: modalSlideUp 0.2s ease;
+    }
+
+    .user-dropdown.open {
+      display: flex;
+    }
+
+    .user-dropdown-header {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    .user-dropdown-header .u-name {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--ink);
+    }
+
+    .user-dropdown-header .u-email {
+      font-size: 11px;
+      color: var(--ink-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: none;
+      background: none;
+      font-size: 13px;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .dropdown-item:hover {
+      background: var(--cream);
+      color: var(--terracotta);
+    }
+
+    .dropdown-item.logout {
+      color: #C0392B;
+    }
+
+    .dropdown-item.logout:hover {
+      background: #FDE8E8;
+    }
+
+    /* ========== AUTH MODAL & SAVED TRIPS ========== */
+    .auth-modal-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(20, 17, 15, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .auth-modal-wrap.open {
+      display: flex;
+      animation: modalFadeIn 0.25s ease;
+    }
+
+    .auth-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 420px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      animation: modalSlideUp 0.3s ease;
+      position: relative;
+    }
+
+    .auth-header {
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-lt) 100%);
+      padding: 24px 24px 20px;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    .auth-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .auth-header p {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .auth-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .auth-close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .auth-nav-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      background: var(--parchment);
+    }
+
+    .auth-tab-btn {
+      padding: 12px;
+      border: none;
+      background: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      position: relative;
+    }
+
+    .auth-tab-btn.active {
+      color: var(--terracotta);
+      background: var(--card);
+    }
+
+    .auth-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--terracotta);
+    }
+
+    .auth-body {
+      padding: 24px;
+    }
+
+    .auth-form {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .auth-form.active {
+      display: flex;
+    }
+
+    .auth-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .auth-input-group label {
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+    }
+
+    .auth-input-group input {
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .auth-input-group input:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(192, 98, 42, 0.12);
+    }
+
+    .auth-submit-btn {
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      padding: 13px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .auth-submit-btn:hover {
+      background: var(--terracotta-lt);
+      transform: translateY(-1px);
+    }
+
+    .auth-alert {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .auth-alert.error {
+      background: #FEF2F0;
+      color: #C0392B;
+      border: 1px solid rgba(192, 57, 43, 0.2);
+      display: flex;
+    }
+
+    .auth-alert.success {
+      background: #EDF7ED;
+      color: #1E4620;
+      border: 1px solid rgba(46, 139, 122, 0.3);
+      display: flex;
+    }
+
+    /* Saved Trips Modal */
+    .trips-modal-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 650px;
+      max-height: 85vh;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trips-list {
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .saved-trip-item {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
+    }
+
+    .saved-trip-item:hover {
+      border-color: var(--terracotta);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .saved-trip-info h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .saved-trip-meta {
+      font-size: 12px;
+      color: var(--ink-soft);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .saved-trip-budget {
+      color: var(--terracotta);
+      font-weight: 700;
+    }
+
+    .trip-action-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-del-trip {
+      background: none;
+      border: 1px solid #E8A598;
+      color: #C0392B;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-del-trip:hover {
+      background: #C0392B;
+      color: #fff;
+    }
+
+    .btn-save-plan {
+      background: var(--indigo);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .btn-save-plan:hover {
+      background: var(--indigo-lt);
+      transform: translateY(-1px);
+    }
+
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 88vh;
+      background: url('/static/hero.jpg?v=saifulmalook_hd') center center / cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-top: 62px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13, 27, 42, 0.68) 0%, rgba(27, 58, 107, 0.38) 50%, rgba(13, 27, 42, 0.75) 100%);
+    }
+
+    .hero-overlay.geo-pattern {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px 80px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 24px;
+      animation: fadeSlideUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      animation: fadeSlideUp 0.7s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      color: var(--saffron);
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 36px;
+      animation: fadeSlideUp 0.7s 0.2s ease both;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      animation: fadeSlideUp 0.7s 0.3s ease both;
+      margin-bottom: 44px;
+    }
+
+    .province-chip {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: rgba(255, 255, 255, 0.88);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      transition: var(--transition);
+    }
+
+    .province-chip:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      animation: fadeSlideUp 0.7s 0.4s ease both;
+    }
+
+    .hero-stat {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-stat .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 600;
+      display: block;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .hero-stat .lbl {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.65);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: bounce 2s infinite;
+    }
+
+    .hero-scroll-hint svg {
+      opacity: 0.5;
+    }
+
+    /* ========== MAIN CONTENT ========== */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+      animation: panelFade 0.3s ease;
+    }
+
+    /* ========== SECTION HEADER ========== */
+    .section-header {
+      margin-bottom: 28px;
+    }
+
+    .section-header h2 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .section-header p {
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    /* ========== SEARCH & FILTERS BAR ========== */
+    .search-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-muted);
+      pointer-events: none;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 12px 10px 38px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(192, 98, 42, 0.1);
+    }
+
+    select {
+      font-family: 'DM Sans', sans-serif;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      color: var(--ink);
+      font-size: 14px;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236A5F55' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 34px;
+      transition: var(--transition);
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(192, 98, 42, 0.1);
+    }
+
+    /* ========== CATEGORY PILLS ========== */
+    .cat-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .cat-pill {
+      padding: 7px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      transition: var(--transition);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .cat-pill:hover {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    .cat-pill.active {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: #fff;
+    }
+
+    /* ========== DESTINATION GRID ========== */
+    .dest-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .dest-card {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: cardIn 0.4s ease forwards;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      height: 180px;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .dest-card:hover .card-img {
+      transform: scale(1.06);
+    }
+
+    .card-img-placeholder {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--turquoise) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .card-cat-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(27, 58, 107, 0.85);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    .card-season-badge {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(232, 148, 58, 0.9);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .fav-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      z-index: 2;
+    }
+
+    .fav-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .fav-btn.active {
+      background: #ff4f6b;
+      color: #fff;
+    }
+
+    .fav-btn.pop {
+      animation: heartPop 0.3s ease;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card-prov {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--turquoise);
+      margin-bottom: 4px;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-days {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .card-budget {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--terracotta);
+    }
+
+    /* ========== EMPTY / ERROR ========== */
+    .empty-state {
+      text-align: center;
+      padding: 64px 20px;
+      color: var(--ink-soft);
+    }
+
+    .empty-state .emoji {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .empty-state p {
+      font-size: 15px;
+    }
+
+    .error-msg {
+      color: #C0392B;
+      font-size: 14px;
+      background: #FEF2F0;
+      border: 1px solid rgba(192, 57, 43, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+    }
+
+    /* ========== MODAL ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(27, 37, 58, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      animation: modalFadeIn 0.25s ease;
+    }
+
+    .modal {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+      animation: modalSlideUp 0.3s ease;
+    }
+
+    .modal-img-wrap {
+      position: relative;
+      height: 260px;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      overflow: hidden;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .modal-img-placeholder {
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--turquoise) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      z-index: 3;
+    }
+
+    .modal-close:hover {
+      background: #fff;
+      transform: scale(1.1);
+    }
+
+    .modal-body {
+      padding: 28px;
+    }
+
+    .modal-prov {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--turquoise);
+      margin-bottom: 6px;
+    }
+
+    .modal-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .modal-desc {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: var(--parchment);
+      color: var(--ink-soft);
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 99px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .modal-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .info-tile {
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .info-tile .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+
+    .info-tile .value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .info-tile .value.highlight {
+      color: var(--terracotta);
+    }
+
+    .modal-cost-row {
+      background: linear-gradient(135deg, var(--indigo), var(--indigo-lt));
+      border-radius: var(--radius-md);
+      padding: 20px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .modal-cost-row .title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .modal-cost-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .cost-cell {
+      text-align: center;
+    }
+
+    .cost-cell .amt {
+      font-size: 16px;
+      font-weight: 600;
+      display: block;
+    }
+
+    .cost-cell .lbl {
+      font-size: 10px;
+      opacity: 0.7;
+      text-transform: uppercase;
+    }
+
+    .modal-activities h4 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      margin-bottom: 10px;
+    }
+
+    .activities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .activity-tag {
+      background: var(--parchment);
+      border: 1px solid var(--parchment-dk);
+      font-size: 13px;
+      padding: 5px 12px;
+      border-radius: 99px;
+      color: var(--ink-soft);
+    }
+
+    .modal-plan-btn {
+      width: 100%;
+      margin-top: 20px;
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .modal-plan-btn:hover {
+      background: var(--terracotta-lt);
+      transform: translateY(-1px);
+    }
+
+    /* ========== PLAN TAB ========== */
+    .plan-layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 28px;
+    }
+
+    @media(max-width: 768px) {
+      .plan-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .plan-form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      height: fit-content;
+    }
+
+    .plan-form-card h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+
+    .form-group select,
+    .form-group input[type=number] {
+      width: 100%;
+    }
+
+    /* Budget slider */
+    .slider-wrap {
+      position: relative;
+    }
+
+    .budget-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      border-radius: 99px;
+      background: linear-gradient(to right, var(--terracotta) 0%, var(--terracotta) var(--pct, 30%), var(--parchment-dk) var(--pct, 30%), var(--parchment-dk) 100%);
+      outline: none;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    .budget-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      box-shadow: 0 2px 8px rgba(192, 98, 42, 0.4);
+      cursor: pointer;
+      border: 2px solid #fff;
+    }
+
+    .budget-display {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .budget-display .current {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+
+    /* Direct Budget Input and Presets */
+    .budget-input-wrapper {
+      display: flex;
+      align-items: center;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 6px 14px;
+      margin-bottom: 8px;
+      transition: var(--transition);
+    }
+
+    .budget-input-wrapper:focus-within {
+      border-color: var(--terracotta);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(192, 98, 42, 0.15);
+    }
+
+    .budget-currency-prefix {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--terracotta);
+      margin-right: 8px;
+    }
+
+    .budget-numeric-input {
+      border: none !important;
+      background: transparent !important;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      width: 100%;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .budget-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .budget-chip {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .budget-chip:hover {
+      background: #fff;
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    .budget-chip.active {
+      background: var(--terracotta);
+      color: #fff;
+      border-color: var(--terracotta);
+    }
+
+    .btn-primary {
+      width: 100%;
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-primary:hover {
+      background: var(--terracotta-lt);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(192, 98, 42, 0.3);
+    }
+
+    .btn-primary:disabled {
+      background: var(--parchment-dk);
+      color: var(--ink-muted);
+      transform: none;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    .loading .spinner {
+      display: block;
+    }
+
+    .loading .btn-text {
+      display: none;
+    }
+
+    /* Plan result */
+    .plan-result-area {
+      min-height: 300px;
+    }
+
+    .plan-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      color: var(--ink-muted);
+      gap: 12px;
+    }
+
+    .plan-placeholder .icon {
+      font-size: 56px;
+    }
+
+    .plan-placeholder p {
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      animation: cardIn 0.4s ease;
+    }
+
+    .result-hero {
+      position: relative;
+      height: 260px;
+    }
+
+    .result-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .result-img-placeholder {
+      width: 100%;
+      height: 260px;
+      background: linear-gradient(135deg, var(--indigo), var(--turquoise));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+    }
+
+    .result-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(20, 28, 45, 0.85) 0%, rgba(20, 28, 45, 0.3) 50%, rgba(0, 0, 0, 0.1) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px;
+    }
+
+    .result-badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .result-cat-badge {
+      background: rgba(27, 58, 107, 0.85);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .result-verified-badge {
+      background: rgba(46, 139, 122, 0.85);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .result-prov {
+      font-size: 12px;
+      color: var(--saffron);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 2px;
+    }
+
+    .result-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #fff;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .result-body {
+      padding: 26px;
+    }
+
+    .result-desc {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+      line-height: 1.65;
+    }
+
+    .section-subheading {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      margin-bottom: 12px;
+    }
+
+    .result-quick-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .quick-info-pill {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-info-pill strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .cost-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    @media(max-width: 600px) {
+      .cost-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .cost-tile {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .cost-tile .icon {
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+
+    .cost-tile .amt {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--indigo);
+      display: block;
+    }
+
+    .cost-tile .lbl {
+      font-size: 11px;
+      color: var(--ink-soft);
+      text-transform: capitalize;
+      font-weight: 500;
+    }
+
+    .cost-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-lt) 100%);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .cost-total-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cost-total-info .label {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .cost-total-info .sublabel {
+      font-size: 11px;
+      opacity: 0.75;
+    }
+
+    .cost-total-row .total {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--saffron);
+    }
+
+    /* Live Pricing Badges & Controls */
+    .live-pricing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 99px;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    }
+
+    .style-selector-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .style-pill-btn {
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 6px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .style-pill-btn:hover {
+      background: #fff;
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    .style-pill-btn.active {
+      background: var(--terracotta);
+      color: #fff;
+      border-color: var(--terracotta);
+      box-shadow: 0 4px 12px rgba(192, 98, 42, 0.25);
+    }
+
+    .tier-comparison-wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media(max-width: 600px) {
+      .tier-comparison-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tier-card {
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tier-card:hover {
+      border-color: var(--terracotta);
+      transform: translateY(-2px);
+    }
+
+    .tier-card.active {
+      border-color: var(--terracotta);
+      background: #FFFDF8;
+      box-shadow: 0 3px 10px rgba(192, 98, 42, 0.15);
+    }
+
+    .tier-card-header {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .tier-card-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--indigo);
+    }
+
+    .tier-card.active .tier-card-price {
+      color: var(--terracotta);
+    }
+
+    .nav-currency-selector {
+      display: flex;
+      align-items: center;
+    }
+
+    .currency-select-nav {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .currency-select-nav:hover {
+      border-color: var(--terracotta);
+    }
+
+    .itinerary-section {
+      margin-bottom: 22px;
+    }
+
+    .itinerary-section h4 {
+      font-size: 12.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      margin-bottom: 14px;
+    }
+
+    .itinerary-list {
+      position: relative;
+      padding-left: 36px;
+    }
+
+    .itinerary-list::before {
+      content: '';
+      position: absolute;
+      left: 13px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--parchment-dk);
+      border-radius: 99px;
+    }
+
+    .day-item {
+      position: relative;
+      padding-bottom: 16px;
+    }
+
+    .day-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .day-item::before {
+      content: attr(data-day);
+      position: absolute;
+      left: -36px;
+      top: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .day-item p {
+      font-size: 14px;
+      color: var(--ink);
+      padding-top: 2px;
+    }
+
+    #plan-map {
+      height: 220px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      margin-top: 8px;
+    }
+
+    /* ========== MAP TAB ========== */
+    .map-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 20px;
+    }
+
+    @media(max-width: 768px) {
+      .map-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #map {
+      height: 540px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .map-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .map-sidebar h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .map-dest-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow-y: auto;
+      max-height: 540px;
+      padding-right: 4px;
+    }
+
+    .map-dest-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .map-dest-item:hover {
+      border-color: var(--terracotta);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .map-dest-item .name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .map-dest-item .info {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    /* ========== CHAT TAB ========== */
+    .chat-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 24px;
+    }
+
+    @media(max-width: 768px) {
+      .chat-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chat-sidebar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      height: fit-content;
+    }
+
+    .chat-sidebar h3 {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    .chat-hints {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chat-hint {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+    }
+
+    .chat-hint:hover {
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    .chat-main {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      height: 560px;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-avatar {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--indigo), var(--turquoise));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .chat-header .name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .chat-header .status {
+      font-size: 12px;
+      color: var(--turquoise);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chat-header .status::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--turquoise);
+      display: block;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-msg {
+      display: flex;
+      gap: 10px;
+      max-width: 85%;
+      animation: msgIn 0.3s ease;
+    }
+
+    .chat-msg.user {
+      flex-direction: row-reverse;
+      margin-left: auto;
+    }
+
+    .chat-msg .bubble {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 16px 16px 16px 4px;
+      padding: 10px 14px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .chat-msg.user .bubble {
+      background: var(--indigo);
+      color: #fff;
+      border-color: var(--indigo);
+      border-radius: 16px 16px 4px 16px;
+    }
+
+    .typing-indicator .bubble {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 12px 16px;
+    }
+
+    .typing-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ink-muted);
+      animation: typingBounce 1.2s infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    .chat-input-row {
+      padding: 14px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      background: var(--cream);
+      transition: var(--transition);
+      resize: none;
+      height: 42px;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(192, 98, 42, 0.1);
+    }
+
+    .chat-send {
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .chat-send:hover {
+      background: var(--terracotta-lt);
+      transform: translateY(-1px);
+    }
+
+    /* ========== WISHLIST TAB ========== */
+    .wishlist-empty {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .wishlist-empty .icon {
+      font-size: 60px;
+      margin-bottom: 16px;
+    }
+
+    .wishlist-empty h3 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--ink-soft);
+    }
+
+    .wishlist-empty p {
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--indigo);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 48px 24px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    @media(max-width: 640px) {
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
+
+    .footer-brand .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-col ul li a {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      transition: var(--transition);
+    }
+
+    .footer-col ul li a:hover {
+      color: #fff;
+    }
+
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--terracotta);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .pk-strip {
+      height: 4px;
+      background: linear-gradient(to right, #01411C 50%, #FFFFFF 50%);
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes panelFade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modalSlideUp {
+      from {
+        transform: translateY(24px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    @keyframes heartPop {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.4);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes typingBounce {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+      }
+
+      30% {
+        transform: translateY(-5px);
+      }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media(max-width: 900px) {
+      .nav-logo {
+        font-size: 16px;
+      }
+
+      .tab-btn {
+        padding: 8px 10px;
+        font-size: 12.5px;
+      }
+    }
+
+    @media(max-width: 640px) {
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero-stats {
+        gap: 20px;
+      }
+
+      .map-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-sidebar {
+        order: 2;
+      }
+
+      .cost-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .modal-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-cost-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dest-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* ========== HERO CTA BUTTONS ========== */
+    .hero-cta-wrap {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+      animation: fadeSlideUp 0.7s 0.35s ease both;
+    }
+
+    .hero-cta-btn {
+      padding: 12px 22px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .hero-cta-btn.primary {
+      background: linear-gradient(135deg, var(--terracotta) 0%, var(--saffron) 100%);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(192, 98, 42, 0.4);
+    }
+
+    .hero-cta-btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(192, 98, 42, 0.5);
+    }
+
+    .hero-cta-btn.secondary {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-cta-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .hero-cta-btn.outline {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .hero-cta-btn.outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ========== DIRECTIONS BUTTON ========== */
+    .btn-directions {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--indigo);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: var(--transition);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-directions:hover {
+      background: var(--indigo-lt);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(27, 58, 107, 0.3);
+      color: #fff;
+    }
+
+    /* ========== MAP LOCATE LIVE BUTTON & PULSE ========== */
+    .map-container-wrap {
+      position: relative;
+    }
+
+    .map-locate-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 1000;
+      background: #fff;
+      color: var(--indigo);
+      border: 1.5px solid var(--indigo);
+      padding: 9px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .map-locate-btn:hover {
+      background: var(--indigo);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .user-location-pulse {
+      background: transparent;
+      border: none;
+    }
+
+    .pulse-dot {
+      width: 18px;
+      height: 18px;
+      background: #0077FF;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #0077FF;
+      animation: radarPulse 1.8s infinite;
+    }
+
+    @keyframes radarPulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 119, 255, 0.7); }
+      70% { box-shadow: 0 0 0 16px rgba(0, 119, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 119, 255, 0); }
+    }
+
+    /* ========== RECOMMENDATIONS (RESTAURANTS & HOTELS) ========== */
+    .rec-section {
+      margin-top: 24px;
+    }
+
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .rec-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .rec-card:hover {
+      border-color: var(--terracotta);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+
+    .rec-card.hotel {
+      background: #fff;
+      border-color: rgba(46, 139, 122, 0.25);
+    }
+
+    .rec-card.hotel:hover {
+      border-color: var(--turquoise);
+    }
+
+    .rec-card.shopping {
+      background: #fff;
+      border-color: rgba(232, 148, 58, 0.35);
+    }
+
+    .rec-card.shopping:hover {
+      border-color: var(--saffron);
+    }
+
+    .rec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .rec-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .rec-rating {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--saffron);
+      background: rgba(232, 148, 58, 0.12);
+      padding: 2px 7px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    .rec-cuisine,
+    .rec-type {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+
+    .rec-price {
+      color: var(--terracotta);
+      font-weight: 700;
+    }
+
+    .rec-desc {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+      margin: 2px 0 6px;
+    }
+
+    .rec-amenities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 4px 0 6px;
+    }
+
+    .rec-amenity-tag {
+      font-size: 11px;
+      background: rgba(46, 139, 122, 0.08);
+      color: var(--turquoise);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .rec-footer {
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .rec-area {
+      color: var(--ink-muted);
+      font-size: 11px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 140px;
+    }
+
+    .rec-map-link {
+      color: var(--terracotta);
+      font-weight: 600;
+      font-size: 12px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .rec-map-link:hover {
+      text-decoration: underline;
+      color: var(--terracotta-lt);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== DESTINATION DETAIL MODAL ===== -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal" id="modal">
+      <div class="modal-img-wrap">
+        <div id="modal-img-container"></div>
+        <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-prov" id="modal-prov"></div>
+        <h2 class="modal-name" id="modal-name"></h2>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-tags" id="modal-tags"></div>
+        <div class="modal-info-grid" id="modal-info-grid"></div>
+        <div class="modal-cost-row" id="modal-cost-row"></div>
+        <div class="modal-activities" id="modal-activities"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+          <button class="modal-plan-btn" id="modal-plan-btn" style="flex:1; margin-top:0;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            Plan a Trip Here
+          </button>
+          <a id="modal-directions-btn" href="#" target="_blank" rel="noopener" class="btn-directions" style="flex:1;">
+            🧭 Google Maps Route
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== AUTHENTICATION MODAL ===== -->
+  <div class="auth-modal-wrap" id="auth-modal-wrap" role="dialog" aria-modal="true">
+    <div class="auth-box">
+      <div class="auth-header">
+        <h3 id="auth-modal-title">Welcome Explorer</h3>
+        <p id="auth-modal-subtitle">Sign in to sync your wishlist and save your trip plans</p>
+        <button class="auth-close-btn" id="auth-close-btn" aria-label="Close">✕</button>
+      </div>
+      <div class="auth-nav-tabs">
+        <button class="auth-tab-btn active" id="tab-auth-login" onclick="switchAuthTab('login')">Sign In</button>
+        <button class="auth-tab-btn" id="tab-auth-register" onclick="switchAuthTab('register')">Create Account</button>
+      </div>
+      <div class="auth-body">
+        <div class="auth-alert" id="auth-alert"></div>
+
+        <!-- Login Form -->
+        <form class="auth-form active" id="form-login" onsubmit="handleLoginSubmit(event)">
+          <div class="auth-input-group">
+            <label for="login-identifier">Email or Username</label>
+            <input type="text" id="login-identifier" required placeholder="name@example.com or username"
+              autocomplete="username">
+          </div>
+          <div class="auth-input-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" required placeholder="••••••••" autocomplete="current-password">
+          </div>
+          <button type="submit" class="auth-submit-btn" id="btn-login-submit">
+            <span>Sign In</span>
+          </button>
+        </form>
+
+        <!-- Register Form -->
+        <form class="auth-form" id="form-register" onsubmit="handleRegisterSubmit(event)">
+          <div class="auth-input-group">
+            <label for="reg-fullname">Full Name</label>
+            <input type="text" id="reg-fullname" placeholder="e.g. Ali Khan">
+          </div>
+          <div class="auth-input-group">
+            <label for="reg-username">Username</label>
+            <input type="text" id="reg-username" required placeholder="e.g. travel_ali" minlength="3"
+              autocomplete="username">
+          </div>
+          <div class="auth-input-group">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" required placeholder="ali@example.com" autocomplete="email">
+          </div>
+          <div class="auth-input-group">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" required placeholder="Min 6 characters" minlength="6"
+              autocomplete="new-password">
+          </div>
+          <button type="submit" class="auth-submit-btn" id="btn-reg-submit">
+            <span>Create Free Account</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SAVED TRIPS MODAL ===== -->
+  <div class="auth-modal-wrap" id="trips-modal-wrap" role="dialog" aria-modal="true">
+    <div class="trips-modal-box">
+      <div class="auth-header" style="background: linear-gradient(135deg, var(--terracotta), var(--saffron));">
+        <h3>🗺️ My Saved Trip Itineraries</h3>
+        <p>Your personalized custom trip plans saved to your account</p>
+        <button class="auth-close-btn" id="trips-close-btn" aria-label="Close">✕</button>
+      </div>
+      <div class="trips-list" id="saved-trips-list">
+        <div class="empty-state">
+          <p>Loading your saved itineraries...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="flag">🇵🇰</span> Discover Pakistan
+      </div>
+      <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="browse" id="tab-browse">Browse</button>
+        <button class="tab-btn" data-tab="plan" id="tab-plan">Plan a Trip</button>
+        <button class="tab-btn" data-tab="map" id="tab-map">Map</button>
+        <button class="tab-btn" data-tab="chat" id="tab-chat">AI Chat</button>
+        <button class="tab-btn" data-tab="wishlist" id="tab-wishlist">Wishlist</button>
+      </div>
+      <div class="nav-auth-section">
+        <div class="nav-currency-selector">
+          <select id="global-currency-select" class="currency-select-nav" onchange="onGlobalCurrencyChange(this.value)" title="Change Currency">
+            <option value="PKR">₨ PKR</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="GBP">£ GBP</option>
+            <option value="AED">AED</option>
+            <option value="SAR">SAR</option>
+            <option value="CAD">CA$</option>
+            <option value="AUD">A$</option>
+          </select>
+        </div>
+        <div class="nav-fav-count" id="nav-fav-count">❤️ <span id="fav-count-num">0</span></div>
+
+        <!-- Guest button -->
+        <button class="nav-sign-in-btn" id="btn-nav-login" onclick="openAuthModal('login')">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3" />
+          </svg>
+          Sign In
+        </button>
+
+        <!-- Logged-in User Pill & Dropdown -->
+        <div class="user-pill-wrap" id="user-pill-wrap">
+          <button class="user-pill" id="btn-user-profile" onclick="toggleUserDropdown(event)">
+            <div class="user-avatar" id="user-avatar-char">U</div>
+            <span id="user-display-name">User</span>
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+          <div class="user-dropdown" id="user-dropdown">
+            <div class="user-dropdown-header">
+              <div class="u-name" id="menu-user-name">User Name</div>
+              <div class="u-email" id="menu-user-email">user@example.com</div>
+            </div>
+            <button class="dropdown-item" onclick="openSavedTripsModal()">
+              <span>🗺️</span> My Saved Trips
+            </button>
+            <button class="dropdown-item" onclick="switchTab('wishlist'); closeUserDropdown()">
+              <span>❤️</span> My Wishlist
+            </button>
+            <button class="dropdown-item logout" onclick="handleLogout()">
+              <span>🚪</span> Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="main-hero">
+    <div class="hero-overlay geo-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">✦ AI-Powered Travel Planner</div>
+      <h1>Discover <em>Pakistan,</em><br>Plan Smarter.</h1>
+      <p class="hero-desc">Real, hand-verified destinations across every province and territory. Mountains, history, nature and
+        culture — all in one intelligent trip planner.</p>
+      
+      <div class="hero-cta-wrap">
+        <button type="button" onclick="switchTab('plan')" class="hero-cta-btn primary">
+          ✨ Plan a Custom Trip
+        </button>
+        <button type="button" onclick="switchTab('map')" class="hero-cta-btn secondary">
+          🗺️ Explore Live Map
+        </button>
+        <button type="button" onclick="document.getElementById('search-input').focus(); document.querySelector('main').scrollIntoView({behavior:'smooth'});" class="hero-cta-btn outline">
+          🔍 Browse 150+ Places
+        </button>
+      </div>
+
+      <div class="hero-chips">
+        <span class="province-chip">Khyber Pakhtunkhwa</span>
+        <span class="province-chip">Punjab</span>
+        <span class="province-chip">Sindh</span>
+        <span class="province-chip">Balochistan</span>
+        <span class="province-chip">Gilgit-Baltistan</span>
+        <span class="province-chip">Islamabad</span>
+        <span class="province-chip">Azad Kashmir</span>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="num" id="stat-dest">30+</span>
+          <span class="lbl">Destinations</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">4</span>
+          <span class="lbl">Provinces</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">3</span>
+          <span class="lbl">Territories<br><small style="font-weight:400; opacity:0.75;">Capital, Azad Kashmir, Gilgit-Baltistan</small></span>
+        </div>
+        <div class="hero-stat">
+          <span class="num" id="stat-districts">—</span>
+          <span class="lbl">Cities &amp; Districts</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">5</span>
+          <span class="lbl">Categories</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">AI</span>
+          <span class="lbl">Powered</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+
+    <!-- BROWSE PANEL -->
+    <section class="panel active" id="browse">
+      <div class="section-header">
+        <h2>All Destinations</h2>
+        <p>Click any destination to see full details, budget breakdown, and activities.</p>
+      </div>
+
+      <div class="search-filter-row">
+        <div class="search-box">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" />
+            <path d="M21 21l-4.35-4.35" />
+          </svg>
+          <input type="text" id="search-input" placeholder="Search destinations, cities, or activities…"
+            autocomplete="off">
+        </div>
+        <select id="filter-province">
+          <option value="">All Provinces</option>
+        </select>
+        <select id="filter-city">
+          <option value="">All Cities</option>
+        </select>
+        <select id="filter-sort">
+          <option value="default">Default Order</option>
+          <option value="budget-asc">Budget: Low → High</option>
+          <option value="budget-desc">Budget: High → Low</option>
+          <option value="name">Name (A–Z)</option>
+          <option value="days">Recommended Days</option>
+        </select>
+      </div>
+
+      <div class="cat-pills" id="cat-pills">
+        <button class="cat-pill active" data-cat="">🗺️ All</button>
+        <button class="cat-pill" data-cat="mountains">🏔️ Mountains</button>
+        <button class="cat-pill" data-cat="historical">🏛️ Historical</button>
+        <button class="cat-pill" data-cat="nature">🌿 Nature</button>
+        <button class="cat-pill" data-cat="beaches">🏖️ Beaches</button>
+        <button class="cat-pill" data-cat="cultural">🎭 Cultural</button>
+      </div>
+
+      <div class="dest-grid" id="dest-grid"></div>
+    </section>
+
+    <!-- PLAN A TRIP PANEL -->
+    <section class="panel" id="plan">
+      <div class="section-header">
+        <h2>⚡ Live Custom Trip Planner</h2>
+        <p>Set your destination, live travel comfort style, and party size — get verified real-market pricing & day-by-day itineraries.</p>
+      </div>
+      <div class="plan-layout">
+        <div class="plan-form-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="margin-bottom:0;">Trip Preferences</h3>
+            <span class="live-pricing-badge">⚡ Live 2026 Rates</span>
+          </div>
+          <form id="plan-form">
+            <div class="form-group">
+              <label>Travel Comfort Tier</label>
+              <div class="style-selector-wrap">
+                <button type="button" class="style-pill-btn" data-style="budget" onclick="setPlannerTravelStyle('budget')">
+                  <span>🎒</span> Budget
+                </button>
+                <button type="button" class="style-pill-btn active" data-style="standard" onclick="setPlannerTravelStyle('standard')">
+                  <span>🏨</span> Standard
+                </button>
+                <button type="button" class="style-pill-btn" data-style="luxury" onclick="setPlannerTravelStyle('luxury')">
+                  <span>⭐</span> Luxury
+                </button>
+              </div>
+              <input type="hidden" id="plan-travel-style" value="standard">
+            </div>
+
+            <div class="form-group">
+              <label for="plan-from-city">Your Current Location <span style="font-size:11.5px; color:var(--ink-soft); font-weight:400;">(for route-based transport pricing)</span></label>
+              <select id="plan-from-city">
+                <option value="">Not sure / skip this</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="plan-province">Destination Province</label>
+              <select id="plan-province">
+                <option value="">Any Province</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="plan-city">Destination City / District</label>
+              <select id="plan-city" disabled>
+                <option value="">Select a province first</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="plan-category">Interest</label>
+              <select id="plan-category">
+                <option value="">Any interest</option>
+                <option value="mountains">🏔️ Mountains</option>
+                <option value="historical">🏛️ Historical</option>
+                <option value="nature">🌿 Nature</option>
+                <option value="beaches">🏖️ Beaches</option>
+                <option value="cultural">🎭 Cultural</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="plan-transport">Transport Preference</label>
+              <select id="plan-transport">
+                <option value="">Auto (Recommended for Route)</option>
+                <option value="private_car">🚗 Dedicated Private Car + Driver & Fuel</option>
+                <option value="mountain_jeep">🚙 4x4 Mountain Prado / Willy Jeep</option>
+                <option value="public_bus">🚌 Intercity Luxury Coach (Daewoo/Faisal Movers)</option>
+                <option value="flight">✈️ Domestic Flight + Local Vehicle</option>
+                <option value="local_transit">🚕 City Ride-Hailing (Careem/Rickshaw)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Do You Need a Hotel Stay?</label>
+              <div class="style-selector-wrap">
+                <button type="button" class="style-pill-btn hotel-pill-btn active" data-hotel="yes" onclick="setPlannerHotelChoice('yes')">
+                  <span>🏨</span> Yes, book a hotel
+                </button>
+                <button type="button" class="style-pill-btn hotel-pill-btn" data-hotel="no" onclick="setPlannerHotelChoice('no')">
+                  <span>🚗</span> No, same-day / staying with family
+                </button>
+              </div>
+              <input type="hidden" id="plan-include-hotel" value="yes">
+            </div>
+            <div class="form-group">
+              <label for="budget-input">Total Budget Limit (PKR) <span style="font-size:11.5px; color:var(--ink-soft); font-weight:400;">(Type exact amount or slide)</span></label>
+              <div class="budget-input-wrapper">
+                <span class="budget-currency-prefix">PKR</span>
+                <input type="number" id="budget-input" class="budget-numeric-input" min="1000" max="2000000" step="1000" value="80000" placeholder="e.g. 80000">
+              </div>
+              <div class="budget-chips-row">
+                <button type="button" class="budget-chip" data-val="30000" onclick="setPresetBudget(30000)">30K</button>
+                <button type="button" class="budget-chip" data-val="50000" onclick="setPresetBudget(50000)">50K</button>
+                <button type="button" class="budget-chip active" data-val="80000" onclick="setPresetBudget(80000)">80K</button>
+                <button type="button" class="budget-chip" data-val="150000" onclick="setPresetBudget(150000)">1.5 Lakh</button>
+                <button type="button" class="budget-chip" data-val="300000" onclick="setPresetBudget(300000)">3 Lakh</button>
+                <button type="button" class="budget-chip" data-val="500000" onclick="setPresetBudget(500000)">5 Lakh</button>
+              </div>
+              <div class="slider-wrap">
+                <input type="range" class="budget-slider" id="budget-slider" min="10000" max="500000" step="5000"
+                  value="80000">
+                <div class="budget-display">
+                  <span>PKR 10K</span>
+                  <span class="current" id="budget-display">PKR 80,000</span>
+                  <span>PKR 500K+</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+              <div>
+                <label for="plan-days">Trip Days</label>
+                <input type="number" id="plan-days" min="1" max="14" value="4">
+              </div>
+              <div>
+                <label for="plan-people">Travelers</label>
+                <input type="number" id="plan-people" min="1" max="20" value="2">
+              </div>
+            </div>
+            <button type="submit" class="btn-primary" id="plan-btn">
+              <div class="spinner"></div>
+              <span class="btn-text">✦ Calculate Live Plan</span>
+            </button>
+          </form>
+        </div>
+        <div class="plan-result-area" id="plan-result">
+          <div class="plan-placeholder">
+            <div class="icon">🗺️</div>
+            <p>Fill in your preferences<br>and click <strong>Plan My Trip</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP PANEL -->
+    <section class="panel" id="map-panel">
+      <div class="section-header">
+        <h2>Explore on Map</h2>
+        <p>All destinations plotted across Pakistan. Click a marker or locate your live position.</p>
+      </div>
+      <div class="map-layout">
+        <div class="map-sidebar">
+          <h3>Destinations</h3>
+          <div class="map-dest-list" id="map-dest-list"></div>
+        </div>
+        <div class="map-container-wrap" style="position:relative;">
+          <button type="button" class="map-locate-btn" id="btn-locate-user" onclick="locateUserOnMap()">
+            📍 Find My Live Location
+          </button>
+          <div id="map"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAT PANEL -->
+    <section class="panel" id="chat-panel">
+      <div class="section-header">
+        <h2>AI Travel Assistant</h2>
+        <p>Ask anything about traveling in Pakistan — budgets, destinations, itineraries.</p>
+      </div>
+      <div class="chat-layout">
+        <div class="chat-sidebar">
+          <h3>Try asking…</h3>
+          <div class="chat-hints">
+            <button class="chat-hint" data-hint="Suggest a 3 day mountain trip under PKR 30000">🏔️ 3-day mountain trip
+              under 30k</button>
+            <button class="chat-hint" data-hint="What are the best historical places in Punjab?">🏛️ Historical places
+              in Punjab</button>
+            <button class="chat-hint" data-hint="I have 5 days and PKR 50000 budget">📅 5-day trip with 50k
+              budget</button>
+            <button class="chat-hint" data-hint="Best time to visit Hunza Valley?">🌸 Best season for Hunza</button>
+            <button class="chat-hint" data-hint="Show me nature spots in Balochistan">🌿 Nature in Balochistan</button>
+            <button class="chat-hint" data-hint="Beach destinations in Pakistan">🏖️ Beach destinations</button>
+          </div>
+        </div>
+        <div class="chat-main">
+          <div class="chat-header">
+            <div class="chat-avatar">🤖</div>
+            <div>
+              <div class="name">Pakistan Travel Agent</div>
+              <div class="status">Online</div>
+            </div>
+          </div>
+          <div class="chat-messages" id="chat-messages">
+            <div class="chat-msg agent">
+              <div class="bubble">Assalamu Alaikum! 🌙 I'm your Pakistan travel assistant. Tell me your budget,
+                interests, and number of days — I'll recommend the perfect destination with a full cost breakdown and
+                itinerary!</div>
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Type your travel question…"
+              autocomplete="off">
+            <button class="chat-send" id="chat-send" aria-label="Send message">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WISHLIST PANEL -->
+    <section class="panel" id="wishlist-panel">
+      <div class="section-header">
+        <h2>My Wishlist</h2>
+        <p>Your saved destinations — click the heart on any card to add.</p>
+      </div>
+      <div id="wishlist-content"></div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="pk-strip"></div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="name">🇵🇰 Discover Pakistan</div>
+          <p>An AI-powered travel planner for Pakistan tourism. Real, verified destinations across all 4 provinces and 3 territories.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#" onclick="switchTab('browse')">All Destinations</a></li>
+            <li><a href="#" onclick="switchTab('plan')">Plan a Trip</a></li>
+            <li><a href="#" onclick="switchTab('map')">Interactive Map</a></li>
+            <li><a href="#" onclick="switchTab('chat')">AI Chat</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>4 Provinces</h4>
+          <ul>
+            <li><a href="#">Punjab</a></li>
+            <li><a href="#">Sindh</a></li>
+            <li><a href="#">Khyber Pakhtunkhwa</a></li>
+            <li><a href="#">Balochistan</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Territories</h4>
+          <ul>
+            <li><a href="#">Islamabad Capital Territory</a></li>
+            <li><a href="#">Azad Kashmir</a></li>
+            <li><a href="#">Gilgit-Baltistan</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <div class="footer-bottom">
+        <p>© 2026 Discover Pakistan · ⚡ Powered by Live Dynamic Market Pricing Engine (2026 Rates) · Built with ❤️ in Pakistan</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="GitHub">⌨</a>
+          <a href="#" class="social-link" title="Twitter">𝕏</a>
+          <a href="#" class="social-link" title="Instagram">📷</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    'use strict';
+    const API = '';
+    let allDestinations = [];
+    let favorites = JSON.parse(localStorage.getItem('pk_favorites') || '[]');
+    let planMapInstance = null;
+    let leafletMap = null;
+    let mapInitialized = false;
+    let activeCategory = '';
+    let leafletMarkers = [];
+
+    // ========== AUTH STATE & UTILS ==========
+    let authToken = localStorage.getItem('pk_auth_token') || null;
+    let currentUser = null;
+    let currentPlannedTrip = null;
+
+    function getAuthHeaders() {
+      const headers = { 'Content-Type': 'application/json' };
+      if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
+      }
+      return headers;
+    }
+
+    async function checkAuth() {
+      if (!authToken) {
+        updateAuthUI(null);
+        return;
+      }
+      try {
+        const res = await fetch(`${API}/auth/me`, { headers: getAuthHeaders() });
+        if (res.ok) {
+          currentUser = await res.json();
+          updateAuthUI(currentUser);
+          await syncUserWishlist();
+        } else {
+          handleLogout(false);
+        }
+      } catch (e) {
+        console.warn('Auth check error:', e);
+      }
+    }
+
+    function updateAuthUI(user) {
+      const signInBtn = document.getElementById('btn-nav-login');
+      const userPillWrap = document.getElementById('user-pill-wrap');
+      if (user) {
+        if (signInBtn) signInBtn.style.display = 'none';
+        if (userPillWrap) {
+          userPillWrap.classList.add('visible');
+          const char = (user.full_name || user.username || 'U').charAt(0).toUpperCase();
+          document.getElementById('user-avatar-char').textContent = char;
+          document.getElementById('user-display-name').textContent = user.username;
+          document.getElementById('menu-user-name').textContent = user.full_name || user.username;
+          document.getElementById('menu-user-email').textContent = user.email;
+        }
+      } else {
+        if (signInBtn) signInBtn.style.display = 'flex';
+        if (userPillWrap) userPillWrap.classList.remove('visible');
+        closeUserDropdown();
+      }
+    }
+
+    function toggleUserDropdown(e) {
+      if (e) e.stopPropagation();
+      const dropdown = document.getElementById('user-dropdown');
+      if (dropdown) dropdown.classList.toggle('open');
+    }
+
+    function closeUserDropdown() {
+      const dropdown = document.getElementById('user-dropdown');
+      if (dropdown) dropdown.classList.remove('open');
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('#user-pill-wrap')) closeUserDropdown();
+    });
+
+    // ========== AUTH MODAL HANDLING ==========
+    function openAuthModal(tab = 'login') {
+      closeUserDropdown();
+      switchAuthTab(tab);
+      document.getElementById('auth-alert').className = 'auth-alert';
+      document.getElementById('auth-alert').style.display = 'none';
+      document.getElementById('auth-modal-wrap').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeAuthModal() {
+      document.getElementById('auth-modal-wrap').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('auth-close-btn').addEventListener('click', closeAuthModal);
+    document.getElementById('auth-modal-wrap').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeAuthModal();
+    });
+
+    function switchAuthTab(tab) {
+      const tabLogin = document.getElementById('tab-auth-login');
+      const tabReg = document.getElementById('tab-auth-register');
+      const formLogin = document.getElementById('form-login');
+      const formReg = document.getElementById('form-register');
+      const title = document.getElementById('auth-modal-title');
+      const subtitle = document.getElementById('auth-modal-subtitle');
+      const alertEl = document.getElementById('auth-alert');
+      alertEl.style.display = 'none';
+
+      if (tab === 'login') {
+        tabLogin.classList.add('active');
+        tabReg.classList.remove('active');
+        formLogin.classList.add('active');
+        formReg.classList.remove('active');
+        title.textContent = 'Welcome Explorer';
+        subtitle.textContent = 'Sign in to access your saved trips and synced wishlist';
+      } else {
+        tabLogin.classList.remove('active');
+        tabReg.classList.add('active');
+        formLogin.classList.remove('active');
+        formReg.classList.add('active');
+        title.textContent = 'Create Free Account';
+        subtitle.textContent = 'Join to save custom travel itineraries across all devices';
+      }
+    }
+
+    function showAuthAlert(msg, type = 'error') {
+      const el = document.getElementById('auth-alert');
+      el.className = `auth-alert ${type}`;
+      el.textContent = (type === 'error' ? '⚠️ ' : '✅ ') + msg;
+      el.style.display = 'flex';
+    }
+
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-login-submit');
+      btn.disabled = true;
+      btn.innerHTML = '<span>Signing In...</span>';
+
+      const body = {
+        email_or_username: document.getElementById('login-identifier').value.trim(),
+        password: document.getElementById('login-password').value,
+      };
+
+      try {
+        const res = await fetch(`${API}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showAuthAlert(data.detail || 'Login failed. Please check your credentials.', 'error');
+        } else {
+          authToken = data.access_token;
+          currentUser = data.user;
+          localStorage.setItem('pk_auth_token', authToken);
+          updateAuthUI(currentUser);
+          showAuthAlert(`Welcome back, ${currentUser.username}!`, 'success');
+          setTimeout(async () => {
+            closeAuthModal();
+            await syncUserWishlist();
+          }, 700);
+        }
+      } catch (err) {
+        showAuthAlert(`Network error: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Sign In</span>';
+      }
+    }
+
+    async function handleRegisterSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-reg-submit');
+      btn.disabled = true;
+      btn.innerHTML = '<span>Creating Account...</span>';
+
+      const body = {
+        full_name: document.getElementById('reg-fullname').value.trim() || null,
+        username: document.getElementById('reg-username').value.trim(),
+        email: document.getElementById('reg-email').value.trim(),
+        password: document.getElementById('reg-password').value,
+      };
+
+      try {
+        const res = await fetch(`${API}/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          showAuthAlert(data.detail || 'Registration failed. Please verify your details.', 'error');
+        } else {
+          authToken = data.access_token;
+          currentUser = data.user;
+          localStorage.setItem('pk_auth_token', authToken);
+          updateAuthUI(currentUser);
+          showAuthAlert(`Account created successfully! Welcome, ${currentUser.username}.`, 'success');
+          setTimeout(async () => {
+            closeAuthModal();
+            await syncUserWishlist();
+          }, 700);
+        }
+      } catch (err) {
+        showAuthAlert(`Network error: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>Create Free Account</span>';
+      }
+    }
+
+    function handleLogout(showMessage = true) {
+      authToken = null;
+      currentUser = null;
+      localStorage.removeItem('pk_auth_token');
+      updateAuthUI(null);
+      if (showMessage) {
+        alert('You have been signed out.');
+      }
+    }
+
+    // ========== CLOUD WISHLIST SYNC ==========
+    async function syncUserWishlist() {
+      if (!authToken) return;
+      try {
+        if (favorites.length > 0) {
+          await fetch(`${API}/api/user/wishlist/sync`, {
+            method: 'POST',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ destination_ids: favorites }),
+          });
+        }
+        const res = await fetch(`${API}/api/user/wishlist`, { headers: getAuthHeaders() });
+        if (res.ok) {
+          const data = await res.json();
+          favorites = data.destination_ids || [];
+          localStorage.setItem('pk_favorites', JSON.stringify(favorites));
+          updateFavCount();
+          renderGrid();
+        }
+      } catch (e) {
+        console.warn('Wishlist sync error:', e);
+      }
+    }
+
+    // ========== CATEGORY CONFIG ==========
+    const CAT_CONFIG = {
+      mountains: { icon: '🏔️', color: '#1B3A6B' },
+      historical: { icon: '🏛️', color: '#C0622A' },
+      nature: { icon: '🌿', color: '#2E8B7A' },
+      beaches: { icon: '🏖️', color: '#E8943A' },
+      cultural: { icon: '🎭', color: '#8B4B9B' },
+    };
+    function catIcon(cat) { return (CAT_CONFIG[cat?.toLowerCase()] || { icon: '📍' }).icon; }
+
+    // ========== DEFAULT BUDGETS (for destinations missing one) ==========
+    const DEFAULT_BUDGETS = {
+      mountains: 7000, historical: 3000, nature: 5000, beaches: 4000, cultural: 5000
+    };
+
+    function getBudget(d) {
+      if (d.estimated_budget_per_day && d.estimated_budget_per_day > 0) return d.estimated_budget_per_day;
+      return DEFAULT_BUDGETS[d.category?.toLowerCase()] || 5000;
+    }
+
+    // ========== TABS ==========
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+      if (btn) btn.classList.add('active');
+      const panelId = tab === 'map' ? 'map-panel' : tab === 'chat' ? 'chat-panel' : tab === 'wishlist' ? 'wishlist-panel' : tab;
+      const panel = document.getElementById(panelId);
+      if (panel) panel.classList.add('active');
+
+      const hero = document.getElementById('main-hero');
+      if (tab === 'browse') {
+        if (hero) hero.style.display = 'flex';
+      } else {
+        if (hero) hero.style.display = 'none';
+      }
+
+      if (tab === 'map') initMap();
+      if (tab === 'wishlist') renderWishlist();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    // ========== IMAGE HELPER ==========
+    function imgOrPlaceholder(url, cssClass, placeholderClass, alt = '') {
+      if (url && !url.startsWith('PLACEHOLDER')) {
+        return `<img class="${cssClass}" src="${url}" alt="${alt}" loading="lazy" onerror="this.outerHTML='<div class=\\"${placeholderClass}\\">📸 Photo unavailable</div>'">`;
+      }
+      return `<div class="${placeholderClass}">📸 No photo yet</div>`;
+    }
+
+    // ========== FAVORITES ==========
+    function isFav(id) { return favorites.includes(id); }
+    async function toggleFav(id, btn) {
+      if (isFav(id)) {
+        favorites = favorites.filter(f => f !== id);
+      } else {
+        favorites.push(id);
+        btn && btn.classList.add('pop');
+        btn && setTimeout(() => btn.classList.remove('pop'), 300);
+      }
+      localStorage.setItem('pk_favorites', JSON.stringify(favorites));
+      // update all fav buttons for this id
+      document.querySelectorAll(`.fav-btn[data-id="${id}"]`).forEach(b => {
+        b.classList.toggle('active', isFav(id));
+        b.title = isFav(id) ? 'Remove from wishlist' : 'Add to wishlist';
+        b.innerHTML = isFav(id) ? '❤️' : '🤍';
+      });
+      updateFavCount();
+
+      // If user is logged in, sync toggle to cloud DB
+      if (authToken) {
+        try {
+          await fetch(`${API}/api/user/wishlist/toggle`, {
+            method: 'POST',
+            headers: getAuthHeaders(),
+            body: JSON.stringify({ destination_id: id }),
+          });
+        } catch (e) {
+          console.warn('Cloud wishlist toggle error:', e);
+        }
+      }
+    }
+    function updateFavCount() {
+      const el = document.getElementById('nav-fav-count');
+      const num = document.getElementById('fav-count-num');
+      num.textContent = favorites.length;
+      el.classList.toggle('visible', favorites.length > 0);
+    }
+
+    // ========== LOAD DESTINATIONS ==========
+    async function loadDestinations() {
+      try {
+        const res = await fetch(`${API}/destinations`);
+        allDestinations = await res.json();
+        // Patch missing budgets client-side
+        allDestinations.forEach(d => {
+          if (!d.estimated_budget_per_day || d.estimated_budget_per_day === 0) {
+            d.estimated_budget_per_day = DEFAULT_BUDGETS[d.category?.toLowerCase()] || 5000;
+          }
+        });
+
+        document.getElementById('stat-dest').textContent = allDestinations.length + '+';
+        const uniqueDistricts = new Set(allDestinations.map(d => d.district).filter(Boolean));
+        document.getElementById('stat-districts').textContent = uniqueDistricts.size + '+';
+
+        // Populate province dropdowns
+        const provinces = [...new Set(allDestinations.map(d => d.province))].sort();
+        const provSelect = document.getElementById('filter-province');
+        const planProvSelect = document.getElementById('plan-province');
+        provinces.forEach(p => {
+          provSelect.insertAdjacentHTML('beforeend', `<option value="${p}">${p}</option>`);
+          planProvSelect.insertAdjacentHTML('beforeend', `<option value="${p}">${p}</option>`);
+        });
+
+        // Populate "Your Current Location" dropdown with every known city/district,
+        // regardless of province -- the user could be starting from anywhere.
+        const fromCitySelect = document.getElementById('plan-from-city');
+        if (fromCitySelect) {
+          const allCities = [...uniqueDistricts].sort();
+          allCities.forEach(c => {
+            fromCitySelect.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`);
+          });
+        }
+
+        populateBrowseCities();
+        renderGrid();
+        updateFavCount();
+      } catch (e) {
+        document.getElementById('dest-grid').innerHTML = `<p class="error-msg">Could not load destinations. Is the server running? ${e}</p>`;
+      }
+    }
+
+    function populateBrowseCities() {
+      const prov = document.getElementById('filter-province').value;
+      const citySelect = document.getElementById('filter-city');
+      let list = allDestinations;
+      if (prov) {
+        list = allDestinations.filter(d => d.province === prov);
+      }
+      const cities = [...new Set(list.map(d => d.district).filter(Boolean))].sort();
+      citySelect.innerHTML = '<option value="">All Cities</option>' +
+        cities.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    // ========== RENDER GRID ==========
+    function renderGrid() {
+      const search = document.getElementById('search-input').value.toLowerCase().trim();
+      const province = document.getElementById('filter-province').value;
+      const city = document.getElementById('filter-city') ? document.getElementById('filter-city').value : '';
+      const cat = activeCategory;
+      const sortBy = document.getElementById('filter-sort') ? document.getElementById('filter-sort').value : 'default';
+
+      let filtered = allDestinations.filter(d =>
+        (!search || d.name.toLowerCase().includes(search) || (d.district || '').toLowerCase().includes(search) || (d.description || '').toLowerCase().includes(search)) &&
+        (!province || d.province === province) &&
+        (!city || d.district === city) &&
+        (!cat || d.category?.toLowerCase() === cat)
+      );
+
+      // Sorting
+      if (sortBy === 'budget-asc') {
+        filtered.sort((a, b) => getBudget(a) - getBudget(b));
+      } else if (sortBy === 'budget-desc') {
+        filtered.sort((a, b) => getBudget(b) - getBudget(a));
+      } else if (sortBy === 'name') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sortBy === 'days') {
+        filtered.sort((a, b) => (b.recommended_days || 1) - (a.recommended_days || 1));
+      }
+
+      const grid = document.getElementById('dest-grid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="emoji">🔍</div><p>No destinations match these filters.<br>Try adjusting your search, city, or category.</p></div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map((d, i) => {
+        const budget = getBudget(d);
+        const seasonIcon = (d.best_season || '').toLowerCase().includes('year') ? '📅' : '🌤️';
+        const delay = Math.min(i * 30, 300);
+        return `
+    <div class="dest-card" onclick="openModal(${d.id})" style="animation-delay:${delay}ms" id="card-${d.id}">
+      <div class="card-img-wrap">
+        ${imgOrPlaceholder(d.image_url, 'card-img', 'card-img-placeholder', d.name)}
+        <div class="card-cat-badge">${catIcon(d.category)} ${d.category || 'destination'}</div>
+        ${d.best_season ? `<div class="card-season-badge">${seasonIcon} ${d.best_season.split('(')[0].trim()}</div>` : ''}
+        <button class="fav-btn ${isFav(d.id) ? 'active' : ''}" data-id="${d.id}"
+          onclick="event.stopPropagation(); toggleFav(${d.id}, this)"
+          title="${isFav(d.id) ? 'Remove from wishlist' : 'Add to wishlist'}">
+          ${isFav(d.id) ? '❤️' : '🤍'}
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-prov">${d.province}${d.district ? ' · ' + d.district : ''}</div>
+        <div class="card-name">${d.name}</div>
+        <div class="card-desc">${d.description || ''}</div>
+        <div class="card-meta">
+          <span class="card-days">📅 ${d.recommended_days ?? '1'} day(s)</span>
+          <span class="card-budget">⚡ ${formatLivePrice(budget)}/day</span>
+        </div>
+      </div>
+    </div>`;
+      }).join('');
+    }
+
+    // ========== LIVE CURRENCY & PRICING HELPERS ==========
+    let currentGlobalCurrency = 'PKR';
+    const FX_RATES = {
+      PKR: { rate: 1.0, symbol: '₨', name: 'PKR' },
+      USD: { rate: 278.5, symbol: '$', name: 'USD' },
+      EUR: { rate: 303.2, symbol: '€', name: 'EUR' },
+      GBP: { rate: 354.8, symbol: '£', name: 'GBP' },
+      AED: { rate: 75.8, symbol: 'AED ', name: 'AED' },
+      SAR: { rate: 74.2, symbol: 'SAR ', name: 'SAR' },
+      CAD: { rate: 204.6, symbol: 'CA$ ', name: 'CAD' },
+      AUD: { rate: 181.5, symbol: 'A$ ', name: 'AUD' },
+    };
+
+    function formatLivePrice(amountPkr, curr = currentGlobalCurrency) {
+      const fx = FX_RATES[curr] || FX_RATES.PKR;
+      if (curr === 'PKR') {
+        return `PKR ${Math.round(amountPkr).toLocaleString()}`;
+      }
+      const converted = (amountPkr / fx.rate).toFixed(2);
+      return `${fx.symbol}${parseFloat(converted).toLocaleString()}`;
+    }
+
+    function onGlobalCurrencyChange(newCurr) {
+      currentGlobalCurrency = newCurr;
+      const navSel = document.getElementById('global-currency-select');
+      if (navSel) navSel.value = newCurr;
+      renderGrid();
+      const planRes = document.getElementById('plan-result');
+      if (planRes && planRes.querySelector('.result-card')) {
+        document.getElementById('plan-form').dispatchEvent(new Event('submit'));
+      }
+    }
+
+    function setPlannerTravelStyle(style) {
+      document.querySelectorAll('.style-pill-btn[data-style]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.style === style);
+      });
+      const input = document.getElementById('plan-travel-style');
+      if (input) input.value = style;
+    }
+
+    function setPlannerHotelChoice(choice) {
+      document.querySelectorAll('.hotel-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.hotel === choice);
+      });
+      const input = document.getElementById('plan-include-hotel');
+      if (input) input.value = choice;
+    }
+
+    function switchPlannerTier(tier) {
+      setPlannerTravelStyle(tier);
+      document.getElementById('plan-form').dispatchEvent(new Event('submit'));
+    }
+
+    // Filter events
+    document.getElementById('search-input').addEventListener('input', renderGrid);
+    document.getElementById('filter-province').addEventListener('change', () => {
+      populateBrowseCities();
+      renderGrid();
+    });
+    if (document.getElementById('filter-city')) {
+      document.getElementById('filter-city').addEventListener('change', renderGrid);
+    }
+    if (document.getElementById('filter-sort')) {
+      document.getElementById('filter-sort').addEventListener('change', renderGrid);
+    }
+    document.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeCategory = pill.dataset.cat;
+        renderGrid();
+      });
+    });
+
+    // ========== MODAL ==========
+    function openModal(id) {
+      const d = allDestinations.find(x => x.id === id);
+      if (!d) return;
+      const budget = getBudget(d);
+
+      // Image
+      const imgAttribHtml = (d.image_url && d.image_attribution)
+        ? `<a href="${d.image_attribution}" target="_blank" rel="noopener"
+          style="position:absolute;bottom:8px;right:10px;font-size:10px;color:rgba(255,255,255,0.65);
+                 background:rgba(0,0,0,0.4);padding:2px 7px;border-radius:99px;text-decoration:none;
+                 backdrop-filter:blur(4px);z-index:2;">📷 Wikipedia</a>`
+        : '';
+      document.getElementById('modal-img-container').innerHTML =
+        imgOrPlaceholder(d.image_url, 'modal-img', 'modal-img-placeholder', d.name) + imgAttribHtml;
+
+      document.getElementById('modal-prov').textContent = d.province + (d.district ? ' · ' + d.district : '');
+      document.getElementById('modal-name').textContent = d.name;
+      document.getElementById('modal-desc').textContent = d.description || '';
+
+      // Tags
+      document.getElementById('modal-tags').innerHTML = [
+        d.category ? `<span class="tag">${catIcon(d.category)} ${d.category}</span>` : '',
+        d.best_season ? `<span class="tag">🌤️ ${d.best_season}</span>` : '',
+        d.data_source ? `<span class="tag">✅ Verified destination</span>` : '',
+      ].join('');
+
+      // Info grid
+      document.getElementById('modal-info-grid').innerHTML = `
+    <div class="info-tile">
+      <div class="label">Recommended Stay</div>
+      <div class="value">${d.recommended_days ?? '1'} day(s)</div>
+    </div>
+    <div class="info-tile">
+      <div class="label">Live Market Budget / Day</div>
+      <div class="value highlight">⚡ ${formatLivePrice(budget)}</div>
+    </div>
+    <div class="info-tile">
+      <div class="label">Location</div>
+      <div class="value">${d.province}${d.district ? ' (' + d.district + ')' : ''}</div>
+    </div>
+    <div class="info-tile">
+      <div class="label">Category</div>
+      <div class="value">${d.category || '—'}</div>
+    </div>`;
+
+      // Cost breakdown (for 2 people, recommended days)
+      const days = d.recommended_days || 2;
+      const people = 2;
+      const acc = Math.round(budget * 0.45 * days * people);
+      const food = Math.round(budget * 0.25 * days * people);
+      const act = Math.round(budget * 0.15 * days * people);
+      const trn = Math.round(budget * 0.15 * days * people);
+      const total = acc + food + act + trn;
+      document.getElementById('modal-cost-row').innerHTML = `
+    <div class="title" style="display:flex; justify-content:space-between; align-items:center;">
+      <span>⚡ Live Market Pricing — ${days} days, ${people} people</span>
+      <span class="live-pricing-badge" style="font-size:9px; padding:2px 8px;">Verified 2026</span>
+    </div>
+    <div class="modal-cost-grid">
+      <div class="cost-cell"><span class="amt">${formatLivePrice(acc)}</span><span class="lbl">🏨 Hotel Stay</span></div>
+      <div class="cost-cell"><span class="amt">${formatLivePrice(food)}</span><span class="lbl">🍽️ Dining</span></div>
+      <div class="cost-cell"><span class="amt">${formatLivePrice(act)}</span><span class="lbl">🎟️ Activities</span></div>
+      <div class="cost-cell"><span class="amt">${formatLivePrice(trn)}</span><span class="lbl">🚗 Transport</span></div>
+    </div>
+    <div style="margin-top:12px; font-size:16px; font-weight:700; color:#fff; display:flex; justify-content:space-between; align-items:center;">
+      <span>Total: ${formatLivePrice(total)}</span>
+      <span style="font-size:11px; opacity:0.8; font-weight:400;">PKR ${total.toLocaleString()}</span>
+    </div>`;
+
+      // Activities
+      const acts = (d.activities || '').split(',').map(a => a.trim()).filter(Boolean);
+      document.getElementById('modal-activities').innerHTML = acts.length ? `
+    <h4>Activities</h4>
+    <div class="activities-list">
+      ${acts.map(a => `<span class="activity-tag">✦ ${a}</span>`).join('')}
+    </div>` : '';
+
+      // Directions button
+      const directionsBtn = document.getElementById('modal-directions-btn');
+      if (directionsBtn) {
+        const query = (d.latitude && d.longitude)
+          ? `${d.latitude},${d.longitude}`
+          : encodeURIComponent(`${d.name}, ${d.province}, Pakistan`);
+        directionsBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${query}`;
+      }
+
+      // Plan-here button
+      document.getElementById('modal-plan-btn').onclick = () => {
+        closeModal();
+        switchTab('plan');
+        const planProv = document.getElementById('plan-province');
+        planProv.value = d.province;
+        planProv.dispatchEvent(new Event('change'));
+        if (d.district) {
+          setTimeout(() => {
+            const citySel = document.getElementById('plan-city');
+            if (citySel) citySel.value = d.district;
+          }, 50);
+        }
+        if (d.category) document.getElementById('plan-category').value = d.category;
+      };
+
+      document.getElementById('modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    document.getElementById('modal-overlay').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // ========== PLAN A TRIP ==========
+    // Budget slider & direct number input sync
+    const slider = document.getElementById('budget-slider');
+    const budgetInput = document.getElementById('budget-input');
+    const budgetDisp = document.getElementById('budget-display');
+
+    function updateSliderFromInput() {
+      let val = parseInt(budgetInput ? budgetInput.value : 0) || 10000;
+      if (val < 1000) val = 1000;
+      if (val > 2000000) val = 2000000;
+      if (slider) {
+        slider.value = Math.min(Math.max(val, 10000), 500000);
+        const pct = ((slider.value - 10000) / (500000 - 10000)) * 100;
+        slider.style.setProperty('--pct', pct + '%');
+      }
+      if (budgetDisp) budgetDisp.textContent = 'PKR ' + val.toLocaleString();
+      highlightPresetChip(val);
+    }
+
+    function updateInputFromSlider() {
+      if (!slider) return;
+      const val = parseInt(slider.value);
+      if (budgetInput) budgetInput.value = val;
+      const pct = ((val - 10000) / (500000 - 10000)) * 100;
+      slider.style.setProperty('--pct', pct + '%');
+      if (budgetDisp) budgetDisp.textContent = 'PKR ' + val.toLocaleString();
+      highlightPresetChip(val);
+    }
+
+    function setPresetBudget(val) {
+      if (budgetInput) budgetInput.value = val;
+      updateSliderFromInput();
+    }
+
+    function highlightPresetChip(val) {
+      document.querySelectorAll('.budget-chip').forEach(chip => {
+        const chipVal = parseInt(chip.dataset.val || 0);
+        chip.classList.toggle('active', chipVal === val);
+      });
+    }
+
+    if (slider) slider.addEventListener('input', updateInputFromSlider);
+    if (budgetInput) budgetInput.addEventListener('input', updateSliderFromInput);
+    if (budgetInput) updateSliderFromInput();
+
+    // Province → city cascade
+    document.getElementById('plan-province').addEventListener('change', e => {
+      const province = e.target.value;
+      const citySelect = document.getElementById('plan-city');
+      if (!province) {
+        citySelect.innerHTML = '<option value="">Select a province first</option>';
+        citySelect.disabled = true;
+        return;
+      }
+      const cities = [...new Set(
+        allDestinations.filter(d => d.province === province).map(d => d.district).filter(Boolean)
+      )].sort();
+      citySelect.innerHTML = '<option value="">Any city in province</option>' +
+        cities.map(c => `<option value="${c}">${c}</option>`).join('');
+      citySelect.disabled = false;
+    });
+
+    // Submit
+    document.getElementById('plan-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = document.getElementById('plan-btn');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      const travelStyle = document.getElementById('plan-travel-style')?.value || 'standard';
+      const transportMode = document.getElementById('plan-transport')?.value || null;
+      const budgetVal = parseInt(document.getElementById('budget-input')?.value || slider?.value || 80000);
+      const fromCity = document.getElementById('plan-from-city')?.value || null;
+      const includeHotel = (document.getElementById('plan-include-hotel')?.value || 'yes') === 'yes';
+
+      const body = {
+        budget: budgetVal,
+        days: parseInt(document.getElementById('plan-days').value),
+        category: document.getElementById('plan-category').value || null,
+        province: document.getElementById('plan-province').value || null,
+        district: document.getElementById('plan-city').value || null,
+        people: parseInt(document.getElementById('plan-people').value),
+        travel_style: travelStyle,
+        transport_mode: transportMode,
+        currency: currentGlobalCurrency,
+        from_city: fromCity,
+        include_hotel: includeHotel,
+      };
+
+      const resultArea = document.getElementById('plan-result');
+
+      try {
+        const res = await fetch(`${API}/plan-trip`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          resultArea.innerHTML = `<div class="error-msg">⚠️ ${data.error}</div>`;
+          return;
+        }
+
+        const cost = data.cost || {};
+        const breakdown = cost.breakdown_pkr || {};
+        const convertedBreakdown = cost.breakdown_converted || {};
+        const totalPkr = cost.total_pkr || cost.estimated_total_pkr || 0;
+        const convTotal = cost.converted_total || { formatted: `PKR ${totalPkr.toLocaleString()}` };
+        const currencyCode = cost.currency || currentGlobalCurrency;
+
+        const imgHtml = (data.image_url && !data.image_url.startsWith('PLACEHOLDER'))
+          ? `<img class="result-img" src="${data.image_url}" alt="${data.destination.name}" onerror="this.outerHTML='<div class=\\"result-img-placeholder\\">📸 Photo unavailable</div>'">`
+          : `<div class="result-img-placeholder">📸 No photo yet</div>`;
+
+        const alternativesHtml = (data.alternatives && data.alternatives.length > 0) ? `
+      <div style="margin-top:20px; padding:16px; background:var(--cream); border-radius:var(--radius-md); border:1px solid var(--border);">
+        <h4 style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink);">✦ Other Great Options Matching Your Trip:</h4>
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          ${data.alternatives.map(a => `
+            <button type="button" class="tag" style="cursor:pointer; background:#fff; border:1px solid var(--border); padding:6px 12px; border-radius:99px; font-size:12px;" onclick="openModal(${a.id})">
+              📍 ${a.name} (${a.district ? a.district + ', ' : ''}${a.province})
+            </button>`).join('')}
+        </div>
+      </div>` : '';
+
+        const tiers = cost.tier_comparisons || {};
+        const tierCompHtml = (tiers.budget && tiers.standard && tiers.luxury) ? `
+          <h4 class="section-subheading" style="margin-top:22px;">⚡ Live Comfort Tiers Comparison</h4>
+          <div class="tier-comparison-wrap">
+            <div class="tier-card ${tiers.budget.active ? 'active' : ''}" onclick="switchPlannerTier('budget')" title="Switch to Budget Tier">
+              <div class="tier-card-header">
+                <span>🎒 Budget</span>
+                ${tiers.budget.active ? '<span style="color:var(--terracotta); font-weight:700;">✓ Active</span>' : ''}
+              </div>
+              <div class="tier-card-price">${tiers.budget.total_formatted || 'PKR ' + (tiers.budget.total_pkr || 0).toLocaleString()}</div>
+              <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">Guesthouses & Coach</div>
+            </div>
+            <div class="tier-card ${tiers.standard.active ? 'active' : ''}" onclick="switchPlannerTier('standard')" title="Switch to Standard Tier">
+              <div class="tier-card-header">
+                <span>🏨 Standard</span>
+                ${tiers.standard.active ? '<span style="color:var(--terracotta); font-weight:700;">✓ Active</span>' : ''}
+              </div>
+              <div class="tier-card-price">${tiers.standard.total_formatted || 'PKR ' + (tiers.standard.total_pkr || 0).toLocaleString()}</div>
+              <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">3-Star Hotel & AC Car</div>
+            </div>
+            <div class="tier-card ${tiers.luxury.active ? 'active' : ''}" onclick="switchPlannerTier('luxury')" title="Switch to Luxury Tier">
+              <div class="tier-card-header">
+                <span>⭐ Luxury</span>
+                ${tiers.luxury.active ? '<span style="color:var(--terracotta); font-weight:700;">✓ Active</span>' : ''}
+              </div>
+              <div class="tier-card-price">${tiers.luxury.total_formatted || 'PKR ' + (tiers.luxury.total_pkr || 0).toLocaleString()}</div>
+              <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">5-Star Resort & 4x4 Jeep</div>
+            </div>
+          </div>` : '';
+
+        const budgetFitHtml = (typeof cost.within_budget === 'boolean') ? `
+          <div style="margin-top:14px; padding:10px 14px; border-radius:10px; font-size:13px; font-weight:600;
+            background:${cost.within_budget ? '#e8f5e9' : '#fff3e0'}; color:${cost.within_budget ? '#2e7d32' : '#e65100'};">
+            ${cost.within_budget
+              ? `✅ This fits within your PKR ${(cost.requested_budget || 0).toLocaleString()} budget`
+              : `⚠️ This is the cheapest option available, but it's above your PKR ${(cost.requested_budget || 0).toLocaleString()} budget`}
+          </div>` : '';
+
+        const routeNoteHtml = cost.route_note ? `
+          <div style="margin-top:10px; padding:10px 14px; border-radius:10px; font-size:13px; background:#f0f4ff; color:#2b3a6b;">
+            🛣️ ${cost.route_note} · ${cost.transport_label || ''}
+          </div>` : '';
+
+        const costLabels = {
+          accommodation: { icon: '🏨', name: 'Hotel / Stays', desc: cost.travel_style_label || 'Hotel Room' },
+          transport: { icon: '🚗', name: 'Transport & Fuel', desc: cost.transport_label || 'Vehicle' },
+          food: { icon: '🍽️', name: 'Dining & Food', desc: cost.dining_style || 'Meals' },
+          activities: { icon: '🎟️', name: 'Sightseeing & Entry', desc: 'Tickets & Permits' },
+          service_and_taxes: { icon: '🧾', name: 'Taxes & Service', desc: '5% Buffer / Govt Fees' },
+        };
+
+        const totalConvertedFormatted = (currencyCode !== 'PKR' && convTotal.formatted)
+          ? `PKR ${totalPkr.toLocaleString()} (${convTotal.formatted})`
+          : `PKR ${totalPkr.toLocaleString()}`;
+
+        const dirQuery = (data.destination.latitude && data.destination.longitude)
+          ? `${data.destination.latitude},${data.destination.longitude}`
+          : encodeURIComponent(`${data.destination.name}, ${data.destination.province}, Pakistan`);
+
+        const restaurantsHtml = (data.restaurants && data.restaurants.length > 0) ? `
+          <div class="rec-section">
+            <h4 class="section-subheading" style="margin-top:24px;">🍽️ Top Recommended Restaurants & Famous Food in ${data.destination.district || data.destination.name}</h4>
+            <div class="rec-grid">
+              ${data.restaurants.map(r => `
+                <div class="rec-card">
+                  <div class="rec-header">
+                    <div class="rec-name">${r.name}</div>
+                    <div class="rec-rating">⭐ ${r.rating}</div>
+                  </div>
+                  <div class="rec-cuisine">${r.cuisine} · <span class="rec-price">${r.price_level}</span></div>
+                  <p class="rec-desc"><strong>Famous for:</strong> ${r.famous_for}</p>
+                  <div class="rec-footer">
+                    <span class="rec-area">📍 ${r.area}</span>
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ' ' + (data.destination.district || data.destination.province) + ' Pakistan')}" target="_blank" rel="noopener" class="rec-map-link">View on Maps ↗</a>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>` : '';
+
+        const hotelsHtml = (data.hotels && data.hotels.length > 0) ? `
+          <div class="rec-section">
+            <h4 class="section-subheading" style="margin-top:24px;">🏨 Top Recommended Hotels & Resorts in ${data.destination.district || data.destination.name}</h4>
+            <div class="rec-grid">
+              ${data.hotels.map(h => `
+                <div class="rec-card hotel">
+                  <div class="rec-header">
+                    <div class="rec-name">${h.name}</div>
+                    <div class="rec-rating">⭐ ${h.rating}</div>
+                  </div>
+                  <div class="rec-type">${h.type} · <span class="rec-price">${h.price_per_night}</span></div>
+                  <div class="rec-amenities">
+                    ${(h.amenities || []).map(a => `<span class="rec-amenity-tag">✓ ${a}</span>`).join('')}
+                  </div>
+                  <div class="rec-footer">
+                    <span class="rec-area">📍 ${h.area}</span>
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.name + ' ' + (data.destination.district || data.destination.province) + ' Pakistan')}" target="_blank" rel="noopener" class="rec-map-link">Search & Book ↗</a>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>` : '';
+
+        const shoppingMallsHtml = (data.shopping_malls && data.shopping_malls.length > 0) ? `
+          <div class="rec-section">
+            <h4 class="section-subheading" style="margin-top:24px;">🛍️ Top Recommended Shopping Malls & Famous Bazaars in ${data.destination.district || data.destination.name}</h4>
+            <div class="rec-grid">
+              ${data.shopping_malls.map(s => `
+                <div class="rec-card shopping">
+                  <div class="rec-header">
+                    <div class="rec-name">${s.name}</div>
+                    <div class="rec-rating">⭐ ${s.rating}</div>
+                  </div>
+                  <div class="rec-type">${s.type} · <span class="rec-price">${s.price_level || 'Market Rates'}</span></div>
+                  <p class="rec-desc"><strong>Famous for:</strong> ${s.famous_for}</p>
+                  <div class="rec-footer">
+                    <span class="rec-area">📍 ${s.area}</span>
+                    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + ' ' + (data.destination.district || data.destination.province) + ' Pakistan')}" target="_blank" rel="noopener" class="rec-map-link">View on Maps ↗</a>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>` : '';
+
+        const similarHtml = (data.similar_destinations && data.similar_destinations.length > 0) ? `
+          <div class="rec-section">
+            <h4 class="section-subheading" style="margin-top:24px;">🤖 AI Picks: Similar Destinations You Might Like</h4>
+            <div class="rec-grid">
+              ${data.similar_destinations.map(s => `
+                <div class="rec-card" style="cursor:pointer;" onclick="openModal(${s.id})" title="View ${s.name}">
+                  <div class="card-img-wrap" style="height:120px; margin:-14px -14px 10px -14px; border-radius:var(--radius-md) var(--radius-md) 0 0; overflow:hidden;">
+                    ${imgOrPlaceholder(s.image_url, 'card-img', 'card-img-placeholder', s.name)}
+                  </div>
+                  <div class="rec-header">
+                    <div class="rec-name">${catIcon(s.category)} ${s.name}</div>
+                  </div>
+                  <div class="rec-type">${s.province}${s.district ? ' · ' + s.district : ''}</div>
+                  <div class="rec-footer">
+                    <span class="rec-price">💰 PKR ${(s.estimated_budget_per_day || 0).toLocaleString()}/day</span>
+                    <span class="rec-map-link">View →</span>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>` : '';
+
+        resultArea.innerHTML = `
+      <div class="result-card">
+        <div class="result-hero">
+          ${imgHtml}
+          <div class="result-hero-overlay">
+            <div class="result-badge-row">
+              <span class="result-cat-badge">${catIcon(data.destination.category)} ${data.destination.category || 'Destination'}</span>
+              <span class="live-pricing-badge">⚡ Live Market Pricing (2026)</span>
+            </div>
+            <div class="result-prov">📍 ${data.destination.province}${data.destination.district ? ' · ' + data.destination.district : ''}</div>
+            <div class="result-name">${data.destination.name}</div>
+          </div>
+        </div>
+        <div class="result-body">
+          <p class="result-desc">${data.destination.description || ''}</p>
+
+          <div class="result-quick-info">
+            <div class="quick-info-pill">📅 <span><strong>Recommended Stay:</strong> ${data.destination.recommended_days || 1} day(s)</span></div>
+            <div class="quick-info-pill">🌤️ <span><strong>Best Season:</strong> ${data.destination.best_season || 'Year-round'}</span></div>
+            <div class="quick-info-pill">💰 <span><strong>Live Daily Rate:</strong> ⚡ ${formatLivePrice(cost.cost_per_person_per_day_pkr || data.destination.estimated_budget_per_day || 5000)}/day</span></div>
+            ${cost.season_status ? `<div class="quick-info-pill">📈 <span><strong>Demand Status:</strong> ${cost.season_status}</span></div>` : ''}
+          </div>
+
+          ${tierCompHtml}
+          ${budgetFitHtml}
+          ${routeNoteHtml}
+
+          <h4 class="section-subheading">⚡ Live Itemized Receipt (${body.days} Days, ${body.people} Traveler${body.people > 1 ? 's' : ''} — ${cost.travel_style_label || 'Standard'})</h4>
+          <div class="cost-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+            ${Object.entries(breakdown).map(([k, v]) => {
+              const meta = costLabels[k.toLowerCase()] || { icon: '💵', name: k, desc: '' };
+              const convertedVal = convertedBreakdown[k];
+              const convStr = (currencyCode !== 'PKR' && convertedVal) ? `<span style="font-size:11px; opacity:0.8; font-weight:400;">(${currencyCode} ${convertedVal.toLocaleString()})</span>` : '';
+              return `
+              <div class="cost-tile">
+                <span class="icon">${meta.icon}</span>
+                <span class="amt">PKR ${v.toLocaleString()} ${convStr}</span>
+                <span class="lbl"><strong>${meta.name}</strong></span>
+              </div>`;
+            }).join('')}
+          </div>
+
+          <div class="cost-total-row">
+            <div class="cost-total-info">
+              <span class="label">Total Live Trip Cost (${cost.travel_style_label || 'Standard'})</span>
+              <span class="sublabel">${body.days} Days · ${body.people} Traveler${body.people > 1 ? 's' : ''} · ⚡ Verified Real Market Index</span>
+            </div>
+            <span class="total">${totalConvertedFormatted}</span>
+          </div>
+
+          <div style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=${dirQuery}" target="_blank" rel="noopener" class="btn-directions">
+              🧭 Open Route in Google Maps
+            </a>
+            <button type="button" class="btn-save-plan" id="btn-save-current-plan" onclick="saveCurrentTripPlan()" style="margin-top:0;">
+              💾 Save Trip to My Profile
+            </button>
+          </div>
+
+          <div class="itinerary-section">
+            <h4>Day-by-Day Itinerary Plan</h4>
+            <div class="itinerary-list">
+              ${data.itinerary.itinerary.map(day => `
+                <div class="day-item" data-day="${day.day}">
+                  <p>${day.plan}</p>
+                </div>`).join('')}
+            </div>
+          </div>
+
+          ${restaurantsHtml}
+          ${hotelsHtml}
+          ${shoppingMallsHtml}
+          ${similarHtml}
+          ${alternativesHtml}
+
+          <div class="plan-map-wrapper">
+            <h4 class="section-subheading" style="margin-top:20px;">📍 Interactive Location Map (${data.destination.name})</h4>
+            <div id="plan-map"></div>
+          </div>
+        </div>
+      </div>`;
+
+        // Store globally for saving
+        currentPlannedTrip = {
+          destination_id: data.destination.id,
+          destination_name: data.destination.name,
+          days: body.days,
+          people: body.people,
+          total_budget: data.cost.estimated_total_pkr,
+          trip_plan_json: JSON.stringify(data),
+        };
+
+        if (data.destination.latitude && data.destination.longitude) {
+          if (planMapInstance) { planMapInstance.remove(); planMapInstance = null; }
+          setTimeout(() => {
+            planMapInstance = L.map('plan-map').setView([data.destination.latitude, data.destination.longitude], 10);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '© OpenStreetMap contributors'
+            }).addTo(planMapInstance);
+            L.marker([data.destination.latitude, data.destination.longitude])
+              .addTo(planMapInstance)
+              .bindPopup(`<strong>${data.destination.name}</strong>`).openPopup();
+          }, 100);
+        }
+      } catch (err) {
+        resultArea.innerHTML = `<div class="error-msg">⚠️ Could not reach the backend: ${err}</div>`;
+      } finally {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    });
+
+    // ========== SAVED TRIPS FUNCTIONS ==========
+    async function saveCurrentTripPlan() {
+      if (!currentPlannedTrip) {
+        alert('Please generate a trip plan first.');
+        return;
+      }
+      if (!authToken) {
+        openAuthModal('login');
+        showAuthAlert('Please sign in to save trips to your profile!', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-save-current-plan');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '💾 Saving...';
+      }
+
+      try {
+        const res = await fetch(`${API}/api/user/trips/save`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify(currentPlannedTrip),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          if (btn) {
+            btn.innerHTML = '✅ Saved in Profile!';
+            setTimeout(() => {
+              btn.disabled = false;
+              btn.innerHTML = '💾 Save Trip to My Profile';
+            }, 2500);
+          }
+        } else {
+          alert(`Error saving trip: ${data.detail || 'Could not save.'}`);
+          if (btn) { btn.disabled = false; btn.innerHTML = '💾 Save Trip to My Profile'; }
+        }
+      } catch (e) {
+        alert(`Network error: ${e.message}`);
+        if (btn) { btn.disabled = false; btn.innerHTML = '💾 Save Trip to My Profile'; }
+      }
+    }
+
+    async function openSavedTripsModal() {
+      closeUserDropdown();
+      if (!authToken) {
+        openAuthModal('login');
+        return;
+      }
+      const modal = document.getElementById('trips-modal-wrap');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      await loadSavedTrips();
+    }
+
+    function closeSavedTripsModal() {
+      document.getElementById('trips-modal-wrap').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('trips-close-btn').addEventListener('click', closeSavedTripsModal);
+    document.getElementById('trips-modal-wrap').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeSavedTripsModal();
+    });
+
+    async function loadSavedTrips() {
+      const container = document.getElementById('saved-trips-list');
+      container.innerHTML = '<div class="empty-state"><p>Loading your saved itineraries...</p></div>';
+
+      try {
+        const res = await fetch(`${API}/api/user/trips`, { headers: getAuthHeaders() });
+        if (!res.ok) throw new Error('Could not fetch saved trips');
+        const data = await res.json();
+        const trips = data.trips || [];
+
+        if (trips.length === 0) {
+          container.innerHTML = `
+        <div class="empty-state">
+          <div class="emoji">🗺️</div>
+          <p>You haven't saved any trips yet.<br>Go to <strong>Plan a Trip</strong> and click <strong>"Save Trip to My Profile"</strong>.</p>
+        </div>`;
+          return;
+        }
+
+        container.innerHTML = trips.map(t => {
+          const dateStr = t.created_at ? new Date(t.created_at).toLocaleDateString() : '';
+          return `
+        <div class="saved-trip-item" id="saved-trip-${t.id}">
+          <div class="saved-trip-info">
+            <h4>${t.destination_name}</h4>
+            <div class="saved-trip-meta">
+              <span>📅 ${t.days} Day(s)</span>
+              <span>👥 ${t.people} Traveler(s)</span>
+              <span class="saved-trip-budget">PKR ${t.total_budget.toLocaleString()}</span>
+              ${dateStr ? `<span>🕒 ${dateStr}</span>` : ''}
+            </div>
+          </div>
+          <div class="trip-action-btns">
+            ${t.destination_id ? `<button class="tag" style="cursor:pointer; background:#fff; padding:6px 12px; border-radius:6px; border:1px solid var(--border);" onclick="closeSavedTripsModal(); openModal(${t.destination_id})">View Place</button>` : ''}
+            <button class="btn-del-trip" onclick="deleteSavedTrip(${t.id})">Delete</button>
+          </div>
+        </div>`;
+        }).join('');
+      } catch (e) {
+        container.innerHTML = `<div class="error-msg">⚠️ Failed to load trips: ${e.message}</div>`;
+      }
+    }
+
+    async function deleteSavedTrip(tripId) {
+      if (!confirm('Are you sure you want to delete this saved itinerary?')) return;
+      try {
+        const res = await fetch(`${API}/api/user/trips/${tripId}`, {
+          method: 'DELETE',
+          headers: getAuthHeaders(),
+        });
+        if (res.ok) {
+          const el = document.getElementById(`saved-trip-${tripId}`);
+          if (el) el.remove();
+          loadSavedTrips();
+        }
+      } catch (e) {
+        alert(`Could not delete trip: ${e.message}`);
+      }
+    }
+
+    // ========== MAP ==========
+    const CAT_COLORS = {
+      mountains: '#1B3A6B', historical: '#C0622A', nature: '#2E8B7A',
+      beaches: '#E8943A', cultural: '#8B4B9B'
+    };
+    function makeMarkerIcon(cat) {
+      const color = CAT_COLORS[cat?.toLowerCase()] || '#6A5F55';
+      const svg = encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="30" height="42" viewBox="0 0 30 42"><path d="M15 0C6.716 0 0 6.716 0 15c0 10.5 15 27 15 27S30 25.5 30 15C30 6.716 23.284 0 15 0z" fill="${color}"/><circle cx="15" cy="15" r="7" fill="white" opacity="0.9"/></svg>`);
+      return L.icon({ iconUrl: `data:image/svg+xml,${svg}`, iconSize: [30, 42], iconAnchor: [15, 42], popupAnchor: [0, -42] });
+    }
+
+    async function initMap() {
+      if (mapInitialized) return;
+      mapInitialized = true;
+      leafletMap = L.map('map').setView([30.3753, 69.3451], 5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(leafletMap);
+
+      const res = await fetch(`${API}/destinations?include_coords=true`);
+      const destinations = await res.json();
+      const list = document.getElementById('map-dest-list');
+
+      destinations.forEach(d => {
+        if (!d.latitude || !d.longitude) return;
+        const budget = getBudget(d);
+        const marker = L.marker([d.latitude, d.longitude], { icon: makeMarkerIcon(d.category) })
+          .addTo(leafletMap)
+          .bindPopup(`
+        <strong>${d.name}</strong><br>
+        ${d.province}<br>
+        PKR ${budget.toLocaleString()}/day<br>
+        <a href="#" onclick="event.preventDefault(); openModalFromMap(${d.id})" style="color:#C0622A;font-weight:600">View Details →</a>
+      `);
+        leafletMarkers.push({ id: d.id, marker });
+
+        list.insertAdjacentHTML('beforeend', `
+      <div class="map-dest-item" onclick="flyToMarker(${d.id})">
+        <div class="name">${catIcon(d.category)} ${d.name}</div>
+        <div class="info">${d.province} · PKR ${budget.toLocaleString()}/day</div>
+      </div>`);
+      });
+    }
+
+    function flyToMarker(id) {
+      const m = leafletMarkers.find(x => x.id === id);
+      if (!m) return;
+      leafletMap.flyTo(m.marker.getLatLng(), 11, { duration: 1 });
+      setTimeout(() => m.marker.openPopup(), 1000);
+    }
+    function openModalFromMap(id) {
+      closeModal();
+      setTimeout(() => openModal(id), 100);
+    }
+
+    let userLocationMarker = null;
+    function locateUserOnMap() {
+      if (!navigator.geolocation) {
+        alert('Geolocation is not supported by your browser.');
+        return;
+      }
+      const btn = document.getElementById('btn-locate-user');
+      if (btn) btn.textContent = '⏳ Locating GPS...';
+
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          const lat = pos.coords.latitude;
+          const lng = pos.coords.longitude;
+          if (!leafletMap) initMap();
+          if (!userLocationMarker) {
+            const userIcon = L.divIcon({
+              className: 'user-location-pulse',
+              html: '<div class="pulse-dot"></div>',
+              iconSize: [20, 20],
+              iconAnchor: [10, 10]
+            });
+            userLocationMarker = L.marker([lat, lng], { icon: userIcon }).addTo(leafletMap);
+            userLocationMarker.bindPopup('<strong>📍 You Are Here (Current Location)</strong>').openPopup();
+          } else {
+            userLocationMarker.setLatLng([lat, lng]).openPopup();
+          }
+          leafletMap.flyTo([lat, lng], 10, { duration: 1.5 });
+          if (btn) btn.textContent = '📍 Location Found!';
+          setTimeout(() => { if (btn) btn.textContent = '📍 Find My Live Location'; }, 3000);
+        },
+        err => {
+          alert(`Could not get live location: ${err.message}. Please enable location permissions in your browser.`);
+          if (btn) btn.textContent = '📍 Find My Live Location';
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
+
+    // ========== WISHLIST ==========
+    function renderWishlist() {
+      const content = document.getElementById('wishlist-content');
+      const favDests = allDestinations.filter(d => favorites.includes(d.id));
+      if (favDests.length === 0) {
+        content.innerHTML = `
+      <div class="wishlist-empty">
+        <div class="icon">💚</div>
+        <h3>Your wishlist is empty</h3>
+        <p>Tap the 🤍 heart on any destination card to save it here.</p>
+      </div>`;
+        return;
+      }
+      content.innerHTML = `<div class="dest-grid">` + favDests.map((d, i) => {
+        const budget = getBudget(d);
+        const seasonIcon = (d.best_season || '').toLowerCase().includes('year') ? '📅' : '🌤️';
+        const delay = Math.min(i * 40, 400);
+        return `
+    <div class="dest-card" onclick="openModal(${d.id})" style="animation-delay:${delay}ms">
+      <div class="card-img-wrap">
+        ${imgOrPlaceholder(d.image_url, 'card-img', 'card-img-placeholder', d.name)}
+        <div class="card-cat-badge">${catIcon(d.category)} ${d.category || 'destination'}</div>
+        ${d.best_season ? `<div class="card-season-badge">${seasonIcon} ${d.best_season.split('(')[0].trim()}</div>` : ''}
+        <button class="fav-btn active" data-id="${d.id}"
+          onclick="event.stopPropagation(); toggleFav(${d.id}, this); renderWishlist()">❤️</button>
+      </div>
+      <div class="card-body">
+        <div class="card-prov">${d.province}</div>
+        <div class="card-name">${d.name}</div>
+        <div class="card-desc">${d.description || ''}</div>
+        <div class="card-meta">
+          <span class="card-days">📅 ${d.recommended_days ?? '—'} day(s)</span>
+          <span class="card-budget">PKR ${budget.toLocaleString()}/day</span>
+        </div>
+      </div>
+    </div>`;
+      }).join('') + `</div>`;
+    }
+
+    // ========== CHAT ==========
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+
+    function appendMsg(text, isUser) {
+      const div = document.createElement('div');
+      div.className = 'chat-msg ' + (isUser ? 'user' : 'agent');
+      div.innerHTML = `<div class="bubble">${text.replace(/\n/g, '<br>')}</div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return div;
+    }
+    function showTyping() {
+      const div = document.createElement('div');
+      div.className = 'chat-msg agent typing-indicator';
+      div.id = 'typing';
+      div.innerHTML = `<div class="bubble"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function removeTyping() {
+      const t = document.getElementById('typing');
+      if (t) t.remove();
+    }
+
+    async function sendChat(msg) {
+      if (!msg.trim()) return;
+      appendMsg(msg, true);
+      chatInput.value = '';
+      showTyping();
+      try {
+        const res = await fetch(`${API}/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg }),
+        });
+        const data = await res.json();
+        removeTyping();
+        appendMsg(data.reply || data.error || 'Something went wrong.', false);
+      } catch (e) {
+        removeTyping();
+        appendMsg(`⚠️ Could not reach the server: ${e}`, false);
+      }
+    }
+
+    document.getElementById('chat-send').addEventListener('click', () => sendChat(chatInput.value));
+    chatInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(chatInput.value); } });
+
+    // Chat hints
+    document.querySelectorAll('.chat-hint').forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchTab('chat');
+        sendChat(btn.dataset.hint);
+      });
+    });
+
+    // ========== FOOTER LINKS ==========
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+      if (btn) btn.classList.add('active');
+      const panelId = { map: 'map-panel', chat: 'chat-panel', wishlist: 'wishlist-panel' }[tab] || tab;
+      const panel = document.getElementById(panelId);
+      if (panel) panel.classList.add('active');
+      if (tab === 'map') initMap();
+      if (tab === 'wishlist') renderWishlist();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ========== INIT ==========
+    loadDestinations();
+    checkAuth();
+  </script>
+</body>
+
+</html>

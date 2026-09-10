@@ -1,0 +1,193 @@
+{
+  "city": "Bahawalpur",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "bwp_att_01",
+      "name": "Noor Mahal",
+      "category": "historical",
+      "description": "A 19th-century palace built for the Nawab of Bahawalpur, blending Italian, Islamic, and colonial architecture.",
+      "entry_fee_pkr": 100,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Model Town A, Bahawalpur",
+      "popularity": "high"
+    },
+    {
+      "id": "bwp_att_02",
+      "name": "Derawar Fort",
+      "category": "historical",
+      "description": "A massive square desert fort in the Cholistan Desert with 40 bastions, visible from miles away.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Cholistan Desert, ~130km from Bahawalpur city",
+      "popularity": "high"
+    },
+    {
+      "id": "bwp_att_03",
+      "name": "Sadiq Garh Palace",
+      "category": "historical",
+      "description": "A grand former royal residence of the Bahawalpur Nawabs, known for its architecture and history.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Dera Nawab Sahib, near Bahawalpur",
+      "popularity": "medium"
+    },
+    {
+      "id": "bwp_att_04",
+      "name": "Lal Suhanra National Park",
+      "category": "nature",
+      "description": "A large national park and biosphere reserve, home to deer, blackbuck, and diverse birdlife.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~35km east of Bahawalpur city",
+      "popularity": "medium"
+    },
+    {
+      "id": "bwp_att_05",
+      "name": "Central Library Bahawalpur",
+      "category": "cultural",
+      "description": "A historic library building with colonial-era architecture, popular for photography and a quiet visit.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Bahawalpur city center",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "bwp_food_01",
+      "name": "Bahawalpuri Sohan Halwa shops (Circular Road)",
+      "cuisine": "desserts",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Bahawalpur's famous sohan halwa, a popular sweet souvenir"
+    },
+    {
+      "id": "bwp_food_02",
+      "name": "Farhan Broast",
+      "cuisine": "fast food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Broasted chicken and casual dining"
+    },
+    {
+      "id": "bwp_food_03",
+      "name": "Local karahi houses near Model Town",
+      "cuisine": "Punjabi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Chicken and mutton karahi"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "bwp_trans_01",
+      "from_city": "Bahawalpur",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Daewoo Express (intercity coach)",
+      "estimated_cost_pkr": 2200,
+      "duration_min": 360,
+      "notes": "AC coach service, multiple daily departures"
+    },
+    {
+      "id": "bwp_trans_02",
+      "from_city": "Bahawalpur",
+      "to_city": "Multan",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 700,
+      "duration_min": 120,
+      "notes": "Short and frequent route"
+    },
+    {
+      "id": "bwp_trans_03",
+      "from_city": "Bahawalpur",
+      "to_city": "Bahawalpur",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive/local rickshaw within city",
+      "estimated_cost_pkr": 250,
+      "duration_min": 15,
+      "notes": "Rickshaws are common and cheap for short local trips"
+    },
+    {
+      "id": "bwp_trans_04",
+      "from_city": "Bahawalpur",
+      "to_city": "Bahawalpur",
+      "transport_type": "private_jeep",
+      "route": "4x4 jeep rental for Cholistan Desert/Derawar Fort",
+      "estimated_cost_pkr": 6000,
+      "duration_min": 240,
+      "notes": "Recommended for desert terrain; arrange in advance"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "bwp_acc_01",
+      "name": "Budget guesthouse near Circular Road",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "bwp_acc_02",
+      "name": "Mid-range hotel near Model Town",
+      "price_range": "moderate",
+      "approx_price_pkr": 7000,
+      "family_friendly": true,
+      "rating": 3.9
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert climate, very dry with extreme summer heat",
+    "best_time_to_visit": "November to February (mild days, cool nights)",
+    "avoid_months": "May to August (extremely hot, often 45°C+, especially in Cholistan)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild days around 20-25°C, cool nights, best time for desert trips" },
+      { "season": "Summer (Apr-Aug)", "avg_condition": "Extremely hot and dry, frequently 42-48°C" },
+      { "season": "Monsoon", "avg_condition": "Minimal rainfall since Bahawalpur is on the edge of the Cholistan Desert" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "bwp_tip_01",
+      "category": "shortcut_route",
+      "tip": "Take the Bahawalpur-Yazman road for the most direct route into the Cholistan Desert toward Derawar Fort; carry extra fuel and water."
+    },
+    {
+      "id": "bwp_tip_02",
+      "category": "local_transport",
+      "tip": "For desert/fort trips, arrange a 4x4 jeep in advance rather than relying on regular taxis, which are not suited to desert terrain."
+    },
+    {
+      "id": "bwp_tip_03",
+      "category": "safety",
+      "tip": "If visiting Cholistan Desert areas, avoid traveling alone and inform someone of your route; carry sufficient water and sun protection."
+    },
+    {
+      "id": "bwp_tip_04",
+      "category": "timing",
+      "tip": "Visit desert attractions like Derawar Fort in the early morning to avoid peak heat, especially outside the winter months."
+    }
+  ],
+  "history": {
+  "founded": "Founded in 1748 by Nawab Bahawal Khan I",
+  "city_history": "Bahawalpur was the capital of the princely state of Bahawalpur, ruled by the Abbasi Nawabs, who built landmarks like Noor Mahal and Sadiq Garh Palace. The state acceded to Pakistan in 1947 and was merged into Punjab province in 1955.",
+  "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+}
+}

@@ -1,0 +1,171 @@
+{
+  "city": "Swat",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "swt_att_01",
+      "name": "Malam Jabba",
+      "category": "nature",
+      "description": "Pakistan's premier ski resort in winter and a scenic hill destination year-round, with chairlift rides and mountain views.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~40km from Mingora, Swat",
+      "popularity": "high"
+    },
+    {
+      "id": "swt_att_02",
+      "name": "Kalam Valley",
+      "category": "nature",
+      "description": "A lush, forested valley with rivers, waterfalls, and mountain scenery, often called the 'Switzerland of Pakistan'.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 240,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~100km from Mingora",
+      "popularity": "high"
+    },
+    {
+      "id": "swt_att_03",
+      "name": "Swat Museum",
+      "category": "museum",
+      "description": "A museum in Mingora showcasing Gandhara-era Buddhist artifacts found throughout the Swat valley.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Mingora, Swat",
+      "popularity": "medium"
+    },
+    {
+      "id": "swt_att_04",
+      "name": "White Palace (Marghazar)",
+      "category": "historical",
+      "description": "A marble former royal residence of the Wali of Swat, set on a hillside with mountain views.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Marghazar, near Mingora",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "swt_food_01",
+      "name": "Trout fish restaurants (Kalam/Bahrain)",
+      "cuisine": "seafood/mountain cuisine",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1200,
+      "family_friendly": true,
+      "specialty": "Fresh river trout, a Swat valley specialty"
+    },
+    {
+      "id": "swt_food_02",
+      "name": "Local Pashtun karahi houses (Mingora)",
+      "cuisine": "Pashtun",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and tikka"
+    },
+    {
+      "id": "swt_food_03",
+      "name": "Roadside dhabas along the Kalam route",
+      "cuisine": "mixed",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Simple, hearty meals popular with travelers"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "swt_trans_01",
+      "from_city": "Swat",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Swat Motorway (M-16) coach",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 300,
+      "notes": "Fast, scenic route via the Swat Motorway"
+    },
+    {
+      "id": "swt_trans_02",
+      "from_city": "Swat",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 900,
+      "duration_min": 180,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "swt_trans_03",
+      "from_city": "Swat",
+      "to_city": "Swat",
+      "transport_type": "local_jeep",
+      "route": "Jeep/4x4 for Kalam and upper valley areas",
+      "estimated_cost_pkr": 5000,
+      "duration_min": 240,
+      "notes": "Recommended for mountain roads beyond Mingora, especially in winter"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "swt_acc_01",
+      "name": "Budget guesthouse in Mingora",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.5
+    },
+    {
+      "id": "swt_acc_02",
+      "name": "Mid-range hotel/resort in Kalam",
+      "price_range": "moderate",
+      "approx_price_pkr": 9000,
+      "family_friendly": true,
+      "rating": 4.2
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Humid subtropical highland climate, cool year-round with snow in winter at higher elevations",
+    "best_time_to_visit": "April to October (pleasant, accessible mountain roads); December to February for skiing at Malam Jabba",
+    "avoid_months": "Heavy winter snowfall can close roads to Kalam and upper valley areas",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cold, often below 0°C at higher elevations, snowfall common" },
+      { "season": "Summer (Apr-Aug)", "avg_condition": "Mild and pleasant, 15-28°C, peak tourist season" },
+      { "season": "Monsoon", "avg_condition": "Regular rainfall, lush green valleys" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "swt_tip_01",
+      "category": "shortcut_route",
+      "tip": "The Swat Motorway (M-16) from Islamabad is by far the fastest and safest way in, cutting travel time significantly compared to older routes."
+    },
+    {
+      "id": "swt_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local 4x4/jeep for trips beyond Mingora to Kalam or Malam Jabba, as roads get narrower and steeper further up the valley."
+    },
+    {
+      "id": "swt_tip_03",
+      "category": "safety",
+      "tip": "Check road and weather conditions before heading to Kalam or Malam Jabba in winter, as snow can temporarily close mountain roads."
+    },
+    {
+      "id": "swt_tip_04",
+      "category": "timing",
+      "tip": "Visit between April and October for the most reliable road access to the upper valley; book winter ski trips to Malam Jabba in advance as it's very popular."
+    }
+  ],
+  "history": {
+    "founded": "Ancient region with roots in the Gandhara civilization, later ruled as the princely State of Swat until 1969",
+    "city_history": "The Swat valley was a major center of Buddhist civilization under the Gandhara kingdom, home to hundreds of stupas and monasteries, some of which are still visible today. It later existed as a semi-autonomous princely state ruled by the Wali of Swat until it was merged into Pakistan in 1969. In recent years it has become one of Pakistan's most popular tourist destinations for its mountain scenery.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

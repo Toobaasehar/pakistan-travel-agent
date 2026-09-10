@@ -1,0 +1,125 @@
+{
+  "city": "Bagh",
+  "province": "Azad Kashmir",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "bgh_att_01",
+      "name": "Bagh Pine Forests",
+      "category": "nature",
+      "description": "Dense pine and fir forests surrounding the town, popular for hiking and picnics.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Bagh town outskirts",
+      "popularity": "medium"
+    },
+    {
+      "id": "bgh_att_02",
+      "name": "Dhirkot & Ganga Choti",
+      "category": "mountains",
+      "description": "A scenic mountain viewpoint area near Bagh, popular for panoramic Himalayan foothill views.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Ganga Choti, Bagh District",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "bgh_food_01",
+      "name": "Bagh bazaar food stalls",
+      "cuisine": "Kashmiri/Pakistani",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional local meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "bgh_trans_01",
+      "from_city": "Bagh",
+      "to_city": "Muzaffarabad",
+      "transport_type": "bus",
+      "route": "Local/intercity coach via AJK highway network",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Most common route to AJK's capital"
+    },
+    {
+      "id": "bgh_trans_02",
+      "from_city": "Bagh",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Intercity coach via Islamabad-Muzaffarabad highway",
+      "estimated_cost_pkr": 1000,
+      "duration_min": 240,
+      "notes": "Daily coach services connect to the twin cities"
+    },
+    {
+      "id": "bgh_trans_03",
+      "from_city": "Bagh",
+      "to_city": "Bagh",
+      "transport_type": "local_van",
+      "route": "Local van/jeep within the district",
+      "estimated_cost_pkr": 200,
+      "duration_min": 20,
+      "notes": "Shared vans and jeeps are common for mountain roads"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "bgh_acc_01",
+      "name": "Guesthouse in Bagh town",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.5
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain climate with mild summers and cold, snowy winters at higher elevations",
+    "best_time_to_visit": "April to August",
+    "avoid_months": "December to February (heavy snow, road closures in upper valleys)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Apr-Aug)",
+        "avg_condition": "Mild and green, 20-30°C, the main tourist season"
+      },
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Cold, often below freezing at higher elevations; upper valleys get heavy snowfall"
+      },
+      {
+        "season": "Monsoon (Jul-Aug)",
+        "avg_condition": "Heavy rain in places, landslide risk on mountain roads"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "bgh_tip_01",
+      "category": "timing",
+      "tip": "Visit Bagh between April and August for the best weather and open mountain roads."
+    },
+    {
+      "id": "bgh_tip_02",
+      "category": "local_transport",
+      "tip": "Jeeps are often needed for higher valleys; book local transport in advance during peak season."
+    },
+    {
+      "id": "bgh_tip_03",
+      "category": "general",
+      "tip": "Check current travel advisories before visiting, as with any AJK district near the Line of Control."
+    }
+  ],
+  "history": {
+    "founded": "An old hill town, historically part of the princely state's Poonch region",
+    "city_history": "Bagh is a green hill-station town in AJK's Poonch division, known for its pine forests, moderate climate, and as a base for trekking into the surrounding mountains.",
+    "province_history": "Azad Jammu and Kashmir (AJK) is a self-governing territory administered by Pakistan since 1947, following the First Kashmir War. It retains its own president, prime minister, and legislative assembly, while Pakistan handles defense and foreign affairs. The region is known for its lush river valleys, forested mountains, and lakes fed by Himalayan glaciers."
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "city": "Khuzdar",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "khz_att_01",
+      "name": "Moola Chotok waterfall",
+      "category": "nature",
+      "description": "A dramatic waterfall in a rocky gorge near Khuzdar, considered one of Balochistan's most scenic natural spots.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 150,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~30km from Khuzdar",
+      "popularity": "high"
+    },
+    {
+      "id": "khz_att_02",
+      "name": "Khuzdar bazaars",
+      "category": "shopping",
+      "description": "Local markets known for Balochi handicrafts, embroidery, and regional goods.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Khuzdar",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "khz_food_01",
+      "name": "Local Balochi sajji houses",
+      "cuisine": "Balochi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1000,
+      "family_friendly": true,
+      "specialty": "Traditional whole-roasted sajji"
+    },
+    {
+      "id": "khz_food_02",
+      "name": "Local tea and snack stalls",
+      "cuisine": "tea/snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Casual roadside tea and snacks"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "khz_trans_01",
+      "from_city": "Khuzdar",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via N-25",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 300,
+      "notes": "Regular daily departures along the N-25 highway"
+    },
+    {
+      "id": "khz_trans_02",
+      "from_city": "Khuzdar",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via N-25 (RCD Highway)",
+      "estimated_cost_pkr": 2500,
+      "duration_min": 480,
+      "notes": "Long route; check current road conditions"
+    },
+    {
+      "id": "khz_trans_03",
+      "from_city": "Khuzdar",
+      "to_city": "Khuzdar",
+      "transport_type": "local_taxi",
+      "route": "Local taxi to Moola Chotok",
+      "estimated_cost_pkr": 2000,
+      "duration_min": 60,
+      "notes": "Round-trip fare typical for the waterfall visit"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "khz_acc_01",
+      "name": "Budget guesthouse in central Khuzdar",
+      "price_range": "budget",
+      "approx_price_pkr": 2600,
+      "family_friendly": true,
+      "rating": 3.2
+    },
+    {
+      "id": "khz_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 5800,
+      "family_friendly": true,
+      "rating": 3.6
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid mountain climate, milder than the Balochistan plains due to elevation",
+    "best_time_to_visit": "October to April",
+    "avoid_months": "June to August (hot)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild to cool, 8-22°C" },
+      { "season": "Summer (May-Aug)", "avg_condition": "Warm, 28-38°C" },
+      { "season": "Monsoon", "avg_condition": "Light, irregular rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "khz_tip_01",
+      "category": "shortcut_route",
+      "tip": "Khuzdar sits directly on the N-25 highway, making it a natural stopover between Quetta and Karachi."
+    },
+    {
+      "id": "khz_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local taxi for the Moola Chotok waterfall trip, as it's off the main highway and best reached with a local driver."
+    },
+    {
+      "id": "khz_tip_03",
+      "category": "safety",
+      "tip": "Check current travel advisories before road travel through this region, particularly for longer overland routes."
+    },
+    {
+      "id": "khz_tip_04",
+      "category": "timing",
+      "tip": "Visit Moola Chotok outside the summer months when water flow and temperatures are both more pleasant."
+    }
+  ],
+  "history": {
+    "founded": "An old settlement with roots as a trading post along historic caravan routes",
+    "city_history": "Khuzdar has long served as a trading and administrative center for central Balochistan, positioned along key routes connecting Quetta to the coast. Today it's known regionally for the dramatic Moola Chotok waterfall nearby.",
+    "province_history": "Balochistan is Pakistan's largest province by area, historically home to various Baloch and Pashtun tribal confederacies, and was governed as British Balochistan before its princely states acceded to Pakistan between 1947 and 1948."
+  }
+}

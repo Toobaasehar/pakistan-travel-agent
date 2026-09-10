@@ -1,0 +1,109 @@
+{
+  "city": "Kohlu",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "khl_att_01",
+      "name": "Kohlu Mountain Terrain",
+      "category": "mountains",
+      "description": "Remote mountainous tribal terrain, traditional homeland of the Marri Baloch.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kohlu District",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "khl_food_01",
+      "name": "Local Balochi eatery",
+      "cuisine": "Balochi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional Balochi meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "khl_trans_01",
+      "from_city": "Kohlu",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "khl_trans_02",
+      "from_city": "Kohlu",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "khl_trans_03",
+      "from_city": "Kohlu",
+      "to_city": "Kohlu",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "khl_acc_01",
+      "name": "Basic guesthouse in Kohlu",
+      "price_range": "budget",
+      "approx_price_pkr": 2800,
+      "family_friendly": true,
+      "rating": 2.4
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain climate with mild summers and cold winters",
+    "best_time_to_visit": "April to September",
+    "avoid_months": "December to February (cold, possible snow)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Mild, 15-30°C, main visiting season for highland areas"
+      },
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Cold, often below freezing, occasional snow at higher elevations"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "khl_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Kohlu — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "khl_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "khl_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "A historic Marri tribal area, developed as a separate district",
+    "city_history": "Kohlu is the traditional homeland of the Marri Baloch tribe, a remote and mountainous district in central Balochistan.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

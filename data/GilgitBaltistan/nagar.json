@@ -1,0 +1,125 @@
+{
+  "city": "Nagar",
+  "province": "Gilgit-Baltistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "ngr_att_01",
+      "name": "Rakaposhi Base Camp / Viewpoint",
+      "category": "mountains",
+      "description": "Trailhead and viewpoint for Rakaposhi (7,788m), one of the most dramatically visible peaks from a roadside anywhere in the world.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Nagar District",
+      "popularity": "high"
+    },
+    {
+      "id": "ngr_att_02",
+      "name": "Hopper (Hoper) Glacier",
+      "category": "nature",
+      "description": "A scenic glacier valley with traditional villages set against a backdrop of high peaks, popular for glacier walks.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Hopper, Nagar District",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "ngr_food_01",
+      "name": "Local Nagar eatery",
+      "cuisine": "Balti/Hunza-style",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Traditional mountain-region cuisine similar to Hunza's"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "ngr_trans_01",
+      "from_city": "Nagar",
+      "to_city": "Gilgit",
+      "transport_type": "van",
+      "route": "Local van/jeep via Karakoram Highway or district road",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Most common route to the regional hub"
+    },
+    {
+      "id": "ngr_trans_02",
+      "from_city": "Nagar",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "NATCO/private coach via Karakoram Highway",
+      "estimated_cost_pkr": 3500,
+      "duration_min": 720,
+      "notes": "Long scenic journey; flights from Gilgit/Skardu are a faster alternative when weather permits"
+    },
+    {
+      "id": "ngr_trans_03",
+      "from_city": "Nagar",
+      "to_city": "Nagar",
+      "transport_type": "jeep",
+      "route": "Local jeep hire within the district",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 60,
+      "notes": "Jeeps are often required for higher valleys and glacier areas"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "ngr_acc_01",
+      "name": "Guesthouse near Hopper Glacier",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.8
+    }
+  ],
+  "weather_info": {
+    "climate_type": "High-altitude mountain climate with cold winters and mild summers",
+    "best_time_to_visit": "May to October",
+    "avoid_months": "December to March (heavy snow, many roads/passes close)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (May-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C in valleys, the main tourist season"
+      },
+      {
+        "season": "Autumn (Oct)",
+        "avg_condition": "Crisp and colorful, famous for golden/red foliage in Hunza and nearby valleys"
+      },
+      {
+        "season": "Winter (Nov-Apr)",
+        "avg_condition": "Very cold, heavy snowfall, many high-altitude roads and passes close"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "ngr_tip_01",
+      "category": "timing",
+      "tip": "Visit Nagar between May and October — many higher areas are snowed in or inaccessible in winter."
+    },
+    {
+      "id": "ngr_tip_02",
+      "category": "local_transport",
+      "tip": "A 4x4 jeep is often necessary for side valleys and glacier viewpoints; book local drivers in advance during peak season (July-August)."
+    },
+    {
+      "id": "ngr_tip_03",
+      "category": "safety",
+      "tip": "Roads can be affected by landslides, especially after rain — check current road conditions before travel, particularly along the Karakoram Highway."
+    }
+  ],
+  "history": {
+    "founded": "Historic princely state of Nagar, ruled by the Mir of Nagar until 1974, traditionally rival to neighboring Hunza",
+    "city_history": "Nagar was a separate princely state across the Hunza River from Hunza itself, formally merged into Pakistan in 1974. It's home to Rakaposhi, one of the world's most striking visible peaks.",
+    "province_history": "Gilgit-Baltistan is a mountainous region in northern Pakistan, home to some of the world's highest peaks including K2, Nanga Parbat, and parts of the Karakoram, Himalaya, and Hindu Kush ranges. Historically composed of small princely states (including Hunza and Nagar) along the ancient Silk Road, the region acceded to Pakistan in 1947-48 and is administered separately from Azad Kashmir, with its own Legislative Assembly since 2009."
+  }
+}

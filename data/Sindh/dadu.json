@@ -1,0 +1,128 @@
+{
+  "city": "Dadu",
+  "province": "Sindh",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "ddu_att_01",
+      "name": "Manchar Lake",
+      "category": "nature",
+      "description": "One of the largest freshwater lakes in Asia, home to diverse birdlife and traditional fishing communities living on houseboats.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~30km from Dadu",
+      "popularity": "high"
+    },
+    {
+      "id": "ddu_att_02",
+      "name": "Johi & Khirthar National Park (day trip)",
+      "category": "nature",
+      "description": "A large national park in the Khirthar mountain range, home to wild sheep, ibex, and rugged desert-mountain scenery.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Dadu district",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "ddu_food_01",
+      "name": "Manchar Lake fish restaurants",
+      "cuisine": "seafood/Sindhi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 800,
+      "family_friendly": true,
+      "specialty": "Fresh lake fish, a local specialty"
+    },
+    {
+      "id": "ddu_food_02",
+      "name": "Local Sindhi karahi houses",
+      "cuisine": "Sindhi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional Sindhi-style karahi"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "ddu_trans_01",
+      "from_city": "Dadu",
+      "to_city": "Hyderabad",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "ddu_trans_02",
+      "from_city": "Dadu",
+      "to_city": "Dadu",
+      "transport_type": "local_taxi",
+      "route": "Local taxi to Manchar Lake",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 40,
+      "notes": "Round-trip fare typical for the lake visit"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "ddu_acc_01",
+      "name": "Budget guesthouse in central Dadu",
+      "price_range": "budget",
+      "approx_price_pkr": 2500,
+      "family_friendly": true,
+      "rating": 3.1
+    },
+    {
+      "id": "ddu_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.5
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert climate, very hot summers",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "April to June (extremely hot)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 12-25°C, best time for birdwatching at Manchar Lake" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Extremely hot, often 42-46°C" },
+      { "season": "Monsoon", "avg_condition": "Light, irregular rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "ddu_tip_01",
+      "category": "shortcut_route",
+      "tip": "Dadu is a convenient base for visiting both Manchar Lake and Khirthar National Park in the same trip."
+    },
+    {
+      "id": "ddu_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local taxi for the Manchar Lake trip, and consider a boat ride once there to see the floating fishing communities."
+    },
+    {
+      "id": "ddu_tip_03",
+      "category": "safety",
+      "tip": "Carry water and sun protection given the very high summer temperatures in this region."
+    },
+    {
+      "id": "ddu_tip_04",
+      "category": "timing",
+      "tip": "Visit Manchar Lake in winter for the best birdwatching, when migratory birds are present in large numbers."
+    }
+  ],
+  "history": {
+    "founded": "An old settlement along the Indus River plains, with the district taking on administrative importance in the British era",
+    "city_history": "Dadu developed as a district center serving the surrounding agricultural areas along the Indus, and is best known today as the gateway to Manchar Lake, one of Asia's largest freshwater lakes and an important habitat for migratory birds.",
+    "province_history": "Sindh is home to one of the world's oldest urban civilizations, the Indus Valley Civilization (Mohenjo-daro), and was later ruled by Persian, Arab, and Mughal empires, as well as the Talpur dynasty, before British annexation in 1843 and eventual inclusion in Pakistan in 1947."
+  }
+}

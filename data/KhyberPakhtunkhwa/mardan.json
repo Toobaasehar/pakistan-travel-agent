@@ -1,0 +1,150 @@
+{
+  "city": "Mardan",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "mdn_att_01",
+      "name": "Takht-i-Bahi",
+      "category": "historical",
+      "description": "A UNESCO World Heritage Site featuring the remarkably well-preserved remains of an ancient Buddhist monastery complex from the Gandhara era.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "~15km northwest of Mardan",
+      "popularity": "high"
+    },
+    {
+      "id": "mdn_att_02",
+      "name": "Jamal Garhi",
+      "category": "historical",
+      "description": "Another significant Buddhist archaeological site from the Gandhara civilization, with monastery ruins and stupas.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Mardan",
+      "popularity": "low"
+    },
+    {
+      "id": "mdn_att_03",
+      "name": "Mardan Museum",
+      "category": "museum",
+      "description": "A museum housing Gandhara-era artifacts and sculptures excavated from the surrounding archaeological sites.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Mardan",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "mdn_food_01",
+      "name": "Mardan Chapli Kebab houses",
+      "cuisine": "Pashtun BBQ",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Mardan is famous nationwide for its chapli kebab"
+    },
+    {
+      "id": "mdn_food_02",
+      "name": "Local tea houses and bakeries",
+      "cuisine": "snacks/tea",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Traditional Pashtun tea and baked snacks"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "mdn_trans_01",
+      "from_city": "Mardan",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 300,
+      "duration_min": 60,
+      "notes": "Short, frequent route"
+    },
+    {
+      "id": "mdn_trans_02",
+      "from_city": "Mardan",
+      "to_city": "Swat",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 600,
+      "duration_min": 150,
+      "notes": "Route toward Swat valley"
+    },
+    {
+      "id": "mdn_trans_03",
+      "from_city": "Mardan",
+      "to_city": "Mardan",
+      "transport_type": "local_taxi",
+      "route": "Local taxi to Takht-i-Bahi",
+      "estimated_cost_pkr": 800,
+      "duration_min": 30,
+      "notes": "Round-trip taxi fare typical for the archaeological site visit"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "mdn_acc_01",
+      "name": "Budget guesthouse in central Mardan",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "mdn_acc_02",
+      "name": "Mid-range hotel near Bank Road",
+      "price_range": "moderate",
+      "approx_price_pkr": 6500,
+      "family_friendly": true,
+      "rating": 3.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool, 5-18°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-40°C" },
+      { "season": "Monsoon", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "mdn_tip_01",
+      "category": "shortcut_route",
+      "tip": "Mardan is a convenient stopover between Peshawar and the Swat valley, worth combining into one trip."
+    },
+    {
+      "id": "mdn_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local taxi for a half-day to visit both Takht-i-Bahi and Jamal Garhi together, since they're relatively close to each other."
+    },
+    {
+      "id": "mdn_tip_03",
+      "category": "safety",
+      "tip": "Standard travel precautions apply; stick to well-known archaeological sites and city areas."
+    },
+    {
+      "id": "mdn_tip_04",
+      "category": "timing",
+      "tip": "Visit Takht-i-Bahi in the morning for cooler temperatures and better light over the hillside ruins."
+    }
+  ],
+  "history": {
+    "founded": "The surrounding region has ancient roots in the Gandhara civilization, over 2,000 years old",
+    "city_history": "Mardan sits at the heart of the ancient Gandhara region, once a major center of Buddhist learning and art, evidenced by the remarkably preserved monastery ruins at Takht-i-Bahi. The modern city developed as an important agricultural and trading center in the Peshawar valley.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "city": "Sialkot",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "skt_att_01",
+      "name": "Sialkot Fort",
+      "category": "historical",
+      "description": "The remains of an ancient fort with a history tied to the city's origins, offering a glimpse into Sialkot's past.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Sialkot",
+      "popularity": "medium"
+    },
+    {
+      "id": "skt_att_02",
+      "name": "Iqbal Manzil",
+      "category": "historical",
+      "description": "The birthplace and ancestral home of poet-philosopher Allama Muhammad Iqbal, now preserved as a heritage site.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Sialkot",
+      "popularity": "medium"
+    },
+    {
+      "id": "skt_att_03",
+      "name": "Sialkot Sports Industry Tours",
+      "category": "cultural",
+      "description": "Sialkot is world-famous for manufacturing sports goods (footballs, gloves); some factories offer visitor tours.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Industrial areas, Sialkot",
+      "popularity": "medium"
+    },
+    {
+      "id": "skt_att_04",
+      "name": "Jinnah Islamia College grounds and old city bazaars",
+      "category": "shopping",
+      "description": "Historic bazaars in the old city known for leather goods, surgical instruments, and local crafts.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Old city, Sialkot",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "skt_food_01",
+      "name": "Sialkoti Kanji Wale (traditional drink stalls)",
+      "cuisine": "beverages/street food",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Kanji, a traditional fermented carrot drink popular in the region"
+    },
+    {
+      "id": "skt_food_02",
+      "name": "Local karahi houses near Cantt",
+      "cuisine": "Punjabi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Chicken and mutton karahi"
+    },
+    {
+      "id": "skt_food_03",
+      "name": "Paratha and lassi stalls, old city",
+      "cuisine": "breakfast",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 300,
+      "family_friendly": true,
+      "specialty": "Traditional Punjabi breakfast"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "skt_trans_01",
+      "from_city": "Sialkot",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 700,
+      "duration_min": 150,
+      "notes": "Frequent daily departures"
+    },
+    {
+      "id": "skt_trans_02",
+      "from_city": "Sialkot",
+      "to_city": "Gujranwala",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 300,
+      "duration_min": 60,
+      "notes": "Short regional route"
+    },
+    {
+      "id": "skt_trans_03",
+      "from_city": "Sialkot",
+      "to_city": "Sialkot",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 250,
+      "duration_min": 15,
+      "notes": "Sialkot has its own international airport, mainly for expatriate/overseas travel"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "skt_acc_01",
+      "name": "Budget guesthouse near Cantt",
+      "price_range": "budget",
+      "approx_price_pkr": 3200,
+      "family_friendly": true,
+      "rating": 3.4
+    },
+    {
+      "id": "skt_acc_02",
+      "name": "Mid-range hotel near Paris Road",
+      "price_range": "moderate",
+      "approx_price_pkr": 7500,
+      "family_friendly": true,
+      "rating": 3.9
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot and humid)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool, 6-20°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-40°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "skt_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Sialkot-Gujranwala bypass road to avoid city-center congestion when passing through toward Lahore."
+    },
+    {
+      "id": "skt_tip_02",
+      "category": "local_transport",
+      "tip": "Sialkot International Airport offers a convenient alternative to Lahore for onward international travel, built through local community/overseas investment."
+    },
+    {
+      "id": "skt_tip_03",
+      "category": "safety",
+      "tip": "Sialkot is generally a calm, business-oriented city; standard precautions in busy market areas apply."
+    },
+    {
+      "id": "skt_tip_04",
+      "category": "timing",
+      "tip": "Visit the old city bazaars in the morning when shops are freshest and less crowded."
+    }
+  ],
+  "history": {
+    "founded": "One of the oldest cities in Punjab, with roots going back over 3,000 years",
+    "city_history": "Sialkot has a long history as a center of craftsmanship, particularly in sports goods, surgical instruments, and leather products, trading globally for over a century. It is also famed as the birthplace of poet-philosopher Allama Iqbal, considered the spiritual father of Pakistan.",
+    "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+  }
+}

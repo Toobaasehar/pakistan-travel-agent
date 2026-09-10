@@ -1,0 +1,133 @@
+{
+  "city": "Lasbela",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "lsb_att_01",
+      "name": "Hingol National Park",
+      "category": "wildlife",
+      "description": "Pakistan's largest national park, spanning desert, mountains, and coastline, home to the Hingol River, mud volcanoes, and diverse wildlife.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 180,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Hingol, Lasbela District",
+      "popularity": "high"
+    },
+    {
+      "id": "lsb_att_02",
+      "name": "Princess of Hope rock formation",
+      "category": "nature",
+      "description": "A striking natural rock formation resembling a face, a famous landmark along the Makran Coastal Highway within Hingol National Park.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Hingol National Park",
+      "popularity": "high"
+    },
+    {
+      "id": "lsb_att_03",
+      "name": "Kund Malir Beach",
+      "category": "beaches",
+      "description": "A remote, pristine beach along the Makran Coastal Highway, popular for its dramatic desert-meets-sea scenery.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Kund Malir, Lasbela District",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "lsb_food_01",
+      "name": "Coastal highway food stalls",
+      "cuisine": "Balochi/seafood",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Fresh seafood and traditional Balochi dishes along the coastal highway"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "lsb_trans_01",
+      "from_city": "Lasbela",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "lsb_trans_02",
+      "from_city": "Lasbela",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "lsb_trans_03",
+      "from_city": "Lasbela",
+      "to_city": "Lasbela",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "lsb_acc_01",
+      "name": "Basic guesthouse/camp near Hingol",
+      "price_range": "budget",
+      "approx_price_pkr": 4000,
+      "family_friendly": true,
+      "rating": 3.2
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Warm coastal climate, hot and humid summers",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "May to August (extreme heat)",
+    "seasonal_notes": [
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Warm and pleasant, 18-28°C, ideal for coastal visits"
+      },
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Hot and humid, often above 38°C"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "lsb_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Lasbela — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "lsb_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "lsb_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "Historic seat of a former princely state, now Balochistan's gateway district from Karachi",
+    "city_history": "Lasbela was historically a princely state ruled by the Jam of Lasbela, and today is home to Hingol National Park, one of Pakistan's largest protected areas, and scenic coastal formations along the Makran Coastal Highway.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

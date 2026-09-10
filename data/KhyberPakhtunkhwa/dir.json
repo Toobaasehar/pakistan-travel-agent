@@ -1,0 +1,150 @@
+{
+  "city": "Dir",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "dir_att_01",
+      "name": "Kumrat Valley",
+      "category": "nature",
+      "description": "A pristine, forested valley with rivers and waterfalls, considered one of the most scenic and least crowded valleys in the region.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 300,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Upper Dir district",
+      "popularity": "high"
+    },
+    {
+      "id": "dir_att_02",
+      "name": "Lowari Tunnel viewpoint",
+      "category": "cultural",
+      "description": "A major engineering landmark connecting Dir to Chitral, with scenic mountain views at either end.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Upper Dir district",
+      "popularity": "low"
+    },
+    {
+      "id": "dir_att_03",
+      "name": "Dir Fort remains",
+      "category": "historical",
+      "description": "Remnants tied to Dir's history as a former princely state.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Dir town",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "dir_food_01",
+      "name": "Local Pashtun karahi houses",
+      "cuisine": "Pashtun",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and tikka"
+    },
+    {
+      "id": "dir_food_02",
+      "name": "Kumrat valley riverside food stalls",
+      "cuisine": "mountain cuisine",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Simple trout and local dishes near the river"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "dir_trans_01",
+      "from_city": "Dir",
+      "to_city": "Chitral",
+      "transport_type": "bus",
+      "route": "Lowari Tunnel road",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Now a year-round route thanks to the Lowari Tunnel"
+    },
+    {
+      "id": "dir_trans_02",
+      "from_city": "Dir",
+      "to_city": "Peshawar",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 800,
+      "duration_min": 240,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "dir_trans_03",
+      "from_city": "Dir",
+      "to_city": "Dir",
+      "transport_type": "local_jeep",
+      "route": "Jeep to Kumrat Valley",
+      "estimated_cost_pkr": 5000,
+      "duration_min": 150,
+      "notes": "4x4 recommended for the unpaved valley roads"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "dir_acc_01",
+      "name": "Budget guesthouse in Dir town",
+      "price_range": "budget",
+      "approx_price_pkr": 2800,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "dir_acc_02",
+      "name": "Kumrat Valley riverside camp/guesthouse",
+      "price_range": "moderate",
+      "approx_price_pkr": 6500,
+      "family_friendly": true,
+      "rating": 4.1
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Cold mountain climate, forested valleys with heavy winter snow at higher elevations",
+    "best_time_to_visit": "May to September (Kumrat Valley roads most reliably open)",
+    "avoid_months": "November to April (heavy snow can restrict access to Kumrat)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Apr)", "avg_condition": "Cold with heavy snow at higher elevations" },
+      { "season": "Summer (May-Aug)", "avg_condition": "Mild and green, 18-28°C, peak visiting season" },
+      { "season": "Monsoon", "avg_condition": "Regular rainfall, lush forests" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "dir_tip_01",
+      "category": "shortcut_route",
+      "tip": "The Lowari Tunnel makes Dir a convenient stopover between Peshawar/Swat and Chitral, open year-round unlike the old mountain pass."
+    },
+    {
+      "id": "dir_tip_02",
+      "category": "local_transport",
+      "tip": "Hire a local 4x4 jeep for Kumrat Valley -- the unpaved roads aren't suitable for regular cars."
+    },
+    {
+      "id": "dir_tip_03",
+      "category": "safety",
+      "tip": "Kumrat Valley has limited mobile signal and few facilities -- carry supplies and inform someone of your plans."
+    },
+    {
+      "id": "dir_tip_04",
+      "category": "timing",
+      "tip": "Visit Kumrat Valley on a weekday if possible to avoid the crowds that build up on weekends during peak summer season."
+    }
+  ],
+  "history": {
+    "founded": "A former princely state that acceded to Pakistan in 1969, along with Chitral and Swat",
+    "city_history": "Dir was historically an independent princely state ruled by the Nawabs of Dir before being merged into Pakistan and becoming part of Khyber Pakhtunkhwa. Its rugged, forested valleys -- especially Kumrat -- have become increasingly popular with domestic tourists in recent years as accessibility has improved.",
+    "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+  }
+}

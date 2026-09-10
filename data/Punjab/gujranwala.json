@@ -1,0 +1,159 @@
+{
+  "city": "Gujranwala",
+  "province": "Punjab",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "gjw_att_01",
+      "name": "Gujranwala Fort remains",
+      "category": "historical",
+      "description": "Remnants linked to the city's history as the birthplace of Maharaja Ranjit Singh, founder of the Sikh Empire.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Gujranwala",
+      "popularity": "low"
+    },
+    {
+      "id": "gjw_att_02",
+      "name": "Nandi Shah Park",
+      "category": "nature",
+      "description": "A popular public park in Gujranwala for family outings and evening walks.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Gujranwala city",
+      "popularity": "medium"
+    },
+    {
+      "id": "gjw_att_03",
+      "name": "Rehmatabad food and wrestling (akhara) culture",
+      "category": "cultural",
+      "description": "Gujranwala is known nationally for its wrestling (kushti) tradition; some akharas welcome visitors to observe training.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Various areas, Gujranwala",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "gjw_food_01",
+      "name": "Gujranwala food street",
+      "cuisine": "Punjabi/BBQ",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "Gujranwala is famously called Pakistan's 'food capital' for its rich BBQ and street food culture"
+    },
+    {
+      "id": "gjw_food_02",
+      "name": "Local nihari and paye shops",
+      "cuisine": "traditional breakfast",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 400,
+      "family_friendly": true,
+      "specialty": "Traditional slow-cooked nihari"
+    },
+    {
+      "id": "gjw_food_03",
+      "name": "Sweet shops (Gujranwala jalebi and barfi)",
+      "cuisine": "desserts",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 250,
+      "family_friendly": true,
+      "specialty": "Well-known local sweets"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "gjw_trans_01",
+      "from_city": "Gujranwala",
+      "to_city": "Lahore",
+      "transport_type": "bus",
+      "route": "Intercity coach / GT Road",
+      "estimated_cost_pkr": 400,
+      "duration_min": 90,
+      "notes": "Short, frequent route"
+    },
+    {
+      "id": "gjw_trans_02",
+      "from_city": "Gujranwala",
+      "to_city": "Sialkot",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 300,
+      "duration_min": 60,
+      "notes": "Short regional route"
+    },
+    {
+      "id": "gjw_trans_03",
+      "from_city": "Gujranwala",
+      "to_city": "Gujranwala",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 250,
+      "duration_min": 15,
+      "notes": "Convenient for reaching food streets and markets"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "gjw_acc_01",
+      "name": "Budget guesthouse near GT Road",
+      "price_range": "budget",
+      "approx_price_pkr": 3000,
+      "family_friendly": true,
+      "rating": 3.3
+    },
+    {
+      "id": "gjw_acc_02",
+      "name": "Mid-range hotel near Model Town",
+      "price_range": "moderate",
+      "approx_price_pkr": 7000,
+      "family_friendly": true,
+      "rating": 3.9
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "October to March",
+    "avoid_months": "May to July (hot and humid)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool, 6-20°C" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Hot, 30-42°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Moderate to heavy rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "gjw_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Gujranwala Bypass on GT Road to avoid the busy city center when passing through between Lahore and Gujrat/Sialkot."
+    },
+    {
+      "id": "gjw_tip_02",
+      "category": "local_transport",
+      "tip": "Ride-hailing apps work well here for reaching the various food streets around the city."
+    },
+    {
+      "id": "gjw_tip_03",
+      "category": "safety",
+      "tip": "Standard precautions apply in busy food street areas, especially during peak evening hours."
+    },
+    {
+      "id": "gjw_tip_04",
+      "category": "timing",
+      "tip": "Visit the food streets in the evening when the widest variety of BBQ and street food vendors are open."
+    }
+  ],
+  "history": {
+    "founded": "An old city with roots going back several centuries, rising to prominence under the Sikh era",
+    "city_history": "Gujranwala is best known as the birthplace of Maharaja Ranjit Singh, founder of the Sikh Empire, who was born here in 1780. The city later developed into an important industrial and manufacturing center in Punjab, and today is famously known across Pakistan for its food culture, particularly BBQ and street food.",
+    "province_history": "Punjab, meaning 'land of five rivers', has one of the longest continuous histories in South Asia, home to the ancient Indus Valley Civilization (Harappa), later ruled by the Mauryas, Mughals, Sikh Empire, and the British before becoming part of Pakistan in 1947."
+  }
+}

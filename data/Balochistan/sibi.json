@@ -1,0 +1,128 @@
+{
+  "city": "Sibi",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "sib_att_01",
+      "name": "Sibi Fort",
+      "category": "historical",
+      "description": "A historic fort reflecting Sibi's long history as a strategic settlement at the edge of the Bolan Pass region.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Sibi",
+      "popularity": "low"
+    },
+    {
+      "id": "sib_att_02",
+      "name": "Sibi Mela grounds",
+      "category": "cultural",
+      "description": "Home to the annual Sibi Mela, one of Balochistan's largest cultural festivals featuring livestock shows, handicrafts, and folk music.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Sibi city",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "sib_food_01",
+      "name": "Local Sibi sajji houses",
+      "cuisine": "Balochi",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 1000,
+      "family_friendly": true,
+      "specialty": "Traditional whole-roasted sajji, a regional specialty"
+    },
+    {
+      "id": "sib_food_02",
+      "name": "Local tea and snack stalls",
+      "cuisine": "tea/snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 200,
+      "family_friendly": true,
+      "specialty": "Casual roadside tea and snacks"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "sib_trans_01",
+      "from_city": "Sibi",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Bolan Pass road/rail route",
+      "estimated_cost_pkr": 700,
+      "duration_min": 150,
+      "notes": "Historic route through the Bolan Pass; also served by rail"
+    },
+    {
+      "id": "sib_trans_02",
+      "from_city": "Sibi",
+      "to_city": "Sibi",
+      "transport_type": "local_taxi",
+      "route": "Local taxi within town",
+      "estimated_cost_pkr": 250,
+      "duration_min": 15,
+      "notes": "Simple, short local trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "sib_acc_01",
+      "name": "Budget guesthouse in central Sibi",
+      "price_range": "budget",
+      "approx_price_pkr": 2500,
+      "family_friendly": true,
+      "rating": 3.1
+    },
+    {
+      "id": "sib_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.5
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Hot desert climate, one of the hottest cities in Pakistan",
+    "best_time_to_visit": "November to February",
+    "avoid_months": "May to July (extremely hot, frequently among the highest temperatures in the country)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Mild, 10-24°C, best time to visit including the Sibi Mela festival season" },
+      { "season": "Summer (Apr-Jun)", "avg_condition": "Extremely hot, often 45-50°C" },
+      { "season": "Monsoon", "avg_condition": "Minimal rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "sib_tip_01",
+      "category": "shortcut_route",
+      "tip": "Sibi sits at the gateway to the historic Bolan Pass, a key route connecting Balochistan to Punjab and Sindh."
+    },
+    {
+      "id": "sib_tip_02",
+      "category": "local_transport",
+      "tip": "Local taxis are the simplest way to get around; the town itself is compact."
+    },
+    {
+      "id": "sib_tip_03",
+      "category": "safety",
+      "tip": "Given the extreme summer heat, avoid outdoor activities in the afternoon between April and July."
+    },
+    {
+      "id": "sib_tip_04",
+      "category": "timing",
+      "tip": "Visit during the annual Sibi Mela (typically held in winter) for a genuine cultural experience -- check current dates before planning."
+    }
+  ],
+  "history": {
+    "founded": "One of the oldest continuously inhabited settlements in the region, with roots going back thousands of years",
+    "city_history": "Sibi's strategic location at the mouth of the Bolan Pass made it an important stop on historic trade and invasion routes between Central Asia and South Asia for centuries. It is famous today for the annual Sibi Mela, a large agricultural and cultural festival dating back to colonial times.",
+    "province_history": "Balochistan is Pakistan's largest province by area, historically home to various Baloch and Pashtun tribal confederacies, and was governed as British Balochistan before its princely states acceded to Pakistan between 1947 and 1948."
+  }
+}

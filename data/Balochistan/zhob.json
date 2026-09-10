@@ -1,0 +1,138 @@
+{
+  "city": "Zhob",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "zhb_att_01",
+      "name": "Zhob Fort",
+      "category": "historical",
+      "description": "A fort reflecting the town's history as a British-era administrative and military outpost.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 30,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Central Zhob",
+      "popularity": "low"
+    },
+    {
+      "id": "zhb_att_02",
+      "name": "Zhob River valley",
+      "category": "nature",
+      "description": "A scenic river valley surrounded by the arid hills typical of northern Balochistan.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Around Zhob town",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "zhb_food_01",
+      "name": "Local Pashtun/Balochi karahi houses",
+      "cuisine": "Pashtun/Balochi",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional karahi and grilled meats"
+    },
+    {
+      "id": "zhb_food_02",
+      "name": "Local dry fruit and tea stalls",
+      "cuisine": "snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 250,
+      "family_friendly": true,
+      "specialty": "Regional dry fruits, popular in this part of Balochistan"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "zhb_trans_01",
+      "from_city": "Zhob",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 1200,
+      "duration_min": 300,
+      "notes": "Regular daily departures"
+    },
+    {
+      "id": "zhb_trans_02",
+      "from_city": "Zhob",
+      "to_city": "Dera Ismail Khan",
+      "transport_type": "bus",
+      "route": "Intercity coach",
+      "estimated_cost_pkr": 900,
+      "duration_min": 240,
+      "notes": "Connects Zhob toward southern KP"
+    },
+    {
+      "id": "zhb_trans_03",
+      "from_city": "Zhob",
+      "to_city": "Zhob",
+      "transport_type": "local_taxi",
+      "route": "Local taxi within town",
+      "estimated_cost_pkr": 250,
+      "duration_min": 15,
+      "notes": "Simple, short local trips"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "zhb_acc_01",
+      "name": "Budget guesthouse in central Zhob",
+      "price_range": "budget",
+      "approx_price_pkr": 2500,
+      "family_friendly": true,
+      "rating": 3.1
+    },
+    {
+      "id": "zhb_acc_02",
+      "name": "Mid-range hotel near the main bazaar",
+      "price_range": "moderate",
+      "approx_price_pkr": 5500,
+      "family_friendly": true,
+      "rating": 3.5
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with cold winters (higher elevation than southern Balochistan)",
+    "best_time_to_visit": "April to October",
+    "avoid_months": "December to February (cold, occasional snow)",
+    "seasonal_notes": [
+      { "season": "Winter (Dec-Feb)", "avg_condition": "Cold, can approach freezing at night" },
+      { "season": "Summer (May-Aug)", "avg_condition": "Warm and dry, 25-35°C" },
+      { "season": "Monsoon", "avg_condition": "Minimal rainfall" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "zhb_tip_01",
+      "category": "shortcut_route",
+      "tip": "Zhob serves as a connecting point between Quetta and southern Khyber Pakhtunkhwa (Dera Ismail Khan)."
+    },
+    {
+      "id": "zhb_tip_02",
+      "category": "local_transport",
+      "tip": "Local taxis are the simplest way to get around; the town itself is compact and easy to navigate."
+    },
+    {
+      "id": "zhb_tip_03",
+      "category": "safety",
+      "tip": "Check current travel advisories before planning a visit, as with other parts of northern Balochistan."
+    },
+    {
+      "id": "zhb_tip_04",
+      "category": "timing",
+      "tip": "Pack warm clothing for winter visits given the cooler elevation compared to Quetta and points south."
+    }
+  ],
+  "history": {
+    "founded": "Developed as a British colonial administrative post in the late 19th century",
+    "city_history": "Zhob grew as an important garrison and trading town under British rule, controlling routes through northern Balochistan toward Afghanistan and southern Khyber Pakhtunkhwa. It remains a regional trading hub for the surrounding tribal areas today.",
+    "province_history": "Balochistan is Pakistan's largest province by area, historically home to various Baloch and Pashtun tribal confederacies, and was governed as British Balochistan before its princely states acceded to Pakistan between 1947 and 1948."
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "city": "Astore",
+  "province": "Gilgit-Baltistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "ast_att_01",
+      "name": "Deosai National Park (Deosai Plains)",
+      "category": "wildlife",
+      "description": "One of the world's highest plateaus, a vast alpine steppe famous for wildflowers, the Himalayan brown bear, and its remote, otherworldly landscape.",
+      "entry_fee_pkr": 200,
+      "visit_duration_min": 240,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Deosai Plains, Astore District",
+      "popularity": "high"
+    },
+    {
+      "id": "ast_att_02",
+      "name": "Rama Lake & Meadow",
+      "category": "nature",
+      "description": "A serene alpine lake surrounded by pine forest with views of Nanga Parbat, reached by jeep from Astore town.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Rama, Astore District",
+      "popularity": "high"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "ast_food_01",
+      "name": "Astore local restaurant",
+      "cuisine": "Shina/Pakistani",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 600,
+      "family_friendly": true,
+      "specialty": "Traditional mountain-region meals"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "ast_trans_01",
+      "from_city": "Astore",
+      "to_city": "Gilgit",
+      "transport_type": "van",
+      "route": "Local van/jeep via Karakoram Highway or district road",
+      "estimated_cost_pkr": 500,
+      "duration_min": 120,
+      "notes": "Most common route to the regional hub"
+    },
+    {
+      "id": "ast_trans_02",
+      "from_city": "Astore",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "NATCO/private coach via Karakoram Highway",
+      "estimated_cost_pkr": 3500,
+      "duration_min": 720,
+      "notes": "Long scenic journey; flights from Gilgit/Skardu are a faster alternative when weather permits"
+    },
+    {
+      "id": "ast_trans_03",
+      "from_city": "Astore",
+      "to_city": "Astore",
+      "transport_type": "jeep",
+      "route": "Local jeep hire within the district",
+      "estimated_cost_pkr": 3000,
+      "duration_min": 60,
+      "notes": "Jeeps are often required for higher valleys and glacier areas"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "ast_acc_01",
+      "name": "Camp/guesthouse near Deosai",
+      "price_range": "moderate",
+      "approx_price_pkr": 6500,
+      "family_friendly": true,
+      "rating": 3.9
+    },
+    {
+      "id": "ast_acc_02",
+      "name": "Basic guesthouse in Astore town",
+      "price_range": "budget",
+      "approx_price_pkr": 4000,
+      "family_friendly": true,
+      "rating": 3.2
+    }
+  ],
+  "weather_info": {
+    "climate_type": "High-altitude mountain climate with cold winters and mild summers",
+    "best_time_to_visit": "May to October",
+    "avoid_months": "December to March (heavy snow, many roads/passes close)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (May-Sep)",
+        "avg_condition": "Mild and pleasant, 15-28°C in valleys, the main tourist season"
+      },
+      {
+        "season": "Autumn (Oct)",
+        "avg_condition": "Crisp and colorful, famous for golden/red foliage in Hunza and nearby valleys"
+      },
+      {
+        "season": "Winter (Nov-Apr)",
+        "avg_condition": "Very cold, heavy snowfall, many high-altitude roads and passes close"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "ast_tip_01",
+      "category": "timing",
+      "tip": "Visit Astore between May and October — many higher areas are snowed in or inaccessible in winter."
+    },
+    {
+      "id": "ast_tip_02",
+      "category": "local_transport",
+      "tip": "A 4x4 jeep is often necessary for side valleys and glacier viewpoints; book local drivers in advance during peak season (July-August)."
+    },
+    {
+      "id": "ast_tip_03",
+      "category": "safety",
+      "tip": "Roads can be affected by landslides, especially after rain — check current road conditions before travel, particularly along the Karakoram Highway."
+    }
+  ],
+  "history": {
+    "founded": "A historic mountain district separated from Diamer District in 2004",
+    "city_history": "Astore is home to the Deosai Plains, one of the highest plateaus in the world, and Rama Lake, both major draws for the region's growing eco-tourism.",
+    "province_history": "Gilgit-Baltistan is a mountainous region in northern Pakistan, home to some of the world's highest peaks including K2, Nanga Parbat, and parts of the Karakoram, Himalaya, and Hindu Kush ranges. Historically composed of small princely states (including Hunza and Nagar) along the ancient Silk Road, the region acceded to Pakistan in 1947-48 and is administered separately from Azad Kashmir, with its own Legislative Assembly since 2009."
+  }
+}

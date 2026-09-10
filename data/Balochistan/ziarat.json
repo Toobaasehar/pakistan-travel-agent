@@ -1,0 +1,133 @@
+{
+  "city": "Ziarat",
+  "province": "Balochistan",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "zrt_att_01",
+      "name": "Quaid-e-Azam Residency",
+      "category": "historical",
+      "description": "The colonial-era residency where Pakistan's founder Muhammad Ali Jinnah spent his final weeks in 1948, now a museum.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Ziarat town",
+      "popularity": "high"
+    },
+    {
+      "id": "zrt_att_02",
+      "name": "Ziarat Juniper Forest",
+      "category": "nature",
+      "description": "One of the largest juniper forests in the world, with trees estimated to be thousands of years old, surrounding the hill station.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 120,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Ziarat District",
+      "popularity": "high"
+    },
+    {
+      "id": "zrt_att_03",
+      "name": "Sandeman Tangi & Chutair Valley",
+      "category": "mountains",
+      "description": "Scenic gorges and valleys around Ziarat, popular for hiking and picnics.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Ziarat outskirts",
+      "popularity": "medium"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "zrt_food_01",
+      "name": "Ziarat local restaurant",
+      "cuisine": "Balochi/Pakistani",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Traditional dishes with fresh local apples and cherries in season"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "zrt_trans_01",
+      "from_city": "Ziarat",
+      "to_city": "Quetta",
+      "transport_type": "bus",
+      "route": "Intercity coach via provincial highway",
+      "estimated_cost_pkr": 700,
+      "duration_min": 180,
+      "notes": "Most common route to the provincial capital"
+    },
+    {
+      "id": "zrt_trans_02",
+      "from_city": "Ziarat",
+      "to_city": "Karachi",
+      "transport_type": "bus",
+      "route": "Intercity coach via national highway",
+      "estimated_cost_pkr": 1800,
+      "duration_min": 480,
+      "notes": "Long-distance coach services connect to Karachi"
+    },
+    {
+      "id": "zrt_trans_03",
+      "from_city": "Ziarat",
+      "to_city": "Ziarat",
+      "transport_type": "local_van",
+      "route": "Local van/shared transport within district",
+      "estimated_cost_pkr": 150,
+      "duration_min": 20,
+      "notes": "Shared vans are the main local transport option"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "zrt_acc_01",
+      "name": "Guesthouse in Ziarat town",
+      "price_range": "moderate",
+      "approx_price_pkr": 6000,
+      "family_friendly": true,
+      "rating": 3.7
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Mountain climate with mild summers and cold winters",
+    "best_time_to_visit": "April to September",
+    "avoid_months": "December to February (cold, possible snow)",
+    "seasonal_notes": [
+      {
+        "season": "Summer (Apr-Sep)",
+        "avg_condition": "Mild, 15-30°C, main visiting season for highland areas"
+      },
+      {
+        "season": "Winter (Nov-Feb)",
+        "avg_condition": "Cold, often below freezing, occasional snow at higher elevations"
+      }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "zrt_tip_01",
+      "category": "timing",
+      "tip": "Check seasonal conditions before visiting Ziarat — mountain districts can have snow-blocked roads in winter, desert districts are extremely hot in summer."
+    },
+    {
+      "id": "zrt_tip_02",
+      "category": "local_transport",
+      "tip": "Intercity coaches and shared vans connect most district towns to Quetta; travel times can be long given Balochistan's size."
+    },
+    {
+      "id": "zrt_tip_03",
+      "category": "general",
+      "tip": "Check current local travel advisories before visiting, as conditions can vary across Balochistan's districts."
+    }
+  ],
+  "history": {
+    "founded": "Developed as a British colonial-era hill station and summer retreat",
+    "city_history": "Ziarat was a favored summer retreat during British rule and later became historically significant as the site of the Quaid-e-Azam Residency, where Muhammad Ali Jinnah spent his final days in 1948.",
+    "province_history": "Balochistan is Pakistan's largest province by area and least populated, historically home to the Baloch and Pashtun peoples and the site of the ancient Mehrgarh civilization (one of the earliest farming settlements in South Asia). It was ruled by the Khanate of Kalat before acceding to Pakistan in 1948, and remains known for its vast deserts, mountain ranges, and long Arabian Sea coastline."
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "city": "Peshawar",
+  "province": "Khyber Pakhtunkhwa",
+  "data_note": "Demo/curated dataset. Costs and durations are approximate estimates for prototype purposes, not verified real-time prices.",
+  "attractions": [
+    {
+      "id": "pew_att_01",
+      "name": "Qissa Khwani Bazaar",
+      "category": "cultural",
+      "description": "The historic 'Storytellers' Market', a centuries-old bazaar known for its atmosphere, dry fruits, and traditional shops.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 75,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Old City, Peshawar",
+      "popularity": "high"
+    },
+    {
+      "id": "pew_att_02",
+      "name": "Bala Hisar Fort",
+      "category": "historical",
+      "description": "A centuries-old fort overlooking the city, historically used as a military garrison, offering views of Peshawar.",
+      "entry_fee_pkr": 50,
+      "visit_duration_min": 60,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Near Old City, Peshawar",
+      "popularity": "medium"
+    },
+    {
+      "id": "pew_att_03",
+      "name": "Peshawar Museum",
+      "category": "museum",
+      "description": "One of the best museums in Pakistan for Gandhara-era Buddhist art and artifacts, housed in a colonial-era building.",
+      "entry_fee_pkr": 20,
+      "visit_duration_min": 90,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "The Mall, Peshawar",
+      "popularity": "medium"
+    },
+    {
+      "id": "pew_att_04",
+      "name": "Chowk Yadgar",
+      "category": "cultural",
+      "description": "A historic central square and monument in the old city, surrounded by markets and street food stalls.",
+      "entry_fee_pkr": 0,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Old City, Peshawar",
+      "popularity": "medium"
+    },
+    {
+      "id": "pew_att_05",
+      "name": "Sethi House / Sethi Mohalla",
+      "category": "historical",
+      "description": "Beautifully restored 19th-century merchant houses showcasing traditional Peshawari architecture and woodwork.",
+      "entry_fee_pkr": 30,
+      "visit_duration_min": 45,
+      "family_friendly": true,
+      "student_friendly": true,
+      "location_text": "Old City, Peshawar",
+      "popularity": "low"
+    }
+  ],
+  "food_places": [
+    {
+      "id": "pew_food_01",
+      "name": "Namak Mandi",
+      "cuisine": "Peshawari BBQ",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 700,
+      "family_friendly": true,
+      "specialty": "Famous open-air tikka and karahi street food area"
+    },
+    {
+      "id": "pew_food_02",
+      "name": "Charsi Tikka (Namak Mandi)",
+      "cuisine": "BBQ",
+      "price_level": "moderate",
+      "approx_cost_per_person_pkr": 900,
+      "family_friendly": true,
+      "specialty": "One of the most well-known tikka spots in Pakistan"
+    },
+    {
+      "id": "pew_food_03",
+      "name": "Shiraz Restaurant",
+      "cuisine": "Pashtun/traditional",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 500,
+      "family_friendly": true,
+      "specialty": "Traditional Pashtun-style karahi and naan"
+    },
+    {
+      "id": "pew_food_04",
+      "name": "Qehwa Khana (tea houses, Old City)",
+      "cuisine": "tea/snacks",
+      "price_level": "budget",
+      "approx_cost_per_person_pkr": 150,
+      "family_friendly": true,
+      "specialty": "Traditional green tea (qehwa) and local snacks"
+    }
+  ],
+  "transportation": [
+    {
+      "id": "pew_trans_01",
+      "from_city": "Peshawar",
+      "to_city": "Islamabad",
+      "transport_type": "bus",
+      "route": "Motorway coach via M-1",
+      "estimated_cost_pkr": 1000,
+      "duration_min": 120,
+      "notes": "Fast route via the M-1 Motorway"
+    },
+    {
+      "id": "pew_trans_02",
+      "from_city": "Peshawar",
+      "to_city": "Lahore",
+      "transport_type": "train",
+      "route": "Pakistan Railways",
+      "estimated_cost_pkr": 1500,
+      "duration_min": 420,
+      "notes": "Scenic but longer option compared to bus/flight"
+    },
+    {
+      "id": "pew_trans_03",
+      "from_city": "Peshawar",
+      "to_city": "Peshawar",
+      "transport_type": "local_rideshare",
+      "route": "Careem/InDrive within city",
+      "estimated_cost_pkr": 300,
+      "duration_min": 20,
+      "notes": "Convenient for reaching the old city and cantonment areas"
+    },
+    {
+      "id": "pew_trans_04",
+      "from_city": "Peshawar",
+      "to_city": "Peshawar",
+      "transport_type": "brt",
+      "route": "Peshawar BRT (Zu Peshawar)",
+      "estimated_cost_pkr": 50,
+      "duration_min": 35,
+      "notes": "Budget-friendly along the main BRT corridor"
+    }
+  ],
+  "accommodations": [
+    {
+      "id": "pew_acc_01",
+      "name": "Budget guesthouse near Saddar",
+      "price_range": "budget",
+      "approx_price_pkr": 3500,
+      "family_friendly": true,
+      "rating": 3.4
+    },
+    {
+      "id": "pew_acc_02",
+      "name": "Mid-range hotel near University Town",
+      "price_range": "moderate",
+      "approx_price_pkr": 8000,
+      "family_friendly": true,
+      "rating": 4.0
+    }
+  ],
+  "weather_info": {
+    "climate_type": "Semi-arid, continental climate with hot summers and cool winters",
+    "best_time_to_visit": "October to March (cool and comfortable)",
+    "avoid_months": "May to July (extremely hot, often 40°C+)",
+    "seasonal_notes": [
+      { "season": "Winter (Nov-Feb)", "avg_condition": "Cool, 5-18°C, occasional light fog in the mornings" },
+      { "season": "Summer (Apr-Jul)", "avg_condition": "Hot and dry, frequently exceeding 38°C" },
+      { "season": "Monsoon (Jul-Aug)", "avg_condition": "Some rainfall, generally lighter than in Punjab/Sindh" }
+    ]
+  },
+  "travel_tips": [
+    {
+      "id": "pew_tip_01",
+      "category": "shortcut_route",
+      "tip": "Use the Ring Road to bypass the congested city center when traveling between the cantonment area and University Town."
+    },
+    {
+      "id": "pew_tip_02",
+      "category": "local_transport",
+      "tip": "Ride-hailing apps are generally more predictable for tourists than negotiating with local rickshaws in unfamiliar areas."
+    },
+    {
+      "id": "pew_tip_03",
+      "category": "safety",
+      "tip": "Check current local security advisories before planning day trips outside the city, as conditions can change; stick to well-known tourist areas."
+    },
+    {
+      "id": "pew_tip_04",
+      "category": "timing",
+      "tip": "Visit Qissa Khwani Bazaar and Namak Mandi in the early evening when the food stalls and shops are liveliest."
+    }
+  ],
+  "history": {
+  "founded": "One of the oldest cities in South Asia, with a history spanning over 2,000 years",
+  "city_history": "Peshawar was a major center of the ancient Gandhara civilization and an important stop on trade routes connecting South and Central Asia. It has been ruled by the Persians, Greeks, Kushans, Mughals, Sikhs, and the British, and its old city and bazaars still reflect this long, layered history.",
+  "province_history": "Khyber Pakhtunkhwa has historically been a crossroads between South and Central Asia, home to the ancient Gandhara civilization, and later part of the Mughal Empire, Sikh Empire, and British India, before joining Pakistan in 1947. It was renamed from the North-West Frontier Province to Khyber Pakhtunkhwa in 2010."
+}
+}
