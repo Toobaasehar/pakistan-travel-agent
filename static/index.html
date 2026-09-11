@@ -862,6 +862,191 @@
       animation: panelFade 0.3s ease;
     }
 
+    /* ========== SOS / EMERGENCY HUB ========== */
+    :root {
+      --sos-red: #C4361F;
+      --sos-red-lt: #E0533A;
+    }
+
+    .tab-btn-sos {
+      color: var(--sos-red) !important;
+      font-weight: 800;
+    }
+
+    .tab-btn-sos.active {
+      background: var(--sos-red) !important;
+      color: #fff !important;
+    }
+
+    .sos-block {
+      margin-bottom: 36px;
+    }
+
+    .sos-block h3 {
+      font-size: 19px;
+      margin-bottom: 6px;
+    }
+
+    .sos-block-sub {
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      margin-bottom: 14px;
+    }
+
+    .sos-offline-banner-inner {
+      background: #FFF3E0;
+      border: 1px solid var(--saffron);
+      color: #8B4B00;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .sos-dial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .sos-dial-card {
+      display: block;
+      background: var(--card);
+      border: 2px solid var(--sos-red);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--ink);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .sos-dial-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      background: #FFF6F4;
+    }
+
+    .sos-dial-number {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--sos-red);
+    }
+
+    .sos-dial-name {
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .sos-dial-desc {
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      margin-top: 4px;
+    }
+
+    .sos-locator-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .sos-locator-filters input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .sos-search-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: var(--sos-red);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sos-search-btn:hover {
+      background: var(--sos-red-lt);
+    }
+
+    .sos-facility-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+    }
+
+    .sos-facility-tags {
+      margin-top: 6px;
+    }
+
+    .sos-facility-tags span {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      margin-right: 6px;
+      margin-top: 6px;
+      background: var(--parchment);
+      color: var(--ink-soft);
+    }
+
+    .sos-facility-tags .tag-24-7 {
+      background: var(--turquoise);
+      color: #fff;
+    }
+
+    .sos-facility-tags .tag-venom,
+    .sos-facility-tags .tag-rabies {
+      background: var(--sos-red);
+      color: #fff;
+    }
+
+    .sos-guide-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .sos-guide-header {
+      padding: 14px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--parchment);
+    }
+
+    .sos-guide-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 16px;
+    }
+
+    .sos-guide-body.open {
+      max-height: 700px;
+      padding: 14px 16px;
+    }
+
+    .sos-guide-body ul,
+    .sos-guide-body ol {
+      margin: 6px 0 12px 20px;
+    }
+
+    .sos-guide-body li {
+      margin-bottom: 4px;
+    }
+
     /* ========== SECTION HEADER ========== */
     .section-header {
       margin-bottom: 28px;
@@ -3062,6 +3247,7 @@
         <button class="tab-btn" data-tab="map" id="tab-map">Map</button>
         <button class="tab-btn" data-tab="chat" id="tab-chat">AI Chat</button>
         <button class="tab-btn" data-tab="wishlist" id="tab-wishlist">Wishlist</button>
+        <button class="tab-btn tab-btn-sos" data-tab="sos" id="tab-sos">🚨 SOS</button>
       </div>
       <div class="nav-auth-section">
         <div class="nav-currency-selector">
@@ -3436,6 +3622,37 @@
         <p>Your saved destinations — click the heart on any card to add.</p>
       </div>
       <div id="wishlist-content"></div>
+    </section>
+
+    <!-- ===== SOS PANEL ===== -->
+    <section class="panel" id="sos-panel">
+      <div class="section-header">
+        <h2>🚨 Emergency SOS</h2>
+        <p>Quick-dial emergency numbers, nearby medical facilities, and first-aid guides — works offline once loaded, for when you're off-grid in the north.</p>
+      </div>
+
+      <div id="sos-offline-banner"></div>
+
+      <div class="sos-block">
+        <h3>📞 Quick Dial</h3>
+        <div class="sos-dial-grid" id="sos-dial-grid"></div>
+      </div>
+
+      <div class="sos-block">
+        <h3>🏥 Nearby Medical Facilities</h3>
+        <p class="sos-block-sub">BHUs, RHCs, Combined Military Hospitals, and pharmacies — filter by district to find anti-venom, anti-rabies, or trauma care nearby.</p>
+        <div class="sos-locator-filters">
+          <input type="text" id="sos-district-input" placeholder="Enter district (e.g. Skardu, Chitral, Swat)" onkeydown="if(event.key==='Enter') searchSOSFacilities()">
+          <button class="sos-search-btn" onclick="searchSOSFacilities()">Search</button>
+        </div>
+        <div id="sos-facility-list"></div>
+      </div>
+
+      <div class="sos-block">
+        <h3>🩺 First-Aid Guides</h3>
+        <p class="sos-block-sub">Tap a guide to expand it. This is general safety info to help until you reach real medical care — not a substitute for it.</p>
+        <div id="sos-guide-list"></div>
+      </div>
     </section>
 
   </main>
@@ -3819,7 +4036,7 @@
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
       if (btn) btn.classList.add('active');
-      const panelId = tab === 'map' ? 'map-panel' : tab === 'chat' ? 'chat-panel' : tab === 'wishlist' ? 'wishlist-panel' : tab;
+      const panelId = tab === 'map' ? 'map-panel' : tab === 'chat' ? 'chat-panel' : tab === 'wishlist' ? 'wishlist-panel' : tab === 'sos' ? 'sos-panel' : tab;
       const panel = document.getElementById(panelId);
       if (panel) panel.classList.add('active');
 
@@ -3832,6 +4049,7 @@
 
       if (tab === 'map') initMap();
       if (tab === 'wishlist') renderWishlist();
+      if (tab === 'sos') loadSOSData();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -4734,18 +4952,43 @@
       if (e.target === e.currentTarget) closeSavedTripsModal();
     });
 
+    // Offline support: cache the last-loaded trips list in localStorage so
+    // the "My Trips" screen still shows something useful with no internet
+    // (e.g. mid-trek in Hunza with zero signal). Whenever a live fetch
+    // succeeds we refresh the cache; if the fetch fails we fall back to it.
+    const TRIPS_CACHE_KEY = 'pk_saved_trips_cache';
+
     async function loadSavedTrips() {
       const container = document.getElementById('saved-trips-list');
       container.innerHTML = '<div class="empty-state"><p>Loading your saved itineraries...</p></div>';
+
+      let trips;
+      let offline = false;
 
       try {
         const res = await fetch(`${API}/api/user/trips`, { headers: getAuthHeaders() });
         if (!res.ok) throw new Error('Could not fetch saved trips');
         const data = await res.json();
-        const trips = data.trips || [];
+        trips = data.trips || [];
+        localStorage.setItem(TRIPS_CACHE_KEY, JSON.stringify(trips));
+      } catch (e) {
+        const cached = localStorage.getItem(TRIPS_CACHE_KEY);
+        if (cached) {
+          trips = JSON.parse(cached);
+          offline = true;
+        } else {
+          container.innerHTML = `<div class="error-msg">⚠️ Failed to load trips: ${e.message}</div>`;
+          return;
+        }
+      }
+
+      try {
+        const offlineBanner = offline
+          ? `<div class="error-msg" style="margin-bottom:12px;">📴 You're offline — showing your last saved trips from this device.</div>`
+          : '';
 
         if (trips.length === 0) {
-          container.innerHTML = `
+          container.innerHTML = offlineBanner + `
         <div class="empty-state">
           <div class="emoji">🗺️</div>
           <p>You haven't saved any trips yet.<br>Go to <strong>Plan a Trip</strong> and click <strong>"Save Trip to My Profile"</strong>.</p>
@@ -4753,7 +4996,7 @@
           return;
         }
 
-        container.innerHTML = trips.map(t => {
+        container.innerHTML = offlineBanner + trips.map(t => {
           const dateStr = t.created_at ? new Date(t.created_at).toLocaleDateString() : '';
           return `
         <div class="saved-trip-item" id="saved-trip-${t.id}">
@@ -4773,7 +5016,7 @@
         </div>`;
         }).join('');
       } catch (e) {
-        container.innerHTML = `<div class="error-msg">⚠️ Failed to load trips: ${e.message}</div>`;
+        container.innerHTML = `<div class="error-msg">⚠️ Failed to display trips: ${e.message}</div>`;
       }
     }
 
@@ -4787,6 +5030,11 @@
         if (res.ok) {
           const el = document.getElementById(`saved-trip-${tripId}`);
           if (el) el.remove();
+          const cached = localStorage.getItem(TRIPS_CACHE_KEY);
+          if (cached) {
+            const updated = JSON.parse(cached).filter(t => t.id !== tripId);
+            localStorage.setItem(TRIPS_CACHE_KEY, JSON.stringify(updated));
+          }
           loadSavedTrips();
         }
       } catch (e) {
@@ -4988,12 +5236,129 @@
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
       if (btn) btn.classList.add('active');
-      const panelId = { map: 'map-panel', chat: 'chat-panel', wishlist: 'wishlist-panel' }[tab] || tab;
+      const panelId = { map: 'map-panel', chat: 'chat-panel', wishlist: 'wishlist-panel', sos: 'sos-panel' }[tab] || tab;
       const panel = document.getElementById(panelId);
       if (panel) panel.classList.add('active');
       if (tab === 'map') initMap();
       if (tab === 'wishlist') renderWishlist();
+      if (tab === 'sos') loadSOSData();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ========== SOS / EMERGENCY HUB ==========
+    const SOS_CACHE_KEY = 'pk_sos_cache';
+    let sosLoaded = false;
+
+    async function loadSOSData(force) {
+      if (sosLoaded && !force) return;
+
+      const banner = document.getElementById('sos-offline-banner');
+      let bundle;
+      let offline = false;
+
+      try {
+        const res = await fetch(`${API}/medical/bundle`);
+        if (!res.ok) throw new Error('Could not reach server');
+        bundle = await res.json();
+        localStorage.setItem(SOS_CACHE_KEY, JSON.stringify(bundle));
+      } catch (e) {
+        const cached = localStorage.getItem(SOS_CACHE_KEY);
+        if (cached) {
+          bundle = JSON.parse(cached);
+          offline = true;
+        } else {
+          banner.innerHTML = `<div class="sos-offline-banner-inner">⚠️ No internet and no offline emergency data saved yet. Open this tab once while online so it's available offline later.</div>`;
+          renderSOSDial([]);
+          renderSOSFacilities([]);
+          renderSOSGuides([]);
+          return;
+        }
+      }
+
+      banner.innerHTML = offline
+        ? `<div class="sos-offline-banner-inner">📴 You're offline — showing emergency data saved from your last visit.</div>`
+        : '';
+
+      renderSOSDial(bundle.emergency_contacts || []);
+      window._sosFacilities = bundle.facilities || [];
+      renderSOSFacilities(window._sosFacilities);
+      renderSOSGuides(bundle.first_aid_guides || []);
+      sosLoaded = true;
+    }
+
+    function renderSOSDial(contacts) {
+      const grid = document.getElementById('sos-dial-grid');
+      if (!contacts.length) {
+        grid.innerHTML = '<p class="sos-block-sub">No emergency contacts cached yet.</p>';
+        return;
+      }
+      grid.innerHTML = contacts.map(c => `
+        <a class="sos-dial-card" href="tel:${c.number}">
+          <div class="sos-dial-number">📞 ${c.number}</div>
+          <div class="sos-dial-name">${c.name}</div>
+          <div class="sos-dial-desc">${c.description}</div>
+        </a>
+      `).join('');
+    }
+
+    function renderSOSFacilities(facilities) {
+      const list = document.getElementById('sos-facility-list');
+      if (!facilities.length) {
+        list.innerHTML = '<p class="sos-block-sub">No facility data cached yet — connect once while online to download the offline medical directory.</p>';
+        return;
+      }
+      list.innerHTML = facilities.map(f => `
+        <div class="sos-facility-card">
+          <strong>${f.name}</strong> — ${f.facility_type}, ${f.district}, ${f.province}
+          <div class="sos-facility-tags">
+            ${f.is_24_7 ? '<span class="tag-24-7">24/7</span>' : ''}
+            ${f.has_anti_venom ? '<span class="tag-venom">Anti-venom</span>' : ''}
+            ${f.has_anti_rabies ? '<span class="tag-rabies">Anti-rabies</span>' : ''}
+            ${f.has_trauma_care ? '<span>Trauma care</span>' : ''}
+          </div>
+          ${f.contact_number ? `<div style="margin-top:8px;"><a href="tel:${f.contact_number}">📞 ${f.contact_number}</a></div>` : ''}
+          ${f.notes ? `<div style="margin-top:6px; font-size:13px; color:var(--ink-soft);">${f.notes}</div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function searchSOSFacilities() {
+      const q = document.getElementById('sos-district-input').value.trim().toLowerCase();
+      const all = window._sosFacilities || [];
+      if (!q) { renderSOSFacilities(all); return; }
+      renderSOSFacilities(all.filter(f =>
+        (f.district || '').toLowerCase().includes(q) || (f.province || '').toLowerCase().includes(q)
+      ));
+    }
+
+    function renderSOSGuides(guides) {
+      const list = document.getElementById('sos-guide-list');
+      if (!guides.length) {
+        list.innerHTML = '<p class="sos-block-sub">No first-aid guides cached yet.</p>';
+        return;
+      }
+      list.innerHTML = guides.map(g => `
+        <div class="sos-guide-item">
+          <div class="sos-guide-header" onclick="toggleSOSGuide('${g.id}')">
+            <span>${g.title}</span>
+            <span id="sos-guide-arrow-${g.id}">▾</span>
+          </div>
+          <div class="sos-guide-body" id="sos-guide-body-${g.id}">
+            <p><strong>Symptoms:</strong></p>
+            <ul>${g.symptoms.map(s => `<li>${s}</li>`).join('')}</ul>
+            <p><strong>What to do:</strong></p>
+            <ol>${g.steps.map(s => `<li>${s}</li>`).join('')}</ol>
+            <p><strong>Seek professional help if:</strong> ${g.seek_help_if}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleSOSGuide(id) {
+      const body = document.getElementById(`sos-guide-body-${id}`);
+      const arrow = document.getElementById(`sos-guide-arrow-${id}`);
+      const isOpen = body.classList.toggle('open');
+      arrow.textContent = isOpen ? '▴' : '▾';
     }
 
     // ========== INIT ==========

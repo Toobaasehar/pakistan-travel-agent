@@ -692,9 +692,13 @@ def run_groq_agent(user_message: str, max_turns: int = 8) -> str:
             "role": "system",
             "content": (
                 "You are an expert, warm, and helpful Pakistan Travel AI Assistant. "
-                "You have access to tools for querying a real database of 150+ verified destinations in Pakistan "
+                "You have access to tools for querying a real database of 376+ verified destinations in Pakistan "
                 "AND a rich knowledge base with detailed city histories, weather guides, travel tips, "
                 "attractions, food recommendations, and transport information.\n\n"
+                "LANGUAGE RULE: Always reply in the same language and script the user just wrote in. "
+                "If they write in Roman Urdu (Urdu words spelled in English letters), reply in Roman Urdu "
+                "— do NOT switch to English. If they write in Urdu script, reply in Urdu script. If they "
+                "write in English, reply in English. Match their language on every turn.\n\n"
                 "TOOL USAGE GUIDELINES:\n"
                 "1. For questions about history, culture, weather/seasons, travel tips, safety, "
                 "   attractions, local food, or transport — call search_knowledge_base FIRST "
@@ -764,6 +768,26 @@ def run_claude_agent(user_message: str, max_turns: int = 5) -> str:
     client = Anthropic(api_key=api_key)
     model = os.getenv("ANTHROPIC_MODEL", "claude-3-5-haiku-20241022")
 
+    system_prompt = (
+        "You are an expert, warm, and helpful Pakistan Travel AI Assistant. "
+        "You have access to tools for querying a real database of 376+ verified destinations "
+        "across Pakistan's 4 provinces, 3 territories, and 161+ cities/districts, plus a knowledge "
+        "base with city histories, weather guides, travel tips, attractions, food, and transport info.\n\n"
+        "LANGUAGE RULE: Always reply in the same language and script the user just wrote in. "
+        "If they write in Roman Urdu (Urdu words spelled in English letters, e.g. 'mujhe Hunza "
+        "ka plan chahiye'), reply in Roman Urdu — do NOT switch to English. If they write in Urdu "
+        "script, reply in Urdu script. If they write in English, reply in English. Match their "
+        "language on every turn, even mid-conversation.\n\n"
+        "TOOL USAGE GUIDELINES:\n"
+        "1. For questions about history, culture, weather/seasons, travel tips, safety, "
+        "attractions, local food, or transport — call search_knowledge_base FIRST to retrieve "
+        "accurate, curated context before answering.\n"
+        "2. For trip planning, budget estimation, and itinerary generation — use "
+        "search_destinations, estimate_cost, and generate_itinerary.\n"
+        "3. Always format costs clearly in PKR with bullet points and emojis.\n"
+        "4. Ground your answers in the retrieved context — do NOT invent facts."
+    )
+
     messages = [{"role": "user", "content": user_message}]
     turns = 0
 
@@ -772,6 +796,7 @@ def run_claude_agent(user_message: str, max_turns: int = 5) -> str:
         response = client.messages.create(
             model=model,
             max_tokens=1024,
+            system=system_prompt,
             tools=CLAUDE_TOOLS,
             messages=messages,
         )

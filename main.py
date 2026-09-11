@@ -29,6 +29,7 @@ from ml.predict_budget import predict_budget
 from ml.similar_destinations import get_similar_destinations
 from ml.explain_budget import explain_budget_prediction
 from review_routes import router as reviews_router
+from medical_routes import router as medical_router
 from auth import (
     UserRegisterRequest,
     UserLoginRequest,
@@ -62,10 +63,17 @@ app = FastAPI(
     version="1.2.0",
 )
 
-# Enable CORS for cross-origin frontend requests
+# Enable CORS for cross-origin frontend requests.
+# In development this defaults to "*" (allow everything) so local testing
+# just works. In production, set ALLOWED_ORIGINS in your .env to your real
+# frontend domain(s), comma-separated, e.g.:
+#   ALLOWED_ORIGINS=https://pakistantravelagent.com,https://www.pakistantravelagent.com
+_allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "*").strip()
+ALLOWED_ORIGINS = ["*"] if _allowed_origins_env == "*" else [o.strip() for o in _allowed_origins_env.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -73,6 +81,7 @@ app.add_middleware(
 
 # Reviews feature: POST/DELETE require a logged-in user (see review_routes.py)
 app.include_router(reviews_router)
+app.include_router(medical_router)
 
 
 @app.on_event("startup")
@@ -735,11 +744,26 @@ if __name__ == "__main__":
         except Exception:
             pass
 
-    def open_browser():
-        time.sleep(1.2)
-        webbrowser.open("http://127.0.0.1:8000")
+    # ENVIRONMENT controls local-dev vs. production behavior:
+    #   ENVIRONMENT=development (default) -> localhost only, auto-reload,
+    #     auto-opens your browser. This is what `python run.py` uses.
+    #   ENVIRONMENT=production -> listens on 0.0.0.0 (required by every
+    #     cloud host/PaaS to accept external traffic), no auto-reload
+    #     (reload is a dev-only feature and hurts stability/performance),
+    #     no browser auto-open, and respects the platform's $PORT.
+    IS_PRODUCTION = os.getenv("ENVIRONMENT", "development").lower() == "production"
+    HOST = "0.0.0.0" if IS_PRODUCTION else "127.0.0.1"
+    PORT = int(os.getenv("PORT", 8000))
 
-    print("\n>> Starting Pakistan Travel Agent (with RAG)...")
-    print(">> Automatically launching http://127.0.0.1:8000 in your browser...\n")
-    threading.Thread(target=open_browser, daemon=True).start()
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    if IS_PRODUCTION:
+        print(f"\n>> Starting Pakistan Travel Agent in PRODUCTION mode on {HOST}:{PORT} ...\n")
+        uvicorn.run("main:app", host=HOST, port=PORT, reload=False)
+    else:
+        def open_browser():
+            time.sleep(1.2)
+            webbrowser.open(f"http://127.0.0.1:{PORT}")
+
+        print("\n>> Starting Pakistan Travel Agent (with RAG)...")
+        print(f">> Automatically launching http://127.0.0.1:{PORT} in your browser...\n")
+        threading.Thread(target=open_browser, daemon=True).start()
+        uvicorn.run("main:app", host=HOST, port=PORT, reload=True)

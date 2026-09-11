@@ -49,6 +49,35 @@ class DestinationImage(Base):
     destination = relationship("Destination", back_populates="images")
 
 
+class MedicalFacility(Base):
+    """
+    Powers the 'Offline Medical SOS Hub'. Deliberately kept flat/simple
+    (no separate lookup tables for facility_type etc.) so the whole table
+    can be dumped to a single JSON file and cached client-side for
+    offline use — that's the part that actually needs to survive a
+    dead internet connection in Gilgit-Baltistan or Chitral.
+    """
+    __tablename__ = "medical_facilities"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    # BHU (Basic Health Unit), RHC (Rural Health Centre), CMH (Combined
+    # Military Hospital), DHQ (District HQ Hospital), Pharmacy, Hospital
+    facility_type = Column(String, nullable=False, index=True)
+    province = Column(String, nullable=False, index=True)
+    district = Column(String, nullable=False, index=True)
+    latitude = Column(Float, nullable=False)
+    longitude = Column(Float, nullable=False)
+    contact_number = Column(String)  # landline/mobile, may be blank in remote areas
+    is_24_7 = Column(Boolean, default=False)
+    has_anti_venom = Column(Boolean, default=False)   # snake bite treatment
+    has_anti_rabies = Column(Boolean, default=False)  # rabies vaccine
+    has_trauma_care = Column(Boolean, default=False)  # fracture/major trauma capability
+    notes = Column(Text)  # e.g. "Only reachable by jeep track in winter"
+    data_source = Column(String)  # e.g. "Verified via district health dept, Sep 2026 -- needs verification"
+    last_verified_at = Column(DateTime, server_default=func.now())
+
+
 class User(Base):
     __tablename__ = "users"
 
@@ -126,4 +155,3 @@ class Review(Base):
 
     user = relationship("User")
     trip = relationship("SavedTrip", back_populates="reviews")
-

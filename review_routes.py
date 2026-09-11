@@ -23,8 +23,12 @@ import reviews as reviews_service
 
 router = APIRouter(prefix="/reviews", tags=["Reviews"])
 
+# NOTE: route order matters here. "/all" must be registered before the
+# "/{destination_name}" catch-all, or FastAPI would treat the literal
+# word "all" as a destination name and this route would never be reached.
 
-@router.post("", response_model=ReviewResponse, status_code=status.HTTP_201_CREATED)
+
+@router.post("/", response_model=ReviewResponse, status_code=status.HTTP_201_CREATED)
 def submit_review(data: ReviewCreate, user: User = Depends(get_current_user)):
     """Create a new review. Requires login. Marked verified if linked to a real trip."""
     try:
@@ -33,19 +37,13 @@ def submit_review(data: ReviewCreate, user: User = Depends(get_current_user)):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.get("", response_model=List[ReviewResponse])
+@router.get("/all", response_model=List[ReviewResponse])
 def list_all_reviews(limit: int = 50):
     """Public: latest reviews across all destinations."""
     return reviews_service.get_all_reviews(limit=limit)
 
 
-@router.get("/destination/{destination_name}", response_model=List[ReviewResponse])
-def list_reviews_for_destination(destination_name: str, limit: int = 20):
-    """Public: list reviews for one specific destination."""
-    return reviews_service.get_reviews_by_destination(destination_name, limit=limit)
-
-
-@router.get("/summary/{destination_name}", response_model=ReviewSummary)
+@router.get("/{destination_name}/summary", response_model=ReviewSummary)
 def destination_review_summary(destination_name: str):
     """Public: average rating, rating breakdown, and top reviews for a destination."""
     summary = reviews_service.get_destination_summary(destination_name)
@@ -54,13 +52,10 @@ def destination_review_summary(destination_name: str):
     return summary
 
 
-@router.get("/{review_id}", response_model=ReviewResponse)
-def get_review(review_id: int):
-    """Public: fetch a single review by its id."""
-    review = reviews_service.get_review_by_id(review_id)
-    if review is None:
-        raise HTTPException(status_code=404, detail="Review not found.")
-    return review
+@router.get("/{destination_name}", response_model=List[ReviewResponse])
+def list_reviews_for_destination(destination_name: str, limit: int = 20):
+    """Public: list reviews for one specific destination."""
+    return reviews_service.get_reviews_by_destination(destination_name, limit=limit)
 
 
 @router.delete("/{review_id}")

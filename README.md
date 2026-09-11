@@ -8,11 +8,11 @@ Includes a modern interactive web UI, OpenStreetMap integration, an intelligent 
 
 ## 🌟 Key Features
 
-- **Comprehensive Travel Database**: 150+ destinations with coordinates, budget estimates, best seasons, and images.
+- **Comprehensive Travel Database**: 376+ destinations with coordinates, budget estimates, best seasons, and images.
 - **AI Agent Intelligence**: Tool-calling agent (Claude / Groq / rule-based fallback) that searches destinations, plans multi-day itineraries, and calculates live budgets.
 - **ML Layer**: Random Forest budget prediction with SHAP explainability, and KMeans clustering for "similar destinations."
 - **Live Market Pricing**: Region-aware hotel tiers, route-based transport pricing (Haversine distance between cities), seasonal multipliers, and multi-currency conversion.
-- **User Accounts**: Email/OTP and phone registration, JWT auth, cloud wishlist, saved trips.
+- **User Accounts**: Email and phone registration, JWT auth, cloud wishlist, saved trips.
 - **Dual Interface**:
   - **FastAPI Web App**: Interactive UI with search, filter by province, dynamic map, and trip planner.
   - **Streamlit App**: Lightweight data-driven exploration dashboard.
@@ -94,7 +94,7 @@ Then edit `.env` and set, at minimum:
 ```bash
 python seed.py
 ```
-This creates `travel.db`, inserts the 150+ curated destinations, and imports any city JSON files under `data/`.
+This creates `travel.db`, inserts the curated base destinations from `destinations_data.py`, and imports every city/district JSON file under `data/` — 376+ destinations in total across 161+ cities & districts.
 
 ### 4. (Optional) Fetch real destination images
 By default, newly seeded destinations get a placeholder image. To replace placeholders with real photos pulled automatically from Wikipedia:
