@@ -4361,8 +4361,16 @@
             🛣️ ${cost.route_note} · ${cost.transport_label || ''}
           </div>` : '';
 
+        const hotelSourceInfo = (() => {
+          const src = String(cost.hotel_rate_source || '');
+          if (src.startsWith('makcorps_live')) return { label: 'Live Verified (Makcorps API)', badge: '🟢 Live API Price', icon: '⚡' };
+          if (src.startsWith('recommendations_curated')) return { label: 'Curated Local Listing', badge: '🔵 Curated Data', icon: '✓' };
+          if (src.startsWith('calibrated_estimate')) return { label: '2026 Market Estimate', badge: '', icon: '📊' };
+          return { label: '', badge: '', icon: '' };
+        })();
+
         const costLabels = {
-          accommodation: { icon: '🏨', name: 'Hotel / Stays', desc: cost.travel_style_label || 'Hotel Room' },
+          accommodation: { icon: '🏨', name: 'Hotel / Stays', desc: `${cost.travel_style_label || 'Hotel Room'}${hotelSourceInfo.label ? ' · ' + hotelSourceInfo.label : ''}` },
           transport: { icon: '🚗', name: 'Transport & Fuel', desc: cost.transport_label || 'Vehicle' },
           food: { icon: '🍽️', name: 'Dining & Food', desc: cost.dining_style || 'Meals' },
           activities: { icon: '🎟️', name: 'Sightseeing & Entry', desc: 'Tickets & Permits' },
@@ -4468,6 +4476,7 @@
             <div class="result-badge-row">
               <span class="result-cat-badge">${catIcon(data.destination.category)} ${data.destination.category || 'Destination'}</span>
               <span class="live-pricing-badge">⚡ Live Market Pricing (2026)</span>
+              ${hotelSourceInfo.badge ? `<span class="live-pricing-badge" style="background:#1f4b2e;">${hotelSourceInfo.badge}</span>` : ''}
             </div>
             <div class="result-prov">📍 ${data.destination.province}${data.destination.district ? ' · ' + data.destination.district : ''}</div>
             <div class="result-name">${data.destination.name}</div>
@@ -4505,7 +4514,7 @@
           <div class="cost-total-row">
             <div class="cost-total-info">
               <span class="label">Total Live Trip Cost (${cost.travel_style_label || 'Standard'})</span>
-              <span class="sublabel">${body.days} Days · ${body.people} Traveler${body.people > 1 ? 's' : ''} · ⚡ Verified Real Market Index</span>
+              <span class="sublabel">${body.days} Days · ${body.people} Traveler${body.people > 1 ? 's' : ''} · ${hotelSourceInfo.icon} ${hotelSourceInfo.label || 'Live Market Calculation'}</span>
             </div>
             <span class="total">${totalConvertedFormatted}</span>
           </div>

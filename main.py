@@ -9,6 +9,15 @@ Then open:
     http://127.0.0.1:8000
 """
 
+# Load .env FIRST, before any other import. Several modules read secrets
+# (JWT_SECRET_KEY in auth.py, AMADEUS_API_KEY in live_pricing.py, GROQ_API_KEY
+# below) at *import time*, not inside a function -- so if .env isn't loaded
+# before those modules are imported, os.environ.get() sees nothing and either
+# crashes (auth.py) or silently falls back (live_pricing.py). This has to be
+# the first thing that runs, ahead of "import os" and everything else.
+from dotenv import load_dotenv
+load_dotenv()
+
 import os
 import json
 from datetime import datetime

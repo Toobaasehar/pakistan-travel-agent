@@ -126,6 +126,7 @@ def estimate_cost(
             "distance_km": pricing["distance_km"],
             "route_note": pricing["route_note"],
             "include_hotel": pricing["include_hotel"],
+            "hotel_rate_source": pricing["hotel_rate_source"],
             "dining_style": pricing["dining_style"],
             "breakdown_pkr": pricing["breakdown_pkr"],
             "breakdown_converted": pricing["breakdown_converted"],

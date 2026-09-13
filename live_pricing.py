@@ -12,8 +12,9 @@ Dynamic, real-world market pricing engine for Pakistan travel:
 
 import math
 import time
+import os
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict, Any, Optional, List
 from recommendations import DISTRICT_RECOMMENDATIONS
 
@@ -21,6 +22,11 @@ try:
     from city_coordinates import CITY_COORDINATES
 except ImportError:
     CITY_COORDINATES = {}
+
+try:
+    import requests
+except ImportError:
+    requests = None  # live API calls are skipped gracefully if 'requests' isn't installed
 
 
 def calculate_distance_km(from_city: Optional[str], to_city: Optional[str]) -> Optional[float]:
@@ -95,6 +101,168 @@ def convert_from_pkr(amount_pkr: float, target_currency: str = "PKR") -> Dict[st
         "amount": converted,
         "formatted": formatted,
     }
+
+
+# ============================================================================
+# REAL HOTEL PRICING — Makcorps Hotel Price API
+# ============================================================================
+# NOTE: Amadeus's free Self-Service developer portal was permanently
+# decommissioned by Amadeus on 2026-07-17 (new signups were paused even
+# earlier, in spring 2026) — it is no longer possible to get a working
+# Amadeus key, so that integration was replaced with Makcorps here.
+#
+# Docs: https://docs.makcorps.com  |  Get a key: https://www.makcorps.com
+# Free tier: a ONE-TIME 30-call demo pack, no credit card required. That is
+# enough to demo live pricing for a handful of destinations, NOT enough to
+# run this in production against real user traffic — budget calls carefully.
+# Paid tiers (10k+ requests/month) start at $350/month if this needs to go
+# beyond a demo.
+#
+# Set MAKCORPS_API_KEY to enable; if it's missing, the app silently falls
+# back to _extract_hotel_rates_from_recommendations() and then
+# REGIONAL_HOTEL_RATES, exactly as before. Nothing breaks without a key.
+#
+# HONEST LIMITATION: Makcorps aggregates OTA listings (Booking.com, Expedia,
+# Hotels.com, etc.), which are strongest in cities that appear on those
+# platforms. Small guesthouses in remote valleys (Hunza, Chitral, Kaghan,
+# etc.) may return zero results — that's expected, not a bug, and is exactly
+# why the calibrated fallback table still needs to exist and stay maintained.
+MAKCORPS_API_KEY = os.environ.get("MAKCORPS_API_KEY")
+MAKCORPS_BASE_URL = "https://api.makcorps.com"
+MAKCORPS_ENABLED = bool(MAKCORPS_API_KEY and requests)
+MAKCORPS_TIMEOUT = 8  # seconds — never let a slow API call stall a trip-planning request
+
+# City-name -> Makcorps city_id never changes, so once resolved it's cached
+# for the lifetime of the process (saves precious free-tier calls). Hotel
+# price results are cached separately with a TTL, since prices do change.
+_makcorps_city_id_cache: Dict[str, Any] = {}       # district -> city_id_or_None
+_hotel_api_cache: Dict[str, Any] = {}              # district -> (fetched_at_epoch, result_or_None)
+HOTEL_API_CACHE_TTL_SECONDS = 24 * 3600            # re-check a district at most once/day (free-tier calls are scarce)
+
+
+def _get_makcorps_city_id(district: str) -> Optional[str]:
+    """
+    Resolves a district/city name to a Makcorps city_id via their Mapping
+    API. Cached forever per process, since this mapping never changes and
+    every free-tier call is precious. Returns None if the city isn't found
+    or the request fails.
+    """
+    cache_key = district.lower().strip()
+    if cache_key in _makcorps_city_id_cache:
+        return _makcorps_city_id_cache[cache_key]
+
+    try:
+        resp = requests.get(
+            f"{MAKCORPS_BASE_URL}/mapping",
+            params={"api_key": MAKCORPS_API_KEY, "name": f"{district}, Pakistan"},
+            timeout=MAKCORPS_TIMEOUT,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        # Response is a list of candidate matches; take the first GEO (city)
+        # match rather than a HOTEL match.
+        candidates = data if isinstance(data, list) else data.get("data", [])
+        city_id = None
+        for item in candidates:
+            if str(item.get("type", "")).upper() == "GEO":
+                city_id = item.get("document_id")
+                break
+        _makcorps_city_id_cache[cache_key] = city_id
+        return city_id
+    except Exception as e:
+        print(f"[live_pricing] Makcorps city mapping failed for '{district}': {e}")
+        return None  # don't cache failures — worth retrying next call
+
+
+def _fetch_makcorps_hotel_rates(district: Optional[str]) -> Optional[Dict[str, Any]]:
+    """
+    Tries to get REAL, live hotel price samples for a district from
+    Makcorps (aggregated from 200+ OTAs). Returns
+    {"budget", "standard", "luxury", "source", "sample_size"} in PKR, or
+    None if live data isn't available right now (no API key configured,
+    city not found, Makcorps has zero listings nearby, or the request
+    failed/timed out).
+    """
+    if not district or not MAKCORPS_ENABLED:
+        return None
+
+    cache_key = district.lower().strip()
+    cached = _hotel_api_cache.get(cache_key)
+    if cached and (time.time() - cached[0]) < HOTEL_API_CACHE_TTL_SECONDS:
+        return cached[1]
+
+    city_id = _get_makcorps_city_id(district)
+    if not city_id:
+        _hotel_api_cache[cache_key] = (time.time(), None)  # genuinely not on Makcorps
+        return None
+
+    try:
+        # Sample a representative one-night stay, starting tomorrow, purely
+        # to get a realistic nightly rate -- not an actual booking.
+        checkin = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+        checkout = (datetime.now() + timedelta(days=2)).strftime("%Y-%m-%d")
+
+        resp = requests.get(
+            f"{MAKCORPS_BASE_URL}/city",
+            params={
+                "api_key": MAKCORPS_API_KEY,
+                "cityid": city_id,
+                "pagination": 0,
+                "cur": "USD",
+                "rooms": 1,
+                "adults": 2,
+                "checkin": checkin,
+                "checkout": checkout,
+                "tax": "true",
+            },
+            timeout=MAKCORPS_TIMEOUT,
+        )
+        resp.raise_for_status()
+        hotels = resp.json()
+        if not isinstance(hotels, list):
+            hotels = hotels.get("data", [])
+
+        usd_to_pkr = EXCHANGE_RATES.get("USD", {}).get("rate_to_pkr", 278.5)
+        prices_pkr: List[float] = []
+        for entry in hotels:
+            # Each hotel entry is [ {hotelName, hotelId}, [ {price1, vendor1, tax1}, ... ] ]
+            # -- defensively handle either that shape or a flat dict of
+            # price/vendor fields, since Makcorps' exact response layout
+            # should be double-checked against a live call once a real key
+            # is available.
+            vendor_rows = entry[1] if isinstance(entry, (list, tuple)) and len(entry) > 1 else (
+                entry.get("vendors") if isinstance(entry, dict) else None
+            )
+            if not vendor_rows:
+                continue
+            for row in vendor_rows:
+                if not isinstance(row, dict):
+                    continue
+                for key, val in row.items():
+                    if key.lower().startswith("price"):
+                        try:
+                            prices_pkr.append(float(val) * usd_to_pkr)
+                        except (TypeError, ValueError):
+                            continue
+
+        if not prices_pkr:
+            _hotel_api_cache[cache_key] = (time.time(), None)
+            return None
+
+        prices_pkr.sort()
+        result = {
+            "budget": round(prices_pkr[0]),
+            "standard": round(prices_pkr[len(prices_pkr) // 2]),
+            "luxury": round(prices_pkr[-1]),
+            "source": "makcorps_live",
+            "sample_size": len(prices_pkr),
+        }
+        _hotel_api_cache[cache_key] = (time.time(), result)
+        return result
+
+    except requests.exceptions.RequestException as e:
+        print(f"[live_pricing] Makcorps hotel fetch failed for '{district}': {e}")
+        return None  # don't cache network hiccups — worth retrying next request
 
 
 # --- Baseline Rates by Region & Tier (2026 PKR Market Index) ---
@@ -304,15 +472,27 @@ def calculate_live_pricing(
     season_mult = get_seasonal_multiplier(best_season)
 
     # 1. Hotel / Accommodation Calculation
+    hotel_rate_source = "none"
     if nights == 0:
         hotel_rate_per_night = 0
         total_accommodation = 0
     else:
+        # Tier 1: real, live hotel prices from Makcorps (if a key is
+        # configured and Makcorps has listings for this city).
+        live_rates = _fetch_makcorps_hotel_rates(district)
+        # Tier 2: curated real hotel samples already saved in recommendations.py.
         real_rates = _extract_hotel_rates_from_recommendations(district)
-        if real_rates:
+
+        if live_rates:
+            base_hotel_rate = live_rates[travel_style]
+            hotel_rate_source = f"makcorps_live (n={live_rates['sample_size']})"
+        elif real_rates:
             base_hotel_rate = real_rates[travel_style]
+            hotel_rate_source = "recommendations_curated"
         else:
+            # Tier 3: calibrated 2026 market-index estimate — always available.
             base_hotel_rate = REGIONAL_HOTEL_RATES.get(region, REGIONAL_HOTEL_RATES["default"])[travel_style]
+            hotel_rate_source = "calibrated_estimate"
 
         hotel_rate_per_night = round(base_hotel_rate * season_mult)
         total_accommodation = hotel_rate_per_night * nights * rooms
@@ -465,6 +645,7 @@ def calculate_live_pricing(
         "travel_style": travel_style,
         "travel_style_label": accommodation_label,
         "hotel_rate_per_night_pkr": hotel_rate_per_night,
+        "hotel_rate_source": hotel_rate_source,  # "makcorps_live" / "recommendations_curated" / "calibrated_estimate" / "none"
         "include_hotel": bool(nights > 0),
         "transport_mode": transport_mode,
         "transport_label": trans_info["name"],
