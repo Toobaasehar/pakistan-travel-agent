@@ -2884,6 +2884,89 @@
       text-decoration: underline;
       color: var(--terracotta-lt);
     }
+    /* ===== SOS HUB ===== */
+    .sos-offline-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: var(--radius-sm);
+      background: var(--parchment); border: 1px solid var(--border);
+      font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 20px;
+    }
+    .sos-offline-badge.is-ready { background: #E6F4EC; color: #1E7145; border-color: #B9E4C9; }
+    .sos-section-block { margin-bottom: 36px; }
+    .sos-section-block h3 {
+      font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sos-section-block > p.sos-sub { color: var(--ink-soft); font-size: 0.9rem; margin-bottom: 16px; }
+
+    .sos-contacts-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .sos-contact-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 16px; box-shadow: var(--shadow-sm); text-decoration: none; color: inherit;
+      display: block; transition: var(--transition);
+    }
+    .sos-contact-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .sos-contact-card .num {
+      font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: #C0392B;
+    }
+    .sos-contact-card .name { font-weight: 600; margin-top: 2px; }
+    .sos-contact-card .desc { font-size: 0.82rem; color: var(--ink-soft); margin-top: 6px; line-height: 1.4; }
+    .sos-contact-card .coverage-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+    .sos-tag {
+      font-size: 0.72rem; padding: 2px 8px; border-radius: 20px;
+      background: var(--parchment); color: var(--ink-soft); border: 1px solid var(--border);
+    }
+
+    .sos-aid-list { display: flex; flex-direction: column; gap: 10px; }
+    .sos-aid-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md);
+      overflow: hidden; box-shadow: var(--shadow-sm);
+    }
+    .sos-aid-header {
+      padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; user-select: none;
+    }
+    .sos-aid-header .title { font-weight: 600; }
+    .sos-aid-header .applies { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+    .sos-aid-header .chevron { transition: var(--transition); color: var(--ink-muted); }
+    .sos-aid-card.open .chevron { transform: rotate(180deg); }
+    .sos-aid-body { display: none; padding: 0 18px 18px; }
+    .sos-aid-card.open .sos-aid-body { display: block; }
+    .sos-aid-body h5 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); margin: 12px 0 6px; }
+    .sos-aid-body ul { margin: 0; padding-left: 20px; }
+    .sos-aid-body li { margin-bottom: 5px; font-size: 0.92rem; line-height: 1.45; }
+    .sos-seek-help {
+      margin-top: 12px; padding: 10px 14px; border-radius: var(--radius-sm);
+      background: #FDECEA; border: 1px solid #F5C2BE; color: #A5321F; font-size: 0.88rem;
+    }
+
+    .sos-facility-filters { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .sos-facility-filters select {
+      padding: 8px 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--border);
+      background: var(--card); font-family: inherit; font-size: 0.9rem;
+    }
+    .sos-facility-list { display: flex; flex-direction: column; gap: 10px; }
+    .sos-facility-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md);
+      padding: 14px 18px; box-shadow: var(--shadow-sm);
+      display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .sos-facility-card .fac-name { font-weight: 600; }
+    .sos-facility-card .fac-meta { font-size: 0.82rem; color: var(--ink-soft); margin-top: 2px; }
+    .sos-facility-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .sos-badge { font-size: 0.72rem; padding: 3px 9px; border-radius: 20px; font-weight: 600; }
+    .sos-badge.b-247 { background: #E6F4EC; color: #1E7145; }
+    .sos-badge.b-venom { background: #FDECEA; color: #A5321F; }
+    .sos-badge.b-rabies { background: #FFF3E0; color: #B3690A; }
+    .sos-badge.b-trauma { background: #EAF0FB; color: #1B3A6B; }
+    .sos-call-btn {
+      background: #C0392B; color: #fff; border: none; padding: 8px 16px; border-radius: var(--radius-sm);
+      font-weight: 600; font-size: 0.85rem; cursor: pointer; text-decoration: none; white-space: nowrap;
+    }
+    .sos-empty { color: var(--ink-soft); font-size: 0.9rem; padding: 20px; text-align: center; }
   </style>
 </head>
 
@@ -3062,6 +3145,7 @@
         <button class="tab-btn" data-tab="map" id="tab-map">Map</button>
         <button class="tab-btn" data-tab="chat" id="tab-chat">AI Chat</button>
         <button class="tab-btn" data-tab="wishlist" id="tab-wishlist">Wishlist</button>
+        <button class="tab-btn" data-tab="sos" id="tab-sos">🚨 SOS</button>
       </div>
       <div class="nav-auth-section">
         <div class="nav-currency-selector">
@@ -3436,6 +3520,44 @@
         <p>Your saved destinations — click the heart on any card to add.</p>
       </div>
       <div id="wishlist-content"></div>
+    </section>
+
+    <section class="panel" id="sos-panel">
+      <div class="section-header">
+        <h2>🚨 Medical SOS Hub</h2>
+        <p>Emergency numbers, first-aid guides, and nearby medical facilities — cached once so it keeps working with zero signal.</p>
+      </div>
+      <div id="sos-offline-status" class="sos-offline-badge">⏳ Loading emergency data…</div>
+
+      <div class="sos-section-block">
+        <h3>📞 Emergency Contacts</h3>
+        <p class="sos-sub">Tap any number to call directly.</p>
+        <div id="sos-contacts-content" class="sos-contacts-grid"></div>
+      </div>
+
+      <div class="sos-section-block">
+        <h3>🩹 First-Aid Guides</h3>
+        <p class="sos-sub">General public safety information — not a substitute for professional care.</p>
+        <div id="sos-aid-content" class="sos-aid-list"></div>
+      </div>
+
+      <div class="sos-section-block">
+        <h3>🏥 Nearby Medical Facilities</h3>
+        <p class="sos-sub">Filter by province — flags anti-venom, anti-rabies, and trauma-care availability.</p>
+        <div class="sos-facility-filters">
+          <select id="sos-province-filter" onchange="renderSOSFacilities()">
+            <option value="">All Provinces</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Sindh">Sindh</option>
+            <option value="KPK">Khyber Pakhtunkhwa</option>
+            <option value="Balochistan">Balochistan</option>
+            <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+            <option value="Azad Kashmir">Azad Kashmir</option>
+            <option value="Islamabad">Islamabad</option>
+          </select>
+        </div>
+        <div id="sos-facility-content" class="sos-facility-list"></div>
+      </div>
     </section>
 
   </main>
@@ -3819,7 +3941,7 @@
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
       if (btn) btn.classList.add('active');
-      const panelId = tab === 'map' ? 'map-panel' : tab === 'chat' ? 'chat-panel' : tab === 'wishlist' ? 'wishlist-panel' : tab;
+      const panelId = tab === 'map' ? 'map-panel' : tab === 'chat' ? 'chat-panel' : tab === 'wishlist' ? 'wishlist-panel' : tab === 'sos' ? 'sos-panel' : tab;
       const panel = document.getElementById(panelId);
       if (panel) panel.classList.add('active');
 
@@ -3832,6 +3954,7 @@
 
       if (tab === 'map') initMap();
       if (tab === 'wishlist') renderWishlist();
+      if (tab === 'sos') loadSOSData();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -4997,17 +5120,129 @@
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
       if (btn) btn.classList.add('active');
-      const panelId = { map: 'map-panel', chat: 'chat-panel', wishlist: 'wishlist-panel' }[tab] || tab;
+      const panelId = { map: 'map-panel', chat: 'chat-panel', wishlist: 'wishlist-panel', sos: 'sos-panel' }[tab] || tab;
       const panel = document.getElementById(panelId);
       if (panel) panel.classList.add('active');
       if (tab === 'map') initMap();
       if (tab === 'wishlist') renderWishlist();
+      if (tab === 'sos') loadSOSData();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ========== SOS HUB (offline-first: cache once, works with zero signal after) ==========
+    let sosData = null;
+    const SOS_CACHE_KEY = 'pk_sos_bundle_v1';
+
+    async function loadSOSData() {
+      const statusEl = document.getElementById('sos-offline-status');
+
+      // 1) Instant render from whatever was cached last time (works offline).
+      if (!sosData) {
+        const cached = localStorage.getItem(SOS_CACHE_KEY);
+        if (cached) {
+          try { sosData = JSON.parse(cached); renderSOSAll(); } catch (e) { /* corrupt cache, ignore */ }
+        }
+      }
+      if (sosData && statusEl) { statusEl.textContent = '✓ Cached for offline use'; statusEl.classList.add('is-ready'); }
+
+      // 2) Try to fetch a fresh copy in the background. Silently keeps the
+      // cached version on screen if this fails (e.g. no connection) --
+      // that's the whole point of caching it in the first place.
+      try {
+        const res = await fetch(`${API}/medical/bundle`);
+        if (!res.ok) throw new Error('bad status');
+        const fresh = await res.json();
+        sosData = fresh;
+        localStorage.setItem(SOS_CACHE_KEY, JSON.stringify(fresh));
+        renderSOSAll();
+        if (statusEl) { statusEl.textContent = '✓ Cached for offline use'; statusEl.classList.add('is-ready'); }
+      } catch (e) {
+        if (!sosData && statusEl) {
+          statusEl.textContent = '⚠️ No connection yet and nothing cached — open this tab once online to enable offline SOS.';
+          statusEl.classList.remove('is-ready');
+        }
+      }
+    }
+
+    function renderSOSAll() {
+      renderSOSContacts();
+      renderSOSAid();
+      renderSOSFacilities();
+    }
+
+    function renderSOSContacts() {
+      const el = document.getElementById('sos-contacts-content');
+      if (!el || !sosData) return;
+      const contacts = sosData.emergency_contacts || [];
+      if (!contacts.length) { el.innerHTML = '<div class="sos-empty">No emergency contacts available.</div>'; return; }
+      el.innerHTML = contacts.map(c => `
+        <a class="sos-contact-card" href="tel:${c.number}">
+          <div class="num">${c.number}</div>
+          <div class="name">${c.name}</div>
+          <div class="desc">${c.description || ''}</div>
+          <div class="coverage-tags">${(c.coverage || []).map(a => `<span class="sos-tag">${a}</span>`).join('')}</div>
+        </a>
+      `).join('');
+    }
+
+    function toggleAidCard(id) {
+      const card = document.getElementById(`sos-aid-${id}`);
+      if (card) card.classList.toggle('open');
+    }
+
+    function renderSOSAid() {
+      const el = document.getElementById('sos-aid-content');
+      if (!el || !sosData) return;
+      const guides = sosData.first_aid_guides || [];
+      if (!guides.length) { el.innerHTML = '<div class="sos-empty">No first-aid guides available.</div>'; return; }
+      el.innerHTML = guides.map(g => `
+        <div class="sos-aid-card" id="sos-aid-${g.id}">
+          <div class="sos-aid-header" onclick="toggleAidCard('${g.id}')">
+            <div>
+              <div class="title">${g.title}</div>
+              <div class="applies">Applies to: ${(g.applies_to || []).join(', ')}</div>
+            </div>
+            <span class="chevron">▾</span>
+          </div>
+          <div class="sos-aid-body">
+            <h5>Symptoms</h5>
+            <ul>${(g.symptoms || []).map(s => `<li>${s}</li>`).join('')}</ul>
+            <h5>Steps</h5>
+            <ul>${(g.steps || []).map(s => `<li>${s}</li>`).join('')}</ul>
+            <div class="sos-seek-help"><strong>Seek help if:</strong> ${g.seek_help_if || ''}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderSOSFacilities() {
+      const el = document.getElementById('sos-facility-content');
+      if (!el || !sosData) return;
+      const filter = document.getElementById('sos-province-filter')?.value || '';
+      let facilities = sosData.facilities || [];
+      if (filter) facilities = facilities.filter(f => (f.province || '').toLowerCase().includes(filter.toLowerCase()));
+      if (!facilities.length) { el.innerHTML = '<div class="sos-empty">No facilities found for this filter yet.</div>'; return; }
+      el.innerHTML = facilities.map(f => `
+        <div class="sos-facility-card">
+          <div>
+            <div class="fac-name">${f.name}</div>
+            <div class="fac-meta">${f.facility_type || ''} · ${f.district || ''}, ${f.province || ''}</div>
+            <div class="sos-facility-badges" style="margin-top:8px;">
+              ${f.is_24_7 ? '<span class="sos-badge b-247">24/7</span>' : ''}
+              ${f.has_anti_venom ? '<span class="sos-badge b-venom">Anti-Venom</span>' : ''}
+              ${f.has_anti_rabies ? '<span class="sos-badge b-rabies">Anti-Rabies</span>' : ''}
+              ${f.has_trauma_care ? '<span class="sos-badge b-trauma">Trauma Care</span>' : ''}
+            </div>
+          </div>
+          ${f.contact_number ? `<a class="sos-call-btn" href="tel:${f.contact_number}">📞 Call</a>` : ''}
+        </div>
+      `).join('');
     }
 
     // ========== INIT ==========
     loadDestinations();
     checkAuth();
+    loadSOSData(); // warm the offline SOS cache on app load, per medical_routes.py's design intent
   </script>
 </body>
 
