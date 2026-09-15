@@ -37,8 +37,6 @@ import pandas as pd
 from pathlib import Path
 from functools import lru_cache
 from typing import Optional, List
-
-from predict_budget import apply_price_floor
 from ml.predict_budget import apply_price_floor
 
 MODEL_PATH = Path(__file__).parent / "budget_model.joblib"

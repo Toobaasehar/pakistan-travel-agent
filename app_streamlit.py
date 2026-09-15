@@ -15,7 +15,7 @@ import requests
 from database import SessionLocal
 from models import Destination, DestinationImage
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
-from agent import run_mock_agent
+
 from review_ui import show_reviews_section
 
 # Base URL of the FastAPI backend (main.py / run.py). All account-related
