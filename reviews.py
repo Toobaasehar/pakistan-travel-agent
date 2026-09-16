@@ -148,3 +148,21 @@ def _to_response(review: Review) -> ReviewResponse:
         created_at=(review.created_at or datetime.utcnow()).isoformat(),
         is_verified=bool(review.is_verified),
     )
+import streamlit as st
+
+def show_reviews_section():
+    """
+    Displays the user reviews and feedback section in the Streamlit app.
+    """
+    st.subheader("⭐ User Reviews & Feedback")
+    st.write("Share your travel experience and read reviews from other travelers!")
+    
+    # Add your review submission form or review list logic here
+    with st.form("review_form"):
+        user_name = st.text_input("Your Name")
+        review_text = st.text_input("Write your review")
+        rating = st.slider("Rating", 1, 5, 5)
+        submit_button = st.form_submit_button("Submit Review")
+        
+        if submit_button:
+            st.success("Thank you for your feedback!")
