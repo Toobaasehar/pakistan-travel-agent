@@ -1,0 +1,6 @@
+.venv
+venv
+__pycache__
+*.pyc
+pakistan-travel-mobile
+test_all.py

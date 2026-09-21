@@ -21,7 +21,11 @@ from .knowledge_base import build_knowledge_base
 from .embedder import embed_texts, embed_query, fit_tfidf, is_semantic
 
 # Cache directory (rag/index_cache/)
-CACHE_DIR = os.path.join(os.path.dirname(__file__), "index_cache")
+CACHE_DIR = (
+    "/tmp/index_cache"
+    if os.environ.get("VERCEL")
+    else os.path.join(os.path.dirname(__file__), "index_cache")
+)
 CHUNKS_CACHE = os.path.join(CACHE_DIR, "chunks.pkl")
 VECTORS_CACHE = os.path.join(CACHE_DIR, "vectors.npy")
 FAISS_INDEX_CACHE = os.path.join(CACHE_DIR, "faiss.index")

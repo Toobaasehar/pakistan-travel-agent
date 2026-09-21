@@ -1,3 +1,4 @@
+
 # Core web framework
 fastapi
 uvicorn[standard]
@@ -17,15 +18,13 @@ python-dotenv
 requests
 
 # LLM agent (only one of these is required depending on which key you set
-# in .env -- ANTHROPIC_API_KEY or GROQ_API_KEY. Safe to keep both installed.)
+# in Vercel env vars -- ANTHROPIC_API_KEY or GROQ_API_KEY)
 anthropic
 groq
 
-# RAG (Retrieval-Augmented Generation) -- rag/embedder.py falls back to
-# TF-IDF automatically if sentence-transformers/faiss aren't installed, but
-# for the better semantic search experience, install these too:
+# ML / RAG (RAG falls back to TF-IDF automatically; explain_budget.py uses
+# its built-in Shapley explainer when shap is not installed)
 numpy
-scikit-learn
-sentence-transformers
-faiss-cpu
-shap
+pandas
+joblib
+scikit-learn==1.9.0
