@@ -148,7 +148,10 @@ def _to_response(review: Review) -> ReviewResponse:
         created_at=(review.created_at or datetime.utcnow()).isoformat(),
         is_verified=bool(review.is_verified),
     )
-import streamlit as st
+try:
+    import streamlit as st
+except ImportError:
+    st = None
 
 def show_reviews_section():
     """
