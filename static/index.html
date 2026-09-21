@@ -4484,19 +4484,44 @@
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
+    function normalizeProvince(p) {
+      if (!p) return '';
+      const s = String(p).toLowerCase().trim();
+      if (s.includes('islamabad')) return 'islamabad';
+      if (s.includes('kpk') || s.includes('khyber')) return 'kpk';
+      if (s.includes('kashmir')) return 'kashmir';
+      if (s.includes('gilgit') || s.includes('baltistan')) return 'gilgit';
+      if (s.includes('punjab')) return 'punjab';
+      if (s.includes('sindh')) return 'sindh';
+      if (s.includes('balochistan')) return 'balochistan';
+      return s;
+    }
+
     function filterByProvince(prov) {
       switchTab('browse');
       const provSelect = document.getElementById('filter-province');
       if (provSelect) {
-        provSelect.value = prov;
+        if (!prov) {
+          provSelect.value = '';
+        } else {
+          const norm = normalizeProvince(prov);
+          const matchedOpt = Array.from(provSelect.options).find(opt => normalizeProvince(opt.value) === norm);
+          if (matchedOpt) {
+            provSelect.value = matchedOpt.value;
+          } else {
+            provSelect.value = prov;
+          }
+        }
         populateBrowseCities();
         currentPage = 1;
         renderGrid();
       }
 
       // Sync active state on Story circles
+      const normProv = normalizeProvince(prov);
       document.querySelectorAll('.province-story-item').forEach(item => {
-        item.classList.toggle('active', item.dataset.prov === prov);
+        const itemNorm = normalizeProvince(item.dataset.prov);
+        item.classList.toggle('active', itemNorm && itemNorm === normProv);
       });
       const allBtn = document.getElementById('btn-story-all');
       if (allBtn) allBtn.classList.toggle('active', !prov);
@@ -4573,7 +4598,8 @@
 
         const totalCount = allDestinations.length;
         document.getElementById('stat-dest').textContent = totalCount + '+';
-        document.getElementById('splash-stat-dest').textContent = totalCount + '+';
+        const splashCount = document.getElementById('splash-stat-dest');
+        if (splashCount) splashCount.textContent = totalCount + '+';
 
         const uniqueDistricts = new Set(allDestinations.map(d => d.district).filter(Boolean));
         document.getElementById('stat-districts').textContent = uniqueDistricts.size + '+';
@@ -4606,7 +4632,10 @@
       const prov = document.getElementById('filter-province').value;
       const citySelect = document.getElementById('filter-city');
       let list = allDestinations;
-      if (prov) list = allDestinations.filter(d => d.province === prov);
+      if (prov) {
+        const norm = normalizeProvince(prov);
+        list = allDestinations.filter(d => normalizeProvince(d.province) === norm);
+      }
       const cities = [...new Set(list.map(d => d.district).filter(Boolean))].sort();
       citySelect.innerHTML = '<option value="">All Cities</option>' +
         cities.map(c => `<option value="${c}">${c}</option>`).join('');
@@ -4618,13 +4647,14 @@
     function renderGrid() {
       const search = document.getElementById('search-input').value.toLowerCase().trim();
       const province = document.getElementById('filter-province').value;
+      const normProv = normalizeProvince(province);
       const city = document.getElementById('filter-city') ? document.getElementById('filter-city').value : '';
       const cat = activeCategory;
       const sortBy = document.getElementById('filter-sort') ? document.getElementById('filter-sort').value : 'default';
 
       let filtered = allDestinations.filter(d =>
         (!search || d.name.toLowerCase().includes(search) || (d.district || '').toLowerCase().includes(search) || (d.description || '').toLowerCase().includes(search)) &&
-        (!province || d.province === province) &&
+        (!province || normalizeProvince(d.province) === normProv) &&
         (!city || d.district === city) &&
         (!cat || d.category?.toLowerCase() === cat)
       );
