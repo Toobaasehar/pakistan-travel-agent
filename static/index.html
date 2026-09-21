@@ -4484,6 +4484,8 @@
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
+    let currentSelectedProvince = '';
+
     function normalizeProvince(p) {
       if (!p) return '';
       const s = String(p).toLowerCase().trim();
@@ -4498,6 +4500,7 @@
     }
 
     function filterByProvince(prov) {
+      currentSelectedProvince = prov || '';
       switchTab('browse');
       const provSelect = document.getElementById('filter-province');
       if (provSelect) {
@@ -4512,19 +4515,30 @@
             provSelect.value = prov;
           }
         }
-        populateBrowseCities();
-        currentPage = 1;
-        renderGrid();
       }
 
       // Sync active state on Story circles
       const normProv = normalizeProvince(prov);
       document.querySelectorAll('.province-story-item').forEach(item => {
         const itemNorm = normalizeProvince(item.dataset.prov);
-        item.classList.toggle('active', itemNorm && itemNorm === normProv);
+        item.classList.toggle('active', Boolean(itemNorm && itemNorm === normProv));
       });
       const allBtn = document.getElementById('btn-story-all');
       if (allBtn) allBtn.classList.toggle('active', !prov);
+
+      // Update Section Header Title to clearly show active province
+      const headerTitle = document.querySelector('#browse-header h2');
+      const headerDesc = document.querySelector('#browse-header p');
+      if (headerTitle) {
+        headerTitle.textContent = prov ? `${prov} Destinations` : 'All Destinations';
+      }
+      if (headerDesc) {
+        headerDesc.textContent = prov ? `Explore top places and cities across ${prov}.` : 'Explore verified places across Pakistan. Filter by province, category, or search.';
+      }
+
+      populateBrowseCities();
+      currentPage = 1;
+      renderGrid();
 
       const header = document.getElementById('browse-header');
       if (header && prov) header.scrollIntoView({ behavior: 'smooth' });
@@ -4597,20 +4611,26 @@
         });
 
         const totalCount = allDestinations.length;
-        document.getElementById('stat-dest').textContent = totalCount + '+';
+        const statDest = document.getElementById('stat-dest');
+        if (statDest) statDest.textContent = totalCount + '+';
         const splashCount = document.getElementById('splash-stat-dest');
         if (splashCount) splashCount.textContent = totalCount + '+';
 
         const uniqueDistricts = new Set(allDestinations.map(d => d.district).filter(Boolean));
-        document.getElementById('stat-districts').textContent = uniqueDistricts.size + '+';
+        const statDistricts = document.getElementById('stat-districts');
+        if (statDistricts) statDistricts.textContent = uniqueDistricts.size + '+';
 
         const provinces = [...new Set(allDestinations.map(d => d.province))].sort();
         const provSelect = document.getElementById('filter-province');
         const planProvSelect = document.getElementById('plan-province');
-        provinces.forEach(p => {
-          provSelect.insertAdjacentHTML('beforeend', `<option value="${p}">${p}</option>`);
-          planProvSelect.insertAdjacentHTML('beforeend', `<option value="${p}">${p}</option>`);
-        });
+        if (provSelect) {
+          provSelect.innerHTML = '<option value="">All Provinces</option>' +
+            provinces.map(p => `<option value="${p}">${p}</option>`).join('');
+        }
+        if (planProvSelect) {
+          planProvSelect.innerHTML = '<option value="">Any Province</option>' +
+            provinces.map(p => `<option value="${p}">${p}</option>`).join('');
+        }
 
         const fromCitySelect = document.getElementById('plan-from-city');
         if (fromCitySelect) {
@@ -4624,20 +4644,25 @@
         renderGrid();
         updateFavCount();
       } catch (e) {
-        document.getElementById('dest-grid').innerHTML = `<p class="error-msg">Could not load destinations. ${e}</p>`;
+        console.error('loadDestinations error:', e);
+        const grid = document.getElementById('dest-grid');
+        if (grid) grid.innerHTML = `<p class="error-msg">Could not load destinations: ${e}</p>`;
       }
     }
 
     function populateBrowseCities() {
-      const prov = document.getElementById('filter-province').value;
+      const provSelect = document.getElementById('filter-province');
+      const prov = currentSelectedProvince || (provSelect ? provSelect.value : '');
       const citySelect = document.getElementById('filter-city');
+      if (!citySelect) return;
+      citySelect.value = '';
       let list = allDestinations;
       if (prov) {
         const norm = normalizeProvince(prov);
-        list = allDestinations.filter(d => normalizeProvince(d.province) === norm);
+        list = allDestinations.filter(d => d.province && normalizeProvince(d.province) === norm);
       }
       const cities = [...new Set(list.map(d => d.district).filter(Boolean))].sort();
-      citySelect.innerHTML = '<option value="">All Cities</option>' +
+      citySelect.innerHTML = `<option value="">All Cities (${cities.length})</option>` +
         cities.map(c => `<option value="${c}">${c}</option>`).join('');
     }
 
@@ -4645,18 +4670,22 @@
     // 4. RENDER GRID (WITH 30 DESTINATIONS PER PAGE PAGINATION)
     // ========================================================
     function renderGrid() {
-      const search = document.getElementById('search-input').value.toLowerCase().trim();
-      const province = document.getElementById('filter-province').value;
+      const searchInput = document.getElementById('search-input');
+      const search = searchInput ? searchInput.value.toLowerCase().trim() : '';
+      const provSelect = document.getElementById('filter-province');
+      const province = currentSelectedProvince || (provSelect ? provSelect.value : '');
       const normProv = normalizeProvince(province);
-      const city = document.getElementById('filter-city') ? document.getElementById('filter-city').value : '';
+      const citySelect = document.getElementById('filter-city');
+      const city = citySelect ? citySelect.value.trim().toLowerCase() : '';
       const cat = activeCategory;
-      const sortBy = document.getElementById('filter-sort') ? document.getElementById('filter-sort').value : 'default';
+      const sortSelect = document.getElementById('filter-sort');
+      const sortBy = sortSelect ? sortSelect.value : 'default';
 
       let filtered = allDestinations.filter(d =>
-        (!search || d.name.toLowerCase().includes(search) || (d.district || '').toLowerCase().includes(search) || (d.description || '').toLowerCase().includes(search)) &&
-        (!province || normalizeProvince(d.province) === normProv) &&
-        (!city || d.district === city) &&
-        (!cat || d.category?.toLowerCase() === cat)
+        (!search || (d.name && d.name.toLowerCase().includes(search)) || (d.district && d.district.toLowerCase().includes(search)) || (d.description && d.description.toLowerCase().includes(search))) &&
+        (!province || (d.province && normalizeProvince(d.province) === normProv)) &&
+        (!city || (d.district && d.district.trim().toLowerCase() === city)) &&
+        (!cat || (d.category && d.category.toLowerCase() === cat))
       );
 
       // Sorting
@@ -4757,16 +4786,7 @@
     // Filter resets pagination to page 1
     document.getElementById('search-input').addEventListener('input', () => { currentPage = 1; renderGrid(); });
     document.getElementById('filter-province').addEventListener('change', e => {
-      const prov = e.target.value;
-      document.querySelectorAll('.province-story-item').forEach(item => {
-        item.classList.toggle('active', item.dataset.prov === prov);
-      });
-      const allBtn = document.getElementById('btn-story-all');
-      if (allBtn) allBtn.classList.toggle('active', !prov);
-
-      populateBrowseCities();
-      currentPage = 1;
-      renderGrid();
+      filterByProvince(e.target.value);
     });
     if (document.getElementById('filter-city')) {
       document.getElementById('filter-city').addEventListener('change', () => { currentPage = 1; renderGrid(); });

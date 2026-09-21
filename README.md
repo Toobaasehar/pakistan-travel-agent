@@ -10,7 +10,7 @@ Includes a modern interactive web UI, OpenStreetMap integration, an intelligent 
 
 - **Comprehensive Travel Database**: 376+ destinations with coordinates, budget estimates, best seasons, and images.
 - **AI Agent Intelligence**: Tool-calling agent (Claude / Groq / rule-based fallback) that searches destinations, plans multi-day itineraries, and calculates live budgets.
-- **ML Layer**: Random Forest budget prediction with SHAP explainability, and KMeans clustering for "similar destinations."
+- **ML Layer**: Random Forest budget prediction with , and KMeans clustering for "similar destinations."
 - **Live Market Pricing**: Region-aware hotel tiers, route-based transport pricing (Haversine distance between cities), seasonal multipliers, and multi-currency conversion.
 - **User Accounts**: Email and phone registration, JWT auth, cloud wishlist, saved trips.
 - **Dual Interface**:
@@ -49,7 +49,7 @@ pakistan-travel-agent/
 ├── .env.example                            ← Environment variables template
 ├── ml/
 │   ├── predict_budget.py                    ← ML budget inference + multi-currency conversion
-│   ├── explain_budget.py                     ← SHAP explainability for the budget model
+│   ├── explain_budget.py                     explainability for the budget model
 │   ├── similar_destinations.py                ← KMeans-based "similar destinations" lookup
 │   ├── train_budget_model.py                   ← Trains budget_model.joblib
 │   ├── train_clustering.py                       ← Trains clustering_model.joblib
