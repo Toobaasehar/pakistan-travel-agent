@@ -835,7 +835,132 @@
     main {
       max-width: 1140px;
       margin: 0 auto;
-      padding: 32px 20px 60px;
+      padding: 84px 20px 60px;
+    }
+
+    /* ========== PROVINCE STORIES BAR (MODERN APP HERO REPLACEMENT) ========== */
+    .stories-bar-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px 12px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stories-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .stories-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .stories-subtitle {
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .stories-all-btn {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 99px;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .stories-all-btn:hover,
+    .stories-all-btn.active {
+      background: var(--terracotta);
+      color: #fff;
+      border-color: var(--terracotta);
+    }
+
+    .province-stories-container {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 6px 2px 8px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .province-stories-container::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .province-story-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      width: 78px;
+      text-align: center;
+      transition: transform var(--transition);
+    }
+
+    .province-story-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .province-story-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      padding: 2.5px;
+      background: linear-gradient(135deg, var(--saffron), var(--terracotta));
+      box-shadow: 0 3px 10px rgba(232, 148, 58, 0.25);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .province-story-item.active .province-story-avatar {
+      background: linear-gradient(135deg, #059669, #10B981);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35);
+      transform: scale(1.05);
+    }
+
+    .province-story-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #FFFDF9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      border: 2px solid #fff;
+    }
+
+    .province-story-name {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 78px;
+    }
+
+    .province-story-item.active .province-story-name {
+      color: #059669;
+      font-weight: 700;
     }
 
     .panel {
@@ -3580,66 +3705,6 @@
     </button>
   </div>
 
-  <!-- ===== HERO BANNER (BROWSE PANEL) ===== -->
-  <section class="hero" id="main-hero">
-    <div class="hero-overlay geo-pattern"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">✦ Verified Pakistan Travel Guide</div>
-      <h1>Discover <em>Pakistan,</em><br>Plan Smarter.</h1>
-      <p class="hero-desc">Real, hand-verified destinations across every province and territory. Mountains, history, nature and
-        culture — all in one intelligent trip planner.</p>
-      
-      <div class="hero-cta-wrap">
-        <button type="button" onclick="switchTab('plan')" class="hero-cta-btn primary">
-          ✨ Plan a Custom Trip
-        </button>
-        <button type="button" onclick="switchTab('map')" class="hero-cta-btn secondary">
-          🗺️ Explore Live Map
-        </button>
-        <button type="button" onclick="document.getElementById('search-input').focus(); document.querySelector('main').scrollIntoView({behavior:'smooth'});" class="hero-cta-btn outline">
-          🔍 Browse 295+ Places
-        </button>
-      </div>
-
-      <div class="hero-chips">
-        <span class="province-chip" onclick="filterByProvince('Khyber Pakhtunkhwa')">Khyber Pakhtunkhwa</span>
-        <span class="province-chip" onclick="filterByProvince('Punjab')">Punjab</span>
-        <span class="province-chip" onclick="filterByProvince('Sindh')">Sindh</span>
-        <span class="province-chip" onclick="filterByProvince('Balochistan')">Balochistan</span>
-        <span class="province-chip" onclick="filterByProvince('Gilgit-Baltistan')">Gilgit-Baltistan</span>
-        <span class="province-chip" onclick="filterByProvince('Islamabad')">Islamabad</span>
-        <span class="province-chip" onclick="filterByProvince('Azad Kashmir')">Azad Kashmir</span>
-      </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <span class="num" id="stat-dest">295+</span>
-          <span class="lbl">Destinations</span>
-        </div>
-        <div class="hero-stat">
-          <span class="num">4</span>
-          <span class="lbl">Provinces</span>
-        </div>
-        <div class="hero-stat">
-          <span class="num">3</span>
-          <span class="lbl">Territories</span>
-        </div>
-        <div class="hero-stat">
-          <span class="num" id="stat-districts">—</span>
-          <span class="lbl">Cities &amp; Districts</span>
-        </div>
-        <div class="hero-stat">
-          <span class="num">5</span>
-          <span class="lbl">Categories</span>
-        </div>
-        <div class="hero-stat">
-          <span class="num">AI</span>
-          <span class="lbl">Powered</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===== MAIN PANELS ===== -->
   <main>
 
@@ -3647,6 +3712,52 @@
          BROWSE PANEL (WITH 30 DESTINATIONS / PAGE PAGINATION)
          ======================================================== -->
     <section class="panel active" id="browse">
+      
+      <!-- Interactive Region / Province Stories Bar -->
+      <div class="stories-bar-section">
+        <div class="stories-inner">
+          <div class="stories-header">
+            <div>
+              <div class="stories-title">🇵🇰 Explore Pakistan by Region</div>
+              <div class="stories-subtitle">Tap any province or territory to filter destinations instantly</div>
+            </div>
+            <button type="button" class="stories-all-btn active" id="btn-story-all" onclick="filterByProvince('')">
+              All Regions
+            </button>
+          </div>
+          <div class="province-stories-container">
+            <button type="button" class="province-story-item" data-prov="Gilgit-Baltistan" onclick="filterByProvince('Gilgit-Baltistan')">
+              <div class="province-story-avatar"><div class="province-story-avatar-inner">🏔️</div></div>
+              <span class="province-story-name">Gilgit-Baltistan</span>
+            </button>
+            <button type="button" class="province-story-item" data-prov="Khyber Pakhtunkhwa" onclick="filterByProvince('Khyber Pakhtunkhwa')">
+              <div class="province-story-avatar"><div class="province-story-avatar-inner">🌲</div></div>
+              <span class="province-story-name">KPK</span>
+            </button>
+            <button type="button" class="province-story-item" data-prov="Punjab" onclick="filterByProvince('Punjab')">
+              <div class="province-story-avatar"><div class="province-story-avatar-inner">🏛️</div></div>
+              <span class="province-story-name">Punjab</span>
+            </button>
+            <button type="button" class="province-story-item" data-prov="Sindh" onclick="filterByProvince('Sindh')">
+              <div class="province-story-avatar"><div class="province-story-avatar-inner">🌊</div></div>
+              <span class="province-story-name">Sindh</span>
+            </button>
+            <button type="button" class="province-story-item" data-prov="Balochistan" onclick="filterByProvince('Balochistan')">
+              <div class="province-story-avatar"><div class="province-story-avatar-inner">🏜️</div></div>
+              <span class="province-story-name">Balochistan</span>
+            </button>
+            <button type="button" class="province-story-item" data-prov="Azad Kashmir" onclick="filterByProvince('Azad Kashmir')">
+              <div class="province-story-avatar"><div class="province-story-avatar-inner">⛰️</div></div>
+              <span class="province-story-name">Azad Kashmir</span>
+            </button>
+            <button type="button" class="province-story-item" data-prov="Islamabad" onclick="filterByProvince('Islamabad')">
+              <div class="province-story-avatar"><div class="province-story-avatar-inner">🏙️</div></div>
+              <span class="province-story-name">Islamabad</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="section-header" id="browse-header">
         <h2>All Destinations</h2>
         <p>Explore verified places across Pakistan. Filter by province, category, or search.</p>
@@ -4363,14 +4474,6 @@
       const panel = document.getElementById(panelId);
       if (panel) panel.classList.add('active');
 
-      // Hero banner only on browse tab
-      const hero = document.getElementById('main-hero');
-      if (tab === 'browse') {
-        if (hero) hero.style.display = 'flex';
-      } else {
-        if (hero) hero.style.display = 'none';
-      }
-
       if (tab === 'map') initMap();
       if (tab === 'wishlist') renderWishlist();
       if (tab === 'sos') loadSOSData();
@@ -4389,8 +4492,17 @@
         populateBrowseCities();
         currentPage = 1;
         renderGrid();
-        document.getElementById('browse-header').scrollIntoView({ behavior: 'smooth' });
       }
+
+      // Sync active state on Story circles
+      document.querySelectorAll('.province-story-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.prov === prov);
+      });
+      const allBtn = document.getElementById('btn-story-all');
+      if (allBtn) allBtn.classList.toggle('active', !prov);
+
+      const header = document.getElementById('browse-header');
+      if (header && prov) header.scrollIntoView({ behavior: 'smooth' });
     }
 
     // ========== IMAGE HELPER ==========
@@ -4614,7 +4726,14 @@
 
     // Filter resets pagination to page 1
     document.getElementById('search-input').addEventListener('input', () => { currentPage = 1; renderGrid(); });
-    document.getElementById('filter-province').addEventListener('change', () => {
+    document.getElementById('filter-province').addEventListener('change', e => {
+      const prov = e.target.value;
+      document.querySelectorAll('.province-story-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.prov === prov);
+      });
+      const allBtn = document.getElementById('btn-story-all');
+      if (allBtn) allBtn.classList.toggle('active', !prov);
+
       populateBrowseCities();
       currentPage = 1;
       renderGrid();
