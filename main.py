@@ -28,6 +28,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import selectinload
 from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
 
@@ -173,7 +174,7 @@ def list_destinations(
     """
     Lists destinations with optional filters — used by Browse, Plan, and Map tabs.
     """
-    query = db.query(Destination)
+    query = db.query(Destination).options(selectinload(Destination.images))
     if province:
         query = query.filter(Destination.province.ilike(f"%{province}%"))
     if district:
