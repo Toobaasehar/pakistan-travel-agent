@@ -2169,11 +2169,15 @@
       overflow: hidden;
       box-shadow: var(--shadow-md);
       animation: cardIn 0.4s ease;
+      position: relative;
     }
 
     .result-hero {
       position: relative;
       height: 260px;
+      width: 100%;
+      overflow: hidden;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
 
     .result-img {
@@ -3605,7 +3609,7 @@
   <!-- ===== TOP NAVBAR (DESKTOP & MOBILE HEADER) ===== -->
   <nav id="navbar">
     <div class="nav-inner">
-      <div class="nav-logo" onclick="switchTab('browse')">
+      <div class="nav-logo" onclick="showSplashScreen()" title="Go to Welcome / Landing Page">
         <span class="flag">🇵🇰</span> Discover Pakistan
       </div>
       <!-- Desktop Tabs (Visible > 768px) -->
@@ -3772,7 +3776,8 @@
           <input type="text" id="search-input" placeholder="Search destinations, cities, or activities…"
             autocomplete="off">
         </div>
-        <select id="filter-province">
+        <!-- Hidden province select maintained for programmatic sync with region stories -->
+        <select id="filter-province" style="display: none;" aria-hidden="true">
           <option value="">All Provinces</option>
         </select>
         <select id="filter-city">
@@ -4118,41 +4123,49 @@
     let currentPlannedTrip = null;
 
     // ========================================================
-    // 1. APP ONBOARDING & SPLASH SCREEN LOGIC
+    // 1. APP ONBOARDING & SPLASH SCREEN LOGIC (LANDING PAGE)
     // ========================================================
     function checkAppSplash() {
-      const hasEntered = sessionStorage.getItem('pk_app_entered') || localStorage.getItem('pk_app_entered');
+      // Option A: Clear old persistent flags so landing page always appears first on page load
+      localStorage.removeItem('pk_app_entered');
+      sessionStorage.removeItem('pk_app_entered');
+
       const splash = document.getElementById('app-splash-screen');
-      if (hasEntered || authToken) {
-        // User already entered or signed in -> directly show app
-        if (splash) splash.classList.add('hidden');
-      } else {
-        // Show splash screen
-        if (splash) splash.classList.remove('hidden');
+      if (splash) {
+        splash.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
       }
     }
 
     function showSplashScreen() {
       const splash = document.getElementById('app-splash-screen');
-      if (splash) splash.classList.remove('hidden');
+      if (splash) {
+        splash.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function hideSplashScreen() {
       const splash = document.getElementById('app-splash-screen');
       if (splash) splash.classList.add('hidden');
+      document.body.style.overflow = '';
       sessionStorage.setItem('pk_app_entered', 'true');
-      localStorage.setItem('pk_app_entered', 'true');
     }
 
     function openOnboardingGate() {
-      document.getElementById('gate-modal-wrap').classList.add('open');
+      const gate = document.getElementById('gate-modal-wrap');
+      if (gate) gate.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeGateModal() {
       const el = document.getElementById('gate-modal-wrap');
       if (el) el.classList.remove('open');
-      document.body.style.overflow = '';
+      const splash = document.getElementById('app-splash-screen');
+      if (!splash || splash.classList.contains('hidden')) {
+        document.body.style.overflow = '';
+      }
     }
 
     const gateWrap = document.getElementById('gate-modal-wrap');
@@ -4388,6 +4401,7 @@
       currentUser = null;
       localStorage.removeItem('pk_auth_token');
       updateAuthUI(null);
+      showSplashScreen();
       if (showMessage) alert('You have been signed out.');
     }
 
@@ -4547,7 +4561,7 @@
     // ========== IMAGE HELPER ==========
     function imgOrPlaceholder(url, cssClass, placeholderClass, alt = '') {
       if (url && !url.startsWith('PLACEHOLDER')) {
-        return `<img class="${cssClass}" src="${url}" alt="${alt}" loading="lazy" onerror="this.outerHTML='<div class=\\"${placeholderClass}\\">📸 Photo unavailable</div>'">`;
+        return `<img class="${cssClass}" src="${url}" alt="${alt}" loading="lazy" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';"><div class="${placeholderClass}" style="display:none;">📸 Photo unavailable</div>`;
       }
       return `<div class="${placeholderClass}">📸 No photo yet</div>`;
     }
@@ -5076,8 +5090,9 @@
         const convTotal = cost.converted_total || { formatted: `PKR ${totalPkr.toLocaleString()}` };
         const currencyCode = cost.currency || currentGlobalCurrency;
 
-        const imgHtml = (data.image_url && !data.image_url.startsWith('PLACEHOLDER'))
-          ? `<img class="result-img" src="${data.image_url}" alt="${data.destination.name}" onerror="this.outerHTML='<div class=\\"result-img-placeholder\\">📸 Photo unavailable</div>'">`
+        const hasValidImg = data.image_url && !data.image_url.startsWith('PLACEHOLDER');
+        const imgHtml = hasValidImg
+          ? `<img class="result-img" src="${data.image_url}" alt="${data.destination.name}" onerror="this.style.display='none'; const p=this.parentElement.querySelector('.result-img-placeholder'); if(p) p.style.display='flex';"><div class="result-img-placeholder" style="display:none;">📸 Photo unavailable</div>`
           : `<div class="result-img-placeholder">📸 No photo yet</div>`;
 
         const tiers = cost.tier_comparisons || {};

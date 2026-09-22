@@ -9,16 +9,18 @@ Then open:
     http://127.0.0.1:8000
 """
 
-# Load .env FIRST, before any other import. Several modules read secrets
-# (JWT_SECRET_KEY in auth.py, AMADEUS_API_KEY in live_pricing.py, GROQ_API_KEY
-# below) at *import time*, not inside a function -- so if .env isn't loaded
-# before those modules are imported, os.environ.get() sees nothing and either
-# crashes (auth.py) or silently falls back (live_pricing.py). This has to be
-# the first thing that runs, ahead of "import os" and everything else.
+import sys
+import os
+
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 from dotenv import load_dotenv
 load_dotenv()
-
-import os
 import json
 from datetime import datetime
 from fastapi import FastAPI, Depends, HTTPException, status
@@ -56,7 +58,7 @@ from auth import (
 try:
     from rag.rag_tool import search_knowledge_base as rag_search
     _RAG_READY = True
-    print("[main] RAG module loaded successfully ✓")
+    print("[main] RAG module loaded successfully [OK]")
 except Exception as _rag_err:
     _RAG_READY = False
     print(f"[main] RAG not available: {_rag_err}")
@@ -102,7 +104,7 @@ async def warmup_rag():
             def _build():
                 from rag.retriever import get_retriever
                 get_retriever()  # builds/loads index
-                print("[main] RAG index ready ✓")
+                print("[main] RAG index ready [OK]")
             threading.Thread(target=_build, daemon=True).start()
         except Exception as e:
             print(f"[main] RAG warmup error: {e}")
