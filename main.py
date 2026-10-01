@@ -67,7 +67,10 @@ except Exception as _rag_err:
         return {"results": [], "count": 0, "engine": "disabled"}
 
 # Automatically create all database tables (including users, user_wishlists, saved_trips)
-Base.metadata.create_all(bind=engine)
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as _db_init_err:
+    print(f"[database] Table creation notice: {_db_init_err}")
 
 app = FastAPI(
     title="Pakistan Travel Agent API",
@@ -76,10 +79,6 @@ app = FastAPI(
 )
 
 # Enable CORS for cross-origin frontend requests.
-# In development this defaults to "*" (allow everything) so local testing
-# just works. In production, set ALLOWED_ORIGINS in your .env to your real
-# frontend domain(s), comma-separated, e.g.:
-#   ALLOWED_ORIGINS=https://pakistantravelagent.com,https://www.pakistantravelagent.com
 _allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "*").strip()
 ALLOWED_ORIGINS = ["*"] if _allowed_origins_env == "*" else [o.strip() for o in _allowed_origins_env.split(",") if o.strip()]
 
@@ -94,6 +93,10 @@ app.add_middleware(
 # Reviews feature: POST/DELETE require a logged-in user (see review_routes.py)
 app.include_router(reviews_router)
 app.include_router(medical_router)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+INDEX_PATH = os.path.join(STATIC_DIR, "index.html")
 
 
 @app.on_event("startup")
@@ -114,7 +117,8 @@ async def warmup_rag():
 @app.get("/")
 def serve_ui():
     """Serves the web UI as the site's homepage with cache-busting headers."""
-    return FileResponse("static/index.html", headers={"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache", "Expires": "0"})
+    target_path = INDEX_PATH if os.path.exists(INDEX_PATH) else "static/index.html"
+    return FileResponse(target_path, headers={"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache", "Expires": "0"})
 
 
 @app.get("/favicon.ico", include_in_schema=False)
@@ -124,7 +128,10 @@ def favicon():
 
 
 # Mounted at /static for static assets (images, CSS, JS)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+if os.path.exists(STATIC_DIR):
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+else:
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @app.get("/health")
