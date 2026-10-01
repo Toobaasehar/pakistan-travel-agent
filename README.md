@@ -8,15 +8,19 @@ Includes a modern interactive web UI, OpenStreetMap integration, an intelligent 
 
 ## 🌟 Key Features
 
-- **Comprehensive Travel Database**: 376+ destinations with coordinates, budget estimates, best seasons, and images.
-- **AI Agent Intelligence**: Tool-calling agent (Claude / Groq / rule-based fallback) that searches destinations, plans multi-day itineraries, and calculates live budgets.
-- **ML Layer**: Random Forest budget prediction with , and KMeans clustering for "similar destinations."
+- **Comprehensive Travel Database**: 376+ destinations across all 156+ districts with coordinates, budget estimates, best seasons, and real Wikipedia photos.
+- **AI Agent Intelligence**: Tool-calling agent (Groq / Claude / rule-based fallback) that searches destinations, plans multi-day itineraries, and calculates live budgets.
+- **Direct Distance & Route Planner**: Point-to-point road distance (km), driving hours, motorway/highway breakdown (M-2, M-11, M-15 Hazara Motorway, N-35 Karakoram Highway, Babusar Pass), and night stay advice.
+- **Bilingual & Roman Urdu Support**: Automatically detects Roman Urdu prompts (e.g., *"sialkot se hunza kitni door ha"*) and replies naturally in fluent, polite Roman Urdu.
+- **Real-Time Streaming Chat (SSE) & Conversational Memory**: Word-by-word streaming responses (`/chat/stream`) with clean client-side markdown formatting (no raw `#` or `*` symbols).
+- **Medical SOS Hub & Live Hospital Navigation**: Province & District cascading filters covering 24/7 DHQ hospitals across Pakistan, with instant "📍 Live Location" Google Maps navigation.
+- **ML Layer**: Random Forest budget prediction with explainability and KMeans clustering for "similar destinations."
 - **Live Market Pricing**: Region-aware hotel tiers, route-based transport pricing (Haversine distance between cities), seasonal multipliers, and multi-currency conversion.
-- **User Accounts**: Email and phone registration, JWT auth, cloud wishlist, saved trips.
+- **User Accounts & Social Reviews**: Email and phone registration, JWT auth, cloud wishlist, saved trips, and verified traveler reviews.
 - **Dual Interface**:
-  - **FastAPI Web App**: Interactive UI with search, filter by province, dynamic map, and trip planner.
+  - **FastAPI Web App**: Single-page UI with Browse, Plan, Map, AI Chat, Wishlist, and Medical SOS Hub.
   - **Streamlit App**: Lightweight data-driven exploration dashboard.
-- **Automated Testing Suite**: Coverage for tools, ML modules, auth, and API endpoints.
+- **Automated Testing Suite**: 38 comprehensive tests covering tools, ML modules, auth, and API endpoints.
 
 ---
 
@@ -146,10 +150,26 @@ Covers database integrity, tool functions, the mock-agent parser, the ML budget/
 
 A full pass was done across the codebase (backend, ML layer, Streamlit UI, data seeding). Fixed in this pass:
 
-**New since last pass — Reviews feature**
+**New — Roman Urdu & Distance Calculation Engine**
+- **Roman Urdu & Bilingual AI**: Automatically recognizes Roman Urdu user prompts (e.g., *"sialkot se hunza kitni door ha"*, *"trip ka kharcha kitna hoga"*) and generates warm, fluent, polite Roman Urdu guidance instead of defaulting to generic English templates.
+- **Direct Highway & Route Tool (`get_distance_and_route`)**: Added point-to-point road distance (km), estimated driving hours, specific motorway and highway routes (M-2, M-11, M-15 Hazara Motorway, N-35 Karakoram Highway, Babusar Pass), and night stopover recommendations (Besham, Chilas, Dasu). Registered across Claude, Groq, and simulation agents.
+
+**New — Real-Time Streaming Chat & Clean Markdown Rendering**
+- **SSE Chat Streaming (`/chat/stream`)**: Server-Sent Events endpoint streaming responses in real time with multi-turn conversation history.
+- **Client-Side Markdown Formatter**: Custom parser in `static/index.html` renders headers, bullet points, numbered lists, bold text, and dividers cleanly without raw `#` or `*` markdown symbols leaking into user chat bubbles.
+
+**New — Medical SOS Hub & Live Hospital Navigation**
+- **Cascading Province & District Filters**: Added a City/District selector alongside the Province filter covering all 156+ districts dynamically.
+- **24/7 Emergency Facilities**: Automatically highlights 24/7 DHQ hospitals across Pakistan with green emergency badges and verified emergency contact numbers.
+- **Google Maps Live Location Navigation**: Added a "📍 Live Location" button to hospital cards opening real-time Google Maps coordinates navigation.
+
+**UI & Infrastructure Improvements**
+- **Wishlist-Only Footer Box**: The dark blue footer details box and Pakistan flag strip are hidden on general tabs (Browse, Plan, Map, Chat, SOS) and appear exclusively on the Wishlist tab.
+- **Groq Dynamic Model Detection**: Added `resolve_groq_model()` in `agent.py` to seamlessly auto-detect accessible Groq models (`openai/gpt-oss-120b`, `llama-3.3-70b-versatile`, etc.) preventing API errors.
+
+**New — Reviews feature**
 - Added a `Review` table (`models.py`) linked to `User` and, optionally, a specific `SavedTrip` — reviews now always require a logged-in account (`review_routes.py` uses `get_current_user`), replacing an earlier draft that let anyone submit a review under any typed-in name.
-- After a user saves a trip plan (`static/index.h
-tml`'s "Save Trip to My Profile"), a review prompt now opens automatically, pre-filled with that destination and linked to the trip (`trip_id`) — reviews created this way are marked `is_verified=True` since the backend can confirm the user actually planned that trip.
+- After a user saves a trip plan (`static/index.html`'s "Save Trip to My Profile"), a review prompt now opens automatically, pre-filled with that destination and linked to the trip (`trip_id`) — reviews created this way are marked `is_verified=True` since the backend can confirm the user actually planned that trip.
 - New endpoints: `POST /reviews/` (login required), `GET /reviews/{destination_name}`, `GET /reviews/{destination_name}/summary`, `GET /reviews/all`, `DELETE /reviews/{review_id}` (only the review's author can delete it).
 - `app_streamlit.py` gained a "⭐ Reviews" tab (`review_ui.py`) — writing a review requires being signed in there too; browsing stays open to everyone.
 - Along the way, fixed a pre-existing bug in `app_streamlit.py`'s sidebar: two menu options (`Plan a Trip`, `Browse Destinations`) used different emoji in the `st.sidebar.radio()` list than in their `elif menu == ...` dispatch conditions, so selecting them rendered a blank page. Also removed a stale `!= "pending_verification"` check left over from before registration returned a real token immediately.

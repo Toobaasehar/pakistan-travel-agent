@@ -25,7 +25,7 @@ import json
 from datetime import datetime
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, Response
+from fastapi.responses import FileResponse, Response, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import selectinload
@@ -231,6 +231,7 @@ class TripRequest(BaseModel):
 
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1)
+    history: Optional[List[Dict[str, str]]] = None
 
 
 class BudgetPredictionRequest(BaseModel):
@@ -255,6 +256,13 @@ class SaveTripRequest(BaseModel):
     people: int = 1
     total_budget: int
     trip_plan_json: str
+
+
+class PhoneRegisterRequest(BaseModel):
+    phone_number: str
+    username: str
+    password: str
+    full_name: Optional[str] = None
 
 
 # ── Authentication Endpoints ──────────────────────────────────────────────────
@@ -457,26 +465,42 @@ def chat_endpoint(req: ChatRequest):
     """
     AI Chat endpoint — dynamically routes to live AI agent (Groq or Claude)
     if API keys are set, or seamlessly uses the rule-based simulation agent.
-    Both modes are enhanced with RAG knowledge base retrieval.
+    Both modes are enhanced with RAG knowledge base retrieval and multi-turn memory.
     """
-    groq_key = os.getenv("GROQ_API_KEY", "").strip()
-    anthropic_key = os.getenv("ANTHROPIC_API_KEY", "").strip()
+    from agent import run_agent_with_meta
+    reply, engine, notice = run_agent_with_meta(req.message, history=req.history)
+    res = {"reply": reply, "engine": engine, "rag_enabled": _RAG_READY}
+    if notice:
+        res["notice"] = notice
+    return res
 
-    has_live_key = (groq_key and groq_key != "your_key_here") or (anthropic_key and anthropic_key != "your_key_here")
 
-    if has_live_key:
-        try:
-            from agent import run_agent
-            reply = run_agent(req.message)
-            engine = "groq" if (groq_key and groq_key != "your_key_here") else "claude"
-            return {"reply": reply, "engine": engine, "rag_enabled": _RAG_READY}
-        except Exception as e:
-            print(f"[agent fallback] Error with live agent: {e}. Falling back to mock agent.")
-            reply = run_mock_agent(req.message)
-            return {"reply": reply, "engine": "mock", "rag_enabled": _RAG_READY, "notice": f"Fallback to rule engine: {e}"}
-    else:
-        reply = run_mock_agent(req.message)
-        return {"reply": reply, "engine": "mock", "rag_enabled": _RAG_READY}
+@app.post("/chat/stream")
+def chat_stream_endpoint(req: ChatRequest):
+    """
+    Real-time Server-Sent Events (SSE) streaming endpoint for AI chat.
+    Streams tokens directly to client with conversation memory support.
+    """
+    from agent import stream_agent
+    return StreamingResponse(
+        stream_agent(req.message, history=req.history),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
+
+
+@app.get("/api/agent/status")
+def agent_status_endpoint():
+    """Returns AI model and key diagnostic status."""
+    from agent import test_groq_connection
+    return {
+        "groq": test_groq_connection(),
+        "rag_ready": _RAG_READY,
+    }
 
 
 @app.post("/plan-trip")
@@ -710,21 +734,35 @@ def verify_otp(identifier: str, otp: str, db: Session = Depends(get_db)):
 
 
 @app.post("/auth/phone-register", response_model=TokenResponse)
-def phone_register(phone_number: str, username: str, password: str, full_name: Optional[str] = None, db: Session = Depends(get_db)):
+def phone_register(
+    body: Optional[PhoneRegisterRequest] = None,
+    phone_number: Optional[str] = None,
+    username: Optional[str] = None,
+    password: Optional[str] = None,
+    full_name: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
     """Creates a phone-based account and logs the user in immediately."""
-    phone = phone_number.strip()
-    existing_phone = db.query(User).filter(User.phone_number == phone).first()
+    p_num = (body.phone_number if body else (phone_number or "")).strip()
+    u_name = (body.username if body else (username or "")).strip()
+    p_word = body.password if body else (password or "")
+    f_name = (body.full_name if body and body.full_name else (full_name or "")).strip() or None
+
+    if not p_num or not u_name or not p_word:
+        raise HTTPException(status_code=400, detail="Missing required registration fields (phone_number, username, password).")
+
+    existing_phone = db.query(User).filter(User.phone_number == p_num).first()
     if existing_phone:
         raise HTTPException(status_code=400, detail="This phone number is already registered.")
-    existing_username = db.query(User).filter(User.username == username.strip()).first()
+    existing_username = db.query(User).filter(User.username == u_name).first()
     if existing_username:
         raise HTTPException(status_code=400, detail="This username is already taken.")
 
     user = User(
-        username=username.strip(),
-        phone_number=phone,
-        hashed_password=hash_password(password),
-        full_name=full_name if full_name else username.strip(),
+        username=u_name,
+        phone_number=p_num,
+        hashed_password=hash_password(p_word),
+        full_name=f_name if f_name else u_name,
         is_verified=True,
     )
     db.add(user)

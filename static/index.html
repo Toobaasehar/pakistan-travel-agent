@@ -2737,6 +2737,53 @@
       border-radius: 16px 16px 4px 16px;
     }
 
+    .chat-msg .bubble .chat-heading {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--indigo);
+      margin: 10px 0 6px;
+      line-height: 1.35;
+    }
+
+    .chat-msg .bubble .chat-heading:first-child {
+      margin-top: 2px;
+    }
+
+    .chat-msg .bubble .chat-p {
+      margin-bottom: 8px;
+      line-height: 1.55;
+    }
+
+    .chat-msg .bubble .chat-p:last-child {
+      margin-bottom: 0;
+    }
+
+    .chat-msg .bubble .chat-ul,
+    .chat-msg .bubble .chat-ol {
+      margin: 6px 0 10px 22px;
+      padding: 0;
+    }
+
+    .chat-msg .bubble li {
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    .chat-msg .bubble strong {
+      color: var(--indigo-dark);
+      font-weight: 700;
+    }
+
+    .chat-msg.user .bubble strong {
+      color: #fff;
+    }
+
+    .chat-msg .bubble .chat-hr {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 10px 0;
+    }
+
     .chat-input-row {
       padding: 14px 16px;
       border-top: 1px solid var(--border);
@@ -3063,6 +3110,49 @@
       cursor: pointer;
       text-decoration: none;
       white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .sos-call-btn:hover {
+      background: #A5321F;
+    }
+
+    .sos-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .sos-map-btn {
+      background: var(--indigo);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .sos-map-btn:hover {
+      background: var(--indigo-lt);
+      transform: translateY(-1px);
+    }
+
+    .sos-facility-card {
+      transition: var(--transition);
+    }
+
+    .sos-facility-card:hover {
+      border-color: var(--terracotta);
+      box-shadow: var(--shadow-md);
     }
 
     /* Recommendations */
@@ -3189,11 +3279,12 @@
       white-space: nowrap;
     }
 
-    /* FOOTER */
+    /* FOOTER (Only displayed on Wishlist tab per user specifications) */
     footer {
       background: var(--indigo);
       color: rgba(255, 255, 255, 0.7);
       padding: 48px 20px 32px;
+      display: none;
     }
 
     .footer-inner {
@@ -3266,6 +3357,7 @@
     .pk-strip {
       height: 4px;
       background: linear-gradient(to right, #01411C 50%, #FFFFFF 50%);
+      display: none;
     }
 
     /* ANIMATIONS */
@@ -3981,12 +4073,15 @@
           </div>
         </div>
         <div class="chat-main">
-          <div class="chat-header">
-            <div class="chat-avatar">🤖</div>
-            <div>
-              <div class="name" style="font-weight:700;">Pakistan Travel Agent</div>
-              <div style="font-size:12px; color:var(--turquoise);">Online · Ready to help</div>
+          <div class="chat-header" style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="chat-avatar">🤖</div>
+              <div>
+                <div class="name" style="font-weight:700;">Pakistan Travel Agent</div>
+                <div id="chat-status-text" style="font-size:12px; color:var(--turquoise);">Online · Memory & Streaming Active</div>
+              </div>
             </div>
+            <button id="chat-clear-btn" style="background:var(--cream); border:1px solid var(--border); border-radius:20px; padding:6px 12px; font-size:12px; cursor:pointer; color:var(--ink-soft); font-family:inherit; font-weight:500;" title="Start fresh conversation">🗑️ New Chat</button>
           </div>
           <div class="chat-messages" id="chat-messages">
             <div class="chat-msg agent">
@@ -4040,8 +4135,8 @@
         <h3>🏥 Nearby Medical Facilities</h3>
         <p class="sos-sub">Filter by province — flags anti-venom, anti-rabies, and trauma-care availability.</p>
         <div class="sos-facility-filters">
-          <select id="sos-province-filter" onchange="renderSOSFacilities()">
-            <option value="">All Provinces</option>
+          <select id="sos-province-filter" onchange="onSOSProvinceChange()">
+            <option value="">All Provinces & Territories</option>
             <option value="Punjab">Punjab</option>
             <option value="Sindh">Sindh</option>
             <option value="KPK">Khyber Pakhtunkhwa</option>
@@ -4049,6 +4144,9 @@
             <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
             <option value="Azad Kashmir">Azad Kashmir</option>
             <option value="Islamabad">Islamabad</option>
+          </select>
+          <select id="sos-city-filter" onchange="renderSOSFacilities()">
+            <option value="">All Cities / Districts</option>
           </select>
         </div>
         <div id="sos-facility-content" class="sos-facility-list"></div>
@@ -4360,9 +4458,11 @@
         let res;
         if (regMethod === 'phone') {
           const phone = document.getElementById('reg-phone').value.trim();
-          const params = new URLSearchParams({ phone_number: phone, username, password });
-          if (fullName) params.append('full_name', fullName);
-          res = await fetch(`${API}/auth/phone-register?${params.toString()}`, { method: 'POST' });
+          res = await fetch(`${API}/auth/phone-register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone_number: phone, username, password, full_name: fullName }),
+          });
         } else {
           const email = document.getElementById('reg-email').value.trim();
           res = await fetch(`${API}/auth/register`, {
@@ -4487,6 +4587,13 @@
       const panelId = { map: 'map-panel', chat: 'chat-panel', wishlist: 'wishlist-panel', sos: 'sos-panel' }[tab] || tab;
       const panel = document.getElementById(panelId);
       if (panel) panel.classList.add('active');
+
+      // Footer visibility: only show on wishlist tab, hide on all others (browse, plan, map, chat, sos)
+      const footerEl = document.querySelector('footer');
+      const pkStripEl = document.querySelector('.pk-strip');
+      const isWishlist = (tab === 'wishlist');
+      if (footerEl) footerEl.style.display = isWishlist ? 'block' : 'none';
+      if (pkStripEl) pkStripEl.style.display = isWishlist ? 'block' : 'none';
 
       if (tab === 'map') initMap();
       if (tab === 'wishlist') renderWishlist();
@@ -5543,14 +5650,98 @@
       }).join('') + `</div>`;
     }
 
-    // ========== AI CHAT ==========
+    // ========== AI CHAT (STREAMING, CLEAN MARKDOWN & MULTI-TURN MEMORY) ==========
     const chatMessages = document.getElementById('chat-messages');
     const chatInput = document.getElementById('chat-input');
+    const chatStatusText = document.getElementById('chat-status-text');
+    let chatHistory = [];
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatInlineMarkdown(str) {
+      if (!str) return '';
+      return str
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/__(.+?)__/g, '<strong>$1</strong>')
+        .replace(/_([^_]+)_/g, '<em>$1</em>')
+        .replace(/[#*`]/g, ''); // strip any raw unparsed markdown symbols
+    }
+
+    function renderChatMarkdown(raw) {
+      if (!raw) return '';
+      const escaped = escapeHtml(raw);
+      const lines = escaped.split('\n');
+      const output = [];
+      let inUl = false;
+      let inOl = false;
+
+      function closeLists() {
+        if (inUl) { output.push('</ul>'); inUl = false; }
+        if (inOl) { output.push('</ol>'); inOl = false; }
+      }
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+
+        if (!line) {
+          closeLists();
+          continue;
+        }
+
+        // Horizontal line: --- or ***
+        if (/^[-*_]{3,}$/.test(line)) {
+          closeLists();
+          output.push('<hr class="chat-hr">');
+          continue;
+        }
+
+        // Headers: #, ##, ###, ####, etc.
+        const headerMatch = line.match(/^#{1,6}\s*(.+)$/);
+        if (headerMatch) {
+          closeLists();
+          const cleanHeading = headerMatch[1].replace(/[*_#`]/g, '').trim();
+          output.push(`<h4 class="chat-heading">${cleanHeading}</h4>`);
+          continue;
+        }
+
+        // Unordered lists: -, *, •
+        const ulMatch = line.match(/^[-*•]\s+(.+)$/);
+        if (ulMatch) {
+          if (inOl) { output.push('</ol>'); inOl = false; }
+          if (!inUl) { output.push('<ul class="chat-ul">'); inUl = true; }
+          output.push(`<li>${formatInlineMarkdown(ulMatch[1])}</li>`);
+          continue;
+        }
+
+        // Ordered lists: 1. , 2.
+        const olMatch = line.match(/^(\d+)\.\s+(.+)$/);
+        if (olMatch) {
+          if (inUl) { output.push('</ul>'); inUl = false; }
+          if (!inOl) { output.push('<ol class="chat-ol">'); inOl = true; }
+          output.push(`<li>${formatInlineMarkdown(olMatch[2])}</li>`);
+          continue;
+        }
+
+        closeLists();
+        output.push(`<p class="chat-p">${formatInlineMarkdown(line)}</p>`);
+      }
+      closeLists();
+      return output.join('');
+    }
 
     function appendMsg(text, isUser) {
       const div = document.createElement('div');
       div.className = 'chat-msg ' + (isUser ? 'user' : 'agent');
-      div.innerHTML = `<div class="bubble">${text.replace(/\n/g, '<br>')}</div>`;
+      div.innerHTML = `<div class="bubble">${isUser ? escapeHtml(text).replace(/\n/g, '<br>') : renderChatMarkdown(text)}</div>`;
       chatMessages.appendChild(div);
       chatMessages.scrollTop = chatMessages.scrollHeight;
       return div;
@@ -5560,21 +5751,107 @@
       if (!msg.trim()) return;
       appendMsg(msg, true);
       chatInput.value = '';
+
+      // Create assistant bubble with animated indicator
+      const agentMsgDiv = document.createElement('div');
+      agentMsgDiv.className = 'chat-msg agent';
+      agentMsgDiv.innerHTML = `<div class="bubble"><span style="opacity:0.7;">✨ Preparing travel plan...</span></div>`;
+      chatMessages.appendChild(agentMsgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      const bubbleEl = agentMsgDiv.querySelector('.bubble');
+
+      let accumulated = '';
+
       try {
-        const res = await fetch(`${API}/chat`, {
+        const res = await fetch(`${API}/chat/stream`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: msg }),
+          body: JSON.stringify({ message: msg, history: chatHistory }),
         });
-        const data = await res.json();
-        appendMsg(data.reply || data.error || 'Something went wrong.', false);
+
+        if (!res.ok || !res.body) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder('utf-8');
+        let buffer = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const parts = buffer.split('\n\n');
+          buffer = parts.pop();
+
+          for (const part of parts) {
+            const trimmed = part.trim();
+            if (trimmed.startsWith('data: ')) {
+              try {
+                const data = JSON.parse(trimmed.slice(6));
+                if (data.type === 'status') {
+                  if (chatStatusText) chatStatusText.textContent = `⚡ ${data.content}`;
+                } else if (data.type === 'token') {
+                  if (accumulated === '') bubbleEl.innerHTML = '';
+                  accumulated += data.content;
+                  bubbleEl.innerHTML = renderChatMarkdown(accumulated);
+                  chatMessages.scrollTop = chatMessages.scrollHeight;
+                } else if (data.type === 'done') {
+                  if (chatStatusText) chatStatusText.textContent = 'Online · Memory & Streaming Active';
+                }
+              } catch (parseErr) {
+                // Ignore parse glitches on stream chunk edges
+              }
+            }
+          }
+        }
+
+        if (!accumulated) {
+          accumulated = 'I have processed your inquiry.';
+        }
+        bubbleEl.innerHTML = renderChatMarkdown(accumulated);
+
+        // Store turn in conversational memory
+        chatHistory.push({ role: 'user', content: msg });
+        chatHistory.push({ role: 'assistant', content: accumulated });
+
       } catch (e) {
-        appendMsg(`⚠️ Could not reach server: ${e}`, false);
+        // Fallback to standard /chat if streaming fails
+        try {
+          const fallbackRes = await fetch(`${API}/chat`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg, history: chatHistory }),
+          });
+          const data = await fallbackRes.json();
+          const reply = data.reply || data.error || 'Something went wrong.';
+          bubbleEl.innerHTML = renderChatMarkdown(reply);
+          chatHistory.push({ role: 'user', content: msg });
+          chatHistory.push({ role: 'assistant', content: reply });
+        } catch (fallbackErr) {
+          bubbleEl.innerHTML = `<div class="error-msg">⚠️ Could not reach server: ${e}</div>`;
+        }
+      } finally {
+        if (chatStatusText) chatStatusText.textContent = 'Online · Ready to help';
       }
     }
 
     document.getElementById('chat-send').addEventListener('click', () => sendChat(chatInput.value));
     chatInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(chatInput.value); } });
+
+    const clearBtn = document.getElementById('chat-clear-btn');
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        chatHistory = [];
+        chatMessages.innerHTML = `
+          <div class="chat-msg agent">
+            <div class="bubble">Assalamu Alaikum! 🌙 Conversation reset. What would you like to explore in Pakistan?</div>
+          </div>
+        `;
+        if (chatStatusText) chatStatusText.textContent = 'Online · Ready to help';
+      });
+    }
 
     document.querySelectorAll('.chat-hint').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -5617,7 +5894,78 @@
     function renderSOSAll() {
       renderSOSContacts();
       renderSOSAid();
+      onSOSProvinceChange();
+    }
+
+    function onSOSProvinceChange() {
+      const prov = (document.getElementById('sos-province-filter')?.value || '').trim();
+      const citySelect = document.getElementById('sos-city-filter');
+      if (citySelect) {
+        const currentVal = citySelect.value;
+        citySelect.innerHTML = '<option value="">All Cities / Districts</option>';
+        if (sosData && sosData.facilities) {
+          let facilities = sosData.facilities;
+          if (prov) {
+            facilities = facilities.filter(f => (f.province || '').toLowerCase().includes(prov.toLowerCase()));
+          }
+          const cities = Array.from(new Set(facilities.map(f => f.district).filter(Boolean))).sort();
+          cities.forEach(city => {
+            const opt = document.createElement('option');
+            opt.value = city;
+            opt.textContent = city;
+            if (city === currentVal) opt.selected = true;
+            citySelect.appendChild(opt);
+          });
+        }
+      }
       renderSOSFacilities();
+    }
+
+    function renderSOSFacilities() {
+      const el = document.getElementById('sos-facility-content');
+      if (!el || !sosData) return;
+      const provFilter = (document.getElementById('sos-province-filter')?.value || '').trim();
+      const cityFilter = (document.getElementById('sos-city-filter')?.value || '').trim();
+      let facilities = sosData.facilities || [];
+      if (provFilter) {
+        facilities = facilities.filter(f => (f.province || '').toLowerCase().includes(provFilter.toLowerCase()));
+      }
+      if (cityFilter) {
+        facilities = facilities.filter(f => (f.district || '').toLowerCase() === cityFilter.toLowerCase());
+      }
+
+      if (!facilities.length) {
+        el.innerHTML = '<div class="empty-state"><p>No facilities found for this filter.</p></div>';
+        return;
+      }
+
+      el.innerHTML = facilities.map(f => {
+        const mapsQuery = (f.latitude && f.longitude)
+          ? `${f.latitude},${f.longitude}`
+          : encodeURIComponent(`${f.name} ${f.district || ''} Pakistan`);
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
+        return `
+        <div class="sos-facility-card" onclick="window.open('${mapsUrl}', '_blank')" style="cursor: pointer;" title="Click to view live Google Maps location">
+          <div>
+            <div class="fac-name">🏥 ${f.name}</div>
+            <div class="fac-meta">${f.facility_type || 'Hospital'} · ${f.district || ''}, ${f.province || ''}</div>
+            <div class="sos-facility-badges">
+              ${f.is_24_7 ? '<span class="sos-badge b-247">⚡ 24/7 Emergency</span>' : ''}
+              ${f.has_anti_venom ? '<span class="sos-badge b-venom">Anti-Venom</span>' : ''}
+              ${f.has_anti_rabies ? '<span class="sos-badge b-rabies">Anti-Rabies</span>' : ''}
+              ${f.has_trauma_care ? '<span class="sos-badge b-trauma">Trauma Care</span>' : ''}
+            </div>
+          </div>
+          <div class="sos-card-actions" onclick="event.stopPropagation()">
+            <a class="sos-map-btn" href="${mapsUrl}" target="_blank" rel="noopener">
+              📍 Live Location
+            </a>
+            ${f.contact_number ? `<a class="sos-call-btn" href="tel:${f.contact_number}">📞 Call</a>` : ''}
+          </div>
+        </div>
+      `;
+      }).join('');
     }
 
     function renderSOSContacts() {
@@ -5665,29 +6013,6 @@
       `).join('');
     }
 
-    function renderSOSFacilities() {
-      const el = document.getElementById('sos-facility-content');
-      if (!el || !sosData) return;
-      const filter = document.getElementById('sos-province-filter')?.value || '';
-      let facilities = sosData.facilities || [];
-      if (filter) facilities = facilities.filter(f => (f.province || '').toLowerCase().includes(filter.toLowerCase()));
-      if (!facilities.length) { el.innerHTML = '<div class="empty-state"><p>No facilities found for this filter.</p></div>'; return; }
-      el.innerHTML = facilities.map(f => `
-        <div class="sos-facility-card">
-          <div>
-            <div class="fac-name">${f.name}</div>
-            <div class="fac-meta">${f.facility_type || ''} · ${f.district || ''}, ${f.province || ''}</div>
-            <div class="sos-facility-badges">
-              ${f.is_24_7 ? '<span class="sos-badge b-247">24/7</span>' : ''}
-              ${f.has_anti_venom ? '<span class="sos-badge b-venom">Anti-Venom</span>' : ''}
-              ${f.has_anti_rabies ? '<span class="sos-badge b-rabies">Anti-Rabies</span>' : ''}
-              ${f.has_trauma_care ? '<span class="sos-badge b-trauma">Trauma Care</span>' : ''}
-            </div>
-          </div>
-          ${f.contact_number ? `<a class="sos-call-btn" href="tel:${f.contact_number}">📞 Call</a>` : ''}
-        </div>
-      `).join('');
-    }
 
     // ========== APP INITIALIZATION ==========
     checkAppSplash();
