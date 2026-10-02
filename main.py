@@ -32,7 +32,7 @@ from sqlalchemy.orm import selectinload
 from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
 
-from database import engine, get_db, Base
+from database import engine, get_db, Base, SessionLocal
 from models import Destination, DestinationImage, User, UserWishlist, SavedTrip
 from tools import search_destinations, get_destination_details, estimate_cost, generate_itinerary
 from recommendations import get_recommendations_for_destination
@@ -66,9 +66,28 @@ except Exception as _rag_err:
     def rag_search(query: str, top_k: int = 5) -> dict:
         return {"results": [], "count": 0, "engine": "disabled"}
 
-# Automatically create all database tables (including users, user_wishlists, saved_trips)
+# Automatically create all database tables (including users, user_wishlists, saved_trips, medical_facilities)
 try:
     Base.metadata.create_all(bind=engine)
+    # Check if database is empty and auto-seed baseline data
+    try:
+        _db_init_sess = SessionLocal()
+        _dest_count = _db_init_sess.query(Destination).count()
+        _db_init_sess.close()
+        if _dest_count == 0:
+            print("[database] Destination table empty — auto-seeding baseline data...")
+            try:
+                from seed import seed_database
+                seed_database()
+            except Exception as _seed_err:
+                print(f"[database] Auto-seed destinations notice: {_seed_err}")
+            try:
+                from seed_medical_facilities import seed_medical_facilities
+                seed_medical_facilities()
+            except Exception as _med_seed_err:
+                print(f"[database] Auto-seed medical notice: {_med_seed_err}")
+    except Exception as _count_err:
+        print(f"[database] Check count notice: {_count_err}")
 except Exception as _db_init_err:
     print(f"[database] Table creation notice: {_db_init_err}")
 
@@ -95,8 +114,8 @@ app.include_router(reviews_router)
 app.include_router(medical_router)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-INDEX_PATH = os.path.join(STATIC_DIR, "index.html")
+STATIC_DIR = os.path.join(BASE_DIR, "static") if os.path.exists(os.path.join(BASE_DIR, "static")) else os.path.join(os.getcwd(), "static")
+INDEX_PATH = os.path.join(STATIC_DIR, "index.html") if os.path.exists(os.path.join(STATIC_DIR, "index.html")) else os.path.join(os.getcwd(), "static", "index.html")
 
 
 @app.on_event("startup")
@@ -130,8 +149,9 @@ def favicon():
 # Mounted at /static for static assets (images, CSS, JS)
 if os.path.exists(STATIC_DIR):
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-else:
+elif os.path.exists("static"):
     app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 
 @app.get("/health")

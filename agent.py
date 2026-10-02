@@ -1013,18 +1013,18 @@ def run_mock_agent(user_message: str) -> str:
 def resolve_groq_model(client) -> str:
     """Returns a valid model from Groq API, prioritizing user setting and working models."""
     configured = os.getenv("GROQ_MODEL", "").strip()
-    preferred_candidates = [configured, "openai/gpt-oss-120b", "openai/gpt-oss-20b", "llama-3.3-70b-versatile"]
+    preferred_candidates = [configured, "llama-3.3-70b-versatile", "llama-3.1-8b-instant", "openai/gpt-oss-120b", "openai/gpt-oss-20b"]
     try:
         remote_models = [m.id for m in client.models.list().data]
         for candidate in preferred_candidates:
             if candidate and candidate in remote_models:
                 return candidate
-        chat_models = [m for m in remote_models if "oss" in m or "llama" in m or "qwen" in m]
+        chat_models = [m for m in remote_models if "llama" in m or "oss" in m or "qwen" in m]
         if chat_models:
             return chat_models[0]
     except Exception:
         pass
-    return configured or "openai/gpt-oss-120b"
+    return configured or "llama-3.3-70b-versatile"
 
 
 SYSTEM_PROMPT = (
