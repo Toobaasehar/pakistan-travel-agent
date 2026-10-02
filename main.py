@@ -69,25 +69,6 @@ except Exception as _rag_err:
 # Automatically create all database tables (including users, user_wishlists, saved_trips, medical_facilities)
 try:
     Base.metadata.create_all(bind=engine)
-    # Check if database is empty and auto-seed baseline data
-    try:
-        _db_init_sess = SessionLocal()
-        _dest_count = _db_init_sess.query(Destination).count()
-        _db_init_sess.close()
-        if _dest_count == 0:
-            print("[database] Destination table empty — auto-seeding baseline data...")
-            try:
-                from seed import seed_database
-                seed_database()
-            except Exception as _seed_err:
-                print(f"[database] Auto-seed destinations notice: {_seed_err}")
-            try:
-                from seed_medical_facilities import seed_medical_facilities
-                seed_medical_facilities()
-            except Exception as _med_seed_err:
-                print(f"[database] Auto-seed medical notice: {_med_seed_err}")
-    except Exception as _count_err:
-        print(f"[database] Check count notice: {_count_err}")
 except Exception as _db_init_err:
     print(f"[database] Table creation notice: {_db_init_err}")
 
