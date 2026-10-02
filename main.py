@@ -25,7 +25,7 @@ import json
 from datetime import datetime
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import selectinload
@@ -117,8 +117,28 @@ async def warmup_rag():
 @app.get("/")
 def serve_ui():
     """Serves the web UI as the site's homepage with cache-busting headers."""
-    target_path = INDEX_PATH if os.path.exists(INDEX_PATH) else "static/index.html"
-    return FileResponse(target_path, headers={"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache", "Expires": "0"})
+    candidates = [
+        INDEX_PATH,
+        os.path.join(BASE_DIR, "static", "index.html"),
+        os.path.join(os.getcwd(), "static", "index.html"),
+        "static/index.html"
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            try:
+                with open(c, "r", encoding="utf-8") as f:
+                    html_content = f.read()
+                return HTMLResponse(
+                    content=html_content,
+                    headers={
+                        "Cache-Control": "no-cache, no-store, must-revalidate",
+                        "Pragma": "no-cache",
+                        "Expires": "0"
+                    }
+                )
+            except Exception as read_err:
+                print(f"[serve_ui] Error reading {c}: {read_err}")
+    return HTMLResponse("<h1>Pakistan Travel Agent API</h1><p>Running successfully.</p>")
 
 
 @app.get("/favicon.ico", include_in_schema=False)
