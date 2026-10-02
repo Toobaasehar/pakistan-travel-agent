@@ -3,26 +3,41 @@ rag/embedder.py
 ===============
 Text embedding for RAG.
 
-Primary:  sentence-transformers (all-MiniLM-L6-v2) — semantic vectors
-Fallback: TF-IDF vectorizer from scikit-learn — keyword-based, no extra deps
+Primary:  sentence-transformers (all-MiniLM-L6-v2) — semantic vectors (loaded lazily on demand)
+Fallback: TF-IDF vectorizer from scikit-learn — keyword-based, fast, no extra deps
 
-The embedder is selected automatically at import time.
+The embedder is loaded lazily on first use to ensure instant server cold starts.
 """
 
+import os
 from typing import List
 import numpy as np
 
-# ─── Try to load sentence-transformers ────────────────────────────────────────
-_SBERT_AVAILABLE = False
+# ─── Lazy sentence-transformers loader ───────────────────────────────────────
 _sbert_model = None
+_sbert_checked = False
 
-try:
-    from sentence_transformers import SentenceTransformer
-    _sbert_model = SentenceTransformer("all-MiniLM-L6-v2")
-    _SBERT_AVAILABLE = True
-    print("[RAG] Embedder: sentence-transformers (all-MiniLM-L6-v2) ✓")
-except Exception:
-    print("[RAG] Embedder: sentence-transformers not available — using TF-IDF fallback")
+
+def _get_sbert_model():
+    """Lazily load SentenceTransformer only when first needed (never at import time)."""
+    global _sbert_model, _sbert_checked
+    if _sbert_checked:
+        return _sbert_model
+    _sbert_checked = True
+
+    if os.environ.get("VERCEL"):
+        # Always use fast TF-IDF fallback on Vercel to stay within serverless limits
+        return None
+
+    try:
+        from sentence_transformers import SentenceTransformer
+        _sbert_model = SentenceTransformer("all-MiniLM-L6-v2")
+        print("[RAG] Embedder: sentence-transformers (all-MiniLM-L6-v2) ✓")
+    except Exception:
+        print("[RAG] Embedder: sentence-transformers not available — using TF-IDF fallback")
+        _sbert_model = None
+
+    return _sbert_model
 
 
 # ─── TF-IDF Fallback state ─────────────────────────────────────────────────────
@@ -43,7 +58,7 @@ def fit_tfidf(texts: List[str]) -> None:
         strip_accents="unicode",
     )
     _tfidf_matrix = _tfidf_vectorizer.fit_transform(texts)
-    print(f"[RAG] TF-IDF vectorizer fitted on {len(texts)} texts, vocab={_tfidf_vectorizer.vocabulary_.__len__()}")
+    print(f"[RAG] TF-IDF vectorizer fitted on {len(texts)} texts, vocab={len(_tfidf_vectorizer.vocabulary_)}")
 
 
 def embed_texts(texts: List[str]) -> np.ndarray:
@@ -53,8 +68,9 @@ def embed_texts(texts: List[str]) -> np.ndarray:
 
     Uses sentence-transformers if available, TF-IDF otherwise.
     """
-    if _SBERT_AVAILABLE:
-        vecs = _sbert_model.encode(
+    model = _get_sbert_model()
+    if model is not None:
+        vecs = model.encode(
             texts,
             batch_size=64,
             show_progress_bar=False,
@@ -77,8 +93,9 @@ def embed_query(text: str) -> np.ndarray:
     """
     Encode a single query string into a 1D float32 vector.
     """
-    if _SBERT_AVAILABLE:
-        vec = _sbert_model.encode([text], normalize_embeddings=True)
+    model = _get_sbert_model()
+    if model is not None:
+        vec = model.encode([text], normalize_embeddings=True)
         return np.array(vec[0], dtype=np.float32)
     else:
         if _tfidf_vectorizer is None:
@@ -91,4 +108,4 @@ def embed_query(text: str) -> np.ndarray:
 
 def is_semantic() -> bool:
     """Returns True if using sentence-transformers (semantic), False if TF-IDF."""
-    return _SBERT_AVAILABLE
+    return _get_sbert_model() is not None
