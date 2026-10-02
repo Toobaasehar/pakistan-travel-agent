@@ -20,12 +20,15 @@ from typing import List, Dict, Any, Optional
 from .knowledge_base import build_knowledge_base
 from .embedder import embed_texts, embed_query, fit_tfidf, is_semantic
 
-# Cache directory (rag/index_cache/)
-CACHE_DIR = (
-    "/tmp/index_cache"
-    if os.environ.get("VERCEL")
-    else os.path.join(os.path.dirname(__file__), "index_cache")
-)
+# Cache directory (prefer bundled index_cache, fallback to /tmp/index_cache)
+REPO_CACHE_DIR = os.path.join(os.path.dirname(__file__), "index_cache")
+if os.path.exists(os.path.join(REPO_CACHE_DIR, "chunks.pkl")):
+    CACHE_DIR = REPO_CACHE_DIR
+elif os.environ.get("VERCEL"):
+    CACHE_DIR = "/tmp/index_cache"
+else:
+    CACHE_DIR = REPO_CACHE_DIR
+
 CHUNKS_CACHE = os.path.join(CACHE_DIR, "chunks.pkl")
 VECTORS_CACHE = os.path.join(CACHE_DIR, "vectors.npy")
 FAISS_INDEX_CACHE = os.path.join(CACHE_DIR, "faiss.index")

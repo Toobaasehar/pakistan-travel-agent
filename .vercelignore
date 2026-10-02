@@ -4,3 +4,12 @@ __pycache__
 *.pyc
 pakistan-travel-mobile
 test_all.py
+scripts
+check_groq.py
+check_status.py
+migrate_to_neon.py
+.pytest_cache
+.vscode
+.git
+.github
+*.md
