@@ -28,6 +28,15 @@ if _raw_url:
     # hand out the older "postgres://").
     if _raw_url.startswith("postgres://"):
         _raw_url = "postgresql://" + _raw_url[len("postgres://"):]
+    # Neon's dashboard sometimes hands out a "postgresql+psycopg://" URL,
+    # which tells SQLAlchemy to use psycopg (v3). But requirements.txt
+    # installs psycopg2-binary (v2) -- a different package entirely -- so
+    # that URL crashes with "ModuleNotFoundError: No module named 'psycopg'".
+    # Force the dialect to match what's actually installed.
+    if _raw_url.startswith("postgresql+psycopg://"):
+        _raw_url = "postgresql+psycopg2://" + _raw_url[len("postgresql+psycopg://"):]
+    elif _raw_url.startswith("postgresql://"):
+        _raw_url = "postgresql+psycopg2://" + _raw_url[len("postgresql://"):]
     DATABASE_URL = _raw_url
 
     # pool_pre_ping: test a connection before using it (serverless databases
