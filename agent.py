@@ -18,7 +18,7 @@ import re
 import sys
 import json
 import time
-from typing import Optional, Tuple, Dict, Any
+from typing import Optional, Tuple, List, Dict
 from dotenv import load_dotenv
 
 # Ensure UTF-8 output on Windows terminals to prevent charmap UnicodeEncodeError
